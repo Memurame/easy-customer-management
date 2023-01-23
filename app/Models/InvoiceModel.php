@@ -3,25 +3,18 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
-use App\Entities\Website;
+use App\Entities\Invoice;
 
-class WebsiteModel extends Model
+class InvoiceModel extends Model
 {
 
-    public $table = 'websites';
+    public $table = 'invoices';
     protected $db;
     protected $allowedFields = [
-        "contact_lastname",
-        "contact_firstname",
-        "contact_mail",
-        "contact_company",
-        "bebv_member",
-        "update_abo",
-        "website_url",
-        "website_installed",
-        "website_live",
-        'license_popularfx',
-        "notes"
+        "website_id",
+        "invoice",
+        "paid",
+        "renew"
     ];
 
     protected $primaryKey = 'id';
@@ -30,7 +23,7 @@ class WebsiteModel extends Model
     protected $useTimestamps = true;
     protected $dateFormat = 'int';
 
-    protected $returnType = Website::class;
+    protected $returnType = Invoice::class;
     protected $useSoftDeletes = true;
 
     public function __construct()

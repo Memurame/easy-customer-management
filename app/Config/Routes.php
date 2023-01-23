@@ -32,9 +32,10 @@ $routes->set404Override();
 $routes->get('/', 'Home::index', ['as' => 'home']);
 $routes->get('/abacusexport', 'Tools::abacusexport', ['as' => 'abacus.export']);
 
-$routes->get('/websites', 'Websites::index', ['as' => 'website.index']);
+$routes->get('/websites', 'Websites::index', ['as' => 'website.index', 'filter' => 'Auth']);
 $routes->match(['get', 'post'],'/websites/add', 'Websites::add', ['as' => 'website.add']);
-$routes->get('/websites/(:num)', 'Websites::show/$1', ['as' => 'website.show']);
+$routes->get('/websites/show/(:num)', 'Websites::show/$1', ['as' => 'website.show']);
+$routes->match(['get', 'post'],'/websites/edit/(:num)', 'Websites::edit/$1', ['as' => 'website.edit']);
 
 
 $routes->cli('invoice', 'Cron::invoice');

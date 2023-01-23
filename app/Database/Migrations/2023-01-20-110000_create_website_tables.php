@@ -32,6 +32,7 @@ class CreateWebsiteTables extends Migration
             'website_id'            => ['type' => 'int', 'constraint' => 11],
             'invoice'               => ['type' => 'date', 'null' => true],
             'paid'                  => ['type' => 'int', 'constraint' => 1],
+            'renew'                  => ['type' => 'int', 'constraint' => 1],
             'created_at'            => ['type' => 'varchar', 'constraint' => 50, 'null' => true],
             'updated_at'            => ['type' => 'varchar', 'constraint' => 50, 'null' => true],
             'deleted_at'            => ['type' => 'varchar', 'constraint' => 50, 'null' => true],

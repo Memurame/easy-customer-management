@@ -65,7 +65,7 @@
                     <td>
                         <a href="https://<?=$website->website_url?>" target="_blank"><i class="fa-solid fa-globe"></i></a>
                         <a href="<?=base_url()?><?=route_to('website.show', $website->id)?>"><i class="fa-solid fa-eye"></i></a>
-                        <a href=""><i class="fa-solid fa-pen-to-square"></i></a>
+                        <a href="<?=base_url()?><?=route_to('website.edit', $website->id)?>"><i class="fa-solid fa-pen-to-square"></i></a>
                         <a href=""><i class="fa-solid fa-trash"></i></a>
 
                     </td>
