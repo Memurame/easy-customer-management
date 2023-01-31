@@ -16,34 +16,11 @@
     </div>
     <?= view('templates/message_block.php') ?>
     <div class="row g-3">
-        <div class="col-md-6">
-            <label for="contact_firstname" class="form-label">Vorname <span class="text-danger">*</span></label>
-            <input type="text" class="form-control <?php if(session('errors.contact_firstname')) : ?>is-invalid<?php endif ?>" id="contact_firstname" name="contact_firstname" value="<?=$website->contact_firstname ?>">
-        </div>
-        <div class="col-md-6">
-            <label for="contact_lastname" class="form-label">Nachname <span class="text-danger">*</span></label>
-            <input type="text" class="form-control <?php if(session('errors.contact_lastname')) : ?>is-invalid<?php endif ?>" id="contact_lastname" name="contact_lastname" value="<?=$website->contact_lastname ?>">
-        </div>
-        <div class="col-12">
-            <label for="contact_company" class="form-label">Firma</label>
-            <input type="text" class="form-control" id="contact_company" name="contact_company" value="<?=$website->contact_company ?>">
-        </div>
-        <div class="col-12">
-            <label for="contact_mail" class="form-label">E-Mail <span class="text-danger">*</span></label>
-            <input type="email" class="form-control <?php if(session('errors.contact_mail')) : ?>is-invalid<?php endif ?>" id="contact_mail" name="contact_mail" value="<?=$website->contact_mail ?>">
-        </div>
         <div class="col-12">
             <label for="website_url" class="form-label">Domain <span class="text-danger">*</span></label>
             <input type="text" class="form-control <?php if(session('errors.website_url')) : ?>is-invalid<?php endif ?>" id="website_url" name="website_url" value="<?=$website->website_url ?>">
         </div>
-        <div class="col-md-4">
-            <label for="bebv_member" class="form-label">BEBV Mitglied <span class="text-danger">*</span></label>
-            <select id="bebv_member" name="bebv_member" class="form-select ">
-            <option value="0" <?= ($website->bebv_member == "0") ? 'selected' : ''?>>Nein</option>
-            <option value="1" <?= ($website->bebv_member == "1") ? 'selected' : ''?>>Ja</option>
-            </select>
-        </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             <label for="update_abo" class="form-label">Update Abonement <span class="text-danger">*</span></label>
             <select id="update_abo" name="update_abo" class="form-select">
             <option <?= ($website->update_abo == "Kein Abo") ? 'selected' : ''?>>Kein Abo</option>
@@ -51,7 +28,7 @@
             <option <?= ($website->update_abo == "Update Plus") ? 'selected' : ''?>>Update Plus</option>
             </select>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             <label for="license_popularfx" class="form-label">PopularFX Lizenz <span class="text-danger">*</span></label>
             <select id="license_popularfx" name="license_popularfx" class="form-select">
             <option value="0" <?= ($website->license_popularfx == "0") ? 'selected' : ''?>>Nein</option>

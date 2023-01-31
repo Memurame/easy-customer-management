@@ -23,10 +23,6 @@ class Websites extends BaseController
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
             $rules = [
-                'contact_firstname' => 'required',
-                'contact_lastname' => 'required',
-                'contact_mail' => 'required',
-                'bebv_member' => 'required',
                 'update_abo' => 'required',
                 'website_url' => 'required',
                 'license_popularfx' => 'required',
@@ -58,10 +54,6 @@ class Websites extends BaseController
 
 
             $rules = [
-                'contact_firstname' => 'required',
-                'contact_lastname' => 'required',
-                'contact_mail' => 'required',
-                'bebv_member' => 'required',
                 'update_abo' => 'required',
                 'website_url' => 'required',
                 'license_popularfx' => 'required',
@@ -72,16 +64,10 @@ class Websites extends BaseController
                 return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
             }
 
-
-            $website->contact_firstname = $this->request->getPost('contact_firstname');
-            $website->contact_lastname= $this->request->getPost('contact_lastname');
-            $website->contact_mail = $this->request->getPost('contact_mail');
-            $website->contact_company = $this->request->getPost('contact_company');
             $website->website_installed = $this->request->getPost('website_installed');
             $website->website_live = $this->request->getPost('website_live');
             $website->website_url = $this->request->getPost('website_url');
             $website->license_popularfx = $this->request->getPost('license_popularfx');
-            $website->bebv_member = $this->request->getPost('bebv_member');
             $website->update_abo = $this->request->getPost('update_abo');
             $website->notes = $this->request->getPost('notes');
 
@@ -105,5 +91,28 @@ class Websites extends BaseController
         return view('website/show', [
             'website' => $website
         ]);
+    }
+
+    public function apiDelete($id){
+        $data = array();
+        $data['success'] = 0;
+        $data['token'] = csrf_hash();
+
+        $websiteModel = new WebsiteModel();
+        $website = $websiteModel->find($id);
+
+        if(empty($website)){
+            $data['error'] = "Webseite wurde nicht gefunden.";
+        } else {
+            $deleted = $websiteModel->delete($website->id);
+            if($deleted){
+                $data['success'] = 1;
+            } else {
+                $data['error'] = "Fehler beim Lsöchen der Webseite";
+            }
+        }
+
+
+        return $this->response->setJSON($data);
     }
 }

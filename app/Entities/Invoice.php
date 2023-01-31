@@ -3,6 +3,7 @@
 namespace App\Entities;
 
 use CodeIgniter\Entity;
+use App\Models\WebsiteModel;
 
 class Invoice extends Entity
 {
@@ -28,4 +29,12 @@ class Invoice extends Entity
     protected $team_name;
 
     public $data;
+
+    public function getInvoiceWebsite($websiteid){
+        $websiteModel = new WebsiteModel();
+        $website = $websiteModel->find($websiteid);
+
+        return ($website) ? $website : null;
+
+    }
 }

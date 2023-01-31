@@ -2,10 +2,11 @@
 <!doctype html>
 <html lang="de">
 <head>
+    <meta name="url" href="<?php echo base_url()?>">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Thomas Hirter vom Berner Bauern Verband">
-    <title>Arbeitstools vom BEBV</title>
+    <title>IT-Dienstleistungen</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -68,15 +69,12 @@
     <link href="<?=base_url()?>/assets/style.css" rel="stylesheet">
 </head>
 <body>
-
+<input type="hidden" id="csrf_security" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
 <div class="container">
     <header class="d-flex align-items-center py-3 border-bottom mb-2" style="background-color: black;">
         <a href="<?=base_url()?>" class="d-flex align-items-center text-white text-decoration-none">
-            <i class="fa-solid fa-screwdriver-wrench fa-2xl me-2 ms-2"></i><span class="fs-4">BEBV-Tools</span>
+            <i class="fa-solid fa-screwdriver-wrench fa-2xl me-2 ms-2"></i><span class="fs-4">IT-Dienstleistungen</span>
         </a>
-        <?php if(!current_page(route_to('home'))): ?>
-            <a href="<?=base_url()?>" class="btn btn-outline-light ms-4 text-decoration-none"><i class="fa-solid fa-arrow-left"></i> zurück</a>
-        <?php endif; ?>
     </header>
 
     <main>
@@ -91,6 +89,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="<?=base_url()?>/assets/script.js"></script>
 
 

@@ -19,13 +19,11 @@
     <table id="example" class="table table-striped" style="width:100%">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Firma</th>
+                <th>Kunde</th>
                 <th>Domain</th>
                 <th>Installiert</th>
                 <th>Update</th>
                 <th>PopularFX</th>
-                <th>BEBV Mitglied</th>
                 <th></th>
             </tr>
         </thead>
@@ -37,8 +35,7 @@
                 $installed = ($website->website_installed) ? new DateTime($website->website_installed) : null;
                 ?>
                 <tr>
-                    <td><?=$website->contact_lastname?> <?=$website->contact_firstname?></td>
-                    <td><?=$website->contact_company?></td>
+                    <td>Kundenname</td>
                     <td><?=$website->website_url?></td>
                     <td><?= ($website->website_installed) ? $installed->format('d.m.Y') : '---'?></td>
                     <td>
@@ -56,17 +53,10 @@
                         <?php endif;?>
                     </td>
                     <td>
-                        <?php if($website->bebv_member):?>
-                            <span class="badge rounded-pill text-bg-success">Ja</span>
-                        <?php else:?>
-                            <span class="badge rounded-pill text-bg-danger">Nein</span>
-                        <?php endif;?>
-                    </td>
-                    <td>
                         <a href="https://<?=$website->website_url?>" target="_blank"><i class="fa-solid fa-globe"></i></a>
                         <a href="<?=base_url()?><?=route_to('website.show', $website->id)?>"><i class="fa-solid fa-eye"></i></a>
                         <a href="<?=base_url()?><?=route_to('website.edit', $website->id)?>"><i class="fa-solid fa-pen-to-square"></i></a>
-                        <a href=""><i class="fa-solid fa-trash"></i></a>
+                        <a href="#" class="delete-website" data-wid="<?=$website->id?>"><i class="fa-solid fa-trash"></i></a>
 
                     </td>
                     <?php endforeach; ?>

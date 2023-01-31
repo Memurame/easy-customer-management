@@ -1,0 +1,58 @@
+<?= $this->extend('templates/layout') ?>
+<?= $this->section('main') ?>
+<form method="post">
+    <div class="d-flex border-bottom pb-2 mb-4">
+        <div class="p-1 flex-grow-1">
+            <ol class="breadcrumb my-0 ">
+                <li class="breadcrumb-item"><a href="<?=base_url()?>">Übersicht</a></li>
+                <li class="breadcrumb-item"><a href="<?=base_url()?><?=route_to('invoice.index')?>">Rechnungen</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Neu</li>
+            </ol>
+        </div>
+
+        <div class="">
+            <button type="submit" class="btn btn-success btn-sm">Speichern</button>
+        </div>
+    </div>
+    <?= view('templates/message_block.php') ?>
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label for="invoice" class="form-label">Rechnungsdatum</label>
+            <input type="date" class="form-control" id="invoice" name="invoice" value="<?=old('invoice') ?>">
+        </div>
+        <div class="col-md-6">
+            <label for="website_id" class="form-label">Webseite <span class="text-danger">*</span></label>
+            <select id="website_id" name="website_id" class="form-select ">
+            <option value="0" selected>-- Bitte auswählen --</option>
+            <?php foreach($websites as $index => $website): ?>
+                <option value="<?=$website->id?>"><?=$website->website_url?></option>
+            <?php endforeach; ?>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label for="renew" class="form-label">Automatisch erneuern <span class="text-danger">*</span></label>
+            <select id="renew" name="renew" class="form-select">
+            <option value="0" selected>Nein</option>
+            <option value="1">Monatlich</option>
+            <option value="2">Jährlich (Rechnungsdatum)</option>
+            <option value="3">Jährlich (1. Januar)</option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label for="paid" class="form-label">Bezahlt <span class="text-danger">*</span></label>
+            <select id="paid" name="paid" class="form-select">
+            <option value="0" selected>Nein</option>
+            <option value="1">Ja</option>
+            </select>
+        </div>
+        <div class="col-12">
+            <label for="notes" class="form-label">Notizen</label>
+            <textarea class="form-control" rows="5" id="notes" name="notes"><?=old('notes') ?></textarea>
+        </div>
+    </div>
+</form>
+
+
+
+
+<?= $this->endSection() ?>

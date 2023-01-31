@@ -30,15 +30,28 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index', ['as' => 'home']);
-$routes->get('/abacusexport', 'Tools::abacusexport', ['as' => 'abacus.export']);
 
 $routes->get('/websites', 'Websites::index', ['as' => 'website.index', 'filter' => 'Auth']);
-$routes->match(['get', 'post'],'/websites/add', 'Websites::add', ['as' => 'website.add']);
-$routes->get('/websites/show/(:num)', 'Websites::show/$1', ['as' => 'website.show']);
-$routes->match(['get', 'post'],'/websites/edit/(:num)', 'Websites::edit/$1', ['as' => 'website.edit']);
+$routes->match(['get', 'post'],'/websites/add', 'Websites::add', ['as' => 'website.add', 'filter' => 'Auth']);
+$routes->get('/websites/show/(:num)', 'Websites::show/$1', ['as' => 'website.show', 'filter' => 'Auth']);
+$routes->match(['get', 'post'],'/websites/edit/(:num)', 'Websites::edit/$1', ['as' => 'website.edit', 'filter' => 'Auth']);
+
+$routes->get('/invoices', 'Invoices::index', ['as' => 'invoice.index', 'filter' => 'Auth']);
+$routes->match(['get', 'post'],'/invoices/add', 'Invoices::add', ['as' => 'invoice.add', 'filter' => 'Auth']);
+
+$routes->get('/customers', 'Customers::index', ['as' => 'customer.index', 'filter' => 'Auth']);
+
+$routes->get('/orders', 'Orders::index', ['as' => 'order.index', 'filter' => 'Auth']);
+
+
 
 
 $routes->cli('invoice', 'Cron::invoice');
+
+
+$routes->delete('/api/website/delete/(:num)', 'Websites::apiDelete/$1');
+
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
