@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Thomas Hirter vom Berner Bauern Verband">
-    <title>IT-Dienstleistungen</title>
+    <title>Easy Curtomer Management</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -73,7 +73,7 @@
 <div class="container">
     <header class="d-flex align-items-center py-3 border-bottom mb-2" style="background-color: black;">
         <a href="<?=base_url()?>" class="d-flex align-items-center text-white text-decoration-none">
-            <i class="fa-solid fa-screwdriver-wrench fa-2xl me-2 ms-2"></i><span class="fs-4">IT-Dienstleistungen</span>
+            <i class="fa-solid fa-circle-nodes fa-2xl me-2 ms-2"></i><span class="fs-4">Easy Customer Management</span>
         </a>
     </header>
 

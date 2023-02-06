@@ -2,7 +2,7 @@
 
 use CodeIgniter\Database\Migration;
 
-class CreateWebsiteTables extends Migration
+class InitTables extends Migration
 {
     public function up()
     {
@@ -47,8 +47,10 @@ class CreateWebsiteTables extends Migration
             'contact_firstname'     => ['type' => 'varchar', 'constraint' => 50],
             'contact_lastname'      => ['type' => 'varchar', 'constraint' => 50],
             'contact_mail'          => ['type' => 'varchar', 'constraint' => 150],
-            'bebv_member'           => ['type' => 'int', 'constraint' => 1],
-            'bebv_addressid'         => ['type' => 'int', 'constraint' => 10],
+            'street'                => ['type' => 'varchar', 'constraint' => 150],
+            'postalcode'            => ['type' => 'varchar', 'constraint' => 10],
+            'city'                  => ['type' => 'varchar', 'constraint' => 150],
+            'customernumber'        => ['type' => 'int', 'constraint' => 20],
             'created_at'            => ['type' => 'varchar', 'constraint' => 50, 'null' => true],
             'updated_at'            => ['type' => 'varchar', 'constraint' => 50, 'null' => true],
             'deleted_at'            => ['type' => 'varchar', 'constraint' => 50, 'null' => true],
@@ -65,7 +67,7 @@ class CreateWebsiteTables extends Migration
             'status'                => ['type' => 'int', 'constraint' => 1],
             'date_offer'            => ['type' => 'date', 'null' => true],
             'date_order'            => ['type' => 'date', 'null' => true],
-            'bate_finish'           => ['type' => 'date', 'null' => true],
+            'date_finish'           => ['type' => 'date', 'null' => true],
             'notes'                 => ['type' => 'varchar', 'constraint' => 255],
             'created_at'            => ['type' => 'varchar', 'constraint' => 50, 'null' => true],
             'updated_at'            => ['type' => 'varchar', 'constraint' => 50, 'null' => true],
