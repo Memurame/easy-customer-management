@@ -5,21 +5,19 @@ namespace App\Models;
 use CodeIgniter\Model;
 use App\Entities\Customer;
 
-class CustomerModel extends Model
+class OrderModel extends Model
 {
 
-    public $table = 'customers';
+    public $table = 'orders';
     protected $db;
     protected $allowedFields = [
-        "company",
-        "contact_firstname",
-        "contact_lastname",
-        "contact_mail",
-        "customernumber",
-        "street",
-        'postalcode',
-        'city',
-        'status'
+        "customer_id",
+        "status",
+        "name",
+        "date_offer",
+        "date_order",
+        "date_finish",
+        'notes'
     ];
 
     protected $primaryKey = 'id';
@@ -28,7 +26,7 @@ class CustomerModel extends Model
     protected $useTimestamps = true;
     protected $dateFormat = 'int';
 
-    protected $returnType = Customer::class;
+    protected $returnType = Order::class;
     protected $useSoftDeletes = true;
 
     public function __construct()

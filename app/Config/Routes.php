@@ -40,6 +40,10 @@ $routes->get('/invoices', 'Invoices::index', ['as' => 'invoice.index', 'filter' 
 $routes->match(['get', 'post'],'/invoices/add', 'Invoices::add', ['as' => 'invoice.add', 'filter' => 'Auth']);
 
 $routes->get('/customers', 'Customers::index', ['as' => 'customer.index', 'filter' => 'Auth']);
+$routes->match(['get', 'post'],'/customers/add', 'Customers::add', ['as' => 'customer.add', 'filter' => 'Auth']);
+$routes->get('/customers/show/(:num)', 'Customers::show/$1', ['as' => 'customer.show', 'filter' => 'Auth']);
+$routes->match(['get', 'post'],'/customers/edit/(:num)', 'Customers::edit/$1', ['as' => 'customer.edit', 'filter' => 'Auth']);
+
 
 $routes->get('/orders', 'Orders::index', ['as' => 'order.index', 'filter' => 'Auth']);
 
@@ -50,6 +54,7 @@ $routes->cli('invoice', 'Cron::invoice');
 
 
 $routes->delete('/api/website/delete/(:num)', 'Websites::apiDelete/$1');
+$routes->delete('/api/customer/delete/(:num)', 'Customers::apiDelete/$1');
 
 
 /*

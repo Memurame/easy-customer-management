@@ -52,7 +52,7 @@
                             <span class="badge rounded-pill text-bg-danger">Nein</span>
                         <?php endif;?>
                     </td>
-                    <td>
+                    <td class="text-right">
                         <a href="https://<?=$website->website_url?>" target="_blank"><i class="fa-solid fa-globe"></i></a>
                         <a href="<?=base_url()?><?=route_to('website.show', $website->id)?>"><i class="fa-solid fa-eye"></i></a>
                         <a href="<?=base_url()?><?=route_to('website.edit', $website->id)?>"><i class="fa-solid fa-pen-to-square"></i></a>
