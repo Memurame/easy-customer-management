@@ -8,14 +8,13 @@ class InitTables extends Migration
     {
         $this->forge->addField([
             'id'                    => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
-            'customer_id'            => ['type' => 'int', 'constraint' => 11],
-            'order_id'            => ['type' => 'int', 'constraint' => 11],
+            'customer_id'           => ['type' => 'int', 'constraint' => 11],
+            'order_id'              => ['type' => 'int', 'constraint' => 11],
             'website_url'           => ['type' => 'varchar', 'constraint' => 50],
             'website_live'          => ['type' => 'date', 'null' => true],
             'website_installed'     => ['type' => 'date', 'null' => true],
-            'update_abo'            => ['type' => 'varchar', 'constraint' => 50],
-            'license_popularfx'     => ['type' => 'int', 'constraint' => 1],
-            'notes'                 => ['type' => 'varchar', 'constraint' => 255],
+            'tags'                  => ['type' => 'varchar', 'constraint' => 255],
+            'notes'                 => ['type' => 'text'],
             'created_at'            => ['type' => 'varchar', 'constraint' => 50, 'null' => true],
             'updated_at'            => ['type' => 'varchar', 'constraint' => 50, 'null' => true],
             'deleted_at'            => ['type' => 'varchar', 'constraint' => 50, 'null' => true],

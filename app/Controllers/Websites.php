@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use App\Models\WebsiteModel;
+use App\Models\CustomerModel;
+use App\Models\OrderModel;
 use App\Entities\Website;
 
 class Websites extends BaseController
@@ -20,12 +22,17 @@ class Websites extends BaseController
     public function add()
     {
 
+        $customerModel = new CustomerModel();
+        $customers = $customerModel->findAll();
+
+        $orderModel = new OrderModel();
+        $orders = $orderModel->findAll();
+
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
             $rules = [
-                'update_abo' => 'required',
-                'website_url' => 'required',
-                'license_popularfx' => 'required',
+                'customer_id' => 'required',
+                'website_url' => 'required'
             ];
 
             if (! $this->validate($rules))
@@ -42,7 +49,10 @@ class Websites extends BaseController
 
         }
 
-        return view('website/add');
+        return view('website/add', [
+            'customers' => $customers,
+            'orders' => $orders
+        ]);
     }
 
     public function edit($id)

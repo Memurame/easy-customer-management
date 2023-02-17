@@ -9,29 +9,25 @@
     </div>
 
     <div class="">
-        <a href="https://wpmonitoring.bernerbauern.ch/wp-admin/admin.php?page=mainwp_tab" class="btn btn-dark btn-sm" target="_blank">zum Monitoring</a>
         <a href="<?=base_url()?><?=route_to('website.add')?>" class="btn btn-primary btn-sm">Neue Webseite</a>
     </div>
 </div>
 
 <div class="row">
     <div class="col-12">
-    <table id="example" class="table table-striped" style="width:100%">
-        <thead>
-            <tr>
-                <th>Kunde</th>
-                <th>Domain</th>
-                <th>Installiert</th>
-                <th>Update</th>
-                <th>PopularFX</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            
-            <?php foreach($websites as $id => $website):
-                $invoice = ($website->invoice_date) ? new DateTime($website->invoice_date) : null;
-                $paid = ($website->invoice_paid) ? new DateTime($website->invoice_paid) : null;
+        <table id="example" class="table table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Kunde</th>
+                    <th>Domain</th>
+                    <th>Installiert</th>
+                    <th>Tags</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <?php foreach($websites as $id => $website):
                 $installed = ($website->website_installed) ? new DateTime($website->website_installed) : null;
                 ?>
                 <tr>
@@ -39,24 +35,17 @@
                     <td><?=$website->website_url?></td>
                     <td><?= ($website->website_installed) ? $installed->format('d.m.Y') : '---'?></td>
                     <td>
-                        <?php if($website->update_abo != 'Kein Abo'):?>
-                            <span class="badge rounded-pill text-bg-success"><?=$website->update_abo?></span>
-                        <?php else:?>
-                            <span class="badge rounded-pill text-bg-danger"><?=$website->update_abo?></span>
-                        <?php endif;?>
-                    </td>
-                    <td>
-                        <?php if($website->license_popularfx):?>
-                            <span class="badge rounded-pill text-bg-success">Ja</span>
-                        <?php else:?>
-                            <span class="badge rounded-pill text-bg-danger">Nein</span>
-                        <?php endif;?>
+                        <span class="badge rounded-pill text-bg-danger">tags</span>
                     </td>
                     <td class="text-right">
-                        <a href="https://<?=$website->website_url?>" target="_blank"><i class="fa-solid fa-globe"></i></a>
-                        <a href="<?=base_url()?><?=route_to('website.show', $website->id)?>"><i class="fa-solid fa-eye"></i></a>
-                        <a href="<?=base_url()?><?=route_to('website.edit', $website->id)?>"><i class="fa-solid fa-pen-to-square"></i></a>
-                        <a href="#" class="delete-website" data-wid="<?=$website->id?>"><i class="fa-solid fa-trash"></i></a>
+                        <a href="https://<?=$website->website_url?>" target="_blank"><i
+                                class="fa-solid fa-globe"></i></a>
+                        <a href="<?=base_url()?><?=route_to('website.show', $website->id)?>"><i
+                                class="fa-solid fa-eye"></i></a>
+                        <a href="<?=base_url()?><?=route_to('website.edit', $website->id)?>"><i
+                                class="fa-solid fa-pen-to-square"></i></a>
+                        <a href="#" class="delete-website" data-wid="<?=$website->id?>"><i
+                                class="fa-solid fa-trash"></i></a>
 
                     </td>
                     <?php endforeach; ?>

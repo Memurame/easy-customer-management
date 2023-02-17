@@ -11,16 +11,12 @@ class WebsiteModel extends Model
     public $table = 'websites';
     protected $db;
     protected $allowedFields = [
-        "contact_lastname",
-        "contact_firstname",
-        "contact_mail",
-        "contact_company",
-        "bebv_member",
-        "update_abo",
-        "website_url",
+        "customer_id",
+        "oder_id",
+        "tags",
         "website_installed",
         "website_live",
-        'license_popularfx',
+        "website_url",
         "notes"
     ];
 

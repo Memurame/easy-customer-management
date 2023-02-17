@@ -4,7 +4,9 @@ var csrfHash = document.getElementById('csrf_security').getAttribute('value')
 
 $(document).ready(function () {
     $('#example').DataTable();
-
+    $('.select2-tags').select2({
+        theme: 'bootstrap-5'
+    });
 });
 
 $(".delete-website" ).click(function() {
