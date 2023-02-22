@@ -30,4 +30,6 @@ class TaglistModel extends Model
         $this->db = \Config\Database::connect();
     }
 
+    
+
 }

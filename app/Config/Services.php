@@ -29,4 +29,12 @@ class Services extends BaseService
      *     return new \CodeIgniter\Example();
      * }
      */
+
+     /**
+     * @return \App\Models\SettingsModel
+     */
+    public static function settings(): \App\Models\SettingsModel
+    {
+        return new \App\Models\SettingsModel();
+    }
 }

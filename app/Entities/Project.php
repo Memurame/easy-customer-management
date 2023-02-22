@@ -3,9 +3,9 @@
 namespace App\Entities;
 
 use CodeIgniter\Entity;
-use App\Models\OrderModel;
+use App\Models\ProjectModel;
 
-class Order extends Entity
+class Project extends Entity
 {
     /**
      * @var array
@@ -30,4 +30,15 @@ class Order extends Entity
 
     public $data;
 
+    public function getCustomerInfo($field){
+
+        if($this->customer_id){
+            $customerModel = model(CustomerModel::class);
+
+            return $customerModel->find($this->customer_id)->{$field};
+        }
+
+        return null;
+        
+    }
 }

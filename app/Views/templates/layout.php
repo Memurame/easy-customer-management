@@ -84,7 +84,7 @@
             </a>
         </header>
 
-        <main>
+        <main class="mb-5">
             <?= $this->renderSection('main') ?>
         </main>
         <footer class="py-3 text-muted border-top text-end" style="font-size:12px">

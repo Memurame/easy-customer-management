@@ -1,7 +1,9 @@
 <?= $this->extend('templates/layout') ?>
 <?= $this->section('main') ?>
 <?php
-
+$offer = ($project->date_offer) ? new DateTime($project->date_offer) : null;
+$order = ($project->date_order) ? new DateTime($project->date_order) : null;
+$finish = ($project->date_finish) ? new DateTime($project->date_finish) : null;
 
 ?>
 
@@ -9,15 +11,14 @@
     <div class="p-1 flex-grow-1">
         <ol class="breadcrumb my-0 ">
             <li class="breadcrumb-item"><a href="<?=base_url()?>">Übersicht</a></li>
-            <li class="breadcrumb-item"><a href="<?=base_url()?><?=route_to('customer.index')?>">Kunden</a></li>
-            <li class="breadcrumb-item active" aria-current="page"><?=$customer->contact_lastname?>
-                <?=$customer->contact_firstname?></li>
+            <li class="breadcrumb-item"><a href="<?=base_url()?><?=route_to('project.index')?>">Projekte</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><?=$project->name?></li>
         </ol>
     </div>
 
     <div class="">
-        <a href="<?=base_url()?><?=route_to('customer.edit', $customer->id)?>"
-            class="btn btn-primary btn-sm">Bearbeiten</a>
+        <a href="<?=base_url()?><?=route_to('project.edit', $project->id)?>"
+            class="btn btn-outline-primary btn-sm">Bearbeiten</a>
     </div>
 </div>
 <div class="row g-3">
@@ -27,72 +28,61 @@
                 <h6 class="mb-0">Status</h6>
             </div>
             <div class="col-sm-7 text-secondary">
-                <?php if($customer->status == 1):?>
-                <span class="badge rounded-pill text-bg-success">Aktiv</span>
+                <?php if($project->status == 1):?>
+                <span class="badge text-bg-success">Aktiv</span>
+                <?php elseif($project->status == 2):?>
+                <span class="badge text-bg-secondary">Archiviert</span>
                 <?php else:?>
-                <span class="badge rounded-pill text-bg-danger">Inaktiv</span>
+                <span class="badge text-bg-danger">Inaktiv</span>
                 <?php endif;?>
             </div>
         </div>
         <div class="row mb-3">
             <div class="col-sm-5">
-                <h6 class="mb-0">Kundennummer</h6>
+                <h6 class="mb-0">Projektname</h6>
             </div>
             <div class="col-sm-7 text-secondary">
-                <?php echo $customer->customernumber ?>
+                <?php echo $project->name ?>
             </div>
         </div>
         <div class="row mb-3">
             <div class="col-sm-5">
-                <h6 class="mb-0">Name, Vorname</h6>
+                <h6 class="mb-0">Kunde</h6>
             </div>
             <div class="col-sm-7 text-secondary">
-                <?php echo $customer->contact_lastname . ' ' . $customer->contact_firstname ?>
+                <?= $project->getCustomerInfo('company')?: '---' ?>
             </div>
         </div>
         <div class="row mb-3">
             <div class="col-sm-5">
-                <h6 class="mb-0">E-Mail</h6>
+                <h6 class="mb-0">Offerte erstellt</h6>
             </div>
             <div class="col-sm-7 text-secondary">
-                <a href="mailto:<?= $customer->contact_mail ?>"><?= $customer->contact_mail ?></a>
+                <?= ($offer) ? $offer->format('d.m.Y') : '---'?>
             </div>
         </div>
         <div class="row mb-3">
             <div class="col-sm-5">
-                <h6 class="mb-0">Firma</h6>
+                <h6 class="mb-0">Projekt gestartet</h6>
             </div>
             <div class="col-sm-7 text-secondary">
-                <?= $customer->company ?>
+                <?= ($order) ? $order->format('d.m.Y') : '---'?>
             </div>
         </div>
-
         <div class="row mb-3">
             <div class="col-sm-5">
-                <h6 class="mb-0">Adresse</h6>
+                <h6 class="mb-0">Projekt abgeschlossen</h6>
             </div>
             <div class="col-sm-7 text-secondary">
-                <?= $customer->street ?><br>
-                <?= $customer->postcode ?> <?= $customer->city ?>
+                <?= ($finish) ? $finish->format('d.m.Y') : '---'?>
             </div>
         </div>
         <div class="row mb-3">
-            <textarea class="form-control" rows="8"><?= $customer->notes ?></textarea>
+            <textarea class="form-control" rows="8"><?= $project->notes ?></textarea>
         </div>
     </div>
     <div class="col-6">
-        <table class="table table-striped" style="width:100%">
-            <thead>
-                <tr>
-                    <th>Datum</th>
-                    <th>Bezahlt</th>
-                </tr>
-            </thead>
-            <tbody>
 
-
-            </tbody>
-        </table>
     </div>
 </div>
 

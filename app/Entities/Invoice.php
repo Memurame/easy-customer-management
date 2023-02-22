@@ -26,15 +26,39 @@ class Invoice extends Entity
      */
     protected $casts   = [];
 
-    protected $team_name;
-
     public $data;
 
-    public function getInvoiceWebsite($websiteid){
-        $websiteModel = new WebsiteModel();
-        $website = $websiteModel->find($websiteid);
+    public function getWebsiteInfo($field){
 
-        return ($website) ? $website : null;
+        $result = null;
+        if($this->website_id){
+            $websiteModel = model(WebsiteModel::class);
+            $result = $websiteModel->find($this->website_id);
+        }
 
+        return $result ? $result->{$field} : null;
+
+    }
+
+    public function getCustomerInfo($field){
+        $result = null;
+        if($this->customer_id){
+            $customerModel = model(CustomerModel::class);
+            $result = $customerModel->find($this->customer_id);
+        }
+
+        return $result ? $result->{$field} : null;
+        
+    }
+
+    public function getProjectInfo($field){
+        $result = null;
+        if($this->project_id){
+            $projectModel = model(ProjectModel::class);
+            $result = $projectModel->find($this->project_id);
+        }
+
+        return $result ? $result->{$field} : null;
+        
     }
 }

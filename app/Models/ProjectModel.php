@@ -3,12 +3,12 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
-use App\Entities\Order;
+use App\Entities\Project;
 
-class OrderModel extends Model
+class ProjectModel extends Model
 {
 
-    public $table = 'orders';
+    public $table = 'projects';
     protected $db;
     protected $allowedFields = [
         "customer_id",
@@ -26,7 +26,7 @@ class OrderModel extends Model
     protected $useTimestamps = true;
     protected $dateFormat = 'int';
 
-    protected $returnType = Order::class;
+    protected $returnType = Project::class;
     protected $useSoftDeletes = true;
 
     public function __construct()

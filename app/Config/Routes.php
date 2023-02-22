@@ -38,6 +38,8 @@ $routes->match(['get', 'post'],'/websites/edit/(:num)', 'Websites::edit/$1', ['a
 
 $routes->get('/invoices', 'Invoices::index', ['as' => 'invoice.index', 'filter' => 'Auth']);
 $routes->match(['get', 'post'],'/invoices/add', 'Invoices::add', ['as' => 'invoice.add', 'filter' => 'Auth']);
+$routes->get('/invoices/show/(:num)', 'Invoices::show/$1', ['as' => 'invoice.show', 'filter' => 'Auth']);
+$routes->match(['get', 'post'],'/invoices/edit/(:num)', 'Invoices::edit/$1', ['as' => 'invoice.edit', 'filter' => 'Auth']);
 
 $routes->get('/customers', 'Customers::index', ['as' => 'customer.index', 'filter' => 'Auth']);
 $routes->match(['get', 'post'],'/customers/add', 'Customers::add', ['as' => 'customer.add', 'filter' => 'Auth']);
@@ -45,16 +47,21 @@ $routes->get('/customers/show/(:num)', 'Customers::show/$1', ['as' => 'customer.
 $routes->match(['get', 'post'],'/customers/edit/(:num)', 'Customers::edit/$1', ['as' => 'customer.edit', 'filter' => 'Auth']);
 
 
-$routes->get('/orders', 'Orders::index', ['as' => 'order.index', 'filter' => 'Auth']);
+$routes->get('/projects', 'Projects::index', ['as' => 'project.index', 'filter' => 'Auth']);
+$routes->match(['get', 'post'],'/projects/add', 'Projects::add', ['as' => 'project.add', 'filter' => 'Auth']);
+$routes->match(['get', 'post'],'/projects/edit/(:num)', 'Projects::edit/$1', ['as' => 'project.edit', 'filter' => 'Auth']);
+$routes->get('/projects/show/(:num)', 'Projects::show/$1', ['as' => 'project.show', 'filter' => 'Auth']);
 
 
 
 
-$routes->cli('invoice', 'Cron::invoice');
+$routes->cli('cron', 'Invoices::cron');
 
 
 $routes->delete('/api/website/delete/(:num)', 'Websites::apiDelete/$1');
 $routes->delete('/api/customer/delete/(:num)', 'Customers::apiDelete/$1');
+$routes->delete('/api/project/delete/(:num)', 'Projects::apiDelete/$1');
+$routes->delete('/api/invoice/delete/(:num)', 'Invoices::apiDelete/$1');
 
 
 /*

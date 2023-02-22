@@ -20,7 +20,7 @@ $golive = ($website->website_live) ? new DateTime($website->website_live) : null
 
     <div class="">
         <a href="<?=base_url()?><?=route_to('website.edit', $website->id)?>"
-            class="btn btn-primary btn-sm">Bearbeiten</a>
+            class="btn btn-outline-primary btn-sm">Bearbeiten</a>
     </div>
 </div>
 <div class="row g-3">
@@ -39,6 +39,14 @@ $golive = ($website->website_live) ? new DateTime($website->website_live) : null
             </div>
             <div class="col-sm-7 text-secondary">
                 <?=($website->getCustomerInfo('company') ? '<a href="'.base_url().route_to('customer.show', $website->getCustomerInfo('id')).'">'.$website->getCustomerInfo('company').'</a>' : '---') ?>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-sm-5">
+                <h6 class="mb-0">Projekt</h6>
+            </div>
+            <div class="col-sm-7 text-secondary">
+                <?=($website->getProjectInfo('name') ? '<a href="'.base_url().route_to('project.show', $website->getProjectInfo('id')).'">'.$website->getProjectInfo('name').'</a>' : '---') ?>
             </div>
         </div>
         <div class="row mb-3">
@@ -72,8 +80,7 @@ $golive = ($website->website_live) ? new DateTime($website->website_live) : null
             </div>
             <div class="col-sm-7 text-secondary">
                 <?php foreach($website->getTags() as $tag):?>
-                <span
-                    class="badge rounded-pill <?=($tag['class']) ? $tag['class'] : 'text-bg-secondary'?>"><?=$tag['name']?></span>
+                <span class="badge <?=($tag['class']) ? $tag['class'] : 'text-bg-secondary'?>"><?=$tag['name']?></span>
                 <?php endforeach;?>
             </div>
         </div>

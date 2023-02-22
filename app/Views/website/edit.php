@@ -12,7 +12,7 @@
         </div>
 
         <div class="">
-            <button type="submit" class="btn btn-success btn-sm">Speichern</button>
+            <button type="submit" class="btn btn-outline-success btn-sm">Speichern</button>
         </div>
     </div>
     <?= view('templates/message_block.php') ?>
@@ -29,12 +29,12 @@
             </select>
         </div>
         <div class="col-6">
-            <label for="order_id" class="form-label">Auftrag</label>
-            <select class="form-select" name="order_id" id="order_id">
+            <label for="project_id" class="form-label">Projekt</label>
+            <select class="form-select" name="project_id" id="project_id">
                 <option value="0">-- Auftrag auswählen --</option>
-                <?php foreach($orders as $order): ?>
-                <option value="<?=$order->id ?>" <?= ($website->order_id == $order->id) ? 'selected' : '' ?>>
-                    <?= $order->name ?></option>
+                <?php foreach($projects as $project): ?>
+                <option value="<?=$project->id ?>" <?= ($website->project_id == $project->id) ? 'selected' : '' ?>>
+                    <?= $project->name ?></option>
 
                 <?php endforeach; ?>
             </select>

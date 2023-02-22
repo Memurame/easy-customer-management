@@ -6,12 +6,12 @@
             <ol class="breadcrumb my-0 ">
                 <li class="breadcrumb-item"><a href="<?=base_url()?>">Übersicht</a></li>
                 <li class="breadcrumb-item"><a href="<?=base_url()?><?=route_to('customer.index')?>">Kunden</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Neu</li>
+                <li class="breadcrumb-item active" aria-current="page">Bearbeiten</li>
             </ol>
         </div>
 
         <div class="">
-            <button type="submit" class="btn btn-success btn-sm">Speichern</button>
+            <button type="submit" class="btn btn-outline-success btn-sm">Speichern</button>
         </div>
     </div>
     <?= view('templates/message_block.php') ?>

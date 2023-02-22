@@ -32,12 +32,16 @@ class InitTables extends Migration
 
         $this->forge->addField([
             'id'                    => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
-            'website_id'            => ['type' => 'int', 'constraint' => 11],
-            'order_id'            => ['type' => 'int', 'constraint' => 11],
+            'website_id'            => ['type' => 'int', 'constraint' => 11, 'null' => true],
+            'project_id'            => ['type' => 'int', 'constraint' => 11, 'null' => true],
             'customer_id'            => ['type' => 'int', 'constraint' => 11],
+            'description'            => ['type' => 'varchar', 'constraint' => 100],
+            'notes'                 => ['type' => 'text', 'null' => true],
             'invoice'               => ['type' => 'date', 'null' => true],
             'paid'                  => ['type' => 'int', 'constraint' => 1],
             'renew'                  => ['type' => 'int', 'constraint' => 1],
+            'renew_interval'         => ['type' => 'int', 'constraint' => 2],
+            'amount'                  => ['type' => 'float', 'constraint' => 10],
             'created_at'            => ['type' => 'varchar', 'constraint' => 50, 'null' => true],
             'updated_at'            => ['type' => 'varchar', 'constraint' => 50, 'null' => true],
             'deleted_at'            => ['type' => 'varchar', 'constraint' => 50, 'null' => true],
@@ -83,7 +87,7 @@ class InitTables extends Migration
         ]);
 
         $this->forge->addKey('id', true);
-        $this->forge->createTable('orders', true);
+        $this->forge->createTable('projects', true);
 
         $this->forge->addField([
             'id'                    => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
@@ -96,6 +100,17 @@ class InitTables extends Migration
 
         $this->forge->addKey('id', true);
         $this->forge->createTable('taglist', true);
+
+        /*
+         * Settings Table
+         */
+        $this->forge->addField([
+            'key'              => ['type' => 'varchar', 'constraint' => 100],
+            'value'            => ['type' => 'varchar', 'constraint' => 255],
+        ]);
+
+        $this->forge->addKey('key', true);
+        $this->forge->createTable('settings', true);
     }
 
     //--------------------------------------------------------------------
@@ -106,7 +121,7 @@ class InitTables extends Migration
 		$this->forge->dropTable('websites', true);
         $this->forge->dropTable('invoices', true);
         $this->forge->dropTable('customers', true);
-        $this->forge->dropTable('orders', true);
+        $this->forge->dropTable('projects', true);
         $this->forge->dropTable('website_tags', true);
         $this->forge->dropTable('taglist', true);
     }

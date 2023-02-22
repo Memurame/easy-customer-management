@@ -19,7 +19,7 @@
         <div class="col-6">
             <label for="customer_id" class="form-label">Kunde <span class="text-danger">*</span></label>
             <select class="form-select" name="customer_id" id="customer_id">
-                <option value"0" selected>-- Kunde auswählen --</option>
+                <option value="0" selected>-- Kunde auswählen --</option>
                 <?php foreach($customers as $customer): ?>
                 <option value="<?=$customer->id ?>"><?= $customer->company ?></option>
 
@@ -27,11 +27,11 @@
             </select>
         </div>
         <div class="col-6">
-            <label for="order_id" class="form-label">Auftrag</label>
-            <select class="form-select" name="order_id" id="order_id">
-                <option value"0" selected>-- Auftrag auswählen --</option>
-                <?php foreach($orders as $order): ?>
-                <option value="<?=$order->id ?>"><?= $order->name ?></option>
+            <label for="project_id" class="form-label">Projekt</label>
+            <select class="form-select" name="project_id" id="project_id">
+                <option value="0" selected>-- Projekt auswählen --</option>
+                <?php foreach($projects as $project): ?>
+                <option value="<?=$project->id ?>"><?= $project->name ?></option>
 
                 <?php endforeach; ?>
             </select>

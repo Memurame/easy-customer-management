@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Models\WebsiteModel;
 use App\Models\CustomerModel;
-use App\Models\OrderModel;
+use App\Models\ProjectModel;
 use App\Models\TaglistModel;
 use App\Entities\Website;
 use App\Entities\WebsiteTag;
@@ -27,8 +27,8 @@ class Websites extends BaseController
         $customerModel = new CustomerModel();
         $customers = $customerModel->findAll();
 
-        $orderModel = new OrderModel();
-        $orders = $orderModel->findAll();
+        $projectModel = new ProjectModel();
+        $projects = $projectModel->findAll();
 
         $taglistModel = new TaglistModel();
         $taglist = $taglistModel->findAll();
@@ -69,7 +69,7 @@ class Websites extends BaseController
 
         return view('website/add', [
             'customers' => $customers,
-            'orders' => $orders,
+            'projects' => $projects,
             'taglist' => $taglist
         ]);
     }
@@ -86,8 +86,8 @@ class Websites extends BaseController
         $customerModel = new CustomerModel();
         $customers = $customerModel->findAll();
 
-        $orderModel = new OrderModel();
-        $orders = $orderModel->findAll();
+        $projectModel = new ProjectModel();
+        $projects = $projectModel->findAll();
 
         $taglistModel = new TaglistModel();
         $taglist = $taglistModel->findAll();
@@ -111,7 +111,7 @@ class Websites extends BaseController
             $website->website_live = $this->request->getPost('website_live') ?: null;
             $website->website_url = $this->request->getPost('website_url');
             $website->customer_id = $this->request->getPost('customer_id');
-            $website->order_id = $this->request->getPost('order_id');
+            $website->project_id = $this->request->getPost('project_id');
             $website->notes = $this->request->getPost('notes');
 
             if($website->hasChanged()){
@@ -135,7 +135,7 @@ class Websites extends BaseController
         return view('website/edit', [
             'website' => $website,
             'customers' => $customers,
-            'orders' => $orders,
+            'projects' => $projects,
             'taglist' => $taglist
         ]);
     }

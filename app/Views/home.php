@@ -24,9 +24,9 @@
         <div class="card text-center">
             <div class="card-body">
                 <i class="fa-solid fa-folder-open fa-10x"></i>
-                <a href="<?=base_url()?><?=route_to('order.index')?>"
+                <a href="<?=base_url()?><?=route_to('project.index')?>"
                     class="stretched-link text-dark text-decoration-none">
-                    <h5 class="card-title">Aufträge/Projekte</h5>
+                    <h5 class="card-title">Projekte</h5>
                 </a>
             </div>
         </div>

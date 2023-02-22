@@ -9,7 +9,7 @@
     </div>
 
     <div class="">
-        <a href="<?=base_url()?><?=route_to('website.add')?>" class="btn btn-primary btn-sm">Neue Webseite</a>
+        <a href="<?=base_url()?><?=route_to('website.add')?>" class="btn btn-outline-primary btn-sm">Neue Webseite</a>
     </div>
 </div>
 
@@ -31,25 +31,29 @@
                 $installed = ($website->website_installed) ? new DateTime($website->website_installed) : null;
                 ?>
                 <tr>
-                    <td><?=($website->getCustomerInfo('company') ? '<a href="'.base_url().route_to('customer.show', $website->getCustomerInfo('id')).'">'.$website->getCustomerInfo('company').'</a>' : '---') ?>
+                    <td class="align-middle">
+                        <?=($website->getCustomerInfo('company') ? '<a href="'.base_url().route_to('customer.show', $website->getCustomerInfo('id')).'">'.$website->getCustomerInfo('company').'</a>' : '---') ?>
                     </td>
-                    <td><?=$website->website_url?></td>
-                    <td><?= ($website->website_installed) ? $installed->format('d.m.Y') : '---'?></td>
-                    <td>
+                    <td class="align-middle"><?=$website->website_url?></td>
+                    <td class="align-middle"><?= ($website->website_installed) ? $installed->format('d.m.Y') : '---'?>
+                    </td>
+                    <td class="align-middle">
                         <?php foreach($website->getTags() as $tag): ?>
                         <span
-                            class="badge rounded-pill <?=($tag['class']) ? $tag['class'] : 'text-bg-secondary'?>"><?=$tag['name']?></span>
+                            class="badge <?=($tag['class']) ? $tag['class'] : 'text-bg-secondary'?>"><?=$tag['name']?></span>
                         <?php endforeach; ?>
                     </td>
                     <td class="text-end">
-                        <a href="https://<?=$website->website_url?>" target="_blank"><i
-                                class="fa-solid fa-globe"></i></a>
-                        <a href="<?=base_url()?><?=route_to('website.show', $website->id)?>"><i
-                                class="fa-solid fa-eye"></i></a>
-                        <a href="<?=base_url()?><?=route_to('website.edit', $website->id)?>"><i
-                                class="fa-solid fa-pen-to-square"></i></a>
-                        <a href="#" class="delete-website" data-wid="<?=$website->id?>"><i
-                                class="fa-solid fa-trash"></i></a>
+                        <div class="btn-group">
+                            <a href="https://<?=$website->website_url?>" target="_blank"
+                                class="btn btn-outline-secondary"><i class="fa-solid fa-globe"></i></a>
+                            <a href="<?=base_url()?><?=route_to('website.show', $website->id)?>"
+                                class="btn btn-outline-primary"><i class="fa-solid fa-eye"></i></a>
+                            <a href="<?=base_url()?><?=route_to('website.edit', $website->id)?>"
+                                class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="#" class="delete-website btn btn-outline-danger" data-wid="<?=$website->id?>"><i
+                                    class="fa-solid fa-trash"></i></a>
+                        </div>
 
                     </td>
                     <?php endforeach; ?>

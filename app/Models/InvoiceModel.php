@@ -12,9 +12,15 @@ class InvoiceModel extends Model
     protected $db;
     protected $allowedFields = [
         "website_id",
+        "customer_id",
+        "project_id",
         "invoice",
         "paid",
-        "renew"
+        "renew",
+        "renew_interval",
+        "notes",
+        "description",
+        "amount"
     ];
 
     protected $primaryKey = 'id';

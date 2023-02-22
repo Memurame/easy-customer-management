@@ -57,13 +57,24 @@ class Website extends Entity
 
     public function getCustomerInfo($field){
 
+        $result = null;
         if($this->customer_id){
             $customerModel = model(CustomerModel::class);
-
-            return $customerModel->find($this->customer_id)->{$field};
+            $result = $customerModel->find($this->customer_id);
         }
 
-        return null;
+        return $result ? $result->{$field} : null;
+        
+    }
+    public function getProjectInfo($field){
+
+        $result = null;
+        if($this->project_id){
+            $projectModel = model(ProjectModel::class);
+            $result = $projectModel->find($this->project_id);
+        }
+
+        return $result ? $result->{$field} : null;
         
     }
 }

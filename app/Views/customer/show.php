@@ -17,7 +17,7 @@
 
     <div class="">
         <a href="<?=base_url()?><?=route_to('customer.edit', $customer->id)?>"
-            class="btn btn-primary btn-sm">Bearbeiten</a>
+            class="btn btn-outline-primary btn-sm">Bearbeiten</a>
     </div>
 </div>
 <div class="row g-3">
@@ -28,9 +28,9 @@
             </div>
             <div class="col-sm-7 text-secondary">
                 <?php if($customer->status == 1):?>
-                <span class="badge rounded-pill text-bg-success">Aktiv</span>
+                <span class="badge text-bg-success">Aktiv</span>
                 <?php else:?>
-                <span class="badge rounded-pill text-bg-danger">Inaktiv</span>
+                <span class="badge text-bg-danger">Inaktiv</span>
                 <?php endif;?>
             </div>
         </div>

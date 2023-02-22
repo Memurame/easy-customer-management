@@ -20,6 +20,9 @@ class Customers extends BaseController
 
     public function add()
     {
+        $customerModel = new CustomerModel();
+        $customers = $customerModel->findAll();
+
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
             $rules = [
