@@ -87,9 +87,9 @@
         <main>
             <?= $this->renderSection('main') ?>
         </main>
-        <footer class="pt-5 my-5 text-muted border-top">
+        <footer class="py-3 text-muted border-top text-end" style="font-size:12px">
             Erstellt für den <a href="https://bernerbauern.ch">BEBV</a> durch <a
-                href="mailto:thomas.hirter@bernerbauern.ch">Thomas Hirter</a>
+                href="https://github.com/Memurame/easy-customer-management">Thomas Hirter</a>
         </footer>
     </div>
 

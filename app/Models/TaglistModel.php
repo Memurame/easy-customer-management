@@ -3,23 +3,16 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
-use App\Entities\Customer;
+use App\Entities\Taglist;
 
-class CustomerModel extends Model
+class TaglistModel extends Model
 {
 
-    public $table = 'customers';
+    public $table = 'taglist';
     protected $db;
     protected $allowedFields = [
-        "company",
-        "contact_firstname",
-        "contact_lastname",
-        "contact_mail",
-        "customernumber",
-        "street",
-        'postcode',
-        'city',
-        'status'
+        "name",
+        "class"
     ];
 
     protected $primaryKey = 'id';
@@ -28,7 +21,7 @@ class CustomerModel extends Model
     protected $useTimestamps = true;
     protected $dateFormat = 'int';
 
-    protected $returnType = Customer::class;
+    protected $returnType = Taglist::class;
     protected $useSoftDeletes = true;
 
     public function __construct()

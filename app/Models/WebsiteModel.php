@@ -13,7 +13,6 @@ class WebsiteModel extends Model
     protected $allowedFields = [
         "customer_id",
         "oder_id",
-        "tags",
         "website_installed",
         "website_live",
         "website_url",

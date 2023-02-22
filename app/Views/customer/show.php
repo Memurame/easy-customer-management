@@ -81,18 +81,7 @@
         </div>
     </div>
     <div class="col-6">
-        <table class="table table-striped" style="width:100%">
-            <thead>
-                <tr>
-                    <th>Datum</th>
-                    <th>Bezahlt</th>
-                </tr>
-            </thead>
-            <tbody>
 
-
-            </tbody>
-        </table>
     </div>
 </div>
 

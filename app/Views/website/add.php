@@ -44,10 +44,10 @@
         <div class="col-12">
             <label for="website_url" class="form-label">Tags</label>
             <select class="select2-tags form-select" name="tags[]" id="tags" multiple="multiple">
-                <option value="AL">Alabama</option>
-                <option value="WY">Wyoming</option>
+                <?php foreach($taglist as $tag): ?>
+                <option value="<?=$tag->id ?>"><?=$tag->name ?></option>
+                <?php endforeach; ?>
             </select>
-            <small id="tagsHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
         <div class="col-md-6">
             <label for="website_installed" class="form-label">Webseite installiert am</label>

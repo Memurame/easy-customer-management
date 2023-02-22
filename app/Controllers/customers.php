@@ -53,6 +53,10 @@ class Customers extends BaseController
         $customerModel = new CustomerModel();
         $customer = $customerModel->find($id);
 
+        if(!$customer){
+            return redirect()->route('customer.index');
+        }
+
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 
@@ -94,6 +98,9 @@ class Customers extends BaseController
         $customerModel = new CustomerModel();
         $customer = $customerModel->find($id);
         
+        if(!$customer){
+            return redirect()->route('customer.index');
+        }
 
         return view('customer/show', [
             'customer' => $customer

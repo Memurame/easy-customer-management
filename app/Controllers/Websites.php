@@ -5,7 +5,9 @@ namespace App\Controllers;
 use App\Models\WebsiteModel;
 use App\Models\CustomerModel;
 use App\Models\OrderModel;
+use App\Models\TaglistModel;
 use App\Entities\Website;
+use App\Entities\WebsiteTag;
 
 class Websites extends BaseController
 {
@@ -28,6 +30,9 @@ class Websites extends BaseController
         $orderModel = new OrderModel();
         $orders = $orderModel->findAll();
 
+        $taglistModel = new TaglistModel();
+        $taglist = $taglistModel->findAll();
+
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
             $rules = [
@@ -41,9 +46,22 @@ class Websites extends BaseController
             }
 
             $website = new Website($this->request->getPost());
+            $website->website_installed = $this->request->getPost('website_installed') ?: null;
+            $website->website_live = $this->request->getPost('website_live') ?: null;
 
             $websiteModel = new WebsiteModel();
             $websiteModel->save($website);
+
+
+            $website = $websiteModel->find($websiteModel->insertID());
+            $website->removeAllTags();
+            if($this->request->getPost('tags') !== null){
+                
+                foreach($this->request->getPost('tags') as $tag){
+                    $website->addTagToWebsite($tag);
+                }
+            }
+        
 
             return redirect()->route('website.index');
 
@@ -51,7 +69,8 @@ class Websites extends BaseController
 
         return view('website/add', [
             'customers' => $customers,
-            'orders' => $orders
+            'orders' => $orders,
+            'taglist' => $taglist
         ]);
     }
 
@@ -60,35 +79,64 @@ class Websites extends BaseController
         $websiteModel = new WebsiteModel();
         $website = $websiteModel->find($id);
 
+        if(!$website){
+            return redirect()->route('website.index');
+        }
+
+        $customerModel = new CustomerModel();
+        $customers = $customerModel->findAll();
+
+        $orderModel = new OrderModel();
+        $orders = $orderModel->findAll();
+
+        $taglistModel = new TaglistModel();
+        $taglist = $taglistModel->findAll();
+
+
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 
             $rules = [
-                'update_abo' => 'required',
-                'website_url' => 'required',
-                'license_popularfx' => 'required',
+                'customer_id' => 'required',
+                'website_url' => 'required'
             ];
 
             if (! $this->validate($rules))
             {
                 return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
             }
+            //die( $this->request->getPost('website_live'));
 
-            $website->website_installed = $this->request->getPost('website_installed');
-            $website->website_live = $this->request->getPost('website_live');
+            $website->website_installed = $this->request->getPost('website_installed') ?: null;
+            $website->website_live = $this->request->getPost('website_live') ?: null;
             $website->website_url = $this->request->getPost('website_url');
-            $website->license_popularfx = $this->request->getPost('license_popularfx');
-            $website->update_abo = $this->request->getPost('update_abo');
+            $website->customer_id = $this->request->getPost('customer_id');
+            $website->order_id = $this->request->getPost('order_id');
             $website->notes = $this->request->getPost('notes');
 
-            $websiteModel->save($website);
+            if($website->hasChanged()){
+                $websiteModel->save($website);
+            }
+            
+
+            $website->removeAllTags();
+            if($this->request->getPost('tags') !== null){
+                
+                foreach($this->request->getPost('tags') as $tag){
+                    $website->addTagToWebsite($tag);
+                }
+            }
+            
 
             return redirect()->route('website.show', [$id]);
 
         }
 
         return view('website/edit', [
-            'website' => $website
+            'website' => $website,
+            'customers' => $customers,
+            'orders' => $orders,
+            'taglist' => $taglist
         ]);
     }
 
@@ -97,7 +145,9 @@ class Websites extends BaseController
         $websiteModel = new WebsiteModel();
         $website = $websiteModel->find($id);
         
-
+        if(!$website){
+            return redirect()->route('website.index');
+        }
         return view('website/show', [
             'website' => $website
         ]);

@@ -28,4 +28,42 @@ class Website extends Entity
     protected $team_name;
 
     public $data;
+
+    public function removeAllTags(){
+        
+        $websiteTagModel = model(WebsiteTagModel::class);
+    
+        return $websiteTagModel->removeAllTagsFromWebsite($this->id);
+    }
+
+    public function addTagToWebsite($tagId){
+        
+        $websiteTagModel = model(WebsiteTagModel::class);
+    
+        return $websiteTagModel->addTagToWebsite($tagId, $this->id);
+    }
+
+    public function getTags(){
+        $websiteTagModel = model(WebsiteTagModel::class);
+    
+        return $websiteTagModel->getTagsForWebsite($this->id);
+    }
+
+    public function hasTag($tagId){
+        $websiteTagModel = model(WebsiteTagModel::class);
+
+        return $websiteTagModel->checkWebsiteTag($this->id, $tagId);
+    }
+
+    public function getCustomerInfo($field){
+
+        if($this->customer_id){
+            $customerModel = model(CustomerModel::class);
+
+            return $customerModel->find($this->customer_id)->{$field};
+        }
+
+        return null;
+        
+    }
 }

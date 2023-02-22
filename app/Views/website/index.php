@@ -31,13 +31,17 @@
                 $installed = ($website->website_installed) ? new DateTime($website->website_installed) : null;
                 ?>
                 <tr>
-                    <td>Kundenname</td>
+                    <td><?=($website->getCustomerInfo('company') ? '<a href="'.base_url().route_to('customer.show', $website->getCustomerInfo('id')).'">'.$website->getCustomerInfo('company').'</a>' : '---') ?>
+                    </td>
                     <td><?=$website->website_url?></td>
                     <td><?= ($website->website_installed) ? $installed->format('d.m.Y') : '---'?></td>
                     <td>
-                        <span class="badge rounded-pill text-bg-danger">tags</span>
+                        <?php foreach($website->getTags() as $tag): ?>
+                        <span
+                            class="badge rounded-pill <?=($tag['class']) ? $tag['class'] : 'text-bg-secondary'?>"><?=$tag['name']?></span>
+                        <?php endforeach; ?>
                     </td>
-                    <td class="text-right">
+                    <td class="text-end">
                         <a href="https://<?=$website->website_url?>" target="_blank"><i
                                 class="fa-solid fa-globe"></i></a>
                         <a href="<?=base_url()?><?=route_to('website.show', $website->id)?>"><i
