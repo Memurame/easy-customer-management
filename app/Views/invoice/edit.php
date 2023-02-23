@@ -32,7 +32,8 @@
                 <option value="0" <?=($invoice->customer_id == 0)? 'selected' : ''?>>-- Bitte auswählen --</option>
                 <?php foreach($customers as $index => $customer): ?>
                 <option value="<?=$customer->id?>" <?=($invoice->customer_id == $customer->id)? 'selected' : ''?>>
-                    <?=$customer->company?></option>
+                    <?= $customer->company?: $customer->contact_lastname . ' ' . $customer->contact_firstname ?>
+                </option>
                 <?php endforeach; ?>
             </select>
         </div>
@@ -67,6 +68,7 @@
                 <option value="1" <?=($invoice->paid == 1)? 'selected' : ''?>>Ja</option>
                 <option value="2" <?=($invoice->paid == 2)? 'selected' : ''?>>Rechnung generieren</option>
                 <option value="3" <?=($invoice->paid == 3)? 'selected' : ''?>>Überfällig</option>
+                <option value="4" <?=($invoice->paid == 4)? 'selected' : ''?>>Geplannt</option>
             </select>
         </div>
         <div class="col-md-6">

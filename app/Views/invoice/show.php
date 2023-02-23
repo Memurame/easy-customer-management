@@ -62,6 +62,8 @@ $date = ($invoice->invoice) ? new DateTime($invoice->invoice) : null;
                 <span class="badge text-bg-warning">Pendent</span>
                 <?php elseif($invoice->paid == 3):?>
                 <span class="badge text-bg-danger">Überfällig</span>
+                <?php elseif($invoice->paid == 4):?>
+                <span class="badge text-bg-info">Geplannt</span>
                 <?php else:?>
                 <span class="badge text-bg-warning">Offen</span>
                 <?php endif;?>

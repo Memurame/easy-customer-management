@@ -197,6 +197,22 @@ class Invoices extends BaseController
             }
         }
 
+        /*
+         * Geplannet rechneungen bearbeten und entsprechend status setzen
+         */
+        $invoices = $invoiceModel
+            ->where('paid', 4)
+            ->findAll();
+        foreach($invoices as $key => $invoice){
+            $invoiceDate = strtotime($invoice->invoice);
+            if(time() >= strtotime('-14 days', $invoiceDate)){
+                $invoice->paid = 2;
+                if($invoice->hasChanged()){
+                    $invoiceModel->save($invoice);
+                }
+            }
+        }
+
          /*
          * Rechnungen welche automatisch Monatlich erneuert werden generieren und auf pendent setzen
          */

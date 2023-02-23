@@ -39,7 +39,7 @@
                 <h6 class="mb-0">Kundennummer</h6>
             </div>
             <div class="col-sm-7 text-secondary">
-                <?php echo $customer->customernumber ?>
+                <?php echo $customer->customernumber?: '---' ?>
             </div>
         </div>
         <div class="row mb-3">
@@ -63,7 +63,7 @@
                 <h6 class="mb-0">Firma</h6>
             </div>
             <div class="col-sm-7 text-secondary">
-                <?= $customer->company ?>
+                <?= $customer->company?:'---' ?>
             </div>
         </div>
 

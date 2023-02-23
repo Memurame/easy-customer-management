@@ -4,6 +4,12 @@ ECS is intended for small businesses that specialize in websites and IT services
 
 ![Dashboard](screenshot.png)
 
+## Community
+
+For project communication we use Elements.
+
+https://matrix.to/#/#easy-customer-management:matrix.hi-net.ch
+
 ## Requirements
 
 - PHP 8.0 minimum

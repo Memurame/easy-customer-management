@@ -22,7 +22,8 @@
                 <option value="0">-- Kunde auswählen --</option>
                 <?php foreach($customers as $customer): ?>
                 <option value="<?=$customer->id ?>" <?=($customer->id == $project->customer_id) ? 'selected' : ''?>>
-                    <?= $customer->company ?></option>
+                    <?= $customer->company?: $customer->contact_lastname . ' ' . $customer->contact_firstname ?>
+                </option>
 
                 <?php endforeach; ?>
             </select>

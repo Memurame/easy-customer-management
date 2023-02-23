@@ -65,6 +65,8 @@
                         <span class="badge text-bg-warning">Rechnung generieren</span>
                         <?php elseif($invoice->paid == 3):?>
                         <span class="badge text-bg-danger">Überfällig</span>
+                        <?php elseif($invoice->paid == 4):?>
+                        <span class="badge text-bg-info">Geplannt</span>
                         <?php elseif($invoice->paid == 0):?>
                         <span class="badge text-bg-warning">Offen</span>
                         <?php endif;?>
@@ -109,6 +111,12 @@
                     markiert.</p>
                 <h4>Überfällig</h4>
                 <p><strong>Offene</strong> Rechnungen welche die Zahlungsrist von 30 Tagen überschritten haben werden
+                    autmatisch von <span class="badge text-bg-warning">Offen</span> zu <span
+                        class="badge text-bg-danger">Überfällig</span> geändert.</p>
+                <h4>Geplannte Rechnungen</h4>
+                <p><strong>Geplannt</strong> sind Rechnungen welche z.B erst in einem Jahr oder paar Monaten fällig
+                    sind. Diese können als Geplannte Rechnungen erfast werden.<br> 14 Tage vor dem Rechnungsdatum wird
+                    der Status automatisch zu <span class="badge text-bg-info">Rechnung geneieren</span> geändert.
                     autmatisch von <span class="badge text-bg-warning">Offen</span> zu <span
                         class="badge text-bg-danger">Überfällig</span> geändert.</p>
             </div>

@@ -31,7 +31,9 @@
             <select id="customer_id" name="customer_id" class="form-select ">
                 <option value="0" selected>-- Bitte auswählen --</option>
                 <?php foreach($customers as $index => $customer): ?>
-                <option value="<?=$customer->id?>"><?=$customer->company?></option>
+                <option value="<?=$customer->id?>">
+                    <?= $customer->company?: $customer->contact_lastname . ' ' . $customer->contact_firstname ?>
+                </option>
                 <?php endforeach; ?>
             </select>
         </div>

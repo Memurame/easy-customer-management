@@ -33,7 +33,7 @@
 
                 <tr>
                     <td class="align-middle"><?=$customer->contact_lastname?> <?=$customer->contact_firstname?></td>
-                    <td class="align-middle"><?=$customer->company?></td>
+                    <td class="align-middle"><?=$customer->company?:'---'?></td>
                     <td class="align-middle"><?=$customer->city?></td>
                     <td class="align-middle">
                         <?php if($customer->status == 1):?>
