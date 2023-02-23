@@ -35,7 +35,7 @@ abstract class BaseController extends Controller
      *
      * @var array
      */
-    protected $helpers = ['custom'];
+    protected $helpers = ['custom,setting'];
 
     /**
      * Be sure to declare properties for any property fetch you initialized.
@@ -55,8 +55,10 @@ abstract class BaseController extends Controller
 
         // E.g.: $this->session = \Config\Services::session();
 
+        /*
         $migrate = \Config\Services::migrations();
 
         $migrate->latest();
+        */
     }
 }

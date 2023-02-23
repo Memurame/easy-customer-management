@@ -31,26 +31,26 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index', ['as' => 'home']);
 
-$routes->get('/websites', 'Websites::index', ['as' => 'website.index', 'filter' => 'Auth']);
-$routes->match(['get', 'post'],'/websites/add', 'Websites::add', ['as' => 'website.add', 'filter' => 'Auth']);
-$routes->get('/websites/show/(:num)', 'Websites::show/$1', ['as' => 'website.show', 'filter' => 'Auth']);
-$routes->match(['get', 'post'],'/websites/edit/(:num)', 'Websites::edit/$1', ['as' => 'website.edit', 'filter' => 'Auth']);
+$routes->get('/websites', 'Websites::index', ['as' => 'website.index']);
+$routes->match(['get', 'post'],'/websites/add', 'Websites::add', ['as' => 'website.add']);
+$routes->get('/websites/show/(:num)', 'Websites::show/$1', ['as' => 'website.show']);
+$routes->match(['get', 'post'],'/websites/edit/(:num)', 'Websites::edit/$1', ['as' => 'website.edit']);
 
-$routes->get('/invoices', 'Invoices::index', ['as' => 'invoice.index', 'filter' => 'Auth']);
-$routes->match(['get', 'post'],'/invoices/add', 'Invoices::add', ['as' => 'invoice.add', 'filter' => 'Auth']);
-$routes->get('/invoices/show/(:num)', 'Invoices::show/$1', ['as' => 'invoice.show', 'filter' => 'Auth']);
-$routes->match(['get', 'post'],'/invoices/edit/(:num)', 'Invoices::edit/$1', ['as' => 'invoice.edit', 'filter' => 'Auth']);
+$routes->get('/invoices', 'Invoices::index', ['as' => 'invoice.index']);
+$routes->match(['get', 'post'],'/invoices/add', 'Invoices::add', ['as' => 'invoice.add']);
+$routes->get('/invoices/show/(:num)', 'Invoices::show/$1', ['as' => 'invoice.show']);
+$routes->match(['get', 'post'],'/invoices/edit/(:num)', 'Invoices::edit/$1', ['as' => 'invoice.edit']);
 
-$routes->get('/customers', 'Customers::index', ['as' => 'customer.index', 'filter' => 'Auth']);
-$routes->match(['get', 'post'],'/customers/add', 'Customers::add', ['as' => 'customer.add', 'filter' => 'Auth']);
-$routes->get('/customers/show/(:num)', 'Customers::show/$1', ['as' => 'customer.show', 'filter' => 'Auth']);
-$routes->match(['get', 'post'],'/customers/edit/(:num)', 'Customers::edit/$1', ['as' => 'customer.edit', 'filter' => 'Auth']);
+$routes->get('/customers', 'Customers::index', ['as' => 'customer.index']);
+$routes->match(['get', 'post'],'/customers/add', 'Customers::add', ['as' => 'customer.add']);
+$routes->get('/customers/show/(:num)', 'Customers::show/$1', ['as' => 'customer.show']);
+$routes->match(['get', 'post'],'/customers/edit/(:num)', 'Customers::edit/$1', ['as' => 'customer.edit']);
 
 
-$routes->get('/projects', 'Projects::index', ['as' => 'project.index', 'filter' => 'Auth']);
-$routes->match(['get', 'post'],'/projects/add', 'Projects::add', ['as' => 'project.add', 'filter' => 'Auth']);
-$routes->match(['get', 'post'],'/projects/edit/(:num)', 'Projects::edit/$1', ['as' => 'project.edit', 'filter' => 'Auth']);
-$routes->get('/projects/show/(:num)', 'Projects::show/$1', ['as' => 'project.show', 'filter' => 'Auth']);
+$routes->get('/projects', 'Projects::index', ['as' => 'project.index']);
+$routes->match(['get', 'post'],'/projects/add', 'Projects::add', ['as' => 'project.add']);
+$routes->match(['get', 'post'],'/projects/edit/(:num)', 'Projects::edit/$1', ['as' => 'project.edit']);
+$routes->get('/projects/show/(:num)', 'Projects::show/$1', ['as' => 'project.show']);
 
 
 
@@ -65,7 +65,7 @@ $routes->delete('/api/project/delete/(:num)', 'Projects::apiDelete/$1');
 $routes->delete('/api/invoice/delete/(:num)', 'Invoices::apiDelete/$1');
 
 
-$routes->get('/admin', 'Admin::index', ['as' => 'admin.index', 'filter' => 'Auth']);
+$routes->get('/admin', 'Admin::index', ['as' => 'admin.index']);
 
 
 

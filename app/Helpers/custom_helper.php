@@ -110,16 +110,3 @@ if (! function_exists('createRandomPassword')) {
         return implode($pass);
     }
 }
-
-if (! function_exists('settings')) {
-
-    /**
-     * Lade die Benutzerdefinierten Einstellungen
-     *
-     * @return mixed
-     */
-    function settings()
-    {
-        return service('settings');
-    }
-}
