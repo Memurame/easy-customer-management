@@ -56,12 +56,17 @@ $routes->get('/projects/show/(:num)', 'Projects::show/$1', ['as' => 'project.sho
 
 
 $routes->cli('cron', 'Invoices::cron');
+$routes->get('cron', 'Invoices::cron');
 
 
 $routes->delete('/api/website/delete/(:num)', 'Websites::apiDelete/$1');
 $routes->delete('/api/customer/delete/(:num)', 'Customers::apiDelete/$1');
 $routes->delete('/api/project/delete/(:num)', 'Projects::apiDelete/$1');
 $routes->delete('/api/invoice/delete/(:num)', 'Invoices::apiDelete/$1');
+
+
+$routes->get('/admin', 'Admin::index', ['as' => 'admin.index', 'filter' => 'Auth']);
+
 
 
 /*

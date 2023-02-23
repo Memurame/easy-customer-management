@@ -20,7 +20,8 @@ class InvoiceModel extends Model
         "renew_interval",
         "notes",
         "description",
-        "amount"
+        "amount",
+        "renewed"
     ];
 
     protected $primaryKey = 'id';

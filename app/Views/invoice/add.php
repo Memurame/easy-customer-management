@@ -60,13 +60,15 @@
         <div class="col-md-6">
             <label for="paid" class="form-label">Bezahlt <span class="text-danger">*</span></label>
             <select id="paid" name="paid" class="form-select">
-                <option value="0" selected>Nein</option>
+                <option value="0" selected>Nein (Rechnung versendet)</option>
                 <option value="1">Ja</option>
+                <option value="2">Rechnung generieren</option>
+                <option value="3">Überfällig</option>
             </select>
         </div>
         <div class="col-md-6">
-            <label for="renew" class="form-label">Intervall <span class="text-danger">*</span></label>
-            <select id="renew" name="renew" class="form-select">
+            <label for="renew_interval" class="form-label">Intervall <span class="text-danger">*</span></label>
+            <select id="renew_interval" name="renew_interval" class="form-select">
                 <option value="0" selected>Einmalig</option>
                 <option value="1">Monatlich (Rechnungsdatum)</option>
                 <option value="2">Monatlich (1. im Monat)</option>
@@ -75,9 +77,8 @@
             </select>
         </div>
         <div class="col-md-6">
-            <label for="renew_interval" class="form-label">Automatisch erneuern <span
-                    class="text-danger">*</span></label>
-            <select id="renew_interval" name="renew_interval" class="form-select">
+            <label for="renew" class="form-label">Automatisch erneuern <span class="text-danger">*</span></label>
+            <select id="renew" name="renew" class="form-select">
                 <option value="0" selected>Nein</option>
                 <option value="1">Ja</option>
 

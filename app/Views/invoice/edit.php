@@ -63,9 +63,9 @@
         <div class="col-md-6">
             <label for="paid" class="form-label">Bezahlt <span class="text-danger">*</span></label>
             <select id="paid" name="paid" class="form-select">
-                <option value="0" <?=($invoice->paid == 0)? 'selected' : ''?>>Nein</option>
+                <option value="0" <?=($invoice->paid == 0)? 'selected' : ''?>>Nein (Rechnung versendet)</option>
                 <option value="1" <?=($invoice->paid == 1)? 'selected' : ''?>>Ja</option>
-                <option value="2" <?=($invoice->paid == 2)? 'selected' : ''?>>Pendent</option>
+                <option value="2" <?=($invoice->paid == 2)? 'selected' : ''?>>Rechnung generieren</option>
                 <option value="3" <?=($invoice->paid == 3)? 'selected' : ''?>>Überfällig</option>
             </select>
         </div>

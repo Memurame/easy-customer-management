@@ -41,7 +41,8 @@ class Invoices extends BaseController
                 'invoice' => 'required',
                 'website_id' => 'required',
                 'renew' => 'required',
-                'paid' => 'required'
+                'paid' => 'required',
+                'amount' => 'required'
             ];
 
             if (! $this->validate($rules))
@@ -92,7 +93,8 @@ class Invoices extends BaseController
                 'invoice' => 'required',
                 'website_id' => 'required',
                 'renew' => 'required',
-                'paid' => 'required'
+                'paid' => 'required',
+                'amount' => 'required'
             ];
 
             if (! $this->validate($rules))
@@ -168,18 +170,139 @@ class Invoices extends BaseController
 
     public function cron(){
         $invoiceModel = new InvoiceModel();
-        $invoices = $invoiceModel->where('paid', 0)->findAll();
+        
 
         $paymentTerm = strtotime('-30 days');
        
-
+        /*
+         * Auf überfällige Rechnungen prüfen
+         */
+        $invoices = $invoiceModel
+            ->where('paid', 0)
+            ->findAll();
         foreach($invoices as $key => $invoice){
             $invoiceDate = strtotime($invoice->invoice);
             if($invoiceDate <= $paymentTerm){
                 $invoice->paid = 3;
-                $invoiceModel->save($invoice);
+                if($invoice->hasChanged()){
+                    $invoiceModel->save($invoice);
+                }
+                /*$email = \Config\Services::email();
+                $email->setTo('');
+                $email->setSubject("Überfällige Rechnung - " . $invoice->description);
+                $email->setMessage(view('email/overdue.php', [
+                    'invoice' => $invoice]));
+                $email->send();*/
+            }
+        }
 
-                // SEND MAIL TO USERS
+         /*
+         * Rechnungen welche automatisch Monatlich erneuert werden generieren und auf pendent setzen
+         */
+        $invoices = $invoiceModel
+            ->where('renew', 1)
+            ->where('renew_interval', 1)
+            ->where('renewed', 0)
+            ->findAll();
+
+        foreach($invoices as $key => $invoice){
+            $invoiceDate = strtotime($invoice->invoice);
+            if(time() >= strtotime('+14 days', $invoiceDate)){
+
+                $invoice->renewed = 1;
+                if($invoice->hasChanged()){
+                    $invoiceModel->save($invoice);
+                }
+
+                $invoice->id = null;
+                $invoice->paid = 2;
+                $invoice->renewed = 0;
+                $invoice->invoice = date('Y.m.d', strtotime($invoice->invoice. '+1 months'));
+                $invoiceModel->insert($invoice);
+
+
+            }
+        }
+
+         /*
+         * Rechnungen welche automatisch auf den 1. im Monat fällig sind generieren und auf pendent setzen
+         */
+        $invoices = $invoiceModel
+            ->where('renew', 1)
+            ->where('renew_interval', 2)
+            ->where('renewed', 0)
+            ->findAll();
+
+        foreach($invoices as $key => $invoice){
+            $invoiceDate = strtotime($invoice->invoice);
+            if(date('d', time()) >= 14 && date('m', $invoiceDate) == date('m', time())){
+
+                $invoice->renewed = 1;
+                if($invoice->hasChanged()){
+                    $invoiceModel->save($invoice);
+                }
+
+                $invoice->id = null;
+                $invoice->paid = 2;
+                $invoice->renewed = 0;
+                $invoice->invoice = date('Y.m', strtotime($invoice->invoice. '+1 months')) . '.1';
+                $invoiceModel->insert($invoice);
+
+            }
+        }
+
+        /*
+         * Rechnungen welche automatisch Jährlich erneuert werden generieren und auf pendent setzen
+         */
+        $invoices = $invoiceModel
+            ->where('renew', 1)
+            ->where('renew_interval', 3)
+            ->where('renewed', 0)
+            ->findAll();
+
+        foreach($invoices as $key => $invoice){
+            $invoiceDate = strtotime($invoice->invoice);
+            if(time() >= strtotime('+335 days', $invoiceDate)){
+
+                $invoice->renewed = 1;
+                if($invoice->hasChanged()){
+                    $invoiceModel->save($invoice);
+                }
+
+                $invoice->id = null;
+                $invoice->paid = 2;
+                $invoice->renewed = 0;
+                $invoice->invoice = date('Y.m.d', strtotime($invoice->invoice. '+1 year'));
+                $invoiceModel->insert($invoice);
+
+
+            }
+        }
+
+         /*
+         * Rechnungen welche automatisch auf den 1. im Jahr fällig sind generieren und auf pendent setzen
+         */
+        $invoices = $invoiceModel
+            ->where('renew', 1)
+            ->where('renew_interval', 4)
+            ->where('renewed', 0)
+            ->findAll();
+
+        foreach($invoices as $key => $invoice){
+            $invoiceDate = strtotime($invoice->invoice);
+            if(date('d', time()) >= 1 && date('m', time()) == 12 && date('Y', $invoiceDate) == date('Y', time())){
+
+                $invoice->renewed = 1;
+                if($invoice->hasChanged()){
+                    $invoiceModel->save($invoice);
+                }
+
+                $invoice->id = null;
+                $invoice->paid = 2;
+                $invoice->renewed = 0;
+                $invoice->invoice = date('Y.m', strtotime($invoice->invoice. '+1 year')) . '.1';
+                $invoiceModel->insert($invoice);
+
             }
         }
 

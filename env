@@ -25,6 +25,7 @@
 # app_baseURL = ''
 # app.forceGlobalSecureRequests = false
 # app.CSPEnabled = false
+app.appTimezone = 'Europe/Zurich'
 
 #--------------------------------------------------------------------
 # DATABASE

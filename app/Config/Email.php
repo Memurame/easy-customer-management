@@ -73,7 +73,7 @@ class Email extends BaseConfig
     /**
      * Type of mail, either 'text' or 'html'
      */
-    public string $mailType = 'text';
+    public string $mailType = 'html';
 
     /**
      * Character set (utf-8, iso-8859-1, etc.)
@@ -114,4 +114,24 @@ class Email extends BaseConfig
      * Enable notify message from server
      */
     public bool $DSN = false;
+
+    public function __construct()
+    {
+
+
+        parent::__construct();
+        $this->fromEmail = service('settings')->read('mail.fromEmail');
+        $this->fromName = service('settings')->read('mail.fromName'); 
+        $this->protocol = service('settings')->read('mail.protocol'); 
+        if($this->protocol == 'smtp'){
+            $this->SMTPHost = service('settings')->read('smtp.host');
+            $this->SMTPUser = service('settings')->read('smtp.user');
+            $this->SMTPPass = service('settings')->read('smtp.pass');
+            $this->SMTPCrypto = service('settings')->read('smtp.secure');
+            $this->SMTPPort = service('settings')->read('smtp.port');
+        }
+			
+		
+
+    }
 }

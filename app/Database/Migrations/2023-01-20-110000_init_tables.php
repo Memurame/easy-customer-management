@@ -39,6 +39,7 @@ class InitTables extends Migration
             'notes'                 => ['type' => 'text', 'null' => true],
             'invoice'               => ['type' => 'date', 'null' => true],
             'paid'                  => ['type' => 'int', 'constraint' => 1],
+            'renewed'                  => ['type' => 'int', 'constraint' => 1, 'null' => true],
             'renew'                  => ['type' => 'int', 'constraint' => 1],
             'renew_interval'         => ['type' => 'int', 'constraint' => 2],
             'amount'                  => ['type' => 'float', 'constraint' => 10],

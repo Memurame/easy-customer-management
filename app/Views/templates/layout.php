@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Thomas Hirter vom Berner Bauern Verband">
-    <title>Easy Curtomer Management</title>
+    <title><?=settings()->read('site.title') ?></title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
@@ -88,6 +88,8 @@
             <?= $this->renderSection('main') ?>
         </main>
         <footer class="py-3 text-muted border-top text-end" style="font-size:12px">
+            <a href="<?=base_url()?><?=route_to('admin.index')?>" style="font-size: 16px"
+                class="pe-2 text-decoration-none">[ Administration ]</a>
             Erstellt für den <a href="https://bernerbauern.ch">BEBV</a> durch <a
                 href="https://github.com/Memurame/easy-customer-management">Thomas Hirter</a>
         </footer>
