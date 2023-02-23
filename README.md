@@ -39,3 +39,16 @@ Run the database migration:
 php spark migrate --all
 php spark db:seed InstallSeeder
 ```
+
+## Cron
+For ECM to work properly, a CronJob needs to be run regularly to check invoices and send email. I recommend an interval of 5 minutes.
+
+Directly via console:
+```console
+/[PATH_TO_YOUR_SITE]/public/index.php cron
+```
+
+It is also possible to start the CronJob through an external service:
+```
+https://[YOUR_URL]/cron
+``` 
