@@ -119,6 +119,7 @@ class Email extends BaseConfig
     {
 
 
+        /*
         parent::__construct();
         $this->fromEmail = service('settings')->read('mail.fromEmail');
         $this->fromName = service('settings')->read('mail.fromName'); 
@@ -130,7 +131,7 @@ class Email extends BaseConfig
             $this->SMTPCrypto = service('settings')->read('smtp.secure');
             $this->SMTPPort = service('settings')->read('smtp.port');
         }
-			
+			*/
 		
 
     }

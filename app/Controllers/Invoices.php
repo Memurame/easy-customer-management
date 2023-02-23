@@ -13,6 +13,7 @@ class Invoices extends BaseController
 {
     public function index()
     {
+        
         $invoiceModel = new InvoiceModel();
         $invoices = $invoiceModel->findAll();
 

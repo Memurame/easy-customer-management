@@ -9,7 +9,7 @@ class InitTables extends Migration
         $this->forge->addField([
             'id'                    => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
             'customer_id'           => ['type' => 'int', 'constraint' => 11],
-            'order_id'              => ['type' => 'int', 'constraint' => 11],
+            'project_id'              => ['type' => 'int', 'constraint' => 11],
             'website_url'           => ['type' => 'varchar', 'constraint' => 50],
             'website_live'          => ['type' => 'date', 'null' => true],
             'website_installed'     => ['type' => 'date', 'null' => true],
@@ -102,16 +102,8 @@ class InitTables extends Migration
         $this->forge->addKey('id', true);
         $this->forge->createTable('taglist', true);
 
-        /*
-         * Settings Table
-         */
-        $this->forge->addField([
-            'key'              => ['type' => 'varchar', 'constraint' => 100],
-            'value'            => ['type' => 'varchar', 'constraint' => 255],
-        ]);
 
-        $this->forge->addKey('key', true);
-        $this->forge->createTable('settings', true);
+ 
     }
 
     //--------------------------------------------------------------------
