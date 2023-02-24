@@ -19,7 +19,6 @@ https://matrix.to/#/#easy-customer-management:matrix.hi-net.ch
 ## Installation
 
 To install ECM in your production environment, connect with SSH to your server and change to your webservers (document) root directory. You need to install Git and Composer if you haven’t already.
-Herunterladen des Repository.
 
 ```console
 git clone https://github.com/Memurame/easy-customer-management.git
@@ -45,6 +44,20 @@ Run the database migration:
 php spark migrate --all
 php spark db:seed InstallSeeder
 ```
+
+## Update
+
+**Important:** Always make a backup of your website before you make an update.
+
+```colsole
+git pull
+```
+
+Run the migration:
+```console
+php spark migrate --latest
+```
+
 
 ## Cron
 For ECM to work properly, a CronJob needs to be run regularly to check invoices and send email. I recommend an interval of 5 minutes.

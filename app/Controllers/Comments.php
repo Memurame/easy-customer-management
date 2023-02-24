@@ -1,0 +1,111 @@
+<?php
+
+namespace App\Controllers;
+
+use App\Models\InvoiceModel;
+use App\Entities\Invoice;
+use App\Models\CommentModel;
+use App\Entities\Comment;
+use App\Models\WebsiteModel;
+use App\Entities\Website;
+use App\Models\CustomerModel;
+use App\Models\ProjectModel;
+
+class Comments extends BaseController
+{
+    
+
+    public function add()
+    {
+
+        $websiteModel = new WebsiteModel();
+        $websites = $websiteModel->findAll();
+
+        $customerModel = new CustomerModel();
+        $customers = $customerModel->findAll();
+
+        $projectModel = new ProjectModel();
+        $projects = $projectModel->findAll();
+
+        $selected = [];
+        if($this->request->getGet('websiteId')){
+            $choosedWebsite = $websiteModel->find($this->request->getGet('websiteId'));
+            $selected['customer'] = ($choosedWebsite && $choosedWebsite->customer_id) ? $customerModel->find($choosedWebsite->customer_id)->id : 0;
+            $selected['website'] = ($choosedWebsite) ? $choosedWebsite->id: 0;
+            $selected['project'] = 0;
+            $ref = base_url().route('website.show', [$selected['website']]);
+        }
+        if($this->request->getGet('projectId')){
+            $choosedProject = $projectModel->find($this->request->getGet('projectId'));
+            $selected['customer'] = ($choosedProject && $choosedProject->customer_id) ?
+            $customerModel->find($choosedProject->customer_id)->id : 0;
+            $selected['project'] = ($choosedProject)? $choosedProject->id : 0;
+            $selected['website'] = 0;
+            $ref = base_url().route('project.show', [$selected['project']]);
+        }
+        if($this->request->getGet('customerId')){
+            $choosedCustomer = $customerModel->find($this->request->getGet('customerId'));
+            $selected['customer'] = ($choosedCustomer) ? $choosedCustomer->id : 0;
+            $selected['project'] = 0;
+            $selected['website'] = 0;
+            $ref = base_url().route_to('customer.show', $selected['customer']);
+        }
+    
+
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+            $rules = [
+                'comment' => 'required',
+                'customer_id' => 'required'
+            ];
+
+            if (! $this->validate($rules))
+            {
+                return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+            }
+
+            $comment = new COmment($this->request->getPost());
+
+            $commentModel = new CommentModel();
+            $commentModel->save($comment);
+
+            return redirect()->to($ref);
+
+        }
+
+
+        return view('comment/add', [
+            'projects' => $projects,
+            'customers' => $customers,
+            'websites' => $websites,
+            'selected' => $selected,
+            'ref' => $ref
+        ]);
+    }
+
+    public function apiDelete($id){
+        $data = array();
+        $data['success'] = 0;
+        $data['token'] = csrf_hash();
+
+        $invoiceModel = new InvoiceModel();
+        $invoice = $invoiceModel->find($id);
+
+        if(empty($invoice)){
+            $data['error'] = "Rechnung wurde nicht gefunden.";
+        } else {
+            $deleted = $invoiceModel->delete($invoice->id);
+            if($deleted){
+                $data['success'] = 1;
+            } else {
+                $data['error'] = "Fehler beim Lsöchen des Projekts";
+            }
+        }
+
+
+        return $this->response->setJSON($data);
+    }
+
+
+}

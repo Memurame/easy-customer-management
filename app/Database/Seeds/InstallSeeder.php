@@ -15,6 +15,7 @@ class InstallSeeder extends Seeder
             ['name' => 'Update Plus', 'class' => 'text-bg-info'],
             ['name' => 'WPForms', 'class' => 'text-bg-primary'],
             ['name' => 'MainWp Child', 'class' => 'text-bg-primary'],
+            ['name' => 'Monitoring', 'class' => 'text-bg-dark'],
             
         ];
 

@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\CommentModel;
 use App\Models\CustomerModel;
 use App\Entities\Customer;
 
@@ -109,8 +110,12 @@ class Customers extends BaseController
             return redirect()->route('customer.index');
         }
 
+        $commentModel = new CommentModel();
+        $comments = $commentModel->where('customer_id', $customer->id)->orderBy('id', 'desc')->findAll();
+
         return view('customer/show', [
-            'customer' => $customer
+            'customer' => $customer,
+            'comments' => $comments
         ]);
     }
 

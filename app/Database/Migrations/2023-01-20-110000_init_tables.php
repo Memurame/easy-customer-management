@@ -14,9 +14,9 @@ class InitTables extends Migration
             'website_live'          => ['type' => 'date', 'null' => true],
             'website_installed'     => ['type' => 'date', 'null' => true],
             'notes'                 => ['type' => 'text'],
-            'created_at'            => ['type' => 'varchar', 'constraint' => 50, 'null' => true],
-            'updated_at'            => ['type' => 'varchar', 'constraint' => 50, 'null' => true],
-            'deleted_at'            => ['type' => 'varchar', 'constraint' => 50, 'null' => true],
+            'created_at'            => ['type' => 'int', 'constraint' => 50, 'null' => true],
+            'updated_at'            => ['type' => 'int', 'constraint' => 50, 'null' => true],
+            'deleted_at'            => ['type' => 'int', 'constraint' => 50, 'null' => true],
         ]);
 
         $this->forge->addKey('id', true);
@@ -43,9 +43,9 @@ class InitTables extends Migration
             'renew'                  => ['type' => 'int', 'constraint' => 1],
             'renew_interval'         => ['type' => 'int', 'constraint' => 2],
             'amount'                  => ['type' => 'float', 'constraint' => 10],
-            'created_at'            => ['type' => 'varchar', 'constraint' => 50, 'null' => true],
-            'updated_at'            => ['type' => 'varchar', 'constraint' => 50, 'null' => true],
-            'deleted_at'            => ['type' => 'varchar', 'constraint' => 50, 'null' => true],
+            'created_at'            => ['type' => 'int', 'constraint' => 50, 'null' => true],
+            'updated_at'            => ['type' => 'int', 'constraint' => 50, 'null' => true],
+            'deleted_at'            => ['type' => 'int', 'constraint' => 50, 'null' => true],
         ]);
 
         $this->forge->addKey('id', true);
@@ -64,9 +64,9 @@ class InitTables extends Migration
             'status'                => ['type' => 'int', 'constraint' => 2],
             'customernumber'        => ['type' => 'int', 'constraint' => 20],
             'notes'                 => ['type' => 'text'],
-            'created_at'            => ['type' => 'varchar', 'constraint' => 50, 'null' => true],
-            'updated_at'            => ['type' => 'varchar', 'constraint' => 50, 'null' => true],
-            'deleted_at'            => ['type' => 'varchar', 'constraint' => 50, 'null' => true],
+            'created_at'            => ['type' => 'int', 'constraint' => 50, 'null' => true],
+            'updated_at'            => ['type' => 'int', 'constraint' => 50, 'null' => true],
+            'deleted_at'            => ['type' => 'int', 'constraint' => 50, 'null' => true],
         ]);
 
         $this->forge->addKey('id', true);
@@ -82,9 +82,9 @@ class InitTables extends Migration
             'date_order'            => ['type' => 'date', 'null' => true],
             'date_finish'           => ['type' => 'date', 'null' => true],
             'notes'                 => ['type' => 'varchar', 'constraint' => 255],
-            'created_at'            => ['type' => 'varchar', 'constraint' => 50, 'null' => true],
-            'updated_at'            => ['type' => 'varchar', 'constraint' => 50, 'null' => true],
-            'deleted_at'            => ['type' => 'varchar', 'constraint' => 50, 'null' => true],
+            'created_at'            => ['type' => 'int', 'constraint' => 50, 'null' => true],
+            'updated_at'            => ['type' => 'int', 'constraint' => 50, 'null' => true],
+            'deleted_at'            => ['type' => 'int', 'constraint' => 50, 'null' => true],
         ]);
 
         $this->forge->addKey('id', true);
@@ -94,9 +94,9 @@ class InitTables extends Migration
             'id'                    => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
             'name'                  => ['type' => 'varchar', 'constraint' => 100],
             'class'                 => ['type' => 'varchar', 'constraint' => 100, 'null' => true],
-            'created_at'            => ['type' => 'varchar', 'constraint' => 50, 'null' => true],
-            'updated_at'            => ['type' => 'varchar', 'constraint' => 50, 'null' => true],
-            'deleted_at'            => ['type' => 'varchar', 'constraint' => 50, 'null' => true],
+            'created_at'            => ['type' => 'int', 'constraint' => 50, 'null' => true],
+            'updated_at'            => ['type' => 'int', 'constraint' => 50, 'null' => true],
+            'deleted_at'            => ['type' => 'int', 'constraint' => 50, 'null' => true],
         ]);
 
         $this->forge->addKey('id', true);
