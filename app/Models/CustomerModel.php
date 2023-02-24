@@ -19,7 +19,8 @@ class CustomerModel extends Model
         "street",
         'postcode',
         'city',
-        'status'
+        'status',
+        'notes'
     ];
 
     protected $primaryKey = 'id';

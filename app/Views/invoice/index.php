@@ -116,9 +116,8 @@
                 <h4>Geplannte Rechnungen</h4>
                 <p><strong>Geplannt</strong> sind Rechnungen welche z.B erst in einem Jahr oder paar Monaten fällig
                     sind. Diese können als Geplannte Rechnungen erfast werden.<br> 14 Tage vor dem Rechnungsdatum wird
-                    der Status automatisch zu <span class="badge text-bg-info">Rechnung geneieren</span> geändert.
-                    autmatisch von <span class="badge text-bg-warning">Offen</span> zu <span
-                        class="badge text-bg-danger">Überfällig</span> geändert.</p>
+                    der Status automatisch zu <span class="badge text-bg-warning">Rechnung geneieren</span> geändert.
+                </p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

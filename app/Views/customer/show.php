@@ -21,67 +21,68 @@
     </div>
 </div>
 <div class="row g-3">
-    <div class="col-6">
-        <div class="row mb-3">
-            <div class="col-sm-5">
-                <h6 class="mb-0">Status</h6>
-            </div>
-            <div class="col-sm-7 text-secondary">
-                <?php if($customer->status == 1):?>
-                <span class="badge text-bg-success">Aktiv</span>
-                <?php else:?>
-                <span class="badge text-bg-danger">Inaktiv</span>
-                <?php endif;?>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-sm-5">
-                <h6 class="mb-0">Kundennummer</h6>
-            </div>
-            <div class="col-sm-7 text-secondary">
-                <?php echo $customer->customernumber?: '---' ?>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-sm-5">
-                <h6 class="mb-0">Name, Vorname</h6>
-            </div>
-            <div class="col-sm-7 text-secondary">
-                <?php echo $customer->contact_lastname . ' ' . $customer->contact_firstname ?>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-sm-5">
-                <h6 class="mb-0">E-Mail</h6>
-            </div>
-            <div class="col-sm-7 text-secondary">
-                <a href="mailto:<?= $customer->contact_mail ?>"><?= $customer->contact_mail ?></a>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-sm-5">
-                <h6 class="mb-0">Firma</h6>
-            </div>
-            <div class="col-sm-7 text-secondary">
-                <?= $customer->company?:'---' ?>
-            </div>
-        </div>
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Status</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        <?php if($customer->status == 1):?>
+                        <span class="badge text-bg-success">Aktiv</span>
+                        <?php else:?>
+                        <span class="badge text-bg-danger">Inaktiv</span>
+                        <?php endif;?>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Kundennummer</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        <?php echo $customer->customernumber?: '---' ?>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Name, Vorname</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        <?php echo $customer->contact_lastname . ' ' . $customer->contact_firstname ?>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">E-Mail</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        <a href="mailto:<?= $customer->contact_mail ?>"><?= $customer->contact_mail ?></a>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Firma</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        <?= $customer->company?:'---' ?>
+                    </div>
+                </div>
 
-        <div class="row mb-3">
-            <div class="col-sm-5">
-                <h6 class="mb-0">Adresse</h6>
-            </div>
-            <div class="col-sm-7 text-secondary">
-                <?= $customer->street ?><br>
-                <?= $customer->postcode ?> <?= $customer->city ?>
+                <div class="row mb-3">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Adresse</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        <?= $customer->street ?><br>
+                        <?= $customer->postcode ?> <?= $customer->city ?>
+                    </div>
+                </div>
+                <div class="row">
+                    <textarea class="form-control" rows="8"><?= $customer->notes ?></textarea>
+                </div>
             </div>
         </div>
-        <div class="row mb-3">
-            <textarea class="form-control" rows="8"><?= $customer->notes ?></textarea>
-        </div>
-    </div>
-    <div class="col-6">
-
     </div>
 </div>
 

@@ -84,8 +84,12 @@ class Customers extends BaseController
             $customer->city = $this->request->getPost('city');
             $customer->customernumber = $this->request->getPost('customernumber');
             $customer->status = $this->request->getPost('status');
+            $customer->notes = $this->request->getPost('notes');
 
-            $customerModel->save($customer);
+            if($customer->hasChanged()){
+                $customerModel->save($customer);
+            }
+            
 
             return redirect()->route('customer.show', [$id]);
 
