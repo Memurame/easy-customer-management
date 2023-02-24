@@ -97,7 +97,7 @@
                     Kommentar</a>
             </div>
             <div class="card-body text-dark">
-                <table id="datatable-comments-simple" class="table table-striped" style="width:100%">
+                <table id="datatable-comments-simple" class="table" style="width:100%">
                     <tbody>
                         <?php foreach($comments as $index => $comment):
                             if($comment->comment_typ == -1){
@@ -109,16 +109,22 @@
                             }
                             ?>
                         <tr class="<?=$typ?>">
-                            <td>
-                                <strong
-                                    style="font-size:13px"><?=$comment->created_at->format('d.m.Y - H:i')?></strong><br>
+                            <td class="position-relative">
+                                <a href="<?=base_url()?><?=route_to('comment.edit', $comment->id)?>?ref=customer"
+                                    class="position-absolute" style="top: 5px; right: 30px;"><i
+                                        class="fa-solid fa-pen-to-square"></i></a>
+                                <a href="#" class="position-absolute text-danger" style="top: 5px; right: 8px;"><i
+                                        class="fa-solid fa-trash"></i></a>
+                                <strong style="font-size:13px"><?=$comment->updated_at->format('d.m.Y - H:i')?></strong>
+                                <?=($comment->updated_at > $comment->created_at) ? ' <span style="font-size:10px;">(wurde bearbeitet)</span>' : null; ?>
+
+                                <br>
                                 <?=$comment->comment?>
                                 <hr class="mb-2">
                                 <span class="badge text-bg-secondary">Kunde</span>
                                 <?=($comment->project_id)? '<span class="badge text-bg-secondary">Projekt</span>': null; ?>
-                                <?=($comment->sebsite_id)? '<span class="badge text-bg-secondary">Webseite</span>': null; ?>
+                                <?=($comment->website_id)? '<span class="badge text-bg-secondary">Webseite</span>': null; ?>
                             </td>
-                            <td></td>
                         </tr>
                         <?php endforeach;?>
                     </tbody>

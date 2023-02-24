@@ -84,6 +84,65 @@ class Comments extends BaseController
         ]);
     }
 
+    public function edit($id)
+    {
+        $commentModel = new CommentModel();
+        $comment = $commentModel->find($id);
+
+        $websiteModel = new WebsiteModel();
+        $websites = $websiteModel->findAll();
+
+        $customerModel = new CustomerModel();
+        $customers = $customerModel->findAll();
+
+        $projectModel = new ProjectModel();
+        $projects = $projectModel->findAll();
+
+        if($this->request->getGet('ref') == 'website'){
+            $ref = base_url() . route('website.show', [$comment->website_id]);
+        }
+        if($this->request->getGet('ref') == 'project'){
+            $ref = base_url() . route('project.show', [$comment->project_id]);
+        }
+        if($this->request->getGet('ref') == 'customer'){
+            $ref = base_url() . route_to('customer.show', $comment->customer_id);
+        }
+    
+
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+            $rules = [
+                'comment' => 'required',
+            ];
+
+            if (! $this->validate($rules))
+            {
+                return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+            }
+
+            $comment->comment = $this->request->getPost('comment');
+            $comment->comment_typ = $this->request->getPost('comment_typ');
+
+            $commentModel = new CommentModel();
+            if($comment->hasChanged()){
+                $commentModel->save($comment);
+            }
+            
+
+            return redirect()->to($ref);
+
+        }
+
+
+        return view('comment/edit', [
+            'projects' => $projects,
+            'customers' => $customers,
+            'websites' => $websites,
+            'comment' => $comment
+        ]);
+    }
+
     public function apiDelete($id){
         $data = array();
         $data['success'] = 0;

@@ -53,6 +53,7 @@ $routes->match(['get', 'post'],'/projects/edit/(:num)', 'Projects::edit/$1', ['a
 $routes->get('/projects/show/(:num)', 'Projects::show/$1', ['as' => 'project.show']);
 
 $routes->match(['get', 'post'],'/comments/add', 'Comments::add', ['as' => 'comment.add']);
+$routes->match(['get', 'post'],'/comments/edit/(:num)', 'Comments::edit/$1', ['as' => 'comment.edit']);
 
 
 

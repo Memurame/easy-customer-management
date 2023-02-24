@@ -8,7 +8,7 @@ $(document).ready(function () {
     $('#datatable-comments-simple').DataTable({
         "ordering": false,
         'columnDefs': [ {
-            'targets': [0,1], /* column index */
+            'targets': [0], /* column index */
             'orderable': false, /* true or false */
          }]
     });
