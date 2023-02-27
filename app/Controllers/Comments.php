@@ -33,7 +33,7 @@ class Comments extends BaseController
             $selected['customer'] = ($choosedWebsite && $choosedWebsite->customer_id) ? $customerModel->find($choosedWebsite->customer_id)->id : 0;
             $selected['website'] = ($choosedWebsite) ? $choosedWebsite->id: 0;
             $selected['project'] = 0;
-            $ref = base_url().route('website.show', [$selected['website']]);
+            $ref = base_url().route_to('website.show', $selected['website']);
         }
         if($this->request->getGet('projectId')){
             $choosedProject = $projectModel->find($this->request->getGet('projectId'));
@@ -41,7 +41,7 @@ class Comments extends BaseController
             $customerModel->find($choosedProject->customer_id)->id : 0;
             $selected['project'] = ($choosedProject)? $choosedProject->id : 0;
             $selected['website'] = 0;
-            $ref = base_url().route('project.show', [$selected['project']]);
+            $ref = base_url().route_to('project.show', $selected['project']);
         }
         if($this->request->getGet('customerId')){
             $choosedCustomer = $customerModel->find($this->request->getGet('customerId'));
@@ -99,10 +99,10 @@ class Comments extends BaseController
         $projects = $projectModel->findAll();
 
         if($this->request->getGet('ref') == 'website'){
-            $ref = base_url() . route('website.show', [$comment->website_id]);
+            $ref = base_url() . route_to('website.show', $comment->website_id);
         }
         if($this->request->getGet('ref') == 'project'){
-            $ref = base_url() . route('project.show', [$comment->project_id]);
+            $ref = base_url() . route_to('project.show', $comment->project_id);
         }
         if($this->request->getGet('ref') == 'customer'){
             $ref = base_url() . route_to('customer.show', $comment->customer_id);
@@ -148,17 +148,17 @@ class Comments extends BaseController
         $data['success'] = 0;
         $data['token'] = csrf_hash();
 
-        $invoiceModel = new InvoiceModel();
-        $invoice = $invoiceModel->find($id);
+        $commentModel = new CommentModel();
+        $comment = $commentModel->find($id);
 
-        if(empty($invoice)){
-            $data['error'] = "Rechnung wurde nicht gefunden.";
+        if(empty($comment)){
+            $data['error'] = "Kommentar wurde nicht gefunden.";
         } else {
-            $deleted = $invoiceModel->delete($invoice->id);
+            $deleted = $commentModel->delete($comment->id);
             if($deleted){
                 $data['success'] = 1;
             } else {
-                $data['error'] = "Fehler beim Lsöchen des Projekts";
+                $data['error'] = "Fehler beim Lsöchen des Kommentar";
             }
         }
 

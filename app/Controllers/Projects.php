@@ -9,6 +9,7 @@ use App\Entities\Website;
 use App\Models\ProjectModel;
 use App\Entities\Project;
 use App\Models\CustomerModel;
+use App\Models\CommentModel;
 
 class Projects extends BaseController
 {
@@ -121,8 +122,13 @@ class Projects extends BaseController
         if(!$project){
             return redirect()->route('website.index');
         }
+
+        $commentModel = new CommentModel();
+        $comments = $commentModel->where('project_id', $project->id)->orderBy('id', 'desc')->findAll();
+
         return view('projects/show', [
-            'project' => $project
+            'project' => $project,
+            'comments' => $comments
         ]);
     }
 

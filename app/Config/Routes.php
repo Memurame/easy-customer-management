@@ -65,6 +65,7 @@ $routes->delete('/api/website/delete/(:num)', 'Websites::apiDelete/$1');
 $routes->delete('/api/customer/delete/(:num)', 'Customers::apiDelete/$1');
 $routes->delete('/api/project/delete/(:num)', 'Projects::apiDelete/$1');
 $routes->delete('/api/invoice/delete/(:num)', 'Invoices::apiDelete/$1');
+$routes->delete('/api/comment/delete/(:num)', 'Comments::apiDelete/$1');
 
 
 $routes->get('/admin', 'Admin::index', ['as' => 'admin.index']);

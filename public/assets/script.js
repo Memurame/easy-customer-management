@@ -173,3 +173,42 @@ $(".delete-invoice" ).click(function() {
         }
     })
 });
+
+$(".delete-comment" ).click(function() {
+
+    var row = $(this).closest('tr');
+    Swal.fire({
+        title: 'Löschen',
+        text: "Möchtest du diesen Kommentar wirklich löschen?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        cancelButtonText: 'Abbrechen',
+        confirmButtonText: 'Löschen'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var xhr = $.ajax({
+                url: rootUrl + '/api/comment/delete/' + $(this).data('id'),
+                type: 'DELETE',
+                dataType: 'json',
+                data: JSON.stringify({
+                    [csrfName]: csrfHash
+                }),
+                success: function (response) {
+                    if(response.success == 1) {
+                        $('#csrf_security').val(response.token);
+                        csrfHash = response.token;
+                        row.remove();
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            text: response.error,
+                        })
+                    }
+
+                },
+            });
+        }
+    })
+});

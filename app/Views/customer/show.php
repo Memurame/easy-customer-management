@@ -113,15 +113,16 @@
                                 <a href="<?=base_url()?><?=route_to('comment.edit', $comment->id)?>?ref=customer"
                                     class="position-absolute" style="top: 5px; right: 30px;"><i
                                         class="fa-solid fa-pen-to-square"></i></a>
-                                <a href="#" class="position-absolute text-danger" style="top: 5px; right: 8px;"><i
-                                        class="fa-solid fa-trash"></i></a>
+                                <button class="position-absolute text-danger p-0 btn btn-link delete-comment"
+                                    data-id="<?=$comment->id?>" style="top: 5px; right: 8px;"><i
+                                        class="fa-solid fa-trash"></i></button>
                                 <strong style="font-size:13px"><?=$comment->updated_at->format('d.m.Y - H:i')?></strong>
                                 <?=($comment->updated_at > $comment->created_at) ? ' <span style="font-size:10px;">(wurde bearbeitet)</span>' : null; ?>
 
-                                <br>
-                                <?=$comment->comment?>
-                                <hr class="mb-2">
-                                <span class="badge text-bg-secondary">Kunde</span>
+                                <p>
+                                    <?=$comment->comment?>
+                                </p>
+                                <?=($comment->customer_id)? '<span class="badge text-bg-secondary">Kunde</span>': null; ?>
                                 <?=($comment->project_id)? '<span class="badge text-bg-secondary">Projekt</span>': null; ?>
                                 <?=($comment->website_id)? '<span class="badge text-bg-secondary">Webseite</span>': null; ?>
                             </td>
@@ -131,34 +132,6 @@
                 </table>
 
 
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Neuer Kommentar</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="mb-3">
-                        <label for="recipient-name" class="col-form-label">Recipient:</label>
-                        <input type="text" class="form-control" id="recipient-name">
-                    </div>
-                    <div class="mb-3">
-                        <label for="message-text" class="col-form-label">Message:</label>
-                        <textarea class="form-control" id="message-text"></textarea>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Send message</button>
             </div>
         </div>
     </div>

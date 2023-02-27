@@ -8,6 +8,7 @@ use App\Models\ProjectModel;
 use App\Models\TaglistModel;
 use App\Entities\Website;
 use App\Entities\WebsiteTag;
+use App\Models\CommentModel;
 
 class Websites extends BaseController
 {
@@ -148,8 +149,13 @@ class Websites extends BaseController
         if(!$website){
             return redirect()->route('website.index');
         }
+
+        $commentModel = new CommentModel();
+        $comments = $commentModel->where('website_id', $website->id)->orderBy('id', 'desc')->findAll();
+
         return view('website/show', [
-            'website' => $website
+            'website' => $website,
+            'comments' => $comments
         ]);
     }
 

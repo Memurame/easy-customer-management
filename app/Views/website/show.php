@@ -25,71 +25,125 @@ $golive = ($website->website_live) ? new DateTime($website->website_live) : null
 </div>
 <div class="row g-3">
     <div class="col-6">
-        <div class="row mb-3">
-            <div class="col-sm-5">
-                <h6 class="mb-0">Name, Vorname</h6>
+        <div class="card border-dark mb-3">
+            <div class="card-header bg-transparent border-dark d-flex justify-content-between">
+                <h4 class="card-title m-0">Websiten Infos</h4>
+                <a href="<?=base_url()?><?=route_to('website.edit', $website->id)?>"
+                    class="btn btn-outline-primary btn-sm">Bearbeiten</a>
             </div>
-            <div class="col-sm-7 text-secondary">
-                <?php echo $website->getCustomerInfo('contact_lastname') . ' ' . $website->getCustomerInfo('contact_firstname') ?>
+            <div class="card-body text-dark">
+                <div class="row mb-3">
+                    <div class="col-sm-5">
+                        <h6 class="mb-0">Name, Vorname</h6>
+                    </div>
+                    <div class="col-sm-7 text-secondary">
+                        <?php echo $website->getCustomerInfo('contact_lastname') . ' ' . $website->getCustomerInfo('contact_firstname') ?>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-sm-5">
+                        <h6 class="mb-0">Firma</h6>
+                    </div>
+                    <div class="col-sm-7 text-secondary">
+                        <?=($website->getCustomerInfo('company') ? '<a href="'.base_url().route_to('customer.show', $website->getCustomerInfo('id')).'">'.$website->getCustomerInfo('company').'</a>' : '---') ?>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-sm-5">
+                        <h6 class="mb-0">Projekt</h6>
+                    </div>
+                    <div class="col-sm-7 text-secondary">
+                        <?=($website->getProjectInfo('name') ? '<a href="'.base_url().route_to('project.show', $website->getProjectInfo('id')).'">'.$website->getProjectInfo('name').'</a>' : '---') ?>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-sm-5">
+                        <h6 class="mb-0">E-Mail</h6>
+                    </div>
+                    <div class="col-sm-7 text-secondary">
+                        <a
+                            href="mailto:<?= $website->getCustomerInfo('contact_mail') ?>"><?= $website->getCustomerInfo('contact_mail') ?></a>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-sm-5">
+                        <h6 class="mb-0">Webseite Installiert</h6>
+                    </div>
+                    <div class="col-sm-7 text-secondary">
+                        <?= ($website->website_installed) ? $installed->format('d.m.Y') : '---'?>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-sm-5">
+                        <h6 class="mb-0">Webseite aufschaltung</h6>
+                    </div>
+                    <div class="col-sm-7 text-secondary">
+                        <?= ($website->website_live) ? $golive->format('d.m.Y') : '---'?>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-sm-5">
+                        <h6 class="mb-0">Tags</h6>
+                    </div>
+                    <div class="col-sm-7 text-secondary">
+                        <?php foreach($website->getTags() as $tag):?>
+                        <span
+                            class="badge <?=($tag['class']) ? $tag['class'] : 'text-bg-secondary'?>"><?=$tag['name']?></span>
+                        <?php endforeach;?>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <textarea class="form-control" rows="8"><?= $website->notes ?></textarea>
+                </div>
             </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-sm-5">
-                <h6 class="mb-0">Firma</h6>
-            </div>
-            <div class="col-sm-7 text-secondary">
-                <?=($website->getCustomerInfo('company') ? '<a href="'.base_url().route_to('customer.show', $website->getCustomerInfo('id')).'">'.$website->getCustomerInfo('company').'</a>' : '---') ?>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-sm-5">
-                <h6 class="mb-0">Projekt</h6>
-            </div>
-            <div class="col-sm-7 text-secondary">
-                <?=($website->getProjectInfo('name') ? '<a href="'.base_url().route_to('project.show', $website->getProjectInfo('id')).'">'.$website->getProjectInfo('name').'</a>' : '---') ?>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-sm-5">
-                <h6 class="mb-0">E-Mail</h6>
-            </div>
-            <div class="col-sm-7 text-secondary">
-                <a
-                    href="mailto:<?= $website->getCustomerInfo('contact_mail') ?>"><?= $website->getCustomerInfo('contact_mail') ?></a>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-sm-5">
-                <h6 class="mb-0">Webseite Installiert</h6>
-            </div>
-            <div class="col-sm-7 text-secondary">
-                <?= ($website->website_installed) ? $installed->format('d.m.Y') : '---'?>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-sm-5">
-                <h6 class="mb-0">Webseite aufschaltung</h6>
-            </div>
-            <div class="col-sm-7 text-secondary">
-                <?= ($website->website_live) ? $golive->format('d.m.Y') : '---'?>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-sm-5">
-                <h6 class="mb-0">Tags</h6>
-            </div>
-            <div class="col-sm-7 text-secondary">
-                <?php foreach($website->getTags() as $tag):?>
-                <span class="badge <?=($tag['class']) ? $tag['class'] : 'text-bg-secondary'?>"><?=$tag['name']?></span>
-                <?php endforeach;?>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <textarea class="form-control" rows="8"><?= $website->notes ?></textarea>
         </div>
     </div>
     <div class="col-6">
+        <div class="card border-dark">
+            <div class="card-header bg-transparent border-dark d-flex justify-content-between">
+                <h4 class="card-title m-0">Kommentare</h4>
+                <a href="<?=base_url()?><?=route_to('comment.add')?>?websiteId=<?=$website->id?>"
+                    class="btn btn-outline-primary btn-sm">Neuer
+                    Kommentar</a>
+            </div>
+            <div class="card-body text-dark">
+                <table id="datatable-comments-simple" class="table" style="width:100%">
+                    <tbody>
+                        <?php foreach($comments as $index => $comment):
+                            if($comment->comment_typ == -1){
+                                $typ = 'table-danger';
+                            } elseif($comment->comment_typ == 1){
+                                $typ = 'table-success';
+                            } else {
+                                $typ = null;
+                            }
+                            ?>
+                        <tr class="<?=$typ?>">
+                            <td class="position-relative">
+                                <a href="<?=base_url()?><?=route_to('comment.edit', $comment->id)?>?ref=website"
+                                    class="position-absolute" style="top: 5px; right: 30px;"><i
+                                        class="fa-solid fa-pen-to-square"></i></a>
+                                <button class="position-absolute text-danger p-0 btn btn-link delete-comment"
+                                    data-id="<?=$comment->id?>" style="top: 5px; right: 8px;"><i
+                                        class="fa-solid fa-trash"></i></button>
+                                <strong style="font-size:13px"><?=$comment->updated_at->format('d.m.Y - H:i')?></strong>
+                                <?=($comment->updated_at > $comment->created_at) ? ' <span style="font-size:10px;">(wurde bearbeitet)</span>' : null; ?>
 
+                                <p>
+                                    <?=$comment->comment?>
+                                </p>
+                                <?=($comment->customer_id)? '<span class="badge text-bg-secondary">Kunde</span>': null; ?>
+                                <?=($comment->project_id)? '<span class="badge text-bg-secondary">Projekt</span>': null; ?>
+                                <?=($comment->website_id)? '<span class="badge text-bg-secondary">Webseite</span>': null; ?>
+                            </td>
+                        </tr>
+                        <?php endforeach;?>
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
     </div>
 </div>
 
