@@ -10,6 +10,7 @@ class AddCommentTables extends Migration
             'id'                    => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
             'customer_id'           => ['type' => 'int', 'constraint' => 11],
             'project_id'            => ['type' => 'int', 'constraint' => 11],
+            'invoice_id'            => ['type' => 'int', 'constraint' => 11],
             'website_id'            => ['type' => 'int', 'constraint' => 11],
             'comment_typ'           => ['type' => 'int', 'constraint' => 2],
             'comment'               => ['type' => 'text'],

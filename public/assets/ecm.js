@@ -3,15 +3,6 @@ var csrfName = document.getElementById('csrf_security').getAttribute('name')
 var csrfHash = document.getElementById('csrf_security').getAttribute('value')
 
 $(document).ready(function () {
-    $('#example').DataTable();
-
-    $('#datatable-comments-simple').DataTable({
-        "ordering": false,
-        'columnDefs': [ {
-            'targets': [0], /* column index */
-            'orderable': false, /* true or false */
-         }]
-    });
 
     $('.select2-tags').select2({
         theme: 'bootstrap-5'

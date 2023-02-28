@@ -7,49 +7,59 @@
 </p>
 
 <hr class="col-3 col-md-2 mb-5">
+<div class="row gap-20">
+    <!-- #Toatl Visits ==================== -->
+    <div class="col-md-3">
+        <div class="layers bd bgc-white p-20">
+            <div class="layer w-100 mB-10">
+                <h6 class="lh-1">Kunden</h6>
+            </div>
+            <div class="d-flex justify-content-between w-100">
+                <span><i class="fa-solid fa-people-group c-green-500 fs-2"></i></span>
+                <span
+                    class="d-ib lh-0 va-m fw-600 bdrs-10em pX-15 pY-15 bgc-green-50 c-green-500"><?=$count['customer']?></span>
+            </div>
+        </div>
+    </div>
 
-<div class="row g-5">
-    <div class="col-6">
-        <div class="card text-center">
-            <div class="card-body">
-                <i class="fa-solid fa-people-group fa-10x"></i>
-                <a href="<?=base_url()?><?=route_to('customer.index')?>"
-                    class="stretched-link text-dark text-decoration-none">
-                    <h5 class="card-title">Kundenverwaltung</h5>
-                </a>
+    <!-- #Total Page Views ==================== -->
+    <div class="col-md-3">
+        <div class="layers bd bgc-white p-20">
+            <div class="layer w-100 mB-10">
+                <h6 class="lh-1">Projekte</h6>
+            </div>
+            <div class="d-flex justify-content-between w-100">
+                <span><i class="fa-regular fa-folder-open c-blue-500 fs-2"></i></span>
+                <span
+                    class="d-ib lh-0 va-m fw-600 bdrs-10em pX-15 pY-15 bgc-blue-50 c-blue-500"><?=$count['project']?></span>
             </div>
         </div>
     </div>
-    <div class="col-6">
-        <div class="card text-center">
-            <div class="card-body">
-                <i class="fa-solid fa-folder-open fa-10x"></i>
-                <a href="<?=base_url()?><?=route_to('project.index')?>"
-                    class="stretched-link text-dark text-decoration-none">
-                    <h5 class="card-title">Projekte</h5>
-                </a>
+
+    <!-- #Unique Visitors ==================== -->
+    <div class="col-md-3">
+        <div class="layers bd bgc-white p-20">
+            <div class="layer w-100 mB-10">
+                <h6 class="lh-1">Webseiten</h6>
+            </div>
+            <div class="d-flex justify-content-between w-100">
+                <span><i class="fa-solid fa-globe c-deep-orange-500 fs-2"></i></span>
+                <span
+                    class="d-ib lh-0 va-m fw-600 bdrs-10em pX-15 pY-15 bgc-orange-50 c-orange-500"><?=$count['website']?></span>
             </div>
         </div>
     </div>
-    <div class="col-6">
-        <div class="card text-center">
-            <div class="card-body">
-                <i class="fa-brands fa-chrome fa-10x"></i>
-                <a href="<?=base_url()?><?=route_to('website.index')?>"
-                    class="stretched-link text-dark text-decoration-none">
-                    <h5 class="card-title">Webseiten</h5>
-                </a>
+
+    <!-- #Bounce Rate ==================== -->
+    <div class="col-md-3">
+        <div class="layers bd bgc-white p-20">
+            <div class="layer w-100 mB-10">
+                <h6 class="lh-1">Rechnungen</h6>
             </div>
-        </div>
-    </div>
-    <div class="col-6">
-        <div class="card text-center">
-            <div class="card-body">
-                <i class="fa-solid fa-file-invoice fa-10x"></i>
-                <a href="<?=base_url()?><?=route_to('invoice.index')?>"
-                    class="stretched-link text-dark text-decoration-none">
-                    <h5 class="card-title">Rechnungen</h5>
-                </a>
+            <div class="d-flex justify-content-between w-100">
+                <span><i class="fa-solid fa-file-invoice c-deep-purple-500 fs-2"></i></span>
+                <span
+                    class="d-ib lh-0 va-m fw-600 bdrs-10em pX-15 pY-15 bgc-purple-50 c-purple-500"><?=$count['invoice']?></span>
             </div>
         </div>
     </div>
