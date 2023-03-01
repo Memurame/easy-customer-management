@@ -8,106 +8,157 @@
     <meta name="author" content="Thomas Hirter vom Berner Bauern Verband">
     <title><?=service('settings')->get('App.siteName')?></title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
         integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css">
-    <style>
-    .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-    }
-
-    @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-            font-size: 3.5rem;
-        }
-    }
-
-    .b-example-divider {
-        height: 3rem;
-        background-color: rgba(0, 0, 0, .1);
-        border: solid rgba(0, 0, 0, .15);
-        border-width: 1px 0;
-        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-    }
-
-    .b-example-vr {
-        flex-shrink: 0;
-        width: 1.5rem;
-        height: 100vh;
-    }
-
-    .bi {
-        vertical-align: -.125em;
-        fill: currentColor;
-    }
-
-    .nav-scroller {
-        position: relative;
-        z-index: 2;
-        height: 2.75rem;
-        overflow-y: hidden;
-    }
-
-    .nav-scroller .nav {
-        display: flex;
-        flex-wrap: nowrap;
-        padding-bottom: 1rem;
-        margin-top: -1px;
-        overflow-x: auto;
-        text-align: center;
-        white-space: nowrap;
-        -webkit-overflow-scrolling: touch;
-    }
-    </style>
+    <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
 
 
     <link href="<?=base_url()?>/assets/style.css" rel="stylesheet">
+    <link href="<?=base_url()?>/assets/ecm.css" rel="stylesheet">
 </head>
 
-<body>
+<body class="app">
     <input type="hidden" id="csrf_security" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
-    <div class="container">
-        <header class="d-flex align-items-center py-3 border-bottom mb-2" style="background-color: black;">
-            <a href="<?=base_url()?>" class="d-flex align-items-center text-white text-decoration-none">
-                <i class="fa-solid fa-circle-nodes fa-2xl me-2 ms-2"></i><span class="fs-4">Easy Customer
-                    Management</span>
-            </a>
-        </header>
+    <div>
+        <!-- #Left Sidebar ==================== -->
+        <div class="sidebar">
+            <div class="sidebar-inner">
+                <!-- ### $Sidebar Header ### -->
+                <div class="sidebar-logo">
+                    <div class="peers ai-c fxw-nw">
+                        <div class="peer peer-greed">
+                            <a class="sidebar-link td-n" href="<?=base_url()?>">
+                                <div class="peers ai-c fxw-nw">
+                                    <div class="peer">
+                                        <div class="logo">
+                                            <img src="<?=base_url()?>/assets/logo-ecm.png" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="peer peer-greed">
+                                        <h5 class="lh-1 mB-0 logo-text">Easy Customer Management</h5>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="peer">
+                            <div class="mobile-toggle sidebar-toggle">
+                                <a href="" class="td-n">
+                                    <i class="ti-arrow-circle-left"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        <main class="mb-5">
-            <?= $this->renderSection('main') ?>
-        </main>
-        <footer class="py-3 text-muted border-top text-end" style="font-size:12px">
-            <a href="<?=base_url()?><?=route_to('admin.index')?>" style="font-size: 16px"
-                class="pe-2 text-decoration-none">[ Administration ]</a>
-            Erstellt für den <a href="https://bernerbauern.ch">BEBV</a> durch <a
-                href="https://github.com/Memurame/easy-customer-management">Thomas Hirter</a>
-        </footer>
+                <!-- ### $Sidebar Menu ### -->
+                <ul class="sidebar-menu scrollable pos-r">
+                    <li class="nav-item mT-30 <?= (current_page(route_to('home'))) ? 'actived' : ''?>">
+                        <a class="sidebar-link" href="<?=base_url()?><?=route_to('home')?>">
+                            <span class="icon-holder">
+                                <i class="fa-solid fa-house c-blue-500"></i>
+                            </span>
+                            <span class="title">Übersicht</span>
+                        </a>
+                    </li>
+                    <li class="nav-item <?= (current_page(route_to('customer.index'))) ? 'actived' : ''?>">
+                        <a class="sidebar-link" href="<?=base_url()?><?=route_to('customer.index')?>">
+                            <span class="icon-holder">
+                                <i class="fa-solid fa-people-group c-brown-500"></i>
+                            </span>
+                            <span class="title">Kunden</span>
+                        </a>
+                    </li>
+                    <li class="nav-item <?= (current_page(route_to('project.index'))) ? 'actived' : ''?>">
+                        <a class="sidebar-link" href="<?=base_url()?><?=route_to('project.index')?>">
+                            <span class="icon-holder">
+                                <i class="fa-regular fa-folder-open c-blue-500"></i>
+                            </span>
+                            <span class="title">Projekte</span>
+                        </a>
+                    </li>
+                    <li class="nav-item <?= (current_page(route_to('website.index'))) ? 'actived' : ''?>">
+                        <a class="sidebar-link" href="<?=base_url()?><?=route_to('website.index')?>">
+                            <span class="icon-holder">
+                                <i class="fa-solid fa-globe c-deep-orange-500"></i>
+                            </span>
+                            <span class="title">Webseiten</span>
+                        </a>
+                    </li>
+                    <li class="nav-item <?= (current_page(route_to('invoice.index'))) ? 'actived' : ''?>">
+                        <a class="sidebar-link" href="<?=base_url()?><?=route_to('invoice.index')?>">
+                            <span class="icon-holder">
+                                <i class="fa-solid fa-file-invoice c-deep-purple-500"></i>
+                            </span>
+                            <span class="title">Rechnungen</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="sidebar-link" href="<?=base_url()?><?=route_to('setting.index')?>">
+                            <span class="icon-holder">
+                                <i class="fa-solid fa-gear c-blue-grey-500"></i>
+                            </span>
+                            <span class="title">Einstellungen</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="sidebar-link" href="<?=base_url()?><?=route_to('invoice.index')?>">
+                            <span class="icon-holder">
+                                <i class="fa-solid fa-user c-blue-grey-500"></i>
+                            </span>
+                            <span class="title">Benutzer</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- #Main ============================ -->
+        <div class="page-container">
+            <!-- ### $Topbar ### -->
+            <div class="header navbar">
+                <div class="header-container">
+                    <ul class="nav-left">
+                        <li>
+                            <a id="sidebar-toggle" class="sidebar-toggle" href="javascript:void(0);">
+                                <i class="ti-menu"></i>
+                            </a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+
+            <!-- ### $App Screen Content ### -->
+            <main class="main-content bgc-grey-100">
+                <div id="mainContent">
+                    <div class="container-fluid">
+                        <?= $this->renderSection('main') ?>
+                    </div>
+
+                </div>
+
+            </main>
+
+            <!-- ### $App Screen Footer ### -->
+            <footer class="bdT ta-c p-30 lh-0 fsz-sm c-grey-600">
+                <span>Developed by <a href="https://github.com/Memurame/easy-customer-management" target="_blank"
+                        title="Colorlib">Thomas Hirter</a></span> | <span>Design by <a href="https://colorlib.com"
+                        target="_blank" title="Colorlib">Colorlib</a></span>
+            </footer>
+        </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
         integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
-    </script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js">
-    </script>
-    <script type="text/javascript" charset="utf8"
-        src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="<?=base_url()?>/assets/script.js"></script>
+    <script src="<?=base_url()?>/assets/main.js"></script>
+    <script src="<?=base_url()?>/assets/ecm.js"></script>
 
 
 </body>

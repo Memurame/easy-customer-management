@@ -21,13 +21,14 @@
 </div>
 <div class="row g-3">
     <div class="col-6">
-        <div class="card border-dark mb-3">
-            <div class="card-header bg-transparent border-dark d-flex justify-content-between">
-                <h4 class="card-title m-0">Kundendaten</h4>
+        <div class="bgc-white p-20 bd">
+            <div class="d-flex justify-content-between">
+                <h6 class="c-grey-900">Kundendaten</h6>
                 <a href="<?=base_url()?><?=route_to('customer.edit', $customer->id)?>"
-                    class="btn btn-outline-primary btn-sm">Bearbeiten</a>
+                    class="btn btn-primary btn-sm">Bearbeiten</a>
             </div>
-            <div class="card-body text-dark">
+            <div class="mT-30">
+
                 <div class="row mb-3">
                     <div class="col-sm-3">
                         <h6 class="mb-0">Status</h6>
@@ -89,14 +90,15 @@
         </div>
     </div>
     <div class="col-6">
-        <div class="card border-dark">
-            <div class="card-header bg-transparent border-dark d-flex justify-content-between">
-                <h4 class="card-title m-0">Kommentare</h4>
+        <div class="bgc-white p-20 bd">
+            <div class="d-flex justify-content-between">
+                <h6 class="c-grey-900">Kommentare</h6>
                 <a href="<?=base_url()?><?=route_to('comment.add')?>?customerId=<?=$customer->id?>"
-                    class="btn btn-outline-primary btn-sm">Neuer
+                    class="btn btn-primary btn-sm">Neuer
                     Kommentar</a>
             </div>
-            <div class="card-body text-dark">
+            <div class="mT-30">
+
                 <table id="datatable-comments-simple" class="table" style="width:100%">
                     <tbody>
                         <?php foreach($comments as $index => $comment):

@@ -16,18 +16,18 @@ $date = ($invoice->invoice) ? new DateTime($invoice->invoice) : null;
 
     <div class="">
         <a href="<?=base_url()?><?=route_to('invoice.edit', $invoice->id)?>"
-            class="btn btn-outline-primary btn-sm">Bearbeiten</a>
+            class="btn btn-primary btn-sm">Bearbeiten</a>
     </div>
 </div>
 <div class="row g-3">
     <div class="col-6">
-        <div class="card border-dark mb-3">
-            <div class="card-header bg-transparent border-dark d-flex justify-content-between">
-                <h4 class="card-title m-0">Rechnung</h4>
+        <div class="bgc-white p-20 bd">
+            <div class="d-flex justify-content-between">
+                <h6 class="c-grey-900">Rechungsinfo</h6>
                 <a href="<?=base_url()?><?=route_to('invoice.edit', $invoice->id)?>"
-                    class="btn btn-outline-primary btn-sm">Bearbeiten</a>
+                    class="btn btn-primary btn-sm">Bearbeiten</a>
             </div>
-            <div class="card-body text-dark">
+            <div class="mT-30">
                 <div class="row mb-3">
                     <div class="col-sm-5">
                         <h6 class="mb-0">Status</h6>

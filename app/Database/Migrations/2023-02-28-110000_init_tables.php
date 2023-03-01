@@ -102,6 +102,22 @@ class InitTables extends Migration
         $this->forge->addKey('id', true);
         $this->forge->createTable('taglist', true);
 
+        $this->forge->addField([
+            'id'                    => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
+            'customer_id'           => ['type' => 'int', 'constraint' => 11],
+            'project_id'            => ['type' => 'int', 'constraint' => 11],
+            'invoice_id'            => ['type' => 'int', 'constraint' => 11],
+            'website_id'            => ['type' => 'int', 'constraint' => 11],
+            'comment_typ'           => ['type' => 'int', 'constraint' => 2],
+            'comment'               => ['type' => 'text'],
+            'created_at'            => ['type' => 'int', 'constraint' => 50, 'null' => true],
+            'updated_at'            => ['type' => 'int', 'constraint' => 50, 'null' => true],
+            'deleted_at'            => ['type' => 'int', 'constraint' => 50, 'null' => true],
+        ]);
+
+        $this->forge->addKey('id', true);
+        $this->forge->createTable('comments', true);
+
 
  
     }
@@ -117,5 +133,6 @@ class InitTables extends Migration
         $this->forge->dropTable('projects', true);
         $this->forge->dropTable('website_tags', true);
         $this->forge->dropTable('taglist', true);
+        $this->forge->dropTable('comments', true);
     }
 }

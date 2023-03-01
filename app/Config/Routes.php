@@ -55,6 +55,7 @@ $routes->get('/projects/show/(:num)', 'Projects::show/$1', ['as' => 'project.sho
 $routes->match(['get', 'post'],'/comments/add', 'Comments::add', ['as' => 'comment.add']);
 $routes->match(['get', 'post'],'/comments/edit/(:num)', 'Comments::edit/$1', ['as' => 'comment.edit']);
 
+$routes->match(['get', 'post'],'/settings', 'Settings::index', ['as' => 'setting.index']);
 
 
 $routes->cli('cron', 'Invoices::cron');
