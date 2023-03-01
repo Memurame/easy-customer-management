@@ -97,7 +97,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="sidebar-link" href="<?=base_url()?><?=route_to('setting.index')?>">
+                        <a class="sidebar-link" href="<?=base_url()?><?=route_to('admin.settings')?>">
                             <span class="icon-holder">
                                 <i class="fa-solid fa-gear c-blue-grey-500"></i>
                             </span>

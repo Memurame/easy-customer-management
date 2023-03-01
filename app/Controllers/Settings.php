@@ -7,6 +7,8 @@ class Settings extends BaseController
 {
     public function index()
     {
+
+
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $rules = [
                 'from_email' => 'required',
@@ -37,7 +39,7 @@ class Settings extends BaseController
             service('settings')->set('Email.SMTPPort', $this->request->getPost('smtp_port'));
             service('settings')->set('Email.SMTPCrypto', $this->request->getPost('smtp_secure'));
 
-            return redirect()->route('setting.index');
+            return redirect()->route('admin.settings');
         }
 
         return view('settings');
