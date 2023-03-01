@@ -18,7 +18,7 @@ class Email extends BaseConfig
     /**
      * The mail sending protocol: mail, sendmail, smtp
      */
-    public string $protocol = 'mail';
+    public string $protocol = 'smtp';
 
     /**
      * The server path to Sendmail.
@@ -115,24 +115,4 @@ class Email extends BaseConfig
      */
     public bool $DSN = false;
 
-    public function __construct()
-    {
-
-
-        /*
-        parent::__construct();
-        $this->fromEmail = service('settings')->read('mail.fromEmail');
-        $this->fromName = service('settings')->read('mail.fromName'); 
-        $this->protocol = service('settings')->read('mail.protocol'); 
-        if($this->protocol == 'smtp'){
-            $this->SMTPHost = service('settings')->read('smtp.host');
-            $this->SMTPUser = service('settings')->read('smtp.user');
-            $this->SMTPPass = service('settings')->read('smtp.pass');
-            $this->SMTPCrypto = service('settings')->read('smtp.secure');
-            $this->SMTPPort = service('settings')->read('smtp.port');
-        }
-			*/
-		
-
-    }
 }

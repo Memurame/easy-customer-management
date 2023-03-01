@@ -31,7 +31,7 @@
                 <div class="sidebar-logo">
                     <div class="peers ai-c fxw-nw">
                         <div class="peer peer-greed">
-                            <a class="sidebar-link td-n" href="index.html">
+                            <a class="sidebar-link td-n" href="<?=base_url()?>">
                                 <div class="peers ai-c fxw-nw">
                                     <div class="peer">
                                         <div class="logo">
@@ -97,7 +97,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="sidebar-link" href="<?=base_url()?><?=route_to('invoice.index')?>">
+                        <a class="sidebar-link" href="<?=base_url()?><?=route_to('setting.index')?>">
                             <span class="icon-holder">
                                 <i class="fa-solid fa-gear c-blue-grey-500"></i>
                             </span>
