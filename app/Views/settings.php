@@ -40,6 +40,23 @@
             <div class="mT-30">
                 <div class="row mb-3">
                     <div class="col-md-6">
+                        <label for="protocol" class="form-label">Protokol<span class="text-danger">*</span></label>
+                        <select name="protocol" class="form-select">
+                            <option value="smtp"
+                                <?=(service('settings')->get('Email.protocol') == 'smtp') ?'selected':'' ?>>SMTP
+                            </option>
+                            <option value="sendmail"
+                                <?=(service('settings')->get('Email.protocol') == 'sendmail') ?'selected':'' ?>>Sendmail
+                            </option>
+                            <option value="mail"
+                                <?=(service('settings')->get('Email.protocol') == 'mail') ?'selected':'' ?>>Mail
+                            </option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
                         <label for="from_email" class="form-label">Absender Adresse<span
                                 class="text-danger">*</span></label>
                         <input type="text"
@@ -49,7 +66,7 @@
                     </div>
 
                 </div>
-                <div class="row mb-3">
+                <div class="row mb-3 pb-3" style="border-bottom: 1px solid lightgray">
                     <div class="col-md-6">
                         <label for="from_name" class="form-label">Absender Name<span
                                 class="text-danger">*</span></label>
@@ -59,9 +76,16 @@
                     </div>
 
                 </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="alert alert-info">Folgende Angaben sind nur notwendig wenn das Protokol SMTP
+                            ausgewählt
+                            wurde.</div>
+                    </div>
+                </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="smtp_host" class="form-label">SMTP Host <span class="text-danger">*</span></label>
+                        <label for="smtp_host" class="form-label">SMTP Host</label>
                         <input type="text"
                             class="form-control <?php if(session('errors.smtp_host')) : ?>is-invalid<?php endif ?>"
                             id="smtp_host" name="smtp_host" value="<?=service('settings')->get('Email.SMTPHost'); ?>">
@@ -70,8 +94,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="smtp_user" class="form-label">SMTP Benutzer <span
-                                class="text-danger">*</span></label>
+                        <label for="smtp_user" class="form-label">SMTP Benutzer</label>
                         <input type="text"
                             class="form-control <?php if(session('errors.smtp_user')) : ?>is-invalid<?php endif ?>"
                             id="smtp_user" name="smtp_user" value="<?=service('settings')->get('Email.SMTPUser'); ?>">
@@ -80,8 +103,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="smtp_pass" class="form-label">SMTP Passwort <span
-                                class="text-danger">*</span></label>
+                        <label for="smtp_pass" class="form-label">SMTP Passwort</label>
                         <input type="text"
                             class="form-control <?php if(session('errors.smtp_pass')) : ?>is-invalid<?php endif ?>"
                             id="smtp_pass" name="smtp_pass" placeholder="*****">
@@ -90,7 +112,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="smtp_port" class="form-label">SMTP Port <span class="text-danger">*</span></label>
+                        <label for="smtp_port" class="form-label">SMTP Port</label>
                         <input type="text"
                             class="form-control <?php if(session('errors.smtp_port')) : ?>is-invalid<?php endif ?>"
                             id="smtp_port" name="smtp_port" value="<?=service('settings')->get('Email.SMTPPort'); ?>">
@@ -99,8 +121,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="smtp_secure" class="form-label">SMTP Sicherheit <span
-                                class="text-danger">*</span></label>
+                        <label for="smtp_secure" class="form-label">SMTP Sicherheit </label>
                         <select name="smtp_secure" class="form-select">
                             <option value="ssl"
                                 <?=(service('settings')->get('Email.SMTPCrypto') == 'ssl') ?'selected':'' ?>>SSL

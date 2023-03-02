@@ -52,10 +52,11 @@ class AuthGroups extends ShieldAuthGroups
     public array $permissions = [
         'admin.access'        => 'Can access the sites admin area',
         'admin.settings'      => 'Can access the main site settings',
-        'users.manage-admins' => 'Can manage other admins',
-        'users.create'        => 'Can create new non-admin users',
-        'users.edit'          => 'Can edit existing non-admin users',
-        'users.delete'        => 'Can delete existing non-admin users',
+        'user.manage-admins' => 'Can manage other admins',
+        'user.create'        => 'Can create new non-admin users',
+        'user.edit'          => 'Can edit existing non-admin users',
+        'user.delete'        => 'Can delete existing non-admin users',
+        'user.show'        => 'Can show existing non-admin users',
     ];
 
     /**
@@ -67,13 +68,14 @@ class AuthGroups extends ShieldAuthGroups
     public array $matrix = [
         'superadmin' => [
             'admin.*',
-            'users.*'
+            'user.*'
         ],
         'admin' => [
             'admin.settings',
-            'users.create',
-            'users.edit',
-            'users.delete'
+            'user.create',
+            'user.edit',
+            'user.delete',
+            'user.show'
         ],
         'user' => []
     ];

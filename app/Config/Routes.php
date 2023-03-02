@@ -57,7 +57,8 @@ $routes->group('ecm', static function ($routes) {
     $routes->match(['get', 'post'],'comments/edit/(:num)', 'Comments::edit/$1', ['as' => 'comment.edit']);
 });
 
-$routes->match(['get', 'post'],'/admin/settings', 'Settings::index', ['as' => 'admin.settings', 'filter' => 'permission:admin.settings']);
+$routes->match(['get', 'post'],'/admin/settings', 'Settings::index', ['as' => 'admin.settings', 'filter' => 'permission:admin.access']);
+$routes->match(['get', 'post'],'/admin/users', 'UserController::index', ['as' => 'user.index', 'filter' => 'permission:user.show']);
 
 
 $routes->cli('cron', 'Invoices::cron');
@@ -71,7 +72,7 @@ $routes->delete('/api/invoice/delete/(:num)', 'Invoices::apiDelete/$1');
 $routes->delete('/api/comment/delete/(:num)', 'Comments::apiDelete/$1');
 
 
-$routes->get('/admin', 'Admin::index', ['as' => 'admin.index', 'filter' => ['group:admin,superadmin', 'permission:admin.access']]);
+$routes->get('/admin', 'Admin::index', ['as' => 'admin.index', 'filter' => 'permission:admin.access']);
 
 
 service('auth')->routes($routes);

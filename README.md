@@ -4,6 +4,15 @@ ECS is intended for small businesses that specialize in websites and IT services
 
 ![Dashboard](screenshot.png)
 
+## Build with...
+
+"Easy Customer Management" was created with the following frameworks:
+
+* Codeigniter4 - https://github.com/codeigniter4/CodeIgniter4
+* Shield from Codeiniter4 - https://github.com/codeigniter4/shield
+* Adminator Template - https://github.com/puikinsh/Adminator-admin-dashboard
+
+
 ## Community
 
 For project communication we use Elements.

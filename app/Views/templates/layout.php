@@ -22,6 +22,20 @@
 </head>
 
 <body class="app">
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+            <path
+                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+        </symbol>
+        <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+            <path
+                d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
+        </symbol>
+        <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+            <path
+                d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+        </symbol>
+    </svg>
     <input type="hidden" id="csrf_security" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
     <div>
         <!-- #Left Sidebar ==================== -->
@@ -105,7 +119,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="sidebar-link" href="<?=base_url()?><?=route_to('invoice.index')?>">
+                        <a class="sidebar-link" href="<?=base_url()?><?=route_to('user.index')?>">
                             <span class="icon-holder">
                                 <i class="fa-solid fa-user c-blue-grey-500"></i>
                             </span>
@@ -126,6 +140,41 @@
                             <a id="sidebar-toggle" class="sidebar-toggle" href="javascript:void(0);">
                                 <i class="ti-menu"></i>
                             </a>
+                        </li>
+                    </ul>
+                    <ul class="nav-right">
+                        <li class="dropdown">
+                            <a href="" class="dropdown-toggle no-after peers fxw-nw ai-c lh-1"
+                                data-bs-toggle="dropdown">
+                                <div class="peer mR-10">
+                                    <img class="w-2r bdrs-50p" src="https://randomuser.me/api/portraits/men/10.jpg"
+                                        alt="">
+                                </div>
+                                <div class="peer">
+                                    <span class="fsz-sm c-grey-900"><?= auth()->user()->username ?></span>
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu fsz-sm">
+                                <li>
+                                    <a href="" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700">
+                                        <i class="ti-settings mR-10"></i>
+                                        <span>Setting</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700">
+                                        <i class="ti-user mR-10"></i>
+                                        <span>Profile</span>
+                                    </a>
+                                </li>
+                                <li role="separator" class="divider"></li>
+                                <li>
+                                    <a href="" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700">
+                                        <i class="ti-power-off mR-10"></i>
+                                        <span>Logout</span>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
 

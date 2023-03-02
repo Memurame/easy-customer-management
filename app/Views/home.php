@@ -1,5 +1,18 @@
 <?= $this->extend('templates/layout') ?>
 <?= $this->section('main') ?>
+
+<?php if (auth()->user()->inGroup('superadmin', 'admin')): ?>
+<div class="alert alert-warning d-flex align-items-center" role="alert">
+    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:">
+        <use xlink:href="#exclamation-triangle-fill" />
+    </svg>
+    <div>
+        Es wurde kein Mail Absender definiert, dieser ist notwendig damit das versenden von Mails funktioniert. <br><a
+            href="<?=base_url()?><?=route_to('admin.settings')?>" class="alert-link">Jetzt anpassen</a>
+    </div>
+</div>
+<?php endif; ?>
+
 <h1>Übersicht</h1>
 <p class="fs-5 col-10">&laquo;Easy Customer Management&raquo; ist eine einfache und simple Kunden und
     Auftragsverwaltung. <br>Gedacht ist ECS für Kleinunternehmen welche sich auf Webseiten und IT-Dienstleistungen

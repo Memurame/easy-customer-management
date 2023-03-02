@@ -13,13 +13,19 @@ class Settings extends BaseController
             $rules = [
                 'from_email' => 'required',
                 'from_name' => 'required',
-                'title' => 'required',
-                'smtp_host' => 'required',
-                'smtp_user' => 'required',
-                'smtp_port' => 'required',
-                'smtp_secure' => 'required',
+                'title' => 'required'
 
             ];
+
+            if($this->request->getPost('protocol') == 'smtp'){
+                $rules = array_merge($rules, [
+                    'smtp_host' => 'required',
+                    'smtp_user' => 'required',
+                    'smtp_port' => 'required',
+                    'smtp_secure' => 'required',
+                ]);
+            }
+            
 
             if (! $this->validate($rules))
             {
@@ -27,6 +33,7 @@ class Settings extends BaseController
             }
 
             service('settings')->set('App.siteName', $this->request->getPost('title'));
+            service('settings')->set('Email.protocol', $this->request->getPost('protocol'));
             service('settings')->set('Email.fromName', $this->request->getPost('from_name'));
             service('settings')->set('Email.fromEmail', $this->request->getPost('from_email'));
             service('settings')->set('Email.SMTPHost', $this->request->getPost('smtp_host'));
