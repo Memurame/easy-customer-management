@@ -66,7 +66,8 @@
                 <div class="col-md-4">
                     <div class="form-check">
                         <label class="form-label form-check-label">
-                            <input class="form-check-input" type="checkbox"> Neuer Benutzer per Mail benachrichtigen und
+                            <input class="form-check-input" type="checkbox" name="sendmail"> Neuer Benutzer per Mail
+                            benachrichtigen und
                             die Zugangsdaten zusenden
                         </label>
                     </div>

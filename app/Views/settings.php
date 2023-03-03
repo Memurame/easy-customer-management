@@ -30,7 +30,7 @@
 
                 </div>
                 <div class="row mb-3">
-                    <div class="col-md-6">
+                    <div class="col-lg-8 col-xl-6">
                         <label for="defaultLocale" class="form-label">Sprache</label>
                         <select name="defaultLocale" class="form-select">
                             <option value="de"
@@ -59,7 +59,7 @@
             </div>
             <div class="mT-30">
                 <div class="row mb-3">
-                    <div class="col-md-6">
+                    <div class="col-lg-8 col-xl-6">
                         <label for="protocol" class="form-label">Protokol<span class="text-danger">*</span></label>
                         <select name="protocol" class="form-select">
                             <option value="smtp"
@@ -76,7 +76,7 @@
 
                 </div>
                 <div class="row mb-3">
-                    <div class="col-md-6">
+                    <div class="col-lg-8 col-xl-6">
                         <label for="from_email" class="form-label">Absender Adresse<span
                                 class="text-danger">*</span></label>
                         <input type="text"
@@ -87,7 +87,7 @@
 
                 </div>
                 <div class="row mb-3 pb-3" style="border-bottom: 1px solid lightgray">
-                    <div class="col-md-6">
+                    <div class="col-lg-8 col-xl-6">
                         <label for="from_name" class="form-label">Absender Name<span
                                 class="text-danger">*</span></label>
                         <input type="text"
@@ -97,14 +97,14 @@
 
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-lg-8 col-xl-6">
                         <div class="alert alert-info">Folgende Angaben sind nur notwendig wenn das Protokol SMTP
                             ausgewählt
                             wurde.</div>
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-md-6">
+                    <div class="col-lg-8 col-xl-6">
                         <label for="smtp_host" class="form-label">SMTP Host</label>
                         <input type="text"
                             class="form-control <?php if(session('errors.smtp_host')) : ?>is-invalid<?php endif ?>"
@@ -113,7 +113,7 @@
 
                 </div>
                 <div class="row mb-3">
-                    <div class="col-md-6">
+                    <div class="col-lg-8 col-xl-6">
                         <label for="smtp_user" class="form-label">SMTP Benutzer</label>
                         <input type="text"
                             class="form-control <?php if(session('errors.smtp_user')) : ?>is-invalid<?php endif ?>"
@@ -122,7 +122,7 @@
 
                 </div>
                 <div class="row mb-3">
-                    <div class="col-md-6">
+                    <div class="col-lg-8 col-xl-6">
                         <label for="smtp_pass" class="form-label">SMTP Passwort</label>
                         <input type="text"
                             class="form-control <?php if(session('errors.smtp_pass')) : ?>is-invalid<?php endif ?>"
@@ -131,7 +131,7 @@
 
                 </div>
                 <div class="row mb-3">
-                    <div class="col-md-6">
+                    <div class="col-lg-8 col-xl-6">
                         <label for="smtp_port" class="form-label">SMTP Port</label>
                         <input type="text"
                             class="form-control <?php if(session('errors.smtp_port')) : ?>is-invalid<?php endif ?>"
@@ -140,7 +140,7 @@
 
                 </div>
                 <div class="row mb-3">
-                    <div class="col-md-6">
+                    <div class="col-lg-8 col-xl-6">
                         <label for="smtp_secure" class="form-label">SMTP Sicherheit </label>
                         <select name="smtp_secure" class="form-select">
                             <option value="ssl"

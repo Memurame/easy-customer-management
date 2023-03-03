@@ -120,6 +120,20 @@ class UserController extends BaseController
                     }
                 }
             }
+
+            if($this->request->getPost('sendmail')){
+                $email = emailer()->setFrom(setting('Email.fromEmail'), setting('Email.fromName') ?? '');
+                $email->setTo($user->email);
+                $email->setSubject("Neuer Benutzer");
+                $email->setMessage(view('email/new_user_email.php', [
+                    'username' => $user->username,
+                    'email' => $user->email,
+                    'password' => $this->request->getPost('password')]));
+                if ($email->send(false) === false) {
+                    throw new RuntimeException("Cannot send email \n" . $email->printDebugger(['headers']));
+                }
+            }
+
             return redirect()->route('user.index');
             
             

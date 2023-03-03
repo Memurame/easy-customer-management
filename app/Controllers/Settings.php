@@ -8,7 +8,6 @@ class Settings extends BaseController
     public function index()
     {
 
-
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $rules = [
                 'from_email' => 'required',
