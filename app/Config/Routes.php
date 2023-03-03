@@ -57,8 +57,17 @@ $routes->group('ecm', static function ($routes) {
     $routes->match(['get', 'post'],'comments/edit/(:num)', 'Comments::edit/$1', ['as' => 'comment.edit']);
 });
 
-$routes->match(['get', 'post'],'/admin/settings', 'Settings::index', ['as' => 'admin.settings', 'filter' => 'permission:admin.access']);
-$routes->match(['get', 'post'],'/admin/users', 'UserController::index', ['as' => 'user.index', 'filter' => 'permission:user.show']);
+$routes->group('admin', static function ($routes) {
+
+    $routes->match(['get', 'post'],'settings', 'Settings::index', ['as' => 'admin.settings', 'filter' => 'permission:admin.settings']);
+
+    $routes->match(['get', 'post'],'users', 'UserController::index', ['as' => 'user.index', 'filter' => 'permission:user.show']);
+    $routes->match(['get', 'post'],'users/add', 'UserController::add', ['as' => 'user.add', 'filter' => 'permission:user.add']);
+    $routes->match(['get', 'post'],'users/edit/(:num)', 'UserController::edit/$1', ['as' => 'user.edit', 'filter' => 'permission:user.edit']);
+
+});
+
+
 
 
 $routes->cli('cron', 'Invoices::cron');
@@ -70,6 +79,7 @@ $routes->delete('/api/customer/delete/(:num)', 'Customers::apiDelete/$1');
 $routes->delete('/api/project/delete/(:num)', 'Projects::apiDelete/$1');
 $routes->delete('/api/invoice/delete/(:num)', 'Invoices::apiDelete/$1');
 $routes->delete('/api/comment/delete/(:num)', 'Comments::apiDelete/$1');
+$routes->delete('/api/user/delete/(:num)', 'UserController::apiDelete/$1', ['filter' => 'permission:user.delete']);
 
 
 $routes->get('/admin', 'Admin::index', ['as' => 'admin.index', 'filter' => 'permission:admin.access']);

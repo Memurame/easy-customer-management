@@ -25,21 +25,22 @@
                     <tr>
                         <th>Benutzername</th>
                         <th>Status</th>
-                        <th>Letzter Login</th>
+                        <th>Letzte Aktivität</th>
                         <th>Gruppe</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach($users as $index => $user):?>
+                    <?php foreach($users as $index => $user): ?>
+
 
                     <tr>
                         <td class="align-middle"><?=$user->username?></td>
                         <td class="align-middle">
                             <?php if($user->isActivated()):?>
-                            <span class="badge text-bg-success text-white">Aktiv</span>
+                            <span class="badge text-bg-success text-white">bestätigt</span>
                             <?php else:?>
-                            <span class="badge text-bg-danger text-white">Inaktiv</span>
+                            <span class="badge text-bg-danger text-white">nicht bestätigt</span>
                             <?php endif;?>
                         </td>
                         <td class="align-middle">
@@ -48,9 +49,9 @@
                         <td class="align-middle">
                             <?php foreach($user->getGroups() as $group): ?>
                             <?php if($group == 'superadmin'): ?>
-                            <span class="badge text-bg-danger"><?=$group?></span>
+                            <span class="badge text-bg-danger text-white"><?=$group?></span>
                             <?php elseif($group == 'admin'): ?>
-                            <span class="badge text-bg-danger"><?=$group?></span>
+                            <span class="badge text-bg-danger text-white"><?=$group?></span>
                             <?php else: ?>
                             <span class="badge text-bg-primary text-white"><?=$group?></span>
                             <?php endif; ?>
@@ -59,12 +60,10 @@
                         </td>
                         <td class="text-end">
                             <div class="btn-group">
-                                <a href="<?=base_url()?><?=route_to('user.show', $user->id)?>"
-                                    class="btn btn-link text-primary"><i class="fa-solid fa-eye"></i></a>
                                 <a href="<?=base_url()?><?=route_to('user.edit', $user->id)?>"
                                     class="btn btn-link text-primary"><i class="fa-solid fa-pen-to-square"></i></a>
-                                <a href="#" class="delete-customer btn btn-link text-danger"
-                                    data-wid="<?=$user->id?>"><i class="fa-solid fa-trash"></i></a>
+                                <a href="#" class="delete-user btn btn-link text-danger" data-id="<?=$user->id?>"><i
+                                        class="fa-solid fa-trash"></i></a>
                             </div>
                         </td>
                     </tr>

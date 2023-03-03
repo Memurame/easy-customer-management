@@ -63,7 +63,7 @@ class Auth extends ShieldAuth
      * @var array<string, class-string<ActionInterface>|null>
      */
     public array $actions = [
-        'register' => null,
+        'register' => 'CodeIgniter\Shield\Authentication\Actions\EmailActivator',
         'login'    => null,
     ];
 
@@ -212,7 +212,7 @@ class Auth extends ShieldAuth
         'CodeIgniter\Shield\Authentication\Passwords\CompositionValidator',
         'CodeIgniter\Shield\Authentication\Passwords\NothingPersonalValidator',
         'CodeIgniter\Shield\Authentication\Passwords\DictionaryValidator',
-        // 'CodeIgniter\Shield\Authentication\Passwords\PwnedValidator',
+        'CodeIgniter\Shield\Authentication\Passwords\PwnedValidator',
     ];
 
     /**

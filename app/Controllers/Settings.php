@@ -33,6 +33,8 @@ class Settings extends BaseController
             }
 
             service('settings')->set('App.siteName', $this->request->getPost('title'));
+            service('settings')->set('App.defaultLocale', $this->request->getPost('defaultLocale'));
+
             service('settings')->set('Email.protocol', $this->request->getPost('protocol'));
             service('settings')->set('Email.fromName', $this->request->getPost('from_name'));
             service('settings')->set('Email.fromEmail', $this->request->getPost('from_email'));

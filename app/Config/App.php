@@ -24,6 +24,8 @@ class App extends BaseConfig
      */
     public string $baseURL = 'http://localhost:8080/';
 
+
+
     /**
      * Allowed Hostnames in the Site URL other than the hostname in the baseURL.
      * If you want to accept multiple Hostnames, set this.
@@ -76,7 +78,7 @@ class App extends BaseConfig
      * strings (like currency markers, numbers, etc), that your program
      * should run under for this request.
      */
-    public string $defaultLocale = 'en';
+    public string $defaultLocale = 'de';
 
     /**
      * --------------------------------------------------------------------------
@@ -101,7 +103,7 @@ class App extends BaseConfig
      *
      * @var string[]
      */
-    public array $supportedLocales = ['en'];
+    public array $supportedLocales = ['en','de','it','fr'];
 
     /**
      * --------------------------------------------------------------------------

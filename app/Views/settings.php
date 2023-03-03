@@ -20,12 +20,32 @@
                 <h6 class="c-grey-900">Allgemein</h6>
             </div>
             <div class="mT-30">
-                <div class="row">
+                <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="title" class="form-label">Setentitel <span class="text-danger">*</span></label>
                         <input type="text"
                             class="form-control <?php if(session('errors.title')) : ?>is-invalid<?php endif ?>"
                             id="title" name="title" value="<?=service('settings')->get('App.siteName'); ?>">
+                    </div>
+
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="defaultLocale" class="form-label">Sprache</label>
+                        <select name="defaultLocale" class="form-select">
+                            <option value="de"
+                                <?=(service('settings')->get('App.defaultLocale') == 'de') ?'selected':'' ?>>Deutsch
+                            </option>
+                            <option value="en"
+                                <?=(service('settings')->get('App.defaultLocale') == 'en') ?'selected':'' ?>>English
+                            </option>
+                            <option value="fr"
+                                <?=(service('settings')->get('App.defaultLocale') == 'fr') ?'selected':'' ?>>Française
+                            </option>
+                            <option value="it"
+                                <?=(service('settings')->get('App.defaultLocale') == 'it') ?'selected':'' ?>>Italiano
+                            </option>
+                        </select>
                     </div>
 
                 </div>
