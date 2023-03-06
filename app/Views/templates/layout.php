@@ -147,26 +147,25 @@
                             <a href="" class="dropdown-toggle no-after peers fxw-nw ai-c lh-1"
                                 data-bs-toggle="dropdown">
                                 <div class="peer mR-10">
-                                    <img class="w-2r bdrs-50p" src="https://randomuser.me/api/portraits/men/10.jpg"
-                                        alt="">
+                                    <img class="w-2r bdrs-50p" src="<?=base_url()?>/assets/avatar.jpg" alt="">
                                 </div>
                                 <div class="peer">
                                     <span class="fsz-sm c-grey-900"><?= auth()->user()->username ?></span>
                                 </div>
                             </a>
                             <ul class="dropdown-menu fsz-sm">
-                                <li>
+                                <!--<li>
                                     <a href="" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700">
                                         <i class="ti-settings mR-10"></i>
                                         <span>Setting</span>
                                     </a>
-                                </li>
-                                <li>
+                                </li>-->
+                                <!--<li>
                                     <a href="" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700">
                                         <i class="ti-user mR-10"></i>
                                         <span>Profile</span>
                                     </a>
-                                </li>
+                                </li>-->
                                 <li role="separator" class="divider"></li>
                                 <li>
                                     <a href="<?=base_url()?><?=route_to('logout')?>"
@@ -209,6 +208,9 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="<?=base_url()?>/assets/main.js"></script>
     <script src="<?=base_url()?>/assets/ecm.js"></script>
+
+    <?= view('templates/notification.php') ?>
+
 
 
 </body>

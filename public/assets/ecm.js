@@ -2,6 +2,18 @@ var rootUrl =  document.querySelector('meta[name="url"]').getAttribute('href')
 var csrfName = document.getElementById('csrf_security').getAttribute('name')
 var csrfHash = document.getElementById('csrf_security').getAttribute('value')
 
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-right',
+    iconColor: 'white',
+    customClass: {
+      popup: 'colored-toast'
+    },
+    showConfirmButton: false,
+    timer: 1500,
+    timerProgressBar: true
+  })
+
 $(document).ready(function () {
 
     $('.select2-tags').select2({

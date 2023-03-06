@@ -3,10 +3,35 @@
 namespace App\Controllers;
 use CodeIgniter\Shield\Models\UserModel;
 use CodeIgniter\Shield\Entities\User;
+use CodeIgniter\HTTP\RedirectResponse;
+use CodeIgniter\HTTP\RequestInterface;
+use CodeIgniter\HTTP\ResponseInterface;
+use Psr\Log\LoggerInterface;
 
 
 class UserController extends BaseController
 {
+    /**
+     * Auth Table names
+     */
+    private array $tables;
+
+    public function initController(
+        RequestInterface $request,
+        ResponseInterface $response,
+        LoggerInterface $logger
+    ): void {
+        parent::initController(
+            $request,
+            $response,
+            $logger
+        );
+
+        /** @var Auth $authConfig */
+        $authConfig   = config('Auth');
+        $this->tables = $authConfig->tables;
+    }
+    
     public function index()
     {
         $userModel = new UserModel();
@@ -27,14 +52,28 @@ class UserController extends BaseController
 
 
             $rules = [
-                'username' => 'required',
-                'email' => 'required',
-                'group' => 'required'
+                'username' => [
+                    'label' => 'Auth.username',
+                    'rules' => array_merge(
+                        config('AuthSession')->usernameValidationRules,
+                        [sprintf('is_unique[%s.username, id, %s]', $this->tables['users'], $user->id)]
+                    ),
+                ],
+                'email' => [
+                    'label' => 'Auth.email',
+                    'rules' => array_merge(
+                        config('AuthSession')->emailValidationRules,
+                        [sprintf('is_unique[%s.secret, user_id, %s]', $this->tables['identities'], $user->id)]
+                    ),
+                ],
+                'group'    => [
+                    'rules' => 'required'
+                ]
             ];
 
             if($this->request->getPost('password') == 'smtp'){
                 $rules = array_merge($rules, [
-                    'password' => 'required'
+                    'password' => 'required|strong_password'
                 ]);
             }
 
@@ -52,10 +91,10 @@ class UserController extends BaseController
             if($this->request->getPost('password')){
                 $user->password = $this->request->getPost('password');
             }
+            if($user->hasChanged()){
+                $userModel->save($user);
+            }
             
-            $userModel->save($user);
-
-
             $selectedGroups = $this->request->getPost('group');
             foreach(service('settings')->get('AuthGroups.groups') as $key => $group){
                 if(($group['isAdmin'] && auth()->user()->can('user.manage-admins')) OR !$group['isAdmin']){
@@ -66,6 +105,8 @@ class UserController extends BaseController
                     }
                 }
             }
+
+            session()->setFlashdata('msg_success', 'Benutzer gespeichert.');
             return redirect()->route('user.index');
             
             
@@ -82,21 +123,36 @@ class UserController extends BaseController
     public function add()
     {
 
-
-
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+       if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 
             $rules = [
-                'username' => 'required',
-                'email' => 'required',
-                'password' => 'required',
-                'group' => 'required'
+                'username' => [
+                    'label' => 'Auth.username',
+                    'rules' => array_merge(
+                        config('AuthSession')->usernameValidationRules,
+                        [sprintf('is_unique[%s.username]', $this->tables['users'])]
+                    ),
+                ],
+                'email' => [
+                    'label' => 'Auth.email',
+                    'rules' => array_merge(
+                        config('AuthSession')->emailValidationRules,
+                        [sprintf('is_unique[%s.secret]', $this->tables['identities'])]
+                    ),
+                ],
+                'password' => [
+                    'label' => 'Auth.password',
+                    'rules' => 'required|strong_password',
+                ],
+                'group'    => [
+                    'rules' => 'required'
+                ]
             ];
 
             if (! $this->validate($rules))
             {
-                return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+                return redirect()->back()->withInput()->with('errors', $this->validator->getErrors())->with('msg_error', 'Bitte fülle die erforderlichen Felder aus');
             }
 
             $userGroup = null;
@@ -131,9 +187,13 @@ class UserController extends BaseController
                     'password' => $this->request->getPost('password')]));
                 if ($email->send(false) === false) {
                     throw new RuntimeException("Cannot send email \n" . $email->printDebugger(['headers']));
+                } else {
+                    session()->setFlashdata('msg_success', 'Benutzer erfolgreich angelegt und wurde per Mail benachrigt.');
                 }
+            } else {
+                session()->setFlashdata('msg_success', 'Benutzer erfolgreich angelegt.');
             }
-
+            
             return redirect()->route('user.index');
             
             

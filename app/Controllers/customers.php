@@ -35,13 +35,15 @@ class Customers extends BaseController
 
             if (! $this->validate($rules))
             {
-                return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+                return redirect()->back()->withInput()->with('errors', $this->validator->getErrors())->with('msg_error', 'Bitte alle erforderlichen Felder ausfüllen');
             }
 
             $customer = new Customer($this->request->getPost());
 
             $customerModel = new CustomerModel();
             $customerModel->save($customer);
+
+            session()->setFlashdata('msg_success', 'Kunde erfolgreich angelegt.');
 
             return redirect()->route('customer.index');
 
@@ -73,7 +75,7 @@ class Customers extends BaseController
 
             if (! $this->validate($rules))
             {
-                return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+                return redirect()->back()->withInput()->with('errors', $this->validator->getErrors())->with('msg_error', 'Bitte alle erforderlichen Felder ausfüllen');
             }
 
             $customer->company = $this->request->getPost('company');
@@ -89,6 +91,9 @@ class Customers extends BaseController
 
             if($customer->hasChanged()){
                 $customerModel->save($customer);
+                session()->setFlashdata('msg_success', 'Kunde gespeichert.');
+            } else {
+                session()->setFlashdata('msg_info', 'Es wurden keine änderungen erkannt.');
             }
             
 

@@ -156,6 +156,29 @@
             </div>
         </div>
     </div>
+    <div class="row g-3">
+        <div class="bgc-white bd bdrs-3 p-20 mB-20">
+            <div class="d-flex justify-content-between">
+                <h6 class="c-grey-900">Authentisierung</h6>
+            </div>
+            <div class="mT-30">
+                <div class="row mb-3">
+                    <div class="col-lg-8 col-xl-6">
+                        <label for="allowRegistration" class="form-label">Erlaube Registrierung</label>
+                        <select name="allowRegistration" class="form-select">
+                            <option value="1" <?=(service('settings')->get('Auth.allowRegistration')) ?'selected':'' ?>>
+                                Ja
+                            </option>
+                            <option value="0"
+                                <?=(!service('settings')->get('Auth.allowRegistration')) ?'selected':'' ?>>Nein
+                            </option>
+                        </select>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
 </form>
 
 

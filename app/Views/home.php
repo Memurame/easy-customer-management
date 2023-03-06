@@ -1,7 +1,9 @@
 <?= $this->extend('templates/layout') ?>
 <?= $this->section('main') ?>
 
-<?php if (auth()->user()->inGroup('superadmin', 'admin')): ?>
+<?php if (auth()->user()->inGroup('superadmin', 'admin') AND 
+    empty(service('settings')->get('Email.fromEmail')) OR 
+    empty(service('settings')->get('Email.fromName'))): ?>
 <div class="alert alert-warning d-flex align-items-center" role="alert">
     <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:">
         <use xlink:href="#exclamation-triangle-fill" />

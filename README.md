@@ -50,8 +50,7 @@ database.default.port = 3306
 
 Run the database migration:
 ```console
-php spark migrate --all
-php spark db:seed InstallSeeder
+php spark ecm:install
 ```
 
 ## Update

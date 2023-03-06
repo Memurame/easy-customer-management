@@ -39,15 +39,16 @@ class Settings extends BaseController
             service('settings')->set('Email.fromEmail', $this->request->getPost('from_email'));
             service('settings')->set('Email.SMTPHost', $this->request->getPost('smtp_host'));
             service('settings')->set('Email.SMTPUser', $this->request->getPost('smtp_user'));
-            
             if($this->request->getPost('smtp_pass')){
                 service('settings')->set('Email.SMTPPass', $this->request->getPost('smtp_pass'));
             }
-            
             service('settings')->set('Email.SMTPPort', $this->request->getPost('smtp_port'));
             service('settings')->set('Email.SMTPCrypto', $this->request->getPost('smtp_secure'));
 
-            return redirect()->route('admin.settings');
+            service('settings')->set('Auth.allowRegistration', boolval($this->request->getPost('allowRegistration')));
+
+
+            return redirect()->route('admin.settings')->with('msg_success', 'Einstellungen wurden gespeichert');
         }
 
         return view('settings');

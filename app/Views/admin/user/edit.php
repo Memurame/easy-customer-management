@@ -22,7 +22,7 @@
                 </div>
                 <div class="mT-30">
                     <div class="row mb-3">
-                        <div class="col-md-4">
+                        <div class="col-12">
 
                             <label class="form-label">Gruppe <span class="text-danger">*</span></label>
                             <?php foreach(service('settings')->get('AuthGroups.groups') as $key => $group): ?>
@@ -42,7 +42,7 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <div class="col-md-4">
+                        <div class="col-12">
                             <label for="username" class="form-label">Benutzername</label>
                             <input type="text"
                                 class="form-control <?php if(session('errors.username')) : ?>is-invalid<?php endif ?>"
@@ -50,7 +50,7 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <div class="col-md-4">
+                        <div class="col-12">
                             <label for="email" class="form-label">E-Mail</label>
                             <input type="mail"
                                 class="form-control <?php if(session('errors.email')) : ?>is-invalid<?php endif ?>"
@@ -58,7 +58,7 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <div class="col-md-4">
+                        <div class="col-12">
                             <label for="password" class="form-label">Passwort</label>
                             <input type="password"
                                 class="form-control <?php if(session('errors.password')) : ?>is-invalid<?php endif ?>"
