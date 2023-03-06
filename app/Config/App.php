@@ -7,6 +7,9 @@ use CodeIgniter\Session\Handlers\FileHandler;
 
 class App extends BaseConfig
 {
+
+    public string $version = '1.0.0';
+
     /**
      * --------------------------------------------------------------------------
      * Base Site URL

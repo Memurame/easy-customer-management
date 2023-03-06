@@ -193,10 +193,11 @@
             </main>
 
             <!-- ### $App Screen Footer ### -->
-            <footer class="bdT ta-c p-30 lh-0 fsz-sm c-grey-600">
-                <span>Developed by <a href="https://github.com/Memurame/easy-customer-management" target="_blank"
-                        title="Colorlib">Thomas Hirter</a></span> | <span>Design by <a href="https://colorlib.com"
-                        target="_blank" title="Colorlib">Colorlib</a></span>
+            <footer class="bdT ta-c lh-0 fsz-sm c-grey-600" style="padding: 18px">
+                <p class=" m-0">Developed by <a href="https://github.com/Memurame/easy-customer-management"
+                        target="_blank" title="Colorlib">Thomas Hirter</a> | Design by <a href="https://colorlib.com"
+                        target="_blank" title="Colorlib">Colorlib</a> | Version:
+                    <?=config('App')->version?></p>
             </footer>
         </div>
     </div>
