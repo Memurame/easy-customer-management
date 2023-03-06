@@ -188,12 +188,15 @@ class Invoices extends BaseController
                 if($invoice->hasChanged()){
                     $invoiceModel->save($invoice);
                 }
-                /*$email = \Config\Services::email();
+
+                $email = emailer()->setFrom(setting('Email.fromEmail'), setting('Email.fromName') ?? '');
                 $email->setTo('');
                 $email->setSubject("Überfällige Rechnung - " . $invoice->description);
                 $email->setMessage(view('email/overdue.php', [
                     'invoice' => $invoice]));
-                $email->send();*/
+                if ($email->send(false) === false) {
+                    throw new RuntimeException("Cannot send email \n" . $email->printDebugger(['headers']));
+                }
             }
         }
 

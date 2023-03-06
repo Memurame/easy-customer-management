@@ -20,7 +20,14 @@ class Filters extends BaseConfig
         'toolbar'       => DebugToolbar::class,
         'honeypot'      => Honeypot::class,
         'invalidchars'  => InvalidChars::class,
-        'secureheaders' => SecureHeaders::class
+        'secureheaders' => SecureHeaders::class,
+        'session'    => \CodeIgniter\Shield\Filters\SessionAuth::class,
+        'tokens'     => \CodeIgniter\Shield\Filters\TokenAuth::class,
+        'chain'      => \CodeIgniter\Shield\Filters\ChainAuth::class,
+        'auth-rates' => \CodeIgniter\Shield\Filters\AuthRates::class,
+        'group'      => \CodeIgniter\Shield\Filters\GroupFilter::class,
+        'permission' => \CodeIgniter\Shield\Filters\PermissionFilter::class,
+        'force-reset' => \CodeIgniter\Shield\Filters\ForcePasswordResetFilter::class,
     ];
 
     /**
@@ -29,9 +36,10 @@ class Filters extends BaseConfig
      */
     public array $globals = [
         'before' => [
-            // 'honeypot',
-            // 'csrf',
+            //'honeypot',
+            //'csrf',
             // 'invalidchars',
+            'session' => ['except' => ['login*', 'register', 'auth/a/*']],
         ],
         'after' => [
             'toolbar',

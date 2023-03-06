@@ -21,7 +21,7 @@ class Feature extends BaseConfig
      *     - property $filtersInfo, instead of $filterInfo
      *     - CodeIgniter\Router\RouteCollection::getFiltersForRoute(), instead of getFilterForRoute()
      */
-    public bool $multipleFilters = false;
+    public bool $multipleFilters = true;
 
     /**
      * Use improved new auto routing instead of the default legacy version.

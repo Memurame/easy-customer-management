@@ -70,6 +70,7 @@ class Comments extends BaseController
             $commentModel = new CommentModel();
             $commentModel->save($comment);
 
+            session()->setFlashdata('msg_success', 'Kommentar gespeichert.');
             return redirect()->to($ref);
 
         }
@@ -127,10 +128,13 @@ class Comments extends BaseController
             $commentModel = new CommentModel();
             if($comment->hasChanged()){
                 $commentModel->save($comment);
+                session()->setFlashdata('msg_success', 'Kommentar gespeichert.');
+            } else {
+                session()->setFlashdata('msg_info', 'Es wurden keine änderungen erkannt.');
             }
             
 
-            return redirect()->to($ref);
+            return redirect()->to($ref)->with('msg_success', 'Kommentar gespeichert');
 
         }
 
