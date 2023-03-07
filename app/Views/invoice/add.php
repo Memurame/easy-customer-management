@@ -74,6 +74,7 @@
                         <option value="1">Ja</option>
                         <option value="2">Rechnung generieren</option>
                         <option value="3">Überfällig</option>
+                        <option value="4">Geplannt</option>
                     </select>
                 </div>
             </div>
