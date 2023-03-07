@@ -82,6 +82,7 @@ class Customers extends BaseController
             $customer->contact_firstname = $this->request->getPost('contact_firstname');
             $customer->contact_lastname = $this->request->getPost('contact_lastname');
             $customer->contact_mail = $this->request->getPost('contact_mail');
+            $customer->contact_tel = $this->request->getPost('contact_tel');
             $customer->street = $this->request->getPost('street');
             $customer->postcode = $this->request->getPost('postcode');
             $customer->city = $this->request->getPost('city');

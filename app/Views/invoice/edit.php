@@ -17,7 +17,7 @@
     <?= view('templates/message_block.php') ?>
     <div class="row g-3">
         <div class="bgc-white bd bdrs-3 p-20 mB-20">
-            <div class="row">
+            <div class="row mb-3">
                 <div class="col-9">
                     <label for="description" class="form-label">Bezeichnung <span class="text-danger">*</span></label>
                     <input type="text"
@@ -30,6 +30,8 @@
                         class="form-control <?php if(session('errors.amount')) : ?>is-invalid<?php endif ?>" id="amount"
                         name="amount" value="<?=$invoice->amount ?>">
                 </div>
+            </div>
+            <div class="row mb-3">
                 <div class="col-md-4">
                     <label for="customer_id" class="form-label">Kunde <span class="text-danger">*</span></label>
                     <select id="customer_id" name="customer_id" class="form-select ">
@@ -65,6 +67,8 @@
                         <?php endforeach; ?>
                     </select>
                 </div>
+            </div>
+            <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="invoice" class="form-label">Rechnungsdatum</label>
                     <input type="date" class="form-control" id="invoice" name="invoice" value="<?=$invoice->invoice ?>">
@@ -79,6 +83,8 @@
                         <option value="4" <?=($invoice->paid == 4)? 'selected' : ''?>>Geplannt</option>
                     </select>
                 </div>
+            </div>
+            <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="renew_interval" class="form-label">Intervall <span class="text-danger">*</span></label>
                     <select id="renew_interval" name="renew_interval" class="form-select">
@@ -104,6 +110,8 @@
 
                     </select>
                 </div>
+            </div>
+            <div class="row mb-3">
                 <div class="col-12">
                     <label for="notes" class="form-label">Notizen</label>
                     <textarea class="form-control" rows="5" id="notes" name="notes"><?=$invoice->notes ?></textarea>

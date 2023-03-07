@@ -20,7 +20,8 @@ class CustomerModel extends Model
         'postcode',
         'city',
         'status',
-        'notes'
+        'notes',
+        'contact_tel'
     ];
 
     protected $primaryKey = 'id';

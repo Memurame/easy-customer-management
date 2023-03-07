@@ -43,7 +43,7 @@ class Websites extends BaseController
 
             if (! $this->validate($rules))
             {
-                return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+                return redirect()->back()->withInput()->with('errors', $this->validator->getErrors())->with('msg_error', 'Bitte alle erforderlichen Felder ausfüllen');
             }
 
             $website = new Website($this->request->getPost());
@@ -52,7 +52,8 @@ class Websites extends BaseController
 
             $websiteModel = new WebsiteModel();
             $websiteModel->save($website);
-
+            
+            session()->setFlashdata('msg_success', 'Webseite erfolgreich angelegt.');
 
             $website = $websiteModel->find($websiteModel->insertID());
             $website->removeAllTags();
@@ -104,7 +105,7 @@ class Websites extends BaseController
 
             if (! $this->validate($rules))
             {
-                return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+                return redirect()->back()->withInput()->with('errors', $this->validator->getErrors())->with('msg_error', 'Bitte alle erforderlichen Felder ausfüllen');
             }
             //die( $this->request->getPost('website_live'));
 
@@ -117,6 +118,9 @@ class Websites extends BaseController
 
             if($website->hasChanged()){
                 $websiteModel->save($website);
+                session()->setFlashdata('msg_success', 'Webseite gespeichert.');
+            } else {
+                session()->setFlashdata('msg_info', 'Es wurden keine änderungen erkannt.');
             }
             
 

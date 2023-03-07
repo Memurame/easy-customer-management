@@ -8,6 +8,7 @@ use App\Models\WebsiteModel;
 use App\Entities\Website;
 use App\Models\CustomerModel;
 use App\Models\ProjectModel;
+use CodeIgniter\Shield\Models\UserModel;
 
 class Invoices extends BaseController
 {
@@ -48,7 +49,7 @@ class Invoices extends BaseController
 
             if (! $this->validate($rules))
             {
-                return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+                return redirect()->back()->withInput()->with('errors', $this->validator->getErrors())->with('msg_error', 'Bitte alle erforderlichen Felder ausfüllen');
             }
 
             $invoice = new Invoice($this->request->getPost());
@@ -56,6 +57,8 @@ class Invoices extends BaseController
 
             $invoiceModel = new InvoiceModel();
             $invoiceModel->save($invoice);
+
+            session()->setFlashdata('msg_success', 'Rechnung erfolgreich angelegt.');
 
             return redirect()->route('invoice.index');
 
@@ -100,7 +103,7 @@ class Invoices extends BaseController
 
             if (! $this->validate($rules))
             {
-                return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+                return redirect()->back()->withInput()->with('errors', $this->validator->getErrors())->with('msg_error', 'Bitte alle erforderlichen Felder ausfüllen');
             }
 
             $invoice->invoice = $this->request->getPost('invoice') ?: null;
@@ -117,6 +120,9 @@ class Invoices extends BaseController
 
             if($invoice->hasChanged()){
                 $invoiceModel->save($invoice);
+                session()->setFlashdata('msg_success', 'Rechnung gespeichert.');
+            } else {
+                session()->setFlashdata('msg_info', 'Es wurden keine änderungen erkannt.');
             }
            
 
@@ -171,6 +177,9 @@ class Invoices extends BaseController
 
     public function cron(){
         $invoiceModel = new InvoiceModel();
+
+        $userModel = new UserModel();
+        $users = $userModel->findAll();
         
 
         $paymentTerm = strtotime('-30 days');
@@ -190,7 +199,12 @@ class Invoices extends BaseController
                 }
 
                 $email = emailer()->setFrom(setting('Email.fromEmail'), setting('Email.fromName') ?? '');
-                $email->setTo('');
+                foreach($users as $user){
+                    if(!empty($user->email)){
+                        $email->setTo($user->email);
+                    }
+                    
+                }
                 $email->setSubject("Überfällige Rechnung - " . $invoice->description);
                 $email->setMessage(view('email/overdue.php', [
                     'invoice' => $invoice]));

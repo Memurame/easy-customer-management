@@ -17,7 +17,7 @@
     <?= view('templates/message_block.php') ?>
     <div class="row g-3 mb-3">
         <div class="bgc-white bd bdrs-3 p-20 mB-20">
-            <div class="row">
+            <div class="row mb-3">
                 <div class="col-md-4">
                     <label for="comment_typ" class="form-label">Art <span class="text-danger">*</span></label>
                     <select id="comment_typ" name="comment_typ" class="form-select">
@@ -27,7 +27,7 @@
                     </select>
                 </div>
             </div>
-            <div class="row g-3">
+            <div class="row g-3 mb-3">
                 <div class="col-md-4">
                     <label for="customer_id" class="form-label">Kunde <span class="text-danger">*</span></label>
                     <select id="customer_id" name="customer_id" class="form-select" disabled>
@@ -59,6 +59,8 @@
                         <?php endforeach; ?>
                     </select>
                 </div>
+            </div>
+            <div class="row mb-3">
                 <div class="col-12">
                     <label for="comment" class="form-label">Kommentar</label>
                     <textarea class="form-control" rows="7" id="comment"

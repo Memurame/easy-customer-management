@@ -39,7 +39,7 @@ class Projects extends BaseController
 
             if (! $this->validate($rules))
             {
-                return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+                return redirect()->back()->withInput()->with('errors', $this->validator->getErrors())->with('msg_error', 'Bitte alle erforderlichen Felder ausfüllen');
             }
 
             $project = new Project($this->request->getPost(['name', 'status', 'customer_id', 'notes']));
@@ -50,6 +50,8 @@ class Projects extends BaseController
 
             $projectModel = new ProjectModel();
             $projectModel->save($project);
+
+            session()->setFlashdata('msg_success', 'Projekt erfolgreich angelegt.');
 
             return redirect()->route('project.index');
 
@@ -84,7 +86,7 @@ class Projects extends BaseController
 
             if (! $this->validate($rules))
             {
-                return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+                return redirect()->back()->withInput()->with('errors', $this->validator->getErrors())->with('msg_error', 'Bitte alle erforderlichen Felder ausfüllen');
             }
 
 
@@ -101,6 +103,9 @@ class Projects extends BaseController
             $projectModel = new ProjectModel();
             if($project->hasChanged()){
                 $projectModel->save($project);
+                session()->setFlashdata('msg_success', 'Projekt gespeichert.');
+            } else {
+                session()->setFlashdata('msg_info', 'Es wurden keine änderungen erkannt.');
             }
             
 

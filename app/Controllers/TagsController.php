@@ -72,6 +72,7 @@ class TagsController extends BaseController
 
             if (! $this->validate($rules))
             {
+                session()->setFlashdata('msg_error', 'Bitte fülle die erforderlichen Felder aus');
                 return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
             }
 

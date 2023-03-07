@@ -110,7 +110,8 @@
                             <span class="title">Rechnungen</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <hr>
+                    <li class="nav-item <?= (current_page(route_to('admin.settings'))) ? 'actived' : ''?>">
                         <a class="sidebar-link" href="<?=base_url()?><?=route_to('admin.settings')?>">
                             <span class="icon-holder">
                                 <i class="fa-solid fa-gear c-blue-grey-500"></i>
@@ -118,7 +119,7 @@
                             <span class="title">Einstellungen</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item <?= (current_page(route_to('user.index'))) ? 'actived' : ''?>">
                         <a class="sidebar-link" href="<?=base_url()?><?=route_to('user.index')?>">
                             <span class="icon-holder">
                                 <i class="fa-solid fa-user c-blue-grey-500"></i>
@@ -126,10 +127,10 @@
                             <span class="title">Benutzer</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item <?= (current_page(route_to('tag.index'))) ? 'actived' : ''?>">
                         <a class="sidebar-link" href="<?=base_url()?><?=route_to('tag.index')?>">
                             <span class="icon-holder">
-                                <i class="fa-solid fa-user c-blue-grey-500"></i>
+                                <i class="fa-solid fa-tag c-blue-grey-500"></i>
                             </span>
                             <span class="title">Tags</span>
                         </a>

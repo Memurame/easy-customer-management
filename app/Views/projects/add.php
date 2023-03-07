@@ -17,7 +17,7 @@
     <?= view('templates/message_block.php') ?>
     <div class="row g-3">
         <div class="bgc-white bd bdrs-3 p-20 mB-20">
-            <div class="row">
+            <div class="row mb-3">
                 <div class="col-6">
                     <label for="customer_id" class="form-label">Kunde <span class="text-danger">*</span></label>
                     <select class="form-select" name="customer_id" id="customer_id">
@@ -39,12 +39,16 @@
                         <option value="2">Archiviert</option>
                     </select>
                 </div>
+            </div>
+            <div class="row mb-3">
                 <div class="col-12">
                     <label for="name" class="form-label">Projektname <span class="text-danger">*</span></label>
                     <input type="text"
                         class="form-control <?php if(session('errors.name')) : ?>is-invalid<?php endif ?>" id="name"
                         name="name" value="<?=old('name') ?>">
                 </div>
+            </div>
+            <div class="row mb-3">
                 <div class="col-md-4">
                     <label for="date_offer" class="form-label">Offerten Datum</label>
                     <input type="date" class="form-control" id="date_offer" name="date_offer"
@@ -60,6 +64,8 @@
                     <input type="date" class="form-control" id="date_finish" name="date_finish"
                         value="<?=old('date_finish') ?>">
                 </div>
+            </div>
+            <div class="row mb-3">
                 <div class="col-12">
                     <label for="notes" class="form-label">Notizen</label>
                     <textarea class="form-control" rows="5" id="notes" name="notes"><?=old('notes') ?></textarea>

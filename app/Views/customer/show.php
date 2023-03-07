@@ -67,6 +67,14 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-sm-3">
+                        <h6 class="mb-0">Telefon</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        <a href="tel:<?= $customer->contact_tel ?>"><?= $customer->contact_tel ?></a>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-sm-3">
                         <h6 class="mb-0">Firma</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">

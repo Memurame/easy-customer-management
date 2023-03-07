@@ -18,7 +18,7 @@
     <?= view('templates/message_block.php') ?>
     <div class="row g-3">
         <div class="bgc-white bd bdrs-3 p-20 mB-20">
-            <div class="row">
+            <div class="row mb-3">
                 <div class="col-6">
                     <label for="customer_id" class="form-label">Kunde <span class="text-danger">*</span></label>
                     <select class="form-select" name="customer_id" id="customer_id">
@@ -44,12 +44,16 @@
                         <?php endforeach; ?>
                     </select>
                 </div>
+            </div>
+            <div class="row mb-3">
                 <div class="col-12">
                     <label for="website_url" class="form-label">Domain <span class="text-danger">*</span></label>
                     <input type="text"
                         class="form-control <?php if(session('errors.website_url')) : ?>is-invalid<?php endif ?>"
                         id="website_url" name="website_url" value="<?=$website->website_url ?>">
                 </div>
+            </div>
+            <div class="row mb-3">
                 <div class="col-12">
                     <label for="website_url" class="form-label">Tags</label>
                     <select class="select2-tags form-select" name="tags[]" id="tags" multiple="multiple">
@@ -60,6 +64,8 @@
                     </select>
 
                 </div>
+            </div>
+            <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="website_installed" class="form-label">Webseite installiert am</label>
                     <input type="date" class="form-control" id="website_installed" name="website_installed"
@@ -70,6 +76,8 @@
                     <input type="date" class="form-control" id="website_live" name="website_live"
                         value="<?=$website->website_live ?>">
                 </div>
+            </div>
+            <div class="row mb-3">
                 <div class="col-12">
                     <label for="notes" class="form-label">Notizen</label>
                     <textarea class="form-control" rows="5" id="notes" name="notes"><?=$website->notes ?></textarea>

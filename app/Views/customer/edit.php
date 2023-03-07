@@ -18,7 +18,7 @@
 
     <div class="row g-3 pb-3">
         <div class="bgc-white bd bdrs-3 p-20 mB-20">
-            <div class="row">
+            <div class="row mb-3">
                 <div class="col-2">
                     <label for="customernumber" class="form-label">Kundennummer</label>
                     <input type="text"
@@ -31,24 +31,36 @@
                         class="form-control <?php if(session('errors.company')) : ?>is-invalid<?php endif ?>"
                         id="company" name="company" value="<?=$customer->company ?>">
                 </div>
-                <div class="col-md-4">
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
                     <label for="contact_mail" class="form-label">E-Mail <span class="text-danger">*</span></label>
                     <input type="text"
                         class="form-control <?php if(session('errors.contact_mail')) : ?>is-invalid<?php endif ?>"
                         id="contact_mail" name="contact_mail" value="<?=$customer->contact_mail ?>">
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
+                    <label for="contact_tel" class="form-label">Telefon <span class="text-danger">*</span></label>
+                    <input type="text"
+                        class="form-control <?php if(session('errors.contact_tel')) : ?>is-invalid<?php endif ?>"
+                        id="contact_tel" name="contact_tel" value="<?=$customer->contact_tel ?>">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
                     <label for="contact_firstname" class="form-label">Vorname <span class="text-danger">*</span></label>
                     <input type="text"
                         class="form-control <?php if(session('errors.contact_firstname')) : ?>is-invalid<?php endif ?>"
                         id="contact_firstname" name="contact_firstname" value="<?=$customer->contact_firstname ?>">
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <label for="contact_lastname" class="form-label">Nachname <span class="text-danger">*</span></label>
                     <input type="text"
                         class="form-control <?php if(session('errors.contact_lastname')) : ?>is-invalid<?php endif ?>"
                         id="contact_lastname" name="contact_lastname" value="<?=$customer->contact_lastname ?>">
                 </div>
+            </div>
+            <div class="row mb-3">
                 <div class="col-md-5">
                     <label for="street" class="form-label">Strasse</label>
                     <input type="text"
@@ -68,7 +80,7 @@
                         name="city" value="<?=$customer->city ?>">
                 </div>
             </div>
-            <div class="row g-3 pb-3">
+            <div class="row g-3 mb-3">
 
                 <div class="col-12">
                     <label for="notes" class="form-label">Notizen</label>

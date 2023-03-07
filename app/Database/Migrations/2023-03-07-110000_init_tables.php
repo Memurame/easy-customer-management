@@ -61,6 +61,7 @@ class InitTables extends Migration
             'street'                => ['type' => 'varchar', 'constraint' => 150],
             'postcode'              => ['type' => 'varchar', 'constraint' => 10],
             'city'                  => ['type' => 'varchar', 'constraint' => 150],
+            'tel'                   => ['type' => 'varchar', 'constraint' => 150],
             'status'                => ['type' => 'int', 'constraint' => 2],
             'customernumber'        => ['type' => 'int', 'constraint' => 20],
             'notes'                 => ['type' => 'text'],

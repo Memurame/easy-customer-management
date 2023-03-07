@@ -28,20 +28,7 @@ $date = ($invoice->invoice) ? new DateTime($invoice->invoice) : null;
                     class="btn btn-primary btn-sm">Bearbeiten</a>
             </div>
             <div class="mT-30">
-                <div class="row mb-3">
-                    <div class="col-sm-5">
-                        <h6 class="mb-0">Status</h6>
-                    </div>
-                    <div class="col-sm-7 text-secondary">
-                        <?php if($invoice->status == 1):?>
-                        <span class="badge text-bg-success">Aktiv</span>
-                        <?php elseif($invoice->status == 2):?>
-                        <span class="badge text-bg-secondary">Archiviert</span>
-                        <?php else:?>
-                        <span class="badge text-bg-danger">Inaktiv</span>
-                        <?php endif;?>
-                    </div>
-                </div>
+
                 <div class="row mb-3">
                     <div class="col-sm-5">
                         <h6 class="mb-0">Tags</h6>

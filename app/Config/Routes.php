@@ -35,7 +35,7 @@ $routes->group('ecm', static function ($routes) {
     $routes->get('websites', 'Websites::index', ['as' => 'website.index']);
     $routes->match(['get', 'post'],'websites/add', 'Websites::add', ['as' => 'website.add']);
     $routes->get('websites/show/(:num)', 'Websites::show/$1', ['as' => 'website.show']);
-    $routes->match(['get', 'post'],'/websites/edit/(:num)', 'Websites::edit/$1', ['as' => 'website.edit']);
+    $routes->match(['get', 'post'],'websites/edit/(:num)', 'Websites::edit/$1', ['as' => 'website.edit']);
 
     $routes->get('invoices', 'Invoices::index', ['as' => 'invoice.index']);
     $routes->match(['get', 'post'],'invoices/add', 'Invoices::add', ['as' => 'invoice.add']);
