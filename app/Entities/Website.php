@@ -57,13 +57,28 @@ class Website extends Entity
 
     public function getCustomerInfo($field){
 
-        $result = null;
         if($this->customer_id){
             $customerModel = model(CustomerModel::class);
-            $result = $customerModel->find($this->customer_id);
+
+            $customer = $customerModel->find($this->customer_id);
+
+            $val = null;
+            if($customer){
+                if($field == 'company'){
+                    if(empty($customer->{$field})){
+                        return $customer->contact_lastname . ' ' . $customer->contact_firstname;
+                    }
+                }
+
+                return $customer->{$field};
+            }
+
+            return null;
+
+            
         }
 
-        return $result ? $result->{$field} : null;
+        return null;
         
     }
     public function getProjectInfo($field){

@@ -35,7 +35,9 @@
 
                     <tr>
                         <td class="align-middle"><?=$project->name?></td>
-                        <td class="align-middle"><?=$project->getCustomerInfo('company')?: '---'?></td>
+                        <td class="align-middle">
+                            <?=($project->getCustomerInfo('company')) ? '<a href="'.base_url() . route_to('customer.show', $project->getCustomerInfo('id')).'">'.$project->getCustomerInfo('company').'</a>': '---'?>
+                        </td>
                         <td class="align-middle">
                             <?php if($project->status == 1):?>
                             <span class="badge text-bg-success">Aktiv</span>

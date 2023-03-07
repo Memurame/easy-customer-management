@@ -35,7 +35,22 @@ class Project extends Entity
         if($this->customer_id){
             $customerModel = model(CustomerModel::class);
 
-            return $customerModel->find($this->customer_id)->{$field};
+            $customer = $customerModel->find($this->customer_id);
+
+            $val = null;
+            if($customer){
+                if($field == 'company'){
+                    if(empty($customer->{$field})){
+                        return $customer->contact_lastname . ' ' . $customer->contact_firstname;
+                    }
+                }
+
+                return $customer->{$field};
+            }
+
+            return null;
+
+            
         }
 
         return null;
