@@ -51,6 +51,6 @@ class Settings extends BaseController
             return redirect()->route('admin.settings')->with('msg_success', 'Einstellungen wurden gespeichert');
         }
 
-        return view('settings');
+        return view('admin/settings/index');
     }
 }

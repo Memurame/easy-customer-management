@@ -55,6 +55,11 @@ $routes->group('ecm', static function ($routes) {
 
     $routes->match(['get', 'post'],'comments/add', 'Comments::add', ['as' => 'comment.add']);
     $routes->match(['get', 'post'],'comments/edit/(:num)', 'Comments::edit/$1', ['as' => 'comment.edit']);
+
+    $routes->get('tags', 'TagsController::index', ['as' => 'tag.index']);
+    $routes->match(['get', 'post'],'tags/add', 'TagsController::add', ['as' => 'tag.add']);
+    $routes->match(['get', 'post'],'tags/edit/(:num)', 'TagsController::edit/$1', ['as' => 'tag.edit']);
+    
 });
 
 $routes->group('admin', static function ($routes) {
@@ -79,6 +84,7 @@ $routes->delete('/api/customer/delete/(:num)', 'Customers::apiDelete/$1');
 $routes->delete('/api/project/delete/(:num)', 'Projects::apiDelete/$1');
 $routes->delete('/api/invoice/delete/(:num)', 'Invoices::apiDelete/$1');
 $routes->delete('/api/comment/delete/(:num)', 'Comments::apiDelete/$1');
+$routes->delete('/api/tag/delete/(:num)', 'TagsController::apiDelete/$1');
 $routes->delete('/api/user/delete/(:num)', 'UserController::apiDelete/$1', ['filter' => 'permission:user.delete']);
 
 

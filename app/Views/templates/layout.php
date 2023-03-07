@@ -126,6 +126,14 @@
                             <span class="title">Benutzer</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="sidebar-link" href="<?=base_url()?><?=route_to('tag.index')?>">
+                            <span class="icon-holder">
+                                <i class="fa-solid fa-user c-blue-grey-500"></i>
+                            </span>
+                            <span class="title">Tags</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
