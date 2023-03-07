@@ -9,7 +9,7 @@
     </div>
 
     <div class="">
-        <a href="<?=base_url()?><?=route_to('project.add')?>" class="btn btn-primary btn-sm">Neues
+        <a href="<?=base_url(route_to('project.add'))?>" class="btn btn-primary btn-sm">Neues
             Projekt</a>
     </div>
 </div>
@@ -36,7 +36,7 @@
                     <tr>
                         <td class="align-middle"><?=$project->name?></td>
                         <td class="align-middle">
-                            <?=($project->getCustomerInfo('company')) ? '<a href="'.base_url() . route_to('customer.show', $project->getCustomerInfo('id')).'">'.$project->getCustomerInfo('company').'</a>': '---'?>
+                            <?=($project->getCustomerInfo('company')) ? '<a href="'.base_url(route_to('customer.show', $project->getCustomerInfo('id'))).'">'.$project->getCustomerInfo('company').'</a>': '---'?>
                         </td>
                         <td class="align-middle">
                             <?php if($project->status == 1):?>
@@ -49,9 +49,9 @@
                         </td>
                         <td class="text-end">
                             <div class="btn-group">
-                                <a href="<?=base_url()?><?=route_to('project.show', $project->id)?>"
+                                <a href="<?=base_url(route_to('project.show', $project->id))?>"
                                     class="btn btn-link text-primary"><i class="fa-solid fa-eye"></i></a>
-                                <a href="<?=base_url()?><?=route_to('project.edit', $project->id)?>"
+                                <a href="<?=base_url(route_to('project.edit', $project->id))?>"
                                     class="btn btn-link text-primary"><i class="fa-solid fa-pen-to-square"></i></a>
                                 <a href="#" class="delete-project btn btn-linkr text-danger"
                                     data-id="<?=$project->id?>"><i class="fa-solid fa-trash"></i></a>

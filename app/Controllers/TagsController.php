@@ -32,7 +32,8 @@ class TagsController extends BaseController
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
             $rules = [
-                'name' => 'required'
+                'name' => 'required',
+                'class' => 'required'
             ];
 
             if (! $this->validate($rules))
@@ -67,7 +68,8 @@ class TagsController extends BaseController
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
             $rules = [
-                'name' => 'required'
+                'name' => 'required',
+                'class' => 'required'
             ];
 
             if (! $this->validate($rules))
@@ -78,6 +80,7 @@ class TagsController extends BaseController
 
 
             $taglist->name = $this->request->getPost('name');
+            $taglist->class = $this->request->getPost('class');
 
 
             if($taglist->hasChanged()){

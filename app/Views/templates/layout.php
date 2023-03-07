@@ -8,6 +8,11 @@
     <meta name="author" content="Thomas Hirter vom Berner Bauern Verband">
     <title><?=service('settings')->get('App.siteName')?></title>
 
+    <link rel="shortcut icon" href="<?=base_url()?>favicon.ico">
+    <link rel="icon" type="image/png" href="<?=base_url()?>favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="<?=base_url()?>favicon-32x32.png" sizes="32x32">
+    <link rel="apple-touch-icon" sizes="180x180" href="<?=base_url()?>apple-touch-icon.png">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
         integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -17,8 +22,8 @@
     <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
 
 
-    <link href="<?=base_url()?>/assets/style.css" rel="stylesheet">
-    <link href="<?=base_url()?>/assets/ecm.css" rel="stylesheet">
+    <link href="<?=base_url()?>assets/style.css" rel="stylesheet">
+    <link href="<?=base_url()?>assets/ecm.css" rel="stylesheet">
 </head>
 
 <body class="app">
@@ -49,7 +54,7 @@
                                 <div class="peers ai-c fxw-nw">
                                     <div class="peer">
                                         <div class="logo">
-                                            <img src="<?=base_url()?>/assets/logo-ecm.png" alt="">
+                                            <img src="<?=base_url()?>assets/logo-ecm.png" alt="">
                                         </div>
                                     </div>
                                     <div class="peer peer-greed">
@@ -71,7 +76,7 @@
                 <!-- ### $Sidebar Menu ### -->
                 <ul class="sidebar-menu scrollable pos-r">
                     <li class="nav-item mT-30 <?= (current_page(route_to('home'))) ? 'actived' : ''?>">
-                        <a class="sidebar-link" href="<?=base_url()?><?=route_to('home')?>">
+                        <a class="sidebar-link" href="<?=base_url(route_to('home'))?>">
                             <span class="icon-holder">
                                 <i class="fa-solid fa-house c-blue-500"></i>
                             </span>
@@ -79,7 +84,7 @@
                         </a>
                     </li>
                     <li class="nav-item <?= (current_page(route_to('customer.index'))) ? 'actived' : ''?>">
-                        <a class="sidebar-link" href="<?=base_url()?><?=route_to('customer.index')?>">
+                        <a class="sidebar-link" href="<?=base_url(route_to('customer.index'))?>">
                             <span class="icon-holder">
                                 <i class="fa-solid fa-people-group c-brown-500"></i>
                             </span>
@@ -87,7 +92,7 @@
                         </a>
                     </li>
                     <li class="nav-item <?= (current_page(route_to('project.index'))) ? 'actived' : ''?>">
-                        <a class="sidebar-link" href="<?=base_url()?><?=route_to('project.index')?>">
+                        <a class="sidebar-link" href="<?=base_url(route_to('project.index'))?>">
                             <span class="icon-holder">
                                 <i class="fa-regular fa-folder-open c-blue-500"></i>
                             </span>
@@ -95,7 +100,7 @@
                         </a>
                     </li>
                     <li class="nav-item <?= (current_page(route_to('website.index'))) ? 'actived' : ''?>">
-                        <a class="sidebar-link" href="<?=base_url()?><?=route_to('website.index')?>">
+                        <a class="sidebar-link" href="<?=base_url(route_to('website.index'))?>">
                             <span class="icon-holder">
                                 <i class="fa-solid fa-globe c-deep-orange-500"></i>
                             </span>
@@ -103,7 +108,7 @@
                         </a>
                     </li>
                     <li class="nav-item <?= (current_page(route_to('invoice.index'))) ? 'actived' : ''?>">
-                        <a class="sidebar-link" href="<?=base_url()?><?=route_to('invoice.index')?>">
+                        <a class="sidebar-link" href="<?=base_url(route_to('invoice.index'))?>">
                             <span class="icon-holder">
                                 <i class="fa-solid fa-file-invoice c-deep-purple-500"></i>
                             </span>
@@ -112,7 +117,7 @@
                     </li>
                     <hr>
                     <li class="nav-item <?= (current_page(route_to('admin.settings'))) ? 'actived' : ''?>">
-                        <a class="sidebar-link" href="<?=base_url()?><?=route_to('admin.settings')?>">
+                        <a class="sidebar-link" href="<?=base_url(route_to('admin.settings'))?>">
                             <span class="icon-holder">
                                 <i class="fa-solid fa-gear c-blue-grey-500"></i>
                             </span>
@@ -120,7 +125,7 @@
                         </a>
                     </li>
                     <li class="nav-item <?= (current_page(route_to('user.index'))) ? 'actived' : ''?>">
-                        <a class="sidebar-link" href="<?=base_url()?><?=route_to('user.index')?>">
+                        <a class="sidebar-link" href="<?=base_url(route_to('user.index'))?>">
                             <span class="icon-holder">
                                 <i class="fa-solid fa-user c-blue-grey-500"></i>
                             </span>
@@ -128,7 +133,7 @@
                         </a>
                     </li>
                     <li class="nav-item <?= (current_page(route_to('tag.index'))) ? 'actived' : ''?>">
-                        <a class="sidebar-link" href="<?=base_url()?><?=route_to('tag.index')?>">
+                        <a class="sidebar-link" href="<?=base_url(route_to('tag.index'))?>">
                             <span class="icon-holder">
                                 <i class="fa-solid fa-tag c-blue-grey-500"></i>
                             </span>
@@ -156,7 +161,7 @@
                             <a href="" class="dropdown-toggle no-after peers fxw-nw ai-c lh-1"
                                 data-bs-toggle="dropdown">
                                 <div class="peer mR-10">
-                                    <img class="w-2r bdrs-50p" src="<?=base_url()?>/assets/avatar.jpg" alt="">
+                                    <img class="w-2r bdrs-50p" src="<?=base_url()?>assets/avatar.jpg" alt="">
                                 </div>
                                 <div class="peer">
                                     <span class="fsz-sm c-grey-900"><?= auth()->user()->username ?></span>
@@ -177,7 +182,7 @@
                                 </li>-->
                                 <li role="separator" class="divider"></li>
                                 <li>
-                                    <a href="<?=base_url()?><?=route_to('logout')?>"
+                                    <a href="<?=base_url(route_to('logout'))?>"
                                         class="d-b td-n pY-5 bgcH-grey-100 c-grey-700">
                                         <i class="ti-power-off mR-10"></i>
                                         <span>Logout</span>
@@ -216,8 +221,8 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="<?=base_url()?>/assets/main.js"></script>
-    <script src="<?=base_url()?>/assets/ecm.js"></script>
+    <script src="<?=base_url()?>assets/main.js"></script>
+    <script src="<?=base_url()?>assets/ecm.js"></script>
 
     <?= view('templates/notification.php') ?>
 

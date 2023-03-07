@@ -11,7 +11,7 @@
     </div>
 
     <div class="">
-        <a href="<?=base_url()?><?=route_to('user.add')?>" class="btn btn-primary btn-sm">Neuer
+        <a href="<?=base_url(route_to('user.add'))?>" class="btn btn-primary btn-sm">Neuer
             Benutzer</a>
     </div>
 </div>
@@ -60,7 +60,7 @@
                         </td>
                         <td class="text-end">
                             <div class="btn-group">
-                                <a href="<?=base_url()?><?=route_to('user.edit', $user->id)?>"
+                                <a href="<?=base_url(route_to('user.edit', $user->id))?>"
                                     class="btn btn-link text-primary"><i class="fa-solid fa-pen-to-square"></i></a>
                                 <a href="#" class="delete-user btn btn-link text-danger" data-id="<?=$user->id?>"><i
                                         class="fa-solid fa-trash"></i></a>

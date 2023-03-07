@@ -6,7 +6,7 @@
         <div class="p-1 flex-grow-1">
             <ol class="breadcrumb my-0 ">
                 <li class="breadcrumb-item"><a href="<?=base_url()?>">Übersicht</a></li>
-                <li class="breadcrumb-item"><a href="<?=base_url()?><?=route_to('user.index')?>">Benutzer</a></li>
+                <li class="breadcrumb-item"><a href="<?=base_url(route_to('user.index'))?>">Benutzer</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Bearbeiten</li>
             </ol>
         </div>

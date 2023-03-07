@@ -13,7 +13,7 @@
         <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#invoiceInfo">
             <i class="fa-solid fa-circle-info"></i>
         </button>
-        <a href="<?=base_url()?><?=route_to('invoice.add')?>" class="btn btn-primary btn-sm">Neue Rechnung</a>
+        <a href="<?=base_url(route_to('invoice.add'))?>" class="btn btn-primary btn-sm">Neue Rechnung</a>
     </div>
 </div>
 
@@ -74,9 +74,9 @@
                         </td>
                         <td class="text-end">
                             <div class="btn-group">
-                                <a href="<?=base_url()?><?=route_to('invoice.show', $invoice->id)?>"
+                                <a href="<?=base_url(route_to('invoice.show', $invoice->id))?>"
                                     class="btn btn-link text-primary"><i class="fa-solid fa-eye"></i></a>
-                                <a href="<?=base_url()?><?=route_to('invoice.edit', $invoice->id)?>"
+                                <a href="<?=base_url(route_to('invoice.edit', $invoice->id))?>"
                                     class="btn btn-link text-primary"><i class="fa-solid fa-pen-to-square"></i></a>
                                 <a href="#" class="delete-invoice btn btn-link text-danger"
                                     data-id="<?=$invoice->id?>"><i class="fa-solid fa-trash"></i></a>

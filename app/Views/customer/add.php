@@ -5,7 +5,7 @@
         <div class="p-1 flex-grow-1">
             <ol class="breadcrumb my-0 ">
                 <li class="breadcrumb-item"><a href="<?=base_url()?>">Übersicht</a></li>
-                <li class="breadcrumb-item"><a href="<?=base_url()?><?=route_to('customer.index')?>">Kunden</a></li>
+                <li class="breadcrumb-item"><a href="<?=base_url(route_to('customer.index'))?>">Kunden</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Neu</li>
             </ol>
         </div>

@@ -11,7 +11,7 @@ $finish = ($project->date_finish) ? new DateTime($project->date_finish) : null;
     <div class="p-1 flex-grow-1">
         <ol class="breadcrumb my-0 ">
             <li class="breadcrumb-item"><a href="<?=base_url()?>">Übersicht</a></li>
-            <li class="breadcrumb-item"><a href="<?=base_url()?><?=route_to('project.index')?>">Projekte</a></li>
+            <li class="breadcrumb-item"><a href="<?=base_url(route_to('project.index'))?>">Projekte</a></li>
             <li class="breadcrumb-item active" aria-current="page"><?=$project->name?></li>
         </ol>
     </div>
@@ -22,7 +22,7 @@ $finish = ($project->date_finish) ? new DateTime($project->date_finish) : null;
         <div class="bgc-white p-20 bd">
             <div class="d-flex justify-content-between">
                 <h6 class="c-grey-900">Projektinfos</h6>
-                <a href="<?=base_url()?><?=route_to('project.edit', $project->id)?>"
+                <a href="<?=base_url(route_to('project.edit', $project->id))?>"
                     class="btn btn-primary btn-sm">Bearbeiten</a>
             </div>
             <div class="mT-30">
@@ -90,7 +90,7 @@ $finish = ($project->date_finish) ? new DateTime($project->date_finish) : null;
         <div class="bgc-white p-20 bd">
             <div class="d-flex justify-content-between">
                 <h6 class="c-grey-900">Kommentare</h6>
-                <a href="<?=base_url()?><?=route_to('comment.add')?>?projectId=<?=$project->id?>"
+                <a href="<?=base_url(route_to('comment.add'))?>?projectId=<?=$project->id?>"
                     class="btn btn-primary btn-sm">Neuer
                     Kommentar</a>
             </div>
@@ -108,7 +108,7 @@ $finish = ($project->date_finish) ? new DateTime($project->date_finish) : null;
                             ?>
                         <tr class="<?=$typ?>">
                             <td class="position-relative">
-                                <a href="<?=base_url()?><?=route_to('comment.edit', $comment->id)?>?ref=project"
+                                <a href="<?=base_url(route_to('comment.edit', $comment->id))?>?ref=project"
                                     class="position-absolute" style="top: 5px; right: 30px;"><i
                                         class="fa-solid fa-pen-to-square"></i></a>
                                 <button class="position-absolute text-danger p-0 btn btn-link delete-comment"
