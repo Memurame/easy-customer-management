@@ -15,6 +15,7 @@ class apiWebsitesController extends BaseController
     
 
     public function getWebsites(){
+
         $data = array();
         $data['success'] = 0;
 
@@ -25,11 +26,12 @@ class apiWebsitesController extends BaseController
         $builder->where('deleted_at', null);
         if($json){
             foreach($json as $key => $val){
-                $builder->where($key, $val);
+                if(in_array($key, model('WebsiteModel')->allowedFields)){
+                    $builder->where($key, $val);
+                } 
             }
         }
         
-
         $query = $builder->get();
         $websites = $query->getResultArray();
 
