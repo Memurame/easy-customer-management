@@ -20,8 +20,8 @@
             <div class="row mb-3">
                 <div class="col-6">
                     <label for="customer_id" class="form-label">Kunde <span class="text-danger">*</span></label>
-                    <select class="form-select" name="customer_id" id="customer_id">
-                        <option value"0" selected>-- Kunde auswählen --</option>
+                    <select class="form-select select2" name="customer_id" id="customer_id">
+                        <option value="0" selected>-- Kunde auswählen --</option>
                         <?php foreach($customers as $customer): ?>
                         <option value="<?=$customer->id ?>">
                             <?= $customer->company?: $customer->contact_lastname . ' ' . $customer->contact_firstname ?>

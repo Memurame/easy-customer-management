@@ -27,14 +27,8 @@ class Invoices extends BaseController
     public function add()
     {
 
-        $websiteModel = new WebsiteModel();
-        $websites = $websiteModel->findAll();
-
         $customerModel = new CustomerModel();
         $customers = $customerModel->findAll();
-
-        $projectModel = new ProjectModel();
-        $projects = $projectModel->findAll();
 
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -66,9 +60,7 @@ class Invoices extends BaseController
 
 
         return view('invoice/add', [
-            'projects' => $projects,
             'customers' => $customers,
-            'websites' => $websites
         ]);
     }
 
@@ -78,17 +70,18 @@ class Invoices extends BaseController
         $invoice = $invoiceModel->find($id);
 
         if(!$invoice){
+            session()->setFlashdata('msg_error', 'Die ausgewählte Rechnung wurde nicht gefunden.');
             return redirect()->route('invoice.index');
         }
 
         $websiteModel = new WebsiteModel();
-        $websites = $websiteModel->findAll();
+        $websites = $websiteModel->where('customer_id', $invoice->customer_id)->findAll();
 
         $customerModel = new CustomerModel();
         $customers = $customerModel->findAll();
 
         $projectModel = new ProjectModel();
-        $projects = $projectModel->findAll();
+        $projects = $projectModel->where('customer_id', $invoice->customer_id)->findAll();
 
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -145,6 +138,7 @@ class Invoices extends BaseController
         $invoice = $invoiceModel->find($id);
         
         if(!$invoice){
+            session()->setFlashdata('msg_error', 'Die ausgewählte Rechnung wurde nicht gefunden.');
             return redirect()->route('invoice.index');
         }
         return view('invoice/show', [

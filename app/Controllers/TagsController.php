@@ -61,7 +61,7 @@ class TagsController extends BaseController
         $taglist = $taglistModel->find($id);
 
         if(!$taglist){
-            session()->setFlashdata('msg_error', 'Bitte fülle die erforderlichen Felder aus');
+            session()->setFlashdata('msg_error', 'Das ausgewählte Schlagwort wurde nicht gefunden.');
             return redirect()->route('tag.index');
         }
         

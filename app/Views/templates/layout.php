@@ -75,7 +75,7 @@
 
                 <!-- ### $Sidebar Menu ### -->
                 <ul class="sidebar-menu scrollable pos-r">
-                    <li class="nav-item mT-30 <?= (current_page(route_to('home'))) ? 'actived' : ''?>">
+                    <li class="nav-item mT-30 <?= (current_page(route_to('home'), true)) ? 'actived' : ''?>">
                         <a class="sidebar-link" href="<?=base_url(route_to('home'))?>">
                             <span class="icon-holder">
                                 <i class="fa-solid fa-house c-blue-500"></i>
@@ -221,8 +221,8 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="<?=base_url()?>assets/main.js"></script>
-    <script src="<?=base_url()?>assets/ecm.js"></script>
+    <script src="<?=base_url()?>assets/js/main.js"></script>
+    <script src="<?=base_url()?>assets/js/ecm.js"></script>
 
     <?= view('templates/notification.php') ?>
 

@@ -17,11 +17,6 @@ $golive = ($website->website_live) ? new DateTime($website->website_live) : null
                 <?=$website->contact_firstname?></li>
         </ol>
     </div>
-
-    <div class="">
-        <a href="<?=base_url()?><?=route_to('website.edit', $website->id)?>"
-            class="btn btn-primary btn-sm">Bearbeiten</a>
-    </div>
 </div>
 <div class="row g-3">
     <div class="col-6">

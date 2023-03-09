@@ -46,6 +46,17 @@ class Websites extends BaseController
                 return redirect()->back()->withInput()->with('errors', $this->validator->getErrors())->with('msg_error', 'Bitte alle erforderlichen Felder ausfüllen');
             }
 
+            $exists_customer = $customerModel->find($this->request->getPost('customer_id'));
+            if(!$exists_customer){
+                session()->setFlashdata('msg_error', 'Ausgewählter Kunde existiert nicht.');
+                return redirect()->back()->withInput();
+            }
+            $exists_project = $projectModel->find($this->request->getPost('project_id'));
+            if(!$exists_project){
+                session()->setFlashdata('msg_error', 'Ausgewähltes Projekt existiert nicht.');
+                return redirect()->back()->withInput();
+            }
+
             $website = new Website($this->request->getPost());
             $website->website_installed = $this->request->getPost('website_installed') ?: null;
             $website->website_live = $this->request->getPost('website_live') ?: null;
@@ -82,6 +93,7 @@ class Websites extends BaseController
         $website = $websiteModel->find($id);
 
         if(!$website){
+            session()->setFlashdata('msg_error', 'Die ausgewählte Webseite wurde nicht gefunden.');
             return redirect()->route('website.index');
         }
 
@@ -106,6 +118,17 @@ class Websites extends BaseController
             if (! $this->validate($rules))
             {
                 return redirect()->back()->withInput()->with('errors', $this->validator->getErrors())->with('msg_error', 'Bitte alle erforderlichen Felder ausfüllen');
+            }
+
+            $exists_customer = $customerModel->find($this->request->getPost('customer_id'));
+            if(!$exists_customer){
+                session()->setFlashdata('msg_error', 'Ausgewählter Kunde existiert nicht.');
+                return redirect()->back()->withInput();
+            }
+            $exists_project = $projectModel->find($this->request->getPost('project_id'));
+            if(!$exists_project){
+                session()->setFlashdata('msg_error', 'Ausgewähltes Projekt existiert nicht.');
+                return redirect()->back()->withInput();
             }
             //die( $this->request->getPost('website_live'));
 
@@ -151,6 +174,7 @@ class Websites extends BaseController
         $website = $websiteModel->find($id);
         
         if(!$website){
+            session()->setFlashdata('msg_error', 'Die ausgewählte Webseite wurde nicht gefunden.');
             return redirect()->route('website.index');
         }
 

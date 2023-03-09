@@ -60,6 +60,7 @@ class Customers extends BaseController
         $customer = $customerModel->find($id);
 
         if(!$customer){
+            session()->setFlashdata('msg_error', 'Der ausgewählte Kunde wurde nicht gefunden.');
             return redirect()->route('customer.index');
         }
 
@@ -113,6 +114,7 @@ class Customers extends BaseController
         $customer = $customerModel->find($id);
         
         if(!$customer){
+            session()->setFlashdata('msg_error', 'Der ausgewählte Kunde wurde nicht gefunden.');
             return redirect()->route('customer.index');
         }
 

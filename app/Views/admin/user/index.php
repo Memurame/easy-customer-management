@@ -42,39 +42,46 @@
                             <?php else:?>
                             <span class="badge text-bg-danger text-white">nicht bestätigt</span>
                             <?php endif;?>
-                        </td>
-                        <td class="align-middle">
-                            <?=$user->last_active?>
-                        </td>
-                        <td class="align-middle">
-                            <?php foreach($user->getGroups() as $group): ?>
-                            <?php if($group == 'superadmin'): ?>
-                            <span class="badge text-bg-danger text-white"><?=$group?></span>
-                            <?php elseif($group == 'admin'): ?>
-                            <span class="badge text-bg-danger text-white"><?=$group?></span>
+
+                            <?php if($user->accessTokens()): ?>
+                            <span class="badge text-bg-success text-white">API</span>
                             <?php else: ?>
-                            <span class="badge text-bg-primary text-white"><?=$group?></span>
+                            <span class="badge text-bg-danger text-white">API</span>
                             <?php endif; ?>
-
-                            <?php endforeach; ?>
-                        </td>
-                        <td class="text-end">
-                            <div class="btn-group">
-                                <a href="<?=base_url(route_to('user.edit', $user->id))?>"
-                                    class="btn btn-link text-primary"><i class="fa-solid fa-pen-to-square"></i></a>
-                                <a href="#" class="delete-user btn btn-link text-danger" data-id="<?=$user->id?>"><i
-                                        class="fa-solid fa-trash"></i></a>
-                            </div>
-                        </td>
-                    </tr>
-                    <?php endforeach; ?>
-
-                </tbody>
-
-
-            </table>
         </div>
+        </td>
+        <td class="align-middle">
+            <?=$user->last_active?>
+        </td>
+        <td class="align-middle">
+            <?php foreach($user->getGroups() as $group): ?>
+            <?php if($group == 'superadmin'): ?>
+            <span class="badge text-bg-danger text-white"><?=$group?></span>
+            <?php elseif($group == 'admin'): ?>
+            <span class="badge text-bg-danger text-white"><?=$group?></span>
+            <?php else: ?>
+            <span class="badge text-bg-primary text-white"><?=$group?></span>
+            <?php endif; ?>
+
+            <?php endforeach; ?>
+        </td>
+        <td class="text-end">
+            <div class="btn-group">
+                <a href="<?=base_url(route_to('user.edit', $user->id))?>" class="btn btn-link text-primary"><i
+                        class="fa-solid fa-pen-to-square"></i></a>
+                <a href="#" class="delete-user btn btn-link text-danger" data-id="<?=$user->id?>"><i
+                        class="fa-solid fa-trash"></i></a>
+            </div>
+        </td>
+        </tr>
+        <?php endforeach; ?>
+
+        </tbody>
+
+
+        </table>
     </div>
+</div>
 </div>
 
 

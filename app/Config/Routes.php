@@ -29,9 +29,11 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index', ['as' => 'home']);
+$routes->addRedirect('/', 'ecm');
 
 $routes->group('ecm', static function ($routes) {
+    $routes->get('/', 'Home::index', ['as' => 'home']);
+    
     $routes->get('websites', 'Websites::index', ['as' => 'website.index']);
     $routes->match(['get', 'post'],'websites/add', 'Websites::add', ['as' => 'website.add']);
     $routes->get('websites/show/(:num)', 'Websites::show/$1', ['as' => 'website.show']);
@@ -78,17 +80,37 @@ $routes->group('admin', static function ($routes) {
 $routes->cli('cron', 'Invoices::cron');
 $routes->get('cron', 'Invoices::cron');
 
-
-$routes->delete('/api/website/delete/(:num)', 'Websites::apiDelete/$1');
-$routes->delete('/api/customer/delete/(:num)', 'Customers::apiDelete/$1');
-$routes->delete('/api/project/delete/(:num)', 'Projects::apiDelete/$1');
-$routes->delete('/api/invoice/delete/(:num)', 'Invoices::apiDelete/$1');
-$routes->delete('/api/comment/delete/(:num)', 'Comments::apiDelete/$1');
-$routes->delete('/api/tag/delete/(:num)', 'TagsController::apiDelete/$1');
-$routes->delete('/api/user/delete/(:num)', 'UserController::apiDelete/$1', ['filter' => 'permission:user.delete']);
+$routes->group('api/0', static function ($routes) {
+    $routes->delete('website/delete/(:num)', 'Websites::apiDelete/$1');
+    $routes->get('websites', 'apiWebsitesController::getWebsites');
 
 
-$routes->get('/admin', 'Admin::index', ['as' => 'admin.index', 'filter' => 'permission:admin.access']);
+    $routes->delete('customer/delete/(:num)', 'Customers::apiDelete/$1');
+
+    $routes->delete('project/delete/(:num)', 'Projects::apiDelete/$1');
+    $routes->get('projects', 'apiProjectsController::getProjects');
+
+    $routes->delete('invoice/delete/(:num)', 'Invoices::apiDelete/$1');
+
+    $routes->delete('comment/delete/(:num)', 'Comments::apiDelete/$1');
+
+    $routes->delete('tag/delete/(:num)', 'TagsController::apiDelete/$1');
+    
+    $routes->delete('user/delete/(:num)', 'UserController::apiDelete/$1', ['filter' => 'permission:user.delete']);
+
+    $routes->get('profile/createToken/', 'apiProfileController::createToken');
+    $routes->get('profile/deleteToken/', 'apiProfileController::deleteToken');
+
+});
+
+$routes->group('api/v1', static function ($routes) {
+    
+    $routes->get('websites', 'apiWebsitesController::getWebsites');
+
+    $routes->get('projects', 'apiProjectsController::getProjects');
+
+});
+
 
 
 service('auth')->routes($routes);
