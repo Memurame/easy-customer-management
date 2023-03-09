@@ -45,8 +45,12 @@ class UserController extends BaseController
     public function edit($id)
     {
         $userModel = new UserModel();
-        $user = $userModel->find($id);
+        $user = $userModel->findById($id);
 
+        if(!$user){
+            session()->setFlashdata('msg_error', 'Der ausgewählte Benutzer wurde nicht gefunden.');
+            return redirect()->route('user.index');
+        }
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
@@ -82,8 +86,6 @@ class UserController extends BaseController
                 return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
             }
 
-            $userModel = model('UserModel');
-
 
             $user->username = $this->request->getPost('username');
             $user->email = $this->request->getPost('email');
@@ -91,9 +93,10 @@ class UserController extends BaseController
             if($this->request->getPost('password')){
                 $user->password = $this->request->getPost('password');
             }
-            if($user->hasChanged()){
-                $userModel->save($user);
-            }
+            
+            $userModel->save($user);
+            session()->setFlashdata('msg_success', 'Benutzer gespeichert.');
+            
             
             $selectedGroups = $this->request->getPost('group');
             foreach(service('settings')->get('AuthGroups.groups') as $key => $group){
@@ -106,7 +109,7 @@ class UserController extends BaseController
                 }
             }
 
-            session()->setFlashdata('msg_success', 'Benutzer gespeichert.');
+            
             return redirect()->route('user.index');
             
             
@@ -214,17 +217,17 @@ class UserController extends BaseController
         $user = $userModel->findById($id);
 
         if($user->id == user_id()){
-            $data['error'] = "Du kannst dich selbst nicht löschen.";
+            $data['message'] = "Du kannst dich selbst nicht löschen.";
         }
         else{
             if(empty($user)){
-                $data['error'] = "Der Benutzer wurde nicht gefunden.";
+                $data['message'] = "Der Benutzer wurde nicht gefunden.";
             } else {
                 $deleted = $userModel->delete($user->id, true);
                 if($deleted){
                     $data['success'] = 1;
                 } else {
-                    $data['error'] = "Fehler beim Lsöchen des Benutzers";
+                    $data['message'] = "Fehler beim Lsöchen des Benutzers";
                 }
             }
         }

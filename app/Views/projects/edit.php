@@ -5,7 +5,7 @@
         <div class="p-1 flex-grow-1">
             <ol class="breadcrumb my-0 ">
                 <li class="breadcrumb-item"><a href="<?=base_url()?>">Übersicht</a></li>
-                <li class="breadcrumb-item"><a href="<?=base_url()?><?=route_to('project.index')?>">Projekte</a></li>
+                <li class="breadcrumb-item"><a href="<?=base_url(route_to('project.index'))?>">Projekte</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Bearbeiten</li>
             </ol>
         </div>
@@ -20,7 +20,7 @@
             <div class="row mb-3">
                 <div class="col-6">
                     <label for="customer_id" class="form-label">Kunde <span class="text-danger">*</span></label>
-                    <select class="form-select" name="customer_id" id="customer_id">
+                    <select class="form-select select2" name="customer_id" id="customer_id">
                         <option value="0">-- Kunde auswählen --</option>
                         <?php foreach($customers as $customer): ?>
                         <option value="<?=$customer->id ?>"

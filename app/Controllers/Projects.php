@@ -42,6 +42,12 @@ class Projects extends BaseController
                 return redirect()->back()->withInput()->with('errors', $this->validator->getErrors())->with('msg_error', 'Bitte alle erforderlichen Felder ausfüllen');
             }
 
+            $exists_customer = $customerModel->find($this->request->getPost('customer_id'));
+            if(!$exists_customer){
+                session()->setFlashdata('msg_error', 'Ausgewählter Kunde existiert nicht.');
+                return redirect()->back()->withInput();
+            }
+
             $project = new Project($this->request->getPost(['name', 'status', 'customer_id', 'notes']));
             $project->date_offer = $this->request->getPost('date_offer') ?: null;
             $project->date_order = $this->request->getPost('date_order') ?: null;
@@ -69,6 +75,7 @@ class Projects extends BaseController
         $project = $projectModel->find($id);
 
         if(!$project){
+            session()->setFlashdata('msg_error', 'Das ausgewählte Projekt wurde nicht gefunden.');
             return redirect()->route('project.index');
         }
 
@@ -89,6 +96,11 @@ class Projects extends BaseController
                 return redirect()->back()->withInput()->with('errors', $this->validator->getErrors())->with('msg_error', 'Bitte alle erforderlichen Felder ausfüllen');
             }
 
+            $exists_customer = $customerModel->find($this->request->getPost('customer_id'));
+            if(!$exists_customer){
+                session()->setFlashdata('msg_error', 'Ausgewählter Kunde existiert nicht.');
+                return redirect()->back()->withInput();
+            }
 
             $project->name = $this->request->getPost('name');
             $project->status = $this->request->getPost('status');
@@ -125,6 +137,7 @@ class Projects extends BaseController
         $project = $projectModel->find($id);
         
         if(!$project){
+            session()->setFlashdata('msg_error', 'Das ausgewählte Projekt wurde nicht gefunden.');
             return redirect()->route('website.index');
         }
 

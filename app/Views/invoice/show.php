@@ -9,14 +9,13 @@ $date = ($invoice->invoice) ? new DateTime($invoice->invoice) : null;
     <div class="p-1 flex-grow-1">
         <ol class="breadcrumb my-0 ">
             <li class="breadcrumb-item"><a href="<?=base_url()?>">Übersicht</a></li>
-            <li class="breadcrumb-item"><a href="<?=base_url()?><?=route_to('invoice.index')?>">Rechnungen</a></li>
+            <li class="breadcrumb-item"><a href="<?=base_url(route_to('invoice.index'))?>">Rechnungen</a></li>
             <li class="breadcrumb-item active" aria-current="page"><?=$invoice->dscription?></li>
         </ol>
     </div>
 
     <div class="">
-        <a href="<?=base_url()?><?=route_to('invoice.edit', $invoice->id)?>"
-            class="btn btn-primary btn-sm">Bearbeiten</a>
+        <a href="<?=base_url(route_to('invoice.edit', $invoice->id))?>" class="btn btn-primary btn-sm">Bearbeiten</a>
     </div>
 </div>
 <div class="row g-3">
@@ -24,7 +23,7 @@ $date = ($invoice->invoice) ? new DateTime($invoice->invoice) : null;
         <div class="bgc-white p-20 bd">
             <div class="d-flex justify-content-between">
                 <h6 class="c-grey-900">Rechungsinfo</h6>
-                <a href="<?=base_url()?><?=route_to('invoice.edit', $invoice->id)?>"
+                <a href="<?=base_url(route_to('invoice.edit', $invoice->id))?>"
                     class="btn btn-primary btn-sm">Bearbeiten</a>
             </div>
             <div class="mT-30">
@@ -84,7 +83,7 @@ $date = ($invoice->invoice) ? new DateTime($invoice->invoice) : null;
                         <h6 class="mb-0">Kunde</h6>
                     </div>
                     <div class="col-sm-7 text-secondary">
-                        <?=($invoice->getCustomerInfo('company') ? '<a href="'.base_url().route_to('customer.show', $invoice->getCustomerInfo('id')).'">'.$invoice->getCustomerInfo('company').'</a>' : '---') ?>
+                        <?=($invoice->getCustomerInfo('company') ? '<a href="'.base_url(route_to('customer.show', $invoice->getCustomerInfo('id'))).'">'.$invoice->getCustomerInfo('company').'</a>' : '---') ?>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -92,7 +91,7 @@ $date = ($invoice->invoice) ? new DateTime($invoice->invoice) : null;
                         <h6 class="mb-0">Projekt</h6>
                     </div>
                     <div class="col-sm-7 text-secondary">
-                        <?=($invoice->getProjectInfo('name') ? '<a href="'.base_url().route_to('project.show', $invoice->getProjectInfo('id')).'">'.$invoice->getProjectInfo('name').'</a>' : '---') ?>
+                        <?=($invoice->getProjectInfo('name') ? '<a href="'.base_url(route_to('project.show', $invoice->getProjectInfo('id'))).'">'.$invoice->getProjectInfo('name').'</a>' : '---') ?>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -100,7 +99,7 @@ $date = ($invoice->invoice) ? new DateTime($invoice->invoice) : null;
                         <h6 class="mb-0">Webseite</h6>
                     </div>
                     <div class="col-sm-7 text-secondary">
-                        <?=($invoice->getWebsiteInfo('website_url') ? '<a href="'.base_url().route_to('website.show', $invoice->getWebsiteInfo('id')).'">'.$invoice->getWebsiteInfo('website_url').'</a>' : '---') ?>
+                        <?=($invoice->getWebsiteInfo('website_url') ? '<a href="'.base_url(route_to('website.show', $invoice->getWebsiteInfo('id'))).'">'.$invoice->getWebsiteInfo('website_url').'</a>' : '---') ?>
                     </div>
                 </div>
                 <div class="row mb-3">

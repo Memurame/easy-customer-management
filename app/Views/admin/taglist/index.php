@@ -9,7 +9,7 @@
     </div>
 
     <div class="">
-        <a href="<?=base_url()?><?=route_to('tag.add')?>" class="btn btn-primary btn-sm">Neues Schlagwort</a>
+        <a href="<?=base_url(route_to('tag.add'))?>" class="btn btn-primary btn-sm">Neues Schlagwort</a>
     </div>
 </div>
 
@@ -21,6 +21,7 @@
                 <thead>
                     <tr>
                         <th>Schlagwort</th>
+                        <th>Class</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -32,9 +33,10 @@
 
                     <tr>
                         <td class="align-middle"><?=$tag->name?></td>
+                        <td class="align-middle"><?=$tag->class?></td>
                         <td class="text-end">
                             <div class="btn-group">
-                                <a href="<?=base_url()?><?=route_to('tag.edit', $tag->id)?>"
+                                <a href="<?=base_url(route_to('tag.edit', $tag->id))?>"
                                     class="btn btn-link text-primary"><i class="fa-solid fa-pen-to-square"></i></a>
                                 <a href="#" class="delete-tag btn btn-linkr text-danger" data-id="<?=$tag->id?>"><i
                                         class="fa-solid fa-trash"></i></a>

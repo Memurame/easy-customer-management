@@ -6,7 +6,7 @@
         <div class="p-1 flex-grow-1">
             <ol class="breadcrumb my-0 ">
                 <li class="breadcrumb-item"><a href="<?=base_url()?>">Übersicht</a></li>
-                <li class="breadcrumb-item"><a href="<?=base_url()?><?=route_to('user.index')?>">Benutzer</a></li>
+                <li class="breadcrumb-item"><a href="<?=base_url(route_to('user.index'))?>">Benutzer</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Bearbeiten</li>
             </ol>
         </div>
@@ -65,6 +65,16 @@
                                 id="password" name="password" placeholder="****">
                         </div>
                     </div>
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <label class="form-label">API Zugriff einrichten</label><br>
+                            <?php if($user->accessTokens()): ?>
+                            <button class="btn btn-danger btn-color token-delete">API Token löschen</button>
+                            <?php else: ?>
+                            <button class="btn btn-success btn-color token-create">API Token generieren</button>
+                            <?php endif; ?>
+                        </div>
+                    </div>
 
                 </div>
             </div>
@@ -84,7 +94,9 @@
                             <button type="button" class="btn cur-p btn-primary btn-color">Login Link zusenden</button>
                         </div>
                         <div class="peer">
-                            <button type="button" class="btn cur-p btn-danger btn-color">Benutzer löschen</button>
+                            <button type="button" class="delete-user btn cur-p btn-danger btn-color"
+                                data-id="<?=$user->id ?>">Benutzer
+                                löschen</button>
                         </div>
 
                     </div>
@@ -93,7 +105,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
+        <div class=" col-lg-6">
 
         </div>
     </div>

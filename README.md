@@ -48,7 +48,7 @@ database.default.password = root
 database.default.port = 3306
 ```
 
-Run the database migration:
+Run the installer:
 ```console
 php spark ecm:install
 ```

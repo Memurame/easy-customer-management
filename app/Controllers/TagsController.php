@@ -32,7 +32,8 @@ class TagsController extends BaseController
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
             $rules = [
-                'name' => 'required'
+                'name' => 'required',
+                'class' => 'required'
             ];
 
             if (! $this->validate($rules))
@@ -60,14 +61,15 @@ class TagsController extends BaseController
         $taglist = $taglistModel->find($id);
 
         if(!$taglist){
-            session()->setFlashdata('msg_error', 'Bitte fülle die erforderlichen Felder aus');
+            session()->setFlashdata('msg_error', 'Das ausgewählte Schlagwort wurde nicht gefunden.');
             return redirect()->route('tag.index');
         }
         
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
             $rules = [
-                'name' => 'required'
+                'name' => 'required',
+                'class' => 'required'
             ];
 
             if (! $this->validate($rules))
@@ -78,6 +80,7 @@ class TagsController extends BaseController
 
 
             $taglist->name = $this->request->getPost('name');
+            $taglist->class = $this->request->getPost('class');
 
 
             if($taglist->hasChanged()){

@@ -9,7 +9,7 @@
     <div class="p-1 flex-grow-1">
         <ol class="breadcrumb my-0 ">
             <li class="breadcrumb-item"><a href="<?=base_url()?>">Übersicht</a></li>
-            <li class="breadcrumb-item"><a href="<?=base_url()?><?=route_to('customer.index')?>">Kunden</a></li>
+            <li class="breadcrumb-item"><a href="<?=base_url(route_to('customer.index'))?>">Kunden</a></li>
             <li class="breadcrumb-item active" aria-current="page"><?=$customer->contact_lastname?>
                 <?=$customer->contact_firstname?></li>
         </ol>
@@ -24,7 +24,7 @@
         <div class="bgc-white p-20 bd">
             <div class="d-flex justify-content-between">
                 <h6 class="c-grey-900">Kundendaten</h6>
-                <a href="<?=base_url()?><?=route_to('customer.edit', $customer->id)?>"
+                <a href="<?=base_url(route_to('customer.edit', $customer->id))?>"
                     class="btn btn-primary btn-sm">Bearbeiten</a>
             </div>
             <div class="mT-30">
@@ -101,7 +101,7 @@
         <div class="bgc-white p-20 bd">
             <div class="d-flex justify-content-between">
                 <h6 class="c-grey-900">Kommentare</h6>
-                <a href="<?=base_url()?><?=route_to('comment.add')?>?customerId=<?=$customer->id?>"
+                <a href="<?=base_url(route_to('comment.add'))?>?customerId=<?=$customer->id?>"
                     class="btn btn-primary btn-sm">Neuer
                     Kommentar</a>
             </div>
@@ -120,7 +120,7 @@
                             ?>
                         <tr class="<?=$typ?>">
                             <td class="position-relative">
-                                <a href="<?=base_url()?><?=route_to('comment.edit', $comment->id)?>?ref=customer"
+                                <a href="<?=base_url(route_to('comment.edit', $comment->id))?>?ref=customer"
                                     class="position-absolute" style="top: 5px; right: 30px;"><i
                                         class="fa-solid fa-pen-to-square"></i></a>
                                 <button class="position-absolute text-danger p-0 btn btn-link delete-comment"

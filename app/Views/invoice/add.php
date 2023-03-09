@@ -5,7 +5,7 @@
         <div class="p-1 flex-grow-1">
             <ol class="breadcrumb my-0 ">
                 <li class="breadcrumb-item"><a href="<?=base_url()?>">Übersicht</a></li>
-                <li class="breadcrumb-item"><a href="<?=base_url()?><?=route_to('invoice.index')?>">Rechnungen</a></li>
+                <li class="breadcrumb-item"><a href="<?=base_url(route_to('invoice.index'))?>">Rechnungen</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Neu</li>
             </ol>
         </div>
@@ -34,7 +34,7 @@
             <div class="row mb-3">
                 <div class="col-md-4">
                     <label for="customer_id" class="form-label">Kunde <span class="text-danger">*</span></label>
-                    <select id="customer_id" name="customer_id" class="form-select ">
+                    <select id="customer_id" name="customer_id" class="form-select select2">
                         <option value="0" selected>-- Bitte auswählen --</option>
                         <?php foreach($customers as $index => $customer): ?>
                         <option value="<?=$customer->id?>">
@@ -44,21 +44,15 @@
                     </select>
                 </div>
                 <div class="col-md-4">
-                    <label for="project_id" class="form-label">Projekt <span class="text-danger">*</span></label>
-                    <select id="project_id" name="project_id" class="form-select ">
-                        <option value="0" selected>-- Bitte auswählen --</option>
-                        <?php foreach($projects as $index => $project): ?>
-                        <option value="<?=$project->id?>"><?=$project->name?></option>
-                        <?php endforeach; ?>
+                    <label for="project_id" class="form-label">Projekt</label>
+                    <select id="project_id" name="project_id" class="form-select select2" disabled>
+                        <option value="0" selected>-- Kein Projekt --</option>
                     </select>
                 </div>
                 <div class="col-md-4">
-                    <label for="website_id" class="form-label">Webseite <span class="text-danger">*</span></label>
-                    <select id="website_id" name="website_id" class="form-select ">
-                        <option value="0" selected>-- Bitte auswählen --</option>
-                        <?php foreach($websites as $index => $website): ?>
-                        <option value="<?=$website->id?>"><?=$website->website_url?></option>
-                        <?php endforeach; ?>
+                    <label for="website_id" class="form-label">Webseite</label>
+                    <select id="website_id" name="website_id" class="form-select select2" disabled>
+                        <option value="0" selected>-- Keine Webseite --</option>
                     </select>
                 </div>
             </div>

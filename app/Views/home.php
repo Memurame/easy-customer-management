@@ -10,7 +10,7 @@
     </svg>
     <div>
         Es wurde kein Mail Absender definiert, dieser ist notwendig damit das versenden von Mails funktioniert. <br><a
-            href="<?=base_url()?><?=route_to('admin.settings')?>" class="alert-link">Jetzt anpassen</a>
+            href="<?=base_url(route_to('admin.settings'))?>" class="alert-link">Jetzt anpassen</a>
     </div>
 </div>
 <?php endif; ?>

@@ -11,7 +11,7 @@
     </div>
 
     <div class="">
-        <a href="<?=base_url()?><?=route_to('customer.add')?>" class="btn btn-primary btn-sm">Neuer
+        <a href="<?=base_url(route_to('customer.add'))?>" class="btn btn-primary btn-sm">Neuer
             Kunde</a>
     </div>
 </div>
@@ -46,9 +46,9 @@
                         </td>
                         <td class="text-end">
                             <div class="btn-group">
-                                <a href="<?=base_url()?><?=route_to('customer.show', $customer->id)?>"
+                                <a href="<?=base_url(route_to('customer.show', $customer->id))?>"
                                     class="btn btn-link text-primary"><i class="fa-solid fa-eye"></i></a>
-                                <a href="<?=base_url()?><?=route_to('customer.edit', $customer->id)?>"
+                                <a href="<?=base_url(route_to('customer.edit', $customer->id))?>"
                                     class="btn btn-link text-primary"><i class="fa-solid fa-pen-to-square"></i></a>
                                 <a href="#" class="delete-customer btn btn-link text-danger"
                                     data-wid="<?=$customer->id?>"><i class="fa-solid fa-trash"></i></a>

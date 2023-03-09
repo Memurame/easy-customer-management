@@ -5,7 +5,7 @@
         <div class="p-1 flex-grow-1">
             <ol class="breadcrumb my-0 ">
                 <li class="breadcrumb-item"><a href="<?=base_url()?>">Übersicht</a></li>
-                <li class="breadcrumb-item"><a href="<?=base_url()?><?=route_to('invoice.index')?>">Rechnungen</a></li>
+                <li class="breadcrumb-item"><a href="<?=base_url(route_to('invoice.index'))?>">Rechnungen</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Bearbeiten</li>
             </ol>
         </div>
@@ -34,7 +34,7 @@
             <div class="row mb-3">
                 <div class="col-md-4">
                     <label for="customer_id" class="form-label">Kunde <span class="text-danger">*</span></label>
-                    <select id="customer_id" name="customer_id" class="form-select ">
+                    <select id="customer_id" name="customer_id" class="form-select select2">
                         <option value="0" <?=($invoice->customer_id == 0)? 'selected' : ''?>>-- Bitte auswählen --
                         </option>
                         <?php foreach($customers as $index => $customer): ?>
@@ -46,8 +46,8 @@
                     </select>
                 </div>
                 <div class="col-md-4">
-                    <label for="project_id" class="form-label">Projekt <span class="text-danger">*</span></label>
-                    <select id="project_id" name="project_id" class="form-select ">
+                    <label for="project_id" class="form-label">Projekt</label>
+                    <select id="project_id" name="project_id" class="form-select select2">
                         <option value="0" <?=($invoice->project_id == 0)? 'selected' : ''?>>-- Bitte auswählen --
                         </option>
                         <?php foreach($projects as $index => $project): ?>
@@ -57,8 +57,8 @@
                     </select>
                 </div>
                 <div class="col-md-4">
-                    <label for="website_id" class="form-label">Webseite <span class="text-danger">*</span></label>
-                    <select id="website_id" name="website_id" class="form-select ">
+                    <label for="website_id" class="form-label">Webseite </label>
+                    <select id="website_id" name="website_id" class="form-select select2">
                         <option value="0" <?=($invoice->website_id == 0)? 'selected' : ''?>>-- Bitte auswählen --
                         </option>
                         <?php foreach($websites as $index => $website): ?>
