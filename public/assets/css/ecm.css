@@ -1,0 +1,87 @@
+table.company-info{
+    font-size: 10px;
+}
+table.company-info tbody tr:nth-child(1) td:nth-child(2){
+    font-weight:bold;
+
+}
+table.company-info tbody tr td:nth-child(1){
+    width: 100px;
+}
+
+.print-wrapper{
+    border: 1px solid gray;
+    margin: auto;
+    max-width: 840px;
+}
+
+.print-header{
+    height: 130px;
+}
+.print-header .print-logo img{
+    height: 70%;
+}
+.print-header .print-sender{
+    font-size: 12px;
+    margin-top: 10px;
+}
+.print-header .print-sender address{
+    font-style: italic;
+}
+.print-body{
+    margin: 0 30px;
+}
+
+.print-body .print-receiver{
+    
+}
+
+.print-body .print-detail{
+    
+}
+
+.print-body .title{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.print-body .subtitle{
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.print-body table{
+   
+}
+
+.print-invoice{
+    margin-top:100px;
+ }
+.print-body table tr td{
+   border: 0;
+}
+.print-body table tfoot td{
+    padding-top: 6px;
+    padding-bottom: 6px;
+ }
+.print-body table tfoot{
+    border-top: 1px solid black;
+    border-bottom: 1px double black;
+ }
+
+
+
+ @media print {
+    .print-invoice{
+        break-before: page;
+        margin-top: 630px;
+     }
+     .print-wrapper{
+        border: 0;
+    }
+    .page-body{
+        margin:0;
+    }
+}

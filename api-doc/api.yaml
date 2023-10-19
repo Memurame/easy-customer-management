@@ -1,0 +1,237 @@
+openapi: 3.0.3
+info:
+  title: BEBV-Tools
+  description: BEBV-Tools
+  contact:
+    email: it@bernerbauern.ch
+  version: 1.0.0
+servers:
+- url: https://tools.bernerbauern.ch/api/v1
+tags:
+- name: website
+  description: Website management
+- name: project
+  description: Project management
+- name: customer
+  description: Customer management
+- name: invoice
+  description: Iinvoice management
+paths:
+  /website:
+    get:
+      tags:
+      - website
+      summary: Get all websites
+      operationId: indexWebsite
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Websites'
+        "404":
+          description: No entry found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiFailResponse'
+        "500":
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiFailResponse'
+      security:
+      - api_key: []
+    post:
+      tags:
+        - website
+      summary: Create new Website
+      operationId: createWebsite
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestWebsite'
+        required: true
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWebsite'
+        "400":
+          description: Validation exception
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiFailResponse'
+        "500":
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiFailResponse'
+      security:
+        - api_key: [ ]
+  /website/{websiteId}:
+    patch:
+      tags:
+        - website
+      summary: Update exists website
+      operationId: updateWebsite
+      parameters:
+        - name: websiteId
+          in: path
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int32
+      requestBody:
+        description: "Not all fields must always be specified. It is also possible to change only one field value, for example."
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestWebsite'
+        required: true
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWebsite'
+        "400":
+          description: Validation exception
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiFailResponse'
+        "500":
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiFailResponse'
+      security:
+        - api_key: [ ]
+    delete:
+      tags:
+        - website
+      summary: Delete a website by ID
+      operationId: deleteWebsite
+      parameters:
+        - name: websiteId
+          in: path
+          description: ID of website to delete
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: Successful operation
+        "404":
+          description: No entry found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiFailResponse'
+      security:
+        - api_key: [ ]
+
+
+components:
+  schemas:
+    ArrayMultiple:
+      type: object
+      additionalProperties:
+        type: string
+    ArraySingle:
+      maxProperties: 1
+      type: object
+      additionalProperties:
+        type: string
+    ApiFailResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int32
+        error:
+          type: string
+        messages:
+          $ref: '#/components/schemas/ApiFailResponse_messages'
+    ApiFailResponse_messages:
+      type: object
+      properties:
+        error:
+          type: array
+    Websites:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResponseWebsite'
+    ResponseWebsite:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        assign:
+          type: array
+          items:
+            type: object
+            properties:
+              customer:
+                type: integer
+                format: int32
+                example: 1
+              project:
+                type: integer
+                format: int32
+                example: 2
+        url:
+          type: string
+        live:
+          type: string
+          format: date
+        installed:
+          type: string
+          format: date
+        notes:
+          type: string
+    RequestWebsite:
+      type: object
+      properties:
+        customer:
+          type: integer
+          format: int32
+          example: 1
+          required: true
+        project:
+          type: integer
+          format: int32
+          example: null
+        url:
+          type: string
+          required: true
+        live:
+          type: string
+          format: date
+          example: null
+        installed:
+          type: string
+          format: date
+        notes:
+          type: string
+  securitySchemes:
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header
