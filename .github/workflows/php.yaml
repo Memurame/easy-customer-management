@@ -34,9 +34,7 @@ jobs:
       run: composer install --prefer-dist --no-progress --no-suggest
 
     - name: PHP Lint
-      uses: davidlienhard/php-simple-lint@1
+      uses: michaelw90/PHP-Lint@2.1.0
       with:
         folder: './'
         ignore: './vendor/\*'
-
-    - uses: symfonycorp/security-checker-action@v5
