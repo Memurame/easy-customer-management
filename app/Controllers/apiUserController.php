@@ -22,6 +22,12 @@ class apiUserController extends BaseController
             return $this->failNotFound('The user does not exist');
         }
 
+        $userGroups = $user->getGroups();
+
+        if((in_array('superadmin', $userGroups) OR in_array('admin', $userGroups)) AND !auth()->user()->can('user.manage-admins')){
+            return $this->failForbidden('You do not have the necessary rights to delete an administrator');
+        }
+
         if($user->id == user_id()){
             return $this->fail('You cannot delete yourself');
         }
@@ -65,7 +71,7 @@ class apiUserController extends BaseController
             }
         }
 
-        return $this->respondUpdated();
+        return $this->respondUpdated('Passwort wurde geändert und dem Benutzer zugesendet.');
 
 
     }

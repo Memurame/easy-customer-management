@@ -11,7 +11,7 @@ class apiInvoicePosController extends BaseController
 
     public function delete($invoicePosId = null){
         if($invoicePosId == setting('App.invoiceTemplateId') AND !auth()->user()->can('invoice.template')){
-            return $this->failUnauthorized('You do not have permission to edit templates');
+            return $this->failForbidden('You do not have permission to edit templates');
         }
         
         $invoicePos = model('InvoicePositionModel')->find($invoicePosId);

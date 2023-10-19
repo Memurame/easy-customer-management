@@ -301,36 +301,4 @@ class UserController extends BaseController
 
 
 
-
-    public function apiDelete($id){
-        $data = array();
-        $data['success'] = 0;
-        $data['token'] = csrf_hash();
-
-        $userModel = model('UserModel');
-        $user = $userModel->findById($id);
-
-        if($user->id == user_id()){
-            $data['message'] = "Du kannst dich selbst nicht löschen.";
-        }
-        else{
-            if(empty($user)){
-                $data['message'] = "Der Benutzer wurde nicht gefunden.";
-            } else {
-                $deleted = $userModel->delete($user->id, true);
-                if($deleted){
-                    $data['success'] = 1;
-                } else {
-                    $data['message'] = "Fehler beim Lsöchen des Benutzers";
-                }
-            }
-        }
-
-        
-
-
-        return $this->response->setJSON($data);
-    }
-
-
 }

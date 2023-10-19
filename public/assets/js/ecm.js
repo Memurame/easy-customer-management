@@ -138,7 +138,7 @@ $(".action-mailreset" ).click(function(e) {
             404: function() {
                 Swal.fire({
                     icon: 'error',
-                    text: "Fehler beim zurücksetzen der Mail.",
+                    text: response.responseJSON.messages.error,
                 })
             }
         },
@@ -168,7 +168,7 @@ $(".delete-mailsent" ).click(function(e) {
                     404: function() {
                         Swal.fire({
                             icon: 'error',
-                            text: "Fehler beim Löschen der Vorlage.",
+                            text: response.responseJSON.messages.error,
                         })
                     }
                 },
@@ -201,7 +201,7 @@ $(".delete-mailtemplate" ).click(function(e) {
                     404: function() {
                         Swal.fire({
                             icon: 'error',
-                            text: "Fehler beim Löschen der Vorlage.",
+                            text: response.responseJSON.messages.error,
                         })
                     }
                 },
@@ -232,7 +232,7 @@ $(".delete-chat" ).click(function() {
                     404: function() {
                         Swal.fire({
                             icon: 'error',
-                            text: "Fehler beim Löschen des Chats.",
+                            text: response.responseJSON.messages.error,
                         })
                     }
                 },
@@ -264,7 +264,7 @@ $(".delete-website" ).click(function() {
                     404: function() {
                         Swal.fire({
                             icon: 'error',
-                            text: "Fehler beim Löschen der Webseite.",
+                            text: response.responseJSON.messages.error,
                         })
                     }
                 },
@@ -297,7 +297,7 @@ $(".delete-customer" ).click(function() {
                     404: function() {
                         Swal.fire({
                             icon: 'error',
-                            text: "Fehler beim Löschen des Kunden.",
+                            text: response.responseJSON.messages.error,
                         })
                     }
                 }
@@ -331,7 +331,7 @@ $(".delete-project" ).click(function() {
                     404: function() {
                         Swal.fire({
                             icon: 'error',
-                            text: "Fehler beim Löschen des Kunden.",
+                            text: response.responseJSON.messages.error,
                         })
                     }
                 }
@@ -365,7 +365,7 @@ $(".delete-customer-contact" ).click(function() {
                     404: function() {
                         Swal.fire({
                             icon: 'error',
-                            text: "Fehler beim Löschen des Kunden.",
+                            text: response.responseJSON.messages.error,
                         })
                     }
                 }
@@ -399,7 +399,7 @@ $(".delete-invoice" ).click(function() {
                     404: function() {
                         Swal.fire({
                             icon: 'error',
-                            text: "Fehler beim Löschen des Kunden.",
+                            text: response.responseJSON.messages.error,
                         })
                     }
                 }
@@ -433,7 +433,7 @@ $(".delete-comment" ).click(function() {
                     404: function() {
                         Swal.fire({
                             icon: 'error',
-                            text: "Fehler beim Löschen des Kunden.",
+                            text: response.responseJSON.messages.error,
                         })
                     }
                 }
@@ -464,16 +464,22 @@ $(".delete-user" ).click(function() {
                     200: function() {
                         location.reload()
                     },
-                    400: function() {
+                    400: function(response) {
                         Swal.fire({
                             icon: 'error',
-                            text: "Du kannst dich nicht selbst löschen.",
+                            text: response.responseJSON.messages.error,
                         })
                     },
-                    404: function() {
+                    403: function(response) {
                         Swal.fire({
                             icon: 'error',
-                            text: "Benutzer wurde nicht gefunden.",
+                            text: response.responseJSON.messages.error,
+                        })
+                    },
+                    404: function(response) {
+                        Swal.fire({
+                            icon: 'error',
+                            text: response.responseJSON.messages.error,
                         })
                     }
                 }
@@ -496,7 +502,7 @@ $(".delete-tag" ).click(function() {
         confirmButtonText: 'Löschen'
     }).then((result) => {
         if (result.isConfirmed) {
-            var xhr = $.ajax({
+            $.ajax({
                 url: rootUrl + '/api/0/tag/' + $(this).data('id'),
                 type: 'DELETE',
                 dataType: 'json',
@@ -504,10 +510,10 @@ $(".delete-tag" ).click(function() {
                     200: function() {
                         row.remove();
                     },
-                    404: function() {
+                    404: function(response) {
                         Swal.fire({
                             icon: 'error',
-                            text: "Fehler beim Löschen des Tags.",
+                            text: response.responseJSON.messages.error,
                         })
                     }
                 }
@@ -530,7 +536,7 @@ $(".delete-invoicepos" ).click(function() {
         confirmButtonText: 'Löschen'
     }).then((result) => {
         if (result.isConfirmed) {
-            var xhr = $.ajax({
+            $.ajax({
                 url: rootUrl + '/api/0/invoice/position/'  + $(this).data('id'),
                 type: 'DELETE',
                 dataType: 'json',
@@ -538,10 +544,16 @@ $(".delete-invoicepos" ).click(function() {
                     200: function() {
                         row.remove();
                     },
-                    404: function() {
+                    403: function(response) {
                         Swal.fire({
                             icon: 'error',
-                            text: "Fehler beim Löschen der Position.",
+                            text: response.responseJSON.messages.error,
+                        })
+                    },
+                    404: function(response) {
+                        Swal.fire({
+                            icon: 'error',
+                            text: response.responseJSON.messages.error,
                         })
                     }
                 }
@@ -550,7 +562,7 @@ $(".delete-invoicepos" ).click(function() {
     })
 });
 
-$("#admin-password-reset" ).click(function() {
+$(".admin-password-reset" ).click(function() {
 
     var row = $(this).closest('tr');
     Swal.fire({
@@ -569,28 +581,32 @@ $("#admin-password-reset" ).click(function() {
                 type: 'PATCH',
                 dataType: 'json',
                 statusCode: {
-                    200: function() {
+                    200: function(response) {
+                        console.log(response)
                         Swal.fire({
                             icon: 'success',
-                            text: "Password erfolgreich geändert und dem Benutzer zugesendet.",
+                            text: response.responseText,
                         })
                     },
-                    403: function() {
+                    403: function(response) {
+                        console.log(response)
                         Swal.fire({
                             icon: 'error',
-                            text: "Keine Berechtigung diesen Benutzer zu bearbeiten.",
+                            text: response.responseJSON.messages.error,
                         })
                     },
-                    404: function() {
+                    404: function(response) {
+                        console.log(response)
                         Swal.fire({
                             icon: 'error',
-                            text: "Dieser Benutzer existiert nicht.",
+                            text: response.responseJSON.messages.error,
                         })
                     },
-                    500: function() {
+                    500: function(response) {
+                        console.log(response)
                         Swal.fire({
                             icon: 'error',
-                            text: "Fehler beim versenden der E-Mail",
+                            text: response.responseJSON.messages.error,
                         })
                     }
                 }
