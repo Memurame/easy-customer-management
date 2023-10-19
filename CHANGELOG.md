@@ -4,6 +4,19 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [1.0.0](https://github.com/Memurame/easy-customer-management/compare/v0.0.2...v1.0.0) (2023-10-19)
+
+### Bug Fixes
+
+* Check & fix API errors ([6154c5](https://github.com/Memurame/easy-customer-management/commit/6154c5093f498da08e89b8c172b738c104133f7b))
+
+### Code Refactoring
+
+* Update composer & PHP requirement increased (8.2) ([da7bb8](https://github.com/Memurame/easy-customer-management/commit/da7bb835d5bec317f3aab3327da5fc687a95ff27))
+
+
+---
+
 ## [0.0.2](https://github.com/Memurame/easy-customer-management/compare/v0.0.1...v0.0.2) (2023-10-19)
 
 ### Bug Fixes
