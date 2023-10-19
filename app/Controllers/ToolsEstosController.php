@@ -155,6 +155,8 @@ class ToolsEstosController extends BaseController
         service('settings')->set('App.lastAbacusImport', date('d.m.Y - H:i:s'));
         file_put_contents($this->fileJSON, json_encode($returnArray));
 
+        unlink($filepath);
+
         return redirect()->route('estos.index')->with('msg_success', 'Adressen wurden importiert');
     }
 
@@ -181,11 +183,11 @@ class ToolsEstosController extends BaseController
 
     public function importKalahari(){
         $validationRule = [
-            'abacus_import' => [
+            'kalahari_import' => [
                 'label' => 'Abacus Adressen',
                 'rules' => [
-                    'uploaded[abacus_import]',
-                    'ext_in[json]'
+                    'uploaded[kalahari_import]',
+                    'ext_in[kalahari_import,json]'
                 ],
             ],
         ];
@@ -220,6 +222,8 @@ class ToolsEstosController extends BaseController
         file_put_contents($this->fileKalahari, json_encode($array));
 
         service('settings')->set('App.lastKalahariImport', date('d.m.Y - H:i:s'));
+
+        unlink($filepath);
 
         return redirect()->route('estos.index')->with('msg_success', 'Kalahari Einträge wurden importiert');
     }

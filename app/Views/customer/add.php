@@ -57,7 +57,7 @@
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label for="mail" class="form-label">E-Mail</label>
-                                    <input type="text" class="form-control <?php if(session('errors.mail')) : ?>is-invalid<?php endif ?>" id="mail" name="mail" value="<?=old('mail') ?>">
+                                    <input type="email" class="form-control <?php if(session('errors.mail')) : ?>is-invalid<?php endif ?>" id="mail" name="mail" value="<?=old('mail') ?>">
                                     <div class="invalid-feedback"><?= session('errors.mail') ?></div>
                                 </div>
                                 <div class="col-md-6">
@@ -74,7 +74,7 @@
                                 </div>
                                 <div class="col-md-2">
                                     <label for="postcode" class="form-label">PLZ <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control <?php if(session('errors.postcode')) : ?>is-invalid<?php endif ?>" id="postcode" name="postcode"
+                                    <input type="number" class="form-control <?php if(session('errors.postcode')) : ?>is-invalid<?php endif ?>" id="postcode" name="postcode"
                                         value="<?=old('postcode') ?>">
                                     <div class="invalid-feedback"><?= session('errors.postcode') ?></div>
                                 </div>
@@ -126,8 +126,8 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-md-6">
-                                        <label for="contact_mail" class="form-label">E-Mail</label>
-                                        <input type="text" class="form-control <?php if(session('errors.contact_mail')) : ?>is-invalid<?php endif ?>" id="contact_mail" name="contact_mail"
+                                        <label for="contact_mail" class="form-label">E-Mail <span class="text-danger">*</span></label>
+                                        <input type="email" class="form-control <?php if(session('errors.contact_mail')) : ?>is-invalid<?php endif ?>" id="contact_mail" name="contact_mail"
                                             value="<?=old('contact_mail') ?>">
                                         <div class="invalid-feedback"><?= session('errors.contact_mail') ?></div>
                                     </div>
@@ -147,8 +147,8 @@
                                     </div>
                                     <div class="col-md-2">
                                         <label for="contact_postcode" class="form-label">PLZ</label>
-                                        <input type="text" class="form-control <?php if(session('errors.contact_postcode')) : ?>is-invalid<?php endif ?>" id="contact_postcode" name="contact_postcode"
-                                            value="<?=old('contact_postcode') ?>">
+                                        <input type="number" class="form-control <?php if(session('errors.contact_postcode')) : ?>is-invalid<?php endif ?>" id="contact_postcode"
+                                            name="contact_postcode" value="<?=old('contact_postcode') ?>">
                                         <div class="invalid-feedback"><?= session('errors.contact_postcode') ?></div>
                                     </div>
                                     <div class="col-md-5">

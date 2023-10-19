@@ -25,6 +25,7 @@ class CustomersContactController extends BaseController
             $rules = [
                 'firstname' => 'required',
                 'lastname' => 'required',
+                "mail" => 'valid_email',
                 'typ' => 'required'
             ];
 
@@ -65,6 +66,7 @@ class CustomersContactController extends BaseController
             $rules = [
                 'firstname' => 'required',
                 'lastname' => 'required',
+                "mail" => 'valid_email',
                 'typ' => 'required'
             ];
 
