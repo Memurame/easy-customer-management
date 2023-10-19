@@ -186,8 +186,7 @@ class ToolsEstosController extends BaseController
             'kalahari_import' => [
                 'label' => 'Abacus Adressen',
                 'rules' => [
-                    'uploaded[kalahari_import]',
-                    'ext_in[kalahari_import,json]'
+                    'uploaded[kalahari_import]'
                 ],
             ],
         ];
