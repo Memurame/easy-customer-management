@@ -83,7 +83,7 @@
                             </div>
                             <div class="row mb-3">
                                 <div class="col-12">
-                                    <label for="email" class="form-label">Vorname <span class="text-danger">*</span></label>
+                                    <label for="firstname" class="form-label">Vorname <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control <?php if(session('errors.firstname')) : ?>is-invalid<?php endif ?>" id="firstname" name="firstname"
                                         value="<?=$detail->firstname ?>">
                                     <div class="invalid-feedback"><?= session('errors.firstname') ?></div>
@@ -91,7 +91,7 @@
                             </div>
                             <div class="row mb-3">
                                 <div class="col-12">
-                                    <label for="email" class="form-label">Nachname <span class="text-danger">*</span></label>
+                                    <label for="lastname" class="form-label">Nachname <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control <?php if(session('errors.lastname')) : ?>is-invalid<?php endif ?>" id="lastname" name="lastname"
                                         value="<?=$detail->lastname ?>">
                                     <div class="invalid-feedback"><?= session('errors.lastname') ?></div>
@@ -99,14 +99,14 @@
                             </div>
                             <div class="row mb-3">
                                 <div class="col-12">
-                                    <label for="email" class="form-label">Telefon</label>
+                                    <label for="phone" class="form-label">Telefon</label>
                                     <input type="text" class="form-control <?php if(session('errors.phone')) : ?>is-invalid<?php endif ?>" id="phone" name="phone" value="<?=$detail->lastname ?>">
                                     <div class="invalid-feedback"><?= session('errors.phone') ?></div>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <div class="col-12">
-                                    <label for="email" class="form-label">Abteilung</label>
+                                    <label for="department" class="form-label">Abteilung</label>
                                     <input type="text" class="form-control <?php if(session('errors.department')) : ?>is-invalid<?php endif ?>" id="department" name="department"
                                         value="<?=$detail->department?>">
                                     <div class="invalid-feedback"><?= session('errors.department') ?></div>

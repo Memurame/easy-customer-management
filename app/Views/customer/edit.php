@@ -35,55 +35,43 @@
                     <div class="row mb-3">
                         <div class="col-2">
                             <label for="addressnumber" class="form-label">Adressnummer</label>
-                            <input type="text"
-                                   class="form-control <?php if(session('errors.addressnumber')) : ?>is-invalid<?php endif ?>"
-                                   id="addressnumber" name="addressnumber" value="<?=$customer->addressnumber ?>">
+                            <input type="text" class="form-control <?php if(session('errors.addressnumber')) : ?>is-invalid<?php endif ?>" id="addressnumber" name="addressnumber"
+                                value="<?=$customer->addressnumber ?>">
                             <div class="invalid-feedback"><?= session('errors.addressnumber') ?></div>
                         </div>
                         <div class="col-md-10">
                             <label for="customername" class="form-label">Kundenname <span class="text-danger">*</span></label>
-                            <input type="text"
-                                   class="form-control <?php if(session('errors.customername')) : ?>is-invalid<?php endif ?>"
-                                   id="customername" name="customername" value="<?=$customer->customername ?>">
+                            <input type="text" class="form-control <?php if(session('errors.customername')) : ?>is-invalid<?php endif ?>" id="customername" name="customername"
+                                value="<?=$customer->customername ?>">
                             <div class="invalid-feedback"><?= session('errors.customername') ?></div>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="mail" class="form-label">E-Mail</label>
-                            <input type="text"
-                                   class="form-control <?php if(session('errors.mail')) : ?>is-invalid<?php endif ?>"
-                                   id="mail" name="mail" value="<?=$customer->mail ?>">
+                            <input type="email" class="form-control <?php if(session('errors.mail')) : ?>is-invalid<?php endif ?>" id="mail" name="mail" value="<?=$customer->mail ?>">
                             <div class="invalid-feedback"><?= session('errors.mail') ?></div>
                         </div>
                         <div class="col-md-6">
                             <label for="phone" class="form-label">Telefon</label>
-                            <input type="text"
-                                   class="form-control <?php if(session('errors.phone')) : ?>is-invalid<?php endif ?>"
-                                   id="phone" name="phone" value="<?=$customer->phone ?>">
+                            <input type="text" class="form-control <?php if(session('errors.phone')) : ?>is-invalid<?php endif ?>" id="phone" name="phone" value="<?=$customer->phone ?>">
                             <div class="invalid-feedback"><?= session('errors.phone') ?></div>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-5">
                             <label for="street" class="form-label">Strasse <span class="text-danger">*</span></label>
-                            <input type="text"
-                                   class="form-control <?php if(session('errors.street')) : ?>is-invalid<?php endif ?>" id="street"
-                                   name="street" value="<?=$customer->street ?>">
+                            <input type="text" class="form-control <?php if(session('errors.street')) : ?>is-invalid<?php endif ?>" id="street" name="street" value="<?=$customer->street ?>">
                             <div class="invalid-feedback"><?= session('errors.street') ?></div>
                         </div>
                         <div class="col-md-2">
                             <label for="postcode" class="form-label">PLZ <span class="text-danger">*</span></label>
-                            <input type="text"
-                                   class="form-control <?php if(session('errors.postcode')) : ?>is-invalid<?php endif ?>"
-                                   id="postcode" name="postcode" value="<?=$customer->postcode ?>">
+                            <input type="number" class="form-control <?php if(session('errors.postcode')) : ?>is-invalid<?php endif ?>" id="postcode" name="postcode" value="<?=$customer->postcode ?>">
                             <div class="invalid-feedback"><?= session('errors.postcode') ?></div>
                         </div>
                         <div class="col-md-5">
                             <label for="city" class="form-label">Stadt <span class="text-danger">*</span></label>
-                            <input type="text"
-                                   class="form-control <?php if(session('errors.city')) : ?>is-invalid<?php endif ?>" id="city"
-                                   name="city" value="<?=$customer->city ?>">
+                            <input type="text" class="form-control <?php if(session('errors.city')) : ?>is-invalid<?php endif ?>" id="city" name="city" value="<?=$customer->city ?>">
                             <div class="invalid-feedback"><?= session('errors.city') ?></div>
                         </div>
                     </div>
@@ -101,7 +89,7 @@
                             <select id="billing_contact" name="billing_contact" class="form-select tomselect-default">
                                 <option value="0">-- Kein separater Rechnungskontakt --</option>
                                 <?php foreach($contacts as $contact): ?>
-                                    <option value="<?=$contact->id ?>" <?= ($customer->billing_contact == $contact->id) ? 'selected' : null ?>><?=$contact->lastname ?> <?=$contact->firstname ?></option>
+                                <option value="<?=$contact->id ?>" <?= ($customer->billing_contact == $contact->id) ? 'selected' : null ?>><?=$contact->lastname ?> <?=$contact->firstname ?></option>
                                 <?php endforeach; ?>
                             </select>
                             <div class="form-text text-info">
@@ -113,7 +101,7 @@
                             <label for="main_contact" class="form-label">Hauptkontakt <span class="text-danger">*</span></label>
                             <select id="main_contact" name="main_contact" class="form-select tomselect-default">
                                 <?php foreach($contacts as $contact): ?>
-                                    <option value="<?=$contact->id ?>" <?= ($customer->main_contact == $contact->id) ? 'selected' : null ?>><?=$contact->lastname ?> <?=$contact->firstname ?></option>
+                                <option value="<?=$contact->id ?>" <?= ($customer->main_contact == $contact->id) ? 'selected' : null ?>><?=$contact->lastname ?> <?=$contact->firstname ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -126,7 +114,8 @@
                         </a>
                         <button class="btn btn-success d-none d-sm-inline-block">
                             <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-device-floppy" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-device-floppy" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                 <path d="M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2"></path>
                                 <path d="M12 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>

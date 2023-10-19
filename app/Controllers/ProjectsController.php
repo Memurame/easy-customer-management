@@ -34,7 +34,7 @@ class ProjectsController extends BaseController
             $rules = [
                 'name' => 'required',
                 'status' => 'required',
-                'customer_id' => 'required'
+                'customer_id' => 'required|greater_than[0]'
             ];
 
             if (! $this->validate($rules))

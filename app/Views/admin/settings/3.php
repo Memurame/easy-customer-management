@@ -69,6 +69,7 @@
                                     <label for="from_name" class="form-label">Absender Name<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control <?php if(session('errors.from_name')) : ?>is-invalid<?php endif ?>" id="from_name" name="from_name"
                                         value="<?=service('settings')->get('Email.fromName'); ?>">
+                                    <div class="invalid-feedback"><?= session('errors.from_name') ?></div>
                                 </div>
 
                             </div>
@@ -84,6 +85,7 @@
                                     <label for="smtp_host" class="form-label">SMTP Host</label>
                                     <input type="text" class="form-control <?php if(session('errors.smtp_host')) : ?>is-invalid<?php endif ?>" id="smtp_host" name="smtp_host"
                                         value="<?=service('settings')->get('Email.SMTPHost'); ?>">
+                                    <div class="invalid-feedback"><?= session('errors.smtp_host') ?></div>
                                 </div>
 
                             </div>
@@ -92,6 +94,7 @@
                                     <label for="smtp_user" class="form-label">SMTP Benutzer</label>
                                     <input type="text" class="form-control <?php if(session('errors.smtp_user')) : ?>is-invalid<?php endif ?>" id="smtp_user" name="smtp_user"
                                         value="<?=service('settings')->get('Email.SMTPUser'); ?>">
+                                    <div class="invalid-feedback"><?= session('errors.smtp_user') ?></div>
                                 </div>
 
                             </div>
@@ -99,6 +102,7 @@
                                 <div class="col-lg-8 col-xl-6">
                                     <label for="smtp_pass" class="form-label">SMTP Passwort</label>
                                     <input type="text" class="form-control <?php if(session('errors.smtp_pass')) : ?>is-invalid<?php endif ?>" id="smtp_pass" name="smtp_pass" placeholder="*****">
+                                    <div class="invalid-feedback"><?= session('errors.smtp_pass') ?></div>
                                 </div>
 
                             </div>
@@ -107,6 +111,7 @@
                                     <label for="smtp_port" class="form-label">SMTP Port</label>
                                     <input type="text" class="form-control <?php if(session('errors.smtp_port')) : ?>is-invalid<?php endif ?>" id="smtp_port" name="smtp_port"
                                         value="<?=service('settings')->get('Email.SMTPPort'); ?>">
+                                    <div class="invalid-feedback"><?= session('errors.smtp_port') ?></div>
                                 </div>
 
                             </div>
