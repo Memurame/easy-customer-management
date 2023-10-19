@@ -1,6 +1,6 @@
 name: Code Checker
 
-on:
+on: 
   push:
     branches: [ main ]
   pull_request:
