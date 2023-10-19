@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fdeed681e8331626501c893753df4336",
+    "content-hash": "7138b368d0776dba1a4285f1dd4ace69",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -195,12 +195,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/codeigniter4/shield.git",
-                "reference": "0cd5f3f6e22b0bc7d6d18fd8e8e676db4c2cba6b"
+                "reference": "50fb634742c2b4379c51855ae7175d77c34eeac3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codeigniter4/shield/zipball/0cd5f3f6e22b0bc7d6d18fd8e8e676db4c2cba6b",
-                "reference": "0cd5f3f6e22b0bc7d6d18fd8e8e676db4c2cba6b",
+                "url": "https://api.github.com/repos/codeigniter4/shield/zipball/50fb634742c2b4379c51855ae7175d77c34eeac3",
+                "reference": "50fb634742c2b4379c51855ae7175d77c34eeac3",
                 "shasum": ""
             },
             "require": {
@@ -261,7 +261,7 @@
                 "slack": "https://codeigniterchat.slack.com",
                 "source": "https://github.com/codeigniter4/shield"
             },
-            "time": "2023-10-17T14:52:34+00:00"
+            "time": "2023-10-19T09:48:52+00:00"
         },
         {
             "name": "dasprid/enum",
@@ -4438,7 +4438,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.1",
+        "php": "^8.2",
         "ext-curl": "*"
     },
     "platform-dev": [],
