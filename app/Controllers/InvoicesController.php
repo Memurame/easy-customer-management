@@ -217,21 +217,20 @@ class InvoicesController extends BaseController
                 'CH'
             )
         );
-        $qrBill->setCreditorInformation(
-            QrBill\DataGroup\Element\CreditorInformation::create(
-                setting('Company.iban') // This is a special QR-IBAN. Classic IBANs will not be valid here.
-            )
-        );
-        $qrBill->setUltimateDebtor(
-            QrBill\DataGroup\Element\StructuredAddress::createWithStreet(
-                $invoice->address['name'],
-                $invoice->address['street'],
-                '',
-                $invoice->address['postcode'],
-                $invoice->address['city'],
-                'CH'
-            )
-        );
+
+        if(!empty($invoice->address['name']) AND !empty($invoice->address['street']) AND !empty($invoice->address['postcode']) AND !empty($invoice->address['city'])){
+            $qrBill->setUltimateDebtor(
+                QrBill\DataGroup\Element\StructuredAddress::createWithStreet(
+                    $invoice->address['name'],
+                    $invoice->address['street'],
+                    '',
+                    $invoice->address['postcode'],
+                    $invoice->address['city'],
+                    'CH'
+                )
+            );
+        }
+        
         $qrBill->setPaymentAmountInformation(
             QrBill\DataGroup\Element\PaymentAmountInformation::create(
                 'CHF',
@@ -246,33 +245,57 @@ class InvoicesController extends BaseController
             )
         );
 
-        $qrBill->setPaymentReference(
-            QrBill\DataGroup\Element\PaymentReference::create(
-                QrBill\DataGroup\Element\PaymentReference::TYPE_NON
-            )
-        );
-
-        try {
-            $qrBill->getQrCode()->writeFile(WRITEPATH . '/invoice/'.$invoice->id.'_qr.png');
-            $qrBill->getQrCode()->writeFile(WRITEPATH . '/invoice/' .$invoice->id. '_qr.svg');
-
-            $output = new QrBill\PaymentPart\Output\HtmlOutput\HtmlOutput($qrBill, 'en');
-
-            $html = $output
-                ->setPrintable(false)
-                ->getPaymentPart();
-        
-        } catch (Exception $e) {
-            foreach ($qrBill->getViolations() as $violation) {
-                //print $violation->getMessage()."\n";
-            }
-            exit;
+        if(setting('Company.invoice_qr') == 'iban'  AND !empty(setting('Company.iban'))){
+            $qrBill->setCreditorInformation(
+                QrBill\DataGroup\Element\CreditorInformation::create(
+                    setting('Company.iban')
+                )
+            );
+            $qrBill->setPaymentReference(
+                QrBill\DataGroup\Element\PaymentReference::create(
+                    QrBill\DataGroup\Element\PaymentReference::TYPE_NON
+                )
+            );
         }
+        elseif(setting('Company.invoice_qr') == 'qr-iban' AND !empty(setting('Company.qriban')) AND !empty(setting('Company.qriban_reference'))){
+            $qrBill->setCreditorInformation(
+                QrBill\DataGroup\Element\CreditorInformation::create(
+                    setting('Company.qriban')
+                )
+            );
+            $qrBill->setPaymentReference(
+                QrBill\DataGroup\Element\PaymentReference::create(
+                    QrBill\DataGroup\Element\PaymentReference::TYPE_QR,
+                    setting('Company.qriban_reference')
+                )
+            );
+        }
+        
+
+        if(setting('Company.invoice')){
+            try {
+                $qrBill->getQrCode()->writeFile(WRITEPATH . '/invoice/'.$invoice->id.'_qr.png');
+                $qrBill->getQrCode()->writeFile(WRITEPATH . '/invoice/' .$invoice->id. '_qr.svg');
+    
+                $output = new QrBill\PaymentPart\Output\HtmlOutput\HtmlOutput($qrBill, 'de');
+    
+                $html = $output
+                    ->setPrintable(false)
+                    ->getPaymentPart();
+            
+            } catch (Exception $e) {
+                foreach ($qrBill->getViolations() as $violation) {
+                    //print $violation->getMessage()."\n";
+                }
+                exit;
+            }
+        }
+        
 
 
         return view('invoice/export', [
             'invoice' => $invoice,
-            'qr' => $html
+            'qr' => $html ?? null
         ]);
     }
 

@@ -23,7 +23,7 @@ class Company extends BaseConfig
 
     public string $mwst;
 
-    public string $iban;
+    public string $iban = 'CH9300762011623852957';
 
     public bool $invoice = false;
 
