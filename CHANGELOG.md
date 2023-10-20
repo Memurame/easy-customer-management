@@ -4,6 +4,16 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [1.0.1](https://github.com/Memurame/easy-customer-management/compare/v1.0.0...v1.0.1) (2023-10-20)
+
+### Code Refactoring
+
+* Delete code checker workflow ([235f70](https://github.com/Memurame/easy-customer-management/commit/235f701026a8edf34137767ea441926e3df0587a))
+* Remove Shield unneeded filters from `$aliases` ([1c771d](https://github.com/Memurame/easy-customer-management/commit/1c771d3aa9b4f642cdc1f9cf4c8eab4e09ef3529))
+
+
+---
+
 ## [1.0.0](https://github.com/Memurame/easy-customer-management/compare/v0.0.2...v1.0.0) (2023-10-19)
 
 ### Bug Fixes
