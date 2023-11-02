@@ -4,6 +4,15 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [1.0.2](https://github.com/Memurame/easy-customer-management/compare/v1.0.1...v1.0.2) (2023-11-02)
+
+### Code Refactoring
+
+* Update Composer ([a7e6c6](https://github.com/Memurame/easy-customer-management/commit/a7e6c6e9fc711b24f182397db958f8c1b467767f))
+
+
+---
+
 ## [1.0.1](https://github.com/Memurame/easy-customer-management/compare/v1.0.0...v1.0.1) (2023-10-20)
 
 ### Code Refactoring
