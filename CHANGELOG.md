@@ -4,6 +4,15 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [1.0.3](https://github.com/Memurame/easy-customer-management/compare/v1.0.2...v1.0.3) (2023-11-14)
+
+### Code Refactoring
+
+* Add telefon2 to estos export ([7d421c](https://github.com/Memurame/easy-customer-management/commit/7d421cdf68d4a395fe29a71a602cf3ee90417d9f))
+
+
+---
+
 ## [1.0.2](https://github.com/Memurame/easy-customer-management/compare/v1.0.1...v1.0.2) (2023-11-02)
 
 ### Code Refactoring
