@@ -58,7 +58,8 @@ class ToolsEstosController extends BaseController
             'Bezahlt in %',
             'Zahldatum',
             'Status',
-            'KalahariId'
+            'KalahariId',
+            'Telefon2'
         ];
         fputcsv($fp, $title, ";");
 
@@ -109,12 +110,16 @@ class ToolsEstosController extends BaseController
 
             // Bei den Telefonnummern die (Sonder)Zeichen: / . - ' entfernen
             $adressen[$i]['Telefon 1'] = removeSpecialchar($adressen[$i]['Telefon 1']);
+            $adressen[$i]['Telefon 2'] = removeSpecialchar($adressen[$i]['Telefon 2']);
             $adressen[$i]['Mobiltelefon'] = removeSpecialchar($adressen[$i]['Mobiltelefon']);
 
             // Die Telefonnummer und handynummer so formatieren damit diese mit der Kalahariliste abgeglichen werden können
             // Diese sollten im Format sein wie im folgenden Beispiel: 319382280
             $telefon = removeSpecialchar($adressen[$i]['Telefon 1'], true);
             $telefon = (string)((int)($telefon));
+
+            $telefon2 = removeSpecialchar($adressen[$i]['Telefon 2'], true);
+            $telefon2 = (string)((int)($telefon2));
 
             $mobile = removeSpecialchar($adressen[$i]['Mobiltelefon'], true);
             $mobile = (string)((int)($mobile));
@@ -125,10 +130,11 @@ class ToolsEstosController extends BaseController
             //     ID     Telnummer     ID     Telnummer
             // Eine Telefnonnummer kann mehrere Kalahari Nummern haben
             $t1 = array_keys($kalahari, $telefon);
-            $t2 = array_keys($kalahari, $mobile);
+            $t2 = array_keys($kalahari, $telefon2);
+            $t3 = array_keys($kalahari, $mobile);
 
             // Die Beiden Ergebnisse, Telefonnummer und Mobile zusammenführen
-            $adressen[$i]['KalahariId'] = implode(",", array_merge($t1, $t2));
+            $adressen[$i]['KalahariId'] = implode(",", array_merge($t1, $t2, $t3));
 
 
             // Export der Mitgliederdaten aufbereiten
@@ -146,6 +152,7 @@ class ToolsEstosController extends BaseController
             $returnArray[$i][$title[11]] = $adressDate;
             $returnArray[$i][$title[12]] = $adressen[$i]['Status'];
             $returnArray[$i][$title[13]] = $adressen[$i]['KalahariId'];
+            $returnArray[$i][$title[14]] = $adressen[$i]['Telefon 2'];
 
             fputcsv($fp, $returnArray[$i], ";");
         }
