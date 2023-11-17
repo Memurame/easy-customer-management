@@ -14,6 +14,11 @@ Falls jemand interesse an diesem Projekt hat, darf er/sie es kopieren oder mithe
 - Nachrichten Funktion
 - Benutzerverwaltung mit detailierter Berechtigung
 
+## Geplante Funktionen
+- Zeiterfassung
+- Offerten
+- API
+
 
 ![Dashboard](screenshot.png)
 
@@ -27,7 +32,7 @@ Falls jemand interesse an diesem Projekt hat, darf er/sie es kopieren oder mithe
 
 ## Voraussetzungen
 
-- PHP 8.1 minimum
+- PHP 8.2 minimum
 - Composer
 - MariaDB or MySQL
 - Webserver
@@ -35,7 +40,7 @@ Falls jemand interesse an diesem Projekt hat, darf er/sie es kopieren oder mithe
 ## Installation
 
 ### Webserver
-Um ECM in deiner Produktionsumgebung zu installieren, verbinde dich über SSH mit deinem Server und wechsel zum Verzeichnis deines Webservers. Du musst Git und Composer installieren, damit alles funktioniert.
+Um ECM in deiner Produktionsumgebung zu installieren, verbinde dich über SSH mit deinem Server und wechsel zum Verzeichnis deines Webservers. Du musst Git und Composer installiert haben, damit alles funktioniert.
 
 ```console
 git clone https://github.com/Memurame/easy-customer-management.git
