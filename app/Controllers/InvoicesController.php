@@ -34,7 +34,7 @@ class InvoicesController extends BaseController
         } else if($filter == 'pending'){
             $invoices = $invoiceModel->where('paid', 2)->whereNotIn('customer_id', [0])->findAll();
         } else{
-            $invoices = $invoiceModel->findAll();
+            $invoices = $invoiceModel->whereNotIn('customer_id', [0])->findAll();
         }
 
 
