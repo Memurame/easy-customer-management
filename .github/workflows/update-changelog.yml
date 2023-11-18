@@ -1,32 +1,38 @@
-# .github/workflows/update-changelog.yaml
-name: "Update Changelog"
+name: Deploy
 
 on:
-  release:
-    types: [released]
+  push:
+    tags:
+      - v[0-9]+.[0-9]+.[0-9]+
 
 jobs:
-  update:
+  deploy:
     runs-on: ubuntu-latest
 
-    permissions:
-      contents: write
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.release.target_commitish }}
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
-      - name: Update Changelog
-        uses: stefanzweifel/changelog-updater-action@v1
+      - name: Update CHANGELOG
+        id: changelog
+        uses: requarks/changelog-action@v1
         with:
-          latest-version: ${{ github.event.release.tag_name }}
-          release-notes: ${{ github.event.release.body }}
+          token: ${{ github.token }}
+          tag: ${{ github.ref_name }}
 
-      - name: Commit updated CHANGELOG
-        uses: stefanzweifel/git-auto-commit-action@v5
+      - name: Create Release
+        uses: ncipollo/release-action@v1.12.0
         with:
-          branch: ${{ github.event.release.target_commitish }}
-          commit_message: Update CHANGELOG
+          allowUpdates: true
+          draft: false
+          makeLatest: true
+          name: ${{ github.ref_name }}
+          body: ${{ steps.changelog.outputs.changes }}
+          token: ${{ github.token }}
+
+      - name: Commit CHANGELOG.md
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          branch: main
+          commit_message: 'docs: update CHANGELOG.md for ${{ github.ref_name }} [skip ci]'
           file_pattern: CHANGELOG.md
