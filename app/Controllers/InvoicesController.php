@@ -240,8 +240,7 @@ class InvoicesController extends BaseController
 
         $qrBill->setAdditionalInformation(
             QrBill\DataGroup\Element\AdditionalInformation::create(
-                'Kunde: '.$invoice->customer_id,
-                'Rechnung: ' .$date->format('Y').'-'.$invoice->id
+                'RE-' . str_pad($invoice->id,5,0,STR_PAD_LEFT)
             )
         );
 

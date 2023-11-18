@@ -92,7 +92,7 @@ $date = ($invoice->invoice) ? new DateTime($invoice->invoice) : null;
                                     <?php endif;?>
                                     <tr>
                                         <td>Rechnungsnummer:</td>
-                                        <td><?= $date->format('Y') ?>-<?= $invoice->id ?></td>
+                                        <td>RE-<?=str_pad($invoice->id,5,0,STR_PAD_LEFT)?></td>
                                     </tr>
                                     <?php if($invoice->contact_name):?>
                                     <tr>
@@ -155,40 +155,45 @@ $date = ($invoice->invoice) ? new DateTime($invoice->invoice) : null;
 
                         <tfoot>
                             <tr>
-                                <td colspan="4" class="text-end">
+                                <td colspan="3" class="text-end">
                                     Total (netto)
                                 </td>
-                                <td class="text-end">CHF <?php echo $invoice->getTotal(false, false) ?></td>
+                                <td colspan="3" class="text-end">CHF <?php echo $invoice->getTotal(false, false) ?></td>
                             </tr>
                             <?php foreach($invoice->getMwst() as $mwst): ?>
                             <tr>
-                                <td colspan="4" class="text-end">
+                                <td colspan="3" class="text-end">
                                     Mehrwertsteuer (<?=$mwst['mwst']?>%)
                                 </td>
-                                <td class="text-end">CHF <?=$mwst['value']?></td>
+                                <td colspan="3" class="text-end">CHF <?=$mwst['value']?></td>
                             </tr>
                             <?php endforeach; ?>
                             <tr>
-                                <td colspan="4" class="text-end text-nowrap">
+                                <td colspan="3" class="text-end text-nowrap">
                                     <strong>Rechnungsbetrag</strong>
                                 </td>
-                                <td class="text-end">
+                                <td colspan="3" class="text-end">
                                     <strong>CHF <?php echo $invoice->getTotal(true, true) ?></strong>
                                 </td>
                             </tr>
                         </tfoot>
                     </table>
-                </div>
-                <div class="print-invoice">
-                    <?=$qr?>
-                </div>
+                    <strong>Zahlungskondition:</strong> Zahlbar innerhalb von <?=setting('Company.payment_deadline') ?> Tagen<br>
+                    <?php if(setting('Company.invoice') == 2): ?>
+                    <div class="print-invoice">
+                        <?=$qr?>
+                    </div>
+                    <?php elseif(setting('Company.invoice') == 1): ?>
+                    <strong>Adresse:</strong> <?=setting('Company.name') ?>, <?=setting('Company.street') ?>, <?=setting('Company.postcode') ?> <?=setting('Company.city') ?><br>
+                    <strong>Konto:</strong> <?=setting('Company.iban') ?>
+                    <?php endif; ?>
 
+                </div>
             </div>
+
         </div>
-
     </div>
-</div>
 
 
 
-<?= $this->endSection() ?>
+    <?= $this->endSection() ?>

@@ -25,7 +25,7 @@ class Company extends BaseConfig
 
     public string $iban = 'CH9300762011623852957';
 
-    public bool $invoice = false;
+    public int $invoice = 0;
 
     public string $invoice_qr = 'iban';
 
