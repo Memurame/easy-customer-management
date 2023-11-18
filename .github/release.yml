@@ -1,16 +1,23 @@
-# .github/release.yml
-
 changelog:
   exclude:
-    labels:
-      - ignore-for-release
+    authors:
+      - dependabot
   categories:
-    - title: Breaking Changes 🛠
+    - title: Breaking Changes
       labels:
-        - breaking_changes
-    - title: Exciting New Features 🎉
+        - 'breaking change'
+    - title: Fixed Bugs
       labels:
-        - feat
-    - title: Other Changes
+        - bug
+    - title: New Features
+      labels:
+        - 'new feature'
+    - title: Enhancements
+      labels:
+        - enhancement
+    - title: Refactoring
+      labels:
+        - refactor
+    - title: Others
       labels:
         - "*"
