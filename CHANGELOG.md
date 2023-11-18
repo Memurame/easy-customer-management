@@ -4,6 +4,17 @@
 All notable changes to this project will be documented in this file.
 
 <!--- END HEADER -->
+## 1.0.5 - 2023-11-18
+
+<!-- Release notes generated using configuration in .github/release.yml at main -->
+### What's Changed
+
+#### Others
+
+- Adjustments during installation via git clone by @Memurame in https://github.com/Memurame/easy-customer-management/pull/12
+
+**Full Changelog**: https://github.com/Memurame/easy-customer-management/compare/1.0.4...1.0.5
+
 ## 1.0.4 - 2023-11-18
 
 <!-- Release notes generated using configuration in .github/release.yml at main -->
