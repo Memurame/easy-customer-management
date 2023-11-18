@@ -41,9 +41,10 @@ Falls jemand interesse an diesem Projekt hat, darf er/sie es kopieren oder mithe
 
 ### Webserver
 Um ECM in deiner Produktionsumgebung zu installieren, verbinde dich über SSH mit deinem Server und wechsel zum Verzeichnis deines Webservers. Du musst Git und Composer installiert haben, damit alles funktioniert.
+Ersetze `[CURRENT RELEASE]` mit der letzten Release Version (https://github.com/Memurame/easy-customer-management/releases).
 
 ```console
-git clone https://github.com/Memurame/easy-customer-management.git
+git clone -b [CURRENT RELEASE] --depth 1 https://github.com/Memurame/easy-customer-management.git
 cd easy-customer-management/
 ```
 
@@ -76,9 +77,11 @@ php spark ecm:install
 ## Update
 
 **Important:** Erstelle immer eine Sicherungskopie deiner Website, bevor du eine Aktualisierung machst.
+Ersetze `[CURRENT RELEASE]` mit der letzten Release Version (https://github.com/Memurame/easy-customer-management/releases).
 
 ```colsole
-git pull
+git fetch --tags
+git checkout [CURRENT RELEASE]
 composer install
 ```
 
