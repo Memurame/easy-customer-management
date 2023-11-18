@@ -66,7 +66,7 @@ Installation starten:
 ```console
 php spark ecm:install
 ```
-
+  
 **Mögliche Parameter für die Installation**
 
 `-q` Installation ohne Eingabe<br>
