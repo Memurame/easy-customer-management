@@ -138,9 +138,11 @@
                                 <div class="col-md-6">
                                     <label for="invoice" class="form-label">Einzahlungsschein an Rechnunung anhängen?</label>
                                     <select name="invoice" class="form-select tomselect-default">
-                                        <option value="1" <?=(service('settings')->get('Company.invoice') == true) ?'selected':'' ?>>Ja, anhängen
+                                        <option value="2" <?=(service('settings')->get('Company.invoice') == 2) ?'selected':'' ?>>Ja, QR-Rechnung anhängen
                                         </option>
-                                        <option value="0" <?=(service('settings')->get('Company.invoice') == false) ?'selected':'' ?>>Nein, nicht anhängen
+                                        <option value="1" <?=(service('settings')->get('Company.invoice') == 1) ?'selected':'' ?>>Nein, nur Text anzeigen
+                                        </option>
+                                        <option value="0" <?=(service('settings')->get('Company.invoice') == 0) ?'selected':'' ?>>Keine Info anzeigen
                                         </option>
                                     </select>
                                 </div>

@@ -34,7 +34,7 @@ class InvoicesController extends BaseController
         } else if($filter == 'pending'){
             $invoices = $invoiceModel->where('paid', 2)->whereNotIn('customer_id', [0])->findAll();
         } else{
-            $invoices = $invoiceModel->findAll();
+            $invoices = $invoiceModel->whereNotIn('customer_id', [0])->findAll();
         }
 
 
@@ -240,8 +240,7 @@ class InvoicesController extends BaseController
 
         $qrBill->setAdditionalInformation(
             QrBill\DataGroup\Element\AdditionalInformation::create(
-                'Kunde: '.$invoice->customer_id,
-                'Rechnung: ' .$date->format('Y').'-'.$invoice->id
+                'RE-' . str_pad($invoice->id,5,0,STR_PAD_LEFT)
             )
         );
 
