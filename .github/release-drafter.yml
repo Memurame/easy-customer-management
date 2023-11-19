@@ -4,11 +4,13 @@ categories:
     - title: '🚀 Features'
       labels:
           - 'new feature'
-    - title: 'Enhancements'
+    - title: 'Changes'
       labels:
+          - 'refactor'
           - 'enhancement'
           - 'translation'
           - 'style'
+          - 'documentation'
     - title: '🐛 Bug Fixes'
       labels:
           - 'bug'
