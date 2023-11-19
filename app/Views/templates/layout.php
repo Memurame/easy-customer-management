@@ -478,9 +478,7 @@
                                         Hirter</a> | Design von <a href="https://tabler.io/" target="_blank">Tabler</a>
                                 </li>
                                 <li class="list-inline-item">
-                                    <a href="<?= base_url(
-                                        route_to("changelog"),
-                                    ) ?>" class="link-secondary" rel="noopener">
+                                    <a href="https://github.com/Memurame/easy-customer-management/blob/main/CHANGELOG.md" class="link-secondary" rel="noopener">
                                         <?= composerInfo()['version'] ?>
                                     </a>
                                 </li>
