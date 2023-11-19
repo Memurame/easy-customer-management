@@ -26,6 +26,7 @@ exclude-labels:
     - 'invalid'
     - 'wontfix'
     - 'release'
+    - 'other'
 exclude-contributors:
     - 'dependabot'
 change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
