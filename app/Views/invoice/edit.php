@@ -128,6 +128,13 @@
                                 value="<?=$invoice->contact_mail ?>">
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="alert alert-info">
+                                Solltest du in den Zusatzinfos Hintergrundfarben benutzen, muss dies beim Drucken seperat im Browser eingestellt werden damit die Farben gedruckt werden.
+                            </div>
+                        </div>
+                    </div>
                     <div class="row mb-3">
                         <div class="col-12">
                             <label for="notes_top" class="form-label">Zusatzinfo Oben</label>
@@ -140,6 +147,7 @@
                             <textarea class="form-control" rows="5" name="notes_bottom" id="notes_bottom"><?=$invoice->notes_bottom ?></textarea>
                         </div>
                     </div>
+                    <hr>
                     <div class="row mb-3">
                         <div class="col-12">
                             <label for="notes" class="form-label">Rechnungsinfo (Intern)</label>
