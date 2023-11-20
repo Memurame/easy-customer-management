@@ -49,6 +49,33 @@ $('.tinymce').tinymce({
     }
 );
 
+$('#notes_top').tinymce({
+    height: 200,
+    menubar: false,
+    statusbar: false,
+    plugins: [
+        'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+        'anchor', 'searchreplace', 'visualblocks', 'fullscreen',
+        'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
+    ],
+    toolbar: 'undo redo | bold italic backcolor | ' +
+        'removeformat | help',
+    content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif; font-size: 14px; -webkit-font-smoothing: antialiased; }'
+});
+$('#notes_bottom').tinymce({
+    height: 200,
+    menubar: false,
+    statusbar: false,
+    plugins: [
+        'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+        'anchor', 'searchreplace', 'visualblocks', 'fullscreen',
+        'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
+    ],
+    toolbar: 'undo redo | bold italic backcolor | ' +
+        'removeformat | help',
+    content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif; font-size: 14px; -webkit-font-smoothing: antialiased; }'
+});
+
 $("#mail_template").change(function() {
     if($("#mail_template option:selected").val() > 0) {
         window.location.href = rootUrl + 'mail/'+ $("#mail_template option:selected").val()

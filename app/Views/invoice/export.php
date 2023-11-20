@@ -122,6 +122,11 @@ $date = ($invoice->invoice) ? new DateTime($invoice->invoice) : null;
                     <div class="row subtitle">
                         <span contenteditable="true"><?=$invoice->description?></span>
                     </div>
+                    <?php if(!empty($invoice->notes_top)): ?>
+                    <div class="row notes">
+                        <?=$invoice->notes_top?>
+                    </div>
+                    <?php endif; ?>
                     <table class="table table-transparent table-responsive print-table">
                         <thead>
                             <tr>
@@ -178,6 +183,11 @@ $date = ($invoice->invoice) ? new DateTime($invoice->invoice) : null;
                             </tr>
                         </tfoot>
                     </table>
+                    <?php if(!empty($invoice->notes_bottom)): ?>
+                    <div class="row notes">
+                        <?=$invoice->notes_bottom?>
+                    </div>
+                    <?php endif; ?>
                     <strong>Zahlungskondition:</strong> Zahlbar innerhalb von <?=setting('Company.payment_deadline') ?> Tagen<br>
                     <?php if(setting('Company.invoice') == 2): ?>
                     <div class="print-invoice">

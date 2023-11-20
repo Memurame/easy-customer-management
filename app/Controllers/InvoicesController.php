@@ -128,6 +128,8 @@ class InvoicesController extends BaseController
                 return redirect()->back()->withInput()->with('errors', $this->validator->getErrors())->with('msg_error', 'Bitte alle erforderlichen Felder ausfüllen');
             }
 
+            $parser = new \Parsedown();
+
             $invoice->invoice = $this->request->getPost('invoice') ?: null;
             $invoice->description = $this->request->getPost('description');
             $invoice->renew = $this->request->getPost('renew');
@@ -137,10 +139,14 @@ class InvoicesController extends BaseController
             $invoice->website_id = $this->request->getPost('website_id');
             $invoice->paid = $this->request->getPost('paid');
             $invoice->amount = $this->request->getPost('amount');
+            $invoice->notes_top = $this->request->getPost("notes_top");
+            $invoice->notes_bottom = $this->request->getPost("notes_bottom");
             $invoice->notes = $this->request->getPost('notes');
             $invoice->contact_name = $this->request->getPost('contact_name');
             $invoice->contact_phone = $this->request->getPost('contact_phone');
             $invoice->contact_mail = $this->request->getPost('contact_mail');
+
+
 
 
             if($invoice->hasChanged()){

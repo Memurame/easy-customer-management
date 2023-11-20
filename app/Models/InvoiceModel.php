@@ -19,6 +19,8 @@ class InvoiceModel extends Model
         "renew",
         "renew_interval",
         "notes",
+        "notes_top",
+        "notes_bottom",
         "description",
         "amount",
         "renewed",

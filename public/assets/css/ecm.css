@@ -52,6 +52,11 @@ table.company-info tbody tr td:nth-child(1){
     font-weight: bold;
 }
 
+.print-body .notes{
+    margin-bottom: 12px;
+    font-size: 14px;
+}
+
 .print-body table{
    
 }
