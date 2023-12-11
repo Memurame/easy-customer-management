@@ -116,9 +116,10 @@
                             </div>
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label for="iban" class="form-label">IBAN-Nummer <span class="text-danger">*</span></label>
+                                    <label for="iban" class="form-label">IBAN-Nummer</label>
                                     <input type="text" class="form-control <?php if(session('errors.iban')) : ?>is-invalid<?php endif ?>" id="iban" name="iban"
                                         value="<?=service('settings')->get('Company.iban'); ?>">
+                                    <small class="text-muted">Zurzeit nur Schweizer (CH) IBAN möglich.</small>
                                     <div class="invalid-feedback"><?= session('errors.iban') ?></div>
                                 </div>
 
