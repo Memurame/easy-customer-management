@@ -192,13 +192,17 @@ $date = ($invoice->invoice) ? new DateTime($invoice->invoice) : null;
                     <strong>Zahlungskondition:</strong> Zahlbar innerhalb von <?=setting('Company.payment_deadline') ?> Tagen<br>
                     <?php endif; ?>
 
-                    <?php if(setting('Company.invoice') == 2): ?>
+                    <?php if(setting('Company.invoice') == 2 AND $qr): ?>
                     <div class="print-invoice">
                         <?=$qr?>
                     </div>
                     <?php elseif(setting('Company.invoice') == 1): ?>
                     <strong>Adresse:</strong> <?=setting('Company.name') ?>, <?=setting('Company.street') ?>, <?=setting('Company.postcode') ?> <?=setting('Company.city') ?><br>
+                    <?php if(setting('Company.iban')): ?>
                     <strong>Konto:</strong> <?=setting('Company.iban') ?>
+                    <?php else: ?>
+                    <strong class="text-bg-danger">Keine IBAN hinterlegt</strong>
+                    <?php endif; ?>
                     <?php endif; ?>
 
                 </div>

@@ -53,8 +53,7 @@ class SettingsController extends BaseController
                 'company_postcode' => 'required',
                 'company_city' => 'required',
                 'company_phone' => 'required',
-                'company_mail' => 'required',
-                'iban' => 'required'
+                'company_mail' => 'required'
 
             ];
 
