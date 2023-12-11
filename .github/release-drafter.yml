@@ -1,15 +1,16 @@
 name-template: '$RESOLVED_VERSION 🌈'
 tag-template: '$RESOLVED_VERSION'
 categories:
-    - title: '🚀 Features'
+    - title: '🚀 Enhancement'
       labels:
           - 'new feature'
-    - title: 'Changes'
-      labels:
+          - 'feature request'
           - 'refactor'
           - 'enhancement'
           - 'translation'
           - 'style'
+    - title: '📖 Documentation'
+      labels:
           - 'documentation'
     - title: '🐛 Bug Fixes'
       labels:
