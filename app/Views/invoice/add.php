@@ -151,6 +151,14 @@
                             <textarea class="form-control" rows="5" name="notes_bottom" id="notes_bottom"><?=old('notes_bottom') ?></textarea>
                         </div>
                     </div>
+                    <div class=" row mb-3">
+                        <div class="col-4">
+                            <label class="form-check">
+                                <input class="form-check-input" type="checkbox" name="payment_terms" id="payment_terms" value="1" checked>
+                                <span class="form-check-label">Zahlungskondition anzeigen</span>
+                            </label>
+                        </div>
+                    </div>
                     <hr>
                     <div class="row mb-3">
                         <div class="col-12">
