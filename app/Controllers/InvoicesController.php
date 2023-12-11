@@ -145,6 +145,7 @@ class InvoicesController extends BaseController
             $invoice->contact_name = $this->request->getPost('contact_name');
             $invoice->contact_phone = $this->request->getPost('contact_phone');
             $invoice->contact_mail = $this->request->getPost('contact_mail');
+            $invoice->payment_terms = $this->request->getPost('payment_terms');
 
 
 

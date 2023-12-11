@@ -188,7 +188,10 @@ $date = ($invoice->invoice) ? new DateTime($invoice->invoice) : null;
                         <?=$invoice->notes_bottom?>
                     </div>
                     <?php endif; ?>
+                    <?php if(!empty($invoice->payment_terms)): ?>
                     <strong>Zahlungskondition:</strong> Zahlbar innerhalb von <?=setting('Company.payment_deadline') ?> Tagen<br>
+                    <?php endif; ?>
+
                     <?php if(setting('Company.invoice') == 2): ?>
                     <div class="print-invoice">
                         <?=$qr?>

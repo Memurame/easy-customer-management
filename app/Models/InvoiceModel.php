@@ -26,7 +26,8 @@ class InvoiceModel extends Model
         "renewed",
         "contact_name",
         "contact_phone",
-        "contact_mail"
+        "contact_mail",
+        "payment_terms"
     ];
 
     protected $primaryKey = 'id';
