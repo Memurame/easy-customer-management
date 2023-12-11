@@ -164,7 +164,7 @@ class CustomersController extends BaseController
             $customer->addressnumber = $this->request->getPost("addressnumber");
             $customer->customername = $this->request->getPost("customername");
             $customer->mail = $this->request->getPost("mail");
-            $customer->phone = $this->request->getPost("tel");
+            $customer->phone = $this->request->getPost("phone");
             $customer->street = $this->request->getPost("street");
             $customer->postcode = $this->request->getPost("postcode");
             $customer->city = $this->request->getPost("city");
