@@ -64,6 +64,7 @@
                                 <option value="0" <?=($position->mwst == '0') ? 'selected' : ''?>>0%</option>
                                 <option value="2.5" <?=($position->mwst == '2.5') ? 'selected' : ''?>>2.5%</option>
                                 <option value="7.7" <?=($position->mwst == '7.7') ? 'selected' : ''?>>7.7%</option>
+                                <option value="8.1" <?=($position->mwst == '8.1') ? 'selected' : ''?>>8.1%</option>
                             </select>
                         </div>
                     </div>
