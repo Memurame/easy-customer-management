@@ -137,25 +137,25 @@
         },
         {
             "name": "codeigniter4/settings",
-            "version": "v2.1.2",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/codeigniter4/settings.git",
-                "reference": "854224baa190723f5f22d9dcc32cdb37aeaf79cd"
+                "reference": "2748f2b4572d44a940f98c31847d65272cac5666"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codeigniter4/settings/zipball/854224baa190723f5f22d9dcc32cdb37aeaf79cd",
-                "reference": "854224baa190723f5f22d9dcc32cdb37aeaf79cd",
+                "url": "https://api.github.com/repos/codeigniter4/settings/zipball/2748f2b4572d44a940f98c31847d65272cac5666",
+                "reference": "2748f2b4572d44a940f98c31847d65272cac5666",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.4 || ^8.0"
             },
             "require-dev": {
-                "codeigniter4/devkit": "^1.0",
+                "codeigniter4/devkit": "^1.1.2",
                 "codeigniter4/framework": "^4.2.3",
-                "rector/rector": "0.16.0"
+                "rector/rector": "0.18.13"
             },
             "type": "library",
             "autoload": {
@@ -186,9 +186,9 @@
             ],
             "support": {
                 "issues": "https://github.com/codeigniter4/settings/issues",
-                "source": "https://github.com/codeigniter4/settings/tree/v2.1.2"
+                "source": "https://github.com/codeigniter4/settings/tree/v2.2.0"
             },
-            "time": "2023-06-02T07:15:16+00:00"
+            "time": "2024-01-06T07:10:58+00:00"
         },
         {
             "name": "codeigniter4/shield",
