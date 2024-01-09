@@ -73,6 +73,7 @@ class AuthGroups extends ShieldAuthGroups
         "invoice.template" => "Rechnungsposition Vorlagen verwalten",
         "tool.menu" => "Zeigt das Tools Menu an",
         "tool.estos" => "Estos Telefonliste",
+        "tool.testimonial" => "Testimonial",
         "profile.index" => "Kann sein Profil bearbeiten",
         "profile.password" => "Kann sein Passswortändern",
         "message.index" => "Nachrichten Übersicht",

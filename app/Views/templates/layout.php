@@ -262,12 +262,13 @@
                                         Tools
                                     </span>
                                 </a>
-                                <?php if (
-                                    auth()
-                                        ->user()
-                                        ->can("tool.estos")
-                                ): ?>
+
                                 <div class="dropdown-menu">
+                                    <?php if (
+                                        auth()
+                                            ->user()
+                                            ->can("tool.estos")
+                                    ): ?>
                                     <a class="dropdown-item <?= current_page(
                                         route_to("estos.index"),
                                     )
@@ -277,8 +278,26 @@
                                         ) ?>" rel="noopener">
                                         Estos Telefonliste <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
                                     </a>
+                                    <?php endif; ?>
+                                    <?php if (
+                                        auth()
+                                            ->user()
+                                            ->can("tool.testimonial")
+                                    ): ?>
+
+                                    <a class="dropdown-item <?= current_page(
+                                        route_to("testimonial.index"),
+                                    )
+                                        ? "active"
+                                        : "" ?>" href="<?= base_url(
+                                            route_to("testimonial.index"),
+                                        ) ?>" rel="noopener">
+                                        Testimonial <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+                                    </a>
+                                    <?php endif; ?>
                                 </div>
-                                <?php endif; ?>
+
+
                             </li>
                             <?php endif; ?>
                             <?php if (
