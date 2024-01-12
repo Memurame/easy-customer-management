@@ -140,7 +140,7 @@ $date = ($invoice->invoice) ? new DateTime($invoice->invoice) : null;
                         <tbody>
                             <?php foreach($invoice->getPositions() as $position): ?>
                             <tr>
-                                <td class="text-start">1</td>
+                                <td class="text-start"><?=$position->position?></td>
                                 <td>
                                     <p class="strong mb-1"><?=$position->title?></p>
                                     <div class="text-secondary"><?=$position->description?></div>
