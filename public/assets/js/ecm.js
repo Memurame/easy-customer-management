@@ -130,6 +130,13 @@ $("#receiver-select").change(function() {
     }
 
 });
+
+$(".copy-to-clipboard" ).click(function(e) {
+    e.preventDefault()
+
+    navigator.clipboard.writeText($(this).data('text'));
+});
+
 $(".action-copyinvoicepos" ).click(function(e) {
     e.preventDefault()
     $.ajax({
@@ -584,6 +591,39 @@ $(".delete-invoicepos" ).click(function() {
                         })
                     }
                 }
+            });
+        }
+    })
+});
+
+$(".delete-testimonial" ).click(function() {
+    var row = $(this).closest('tr');
+    Swal.fire({
+        title: 'Löschen',
+        text: "Möchtest du dieser Testimonial Eintrag wirklich löschen?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        cancelButtonText: 'Abbrechen',
+        confirmButtonText: 'Löschen'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: rootUrl + '/api/0/testimonial/' + $(this).data('id'),
+                type: 'DELETE',
+                dataType: 'json',
+                statusCode: {
+                    200: function() {
+                        row.remove();
+                    },
+                    404: function() {
+                        Swal.fire({
+                            icon: 'error',
+                            text: response.responseJSON.messages.error,
+                        })
+                    }
+                },
             });
         }
     })

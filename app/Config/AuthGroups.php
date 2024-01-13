@@ -73,12 +73,16 @@ class AuthGroups extends ShieldAuthGroups
         "invoice.template" => "Rechnungsposition Vorlagen verwalten",
         "tool.menu" => "Zeigt das Tools Menu an",
         "tool.estos" => "Estos Telefonliste",
-        "tool.testimonial" => "Testimonial",
         "profile.index" => "Kann sein Profil bearbeiten",
         "profile.password" => "Kann sein Passswortändern",
         "message.index" => "Nachrichten Übersicht",
         "message.add" => "Nachrichten senden",
         "mail.index" => "Mails anzeigen",
+        "testimonial.index" => "Testimonial anzeigen",
+        "testimonial.edit" => "Testimonial bearbeiten",
+        "testimonial.add" => "Testimonial hinzufügen",
+        "testimonial.show" => "Testimonials anzeigen",
+        "testimonial.forms" => "Testimonial Formulare verwalten",
     ];
 
     /**

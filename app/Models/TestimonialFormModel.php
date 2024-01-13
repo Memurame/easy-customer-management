@@ -3,28 +3,24 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
-use App\Entities\Testimonial;
+use App\Entities\TestimonialForm;
 
-class TestimonialModel extends Model
+class TestimonialFormModel extends Model
 {
-    protected $table            = 'testimonials';
+    protected $table            = 'testimonials_forms';
     protected $db;
     protected $allowedFields    = [
-        "firstname",
-        "lastname",
-        "email",
-        "form",
-        "data",
-        "notes",
+        "token",
+        "title",
+        "description",
         "active",
-        "token_view",
-        "token_edit"
+        "data",
     ];
 
     protected $primaryKey = 'id';
     protected $useAutoIncrement = true;
 
-    protected $returnType = Testimonial::class;
+    protected $returnType = TestimonialForm::class;
     protected $useSoftDeletes = false;
 
     public function __construct()

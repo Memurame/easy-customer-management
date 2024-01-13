@@ -17,6 +17,33 @@ $routes->get("dashboard", "HomeController::index", [
     "filter" => "permission:home.index",
 ]);
 
+$routes->group("testimonial", static function ($routes) {
+    $routes->get("", "TestimonialController::index", [
+        "as" => "testimonial.index",
+        "filter" => "permission:testimonial.index",
+    ]);
+    $routes->match(["get", "post"], "register", "TestimonialController::form", [
+        "as" => "testimonial.register"
+    ]);
+    $routes->match(["get", "post"], "edit/(:num)", "TestimonialController::edit/$1", [
+        "as" => "testimonial.edit",
+        "filter" => "permission:testimonial.edit",
+    ]);
+    $routes->match(["get", "post"], "show/(:num)", "TestimonialController::view/$1", [
+        "as" => "testimonial.show",
+        "filter" => "permission:testimonial.show",
+    ]);
+    
+    $routes->get("form/", "TestimonialFormController::index", [
+        "as" => "testimonialForm.index",
+        "filter" => "permission:testimonial.forms",
+    ]);
+    $routes->match(["get", "post"], "form/add", "TestimonialFormController::add", [
+        "as" => "testimonialForm.add",
+        "filter" => "permission:testimonial.forms",
+    ]);
+});
+
 $routes->get("changelog", "HomeController::changelog", [
     "as" => "changelog",
     "filter" => "permission:home.index",
@@ -329,6 +356,10 @@ $routes->group("api/0", static function ($routes) {
     /*
      * Routes with NEW API
      */
+
+     $routes->delete("testimonial/(:num)", 'apiTestimonialController::delete/$1', [
+        "filter" => "permission:testimonial.delete",
+    ]);
 
     $routes->delete("website/(:num)", 'apiWebsitesController::delete/$1', [
         "filter" => "permission:website.delete",

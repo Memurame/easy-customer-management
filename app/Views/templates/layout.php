@@ -282,7 +282,7 @@
                                     <?php if (
                                         auth()
                                             ->user()
-                                            ->can("tool.testimonial")
+                                            ->can("testimonial.index")
                                     ): ?>
 
                                     <a class="dropdown-item <?= current_page(

@@ -1,0 +1,20 @@
+sections:
+  felder1:
+    title: "Felder"
+    fields:
+      OS:
+        title: "Welches OS"
+        type: "select"
+        desc: "Hier eine Beschreibung"
+        option:
+          0: "Windows"
+          1: "Linux"
+          2: "OSX"
+        required: true
+        outerClass: "col-md-6"
+      Name:
+        title: "Wie gehts?"
+        type: "text"
+        desc: "Hier eine Beschreibung"
+        required: true
+        outerClass: "col-md-6"
