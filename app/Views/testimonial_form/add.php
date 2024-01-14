@@ -35,8 +35,12 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-12">
-                            <label for="json" class="form-label">Formular</label>
-                            <textarea class="form-control" rows="20" id="json" name="json"><?=old('json') ?></textarea>
+                            <div class="alert alert-info">
+                                Beim erstellen eines Formulars ist ein Beispiel Code bereits zu sehen.<br>
+                                Dieser dient als Hilfe um alle möglichen Elemente zu sehen.
+                            </div>
+                            <div id="jsoneditor" style="width: 100%; height: 800px;"></div>
+                            <input type="hidden" name="json" id="json">
                         </div>
                     </div>
                 </div>

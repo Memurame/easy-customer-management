@@ -3,6 +3,72 @@ var currentUrl =  document.querySelector('meta[name="currentUrl"]').getAttribute
 var csrfName = document.getElementById('csrf_security').getAttribute('name')
 var csrfHash = document.getElementById('csrf_security').getAttribute('value')
 
+if($('#jsoneditor').length){
+    const options = {
+        onChangeText: function (json) {
+            let valueJSON = document.getElementById("json");
+            valueJSON.value = json;
+        },
+        modes: ['text', 'code', 'tree', 'view'],
+        mode: 'tree',
+        ace: ace
+    }
+    const editor = new JSONEditor(document.getElementById("jsoneditor"), options)
+    
+    
+    const initialJson = {
+        "sections": {
+            "exampleSection1": {
+                "title": "Section1",
+                "fields": {
+                    "os": {
+                        "title": "Welches OS",
+                        "type": "select",
+                        "desc": "Hier eine Beschreibung",
+                        "option": {
+                            "0": "Windows",
+                            "1": "Linux",
+                            "2": "OSX"
+                        },
+                        "required": true,
+                        "outerClass": "col-md-6"
+                    },
+                    "zustand": {
+                        "title": "Wie geht es Dir heute?",
+                        "type": "text",
+                        "desc": "Kurzer Text über deinen Zustandg",
+                        "required": true,
+                        "outerClass": "col-md-6"
+                        }
+                }
+            },
+            "exampleSection2": {
+                "title": "Section2",
+                "fields": {
+                    "about": {
+                        "title": "Deine Geschichte",
+                        "type": "textarea",
+                        "outerClass": "col-md-12"
+                    },
+                    "transport": {
+                        "title": "Velotransport",
+                        "type": "checkbox",
+                        "option": {
+                            "0": "Ich kann mein Velo nicht selbst transportieren"
+                        },
+                        "required": false,
+                        "outerClass": "col-md-12"
+                    }
+                }
+            }
+        }
+    }
+    editor.set(initialJson)
+    editor.expandAll()
+}
+
+
+
 $('#table-customer').DataTable({
     "pageLength": 100,
     "lengthMenu": [ [50, 100, 200, -1], [50, 100, 200, "All"] ]});

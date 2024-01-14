@@ -1,8 +1,8 @@
 sections:
-  felder1:
-    title: "Felder"
+  examkpleSection1:
+    title: "Section1"
     fields:
-      OS:
+      os:
         title: "Welches OS"
         type: "select"
         desc: "Hier eine Beschreibung"
@@ -12,9 +12,26 @@ sections:
           2: "OSX"
         required: true
         outerClass: "col-md-6"
-      Name:
-        title: "Wie gehts?"
+      zustand:
+        title: "Wie geht es Dir heute?"
         type: "text"
-        desc: "Hier eine Beschreibung"
+        desc: "Kurzer Text über deinen Zustandg"
         required: true
         outerClass: "col-md-6"
+  examkpleSection2:
+    title: "Section2"
+    fields:
+      about:
+        title: "Deine Geschichte"
+        type: "textarea"
+        outerClass: "col-md-12"
+      transport:
+        title: "Velotransport"
+        type: "checkbox"
+        option:
+          0: "Ich kann mein Velo nicht selbst transportieren"
+        required: false
+        outerClass: "col-md-12"
+
+        
+  
