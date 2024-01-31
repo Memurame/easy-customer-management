@@ -42,6 +42,10 @@ $routes->group("testimonial", static function ($routes) {
         "as" => "testimonialForm.add",
         "filter" => "permission:testimonial.forms",
     ]);
+    $routes->match(["get", "post"], "form/(:num)/edit", "TestimonialFormController::edit/$1", [
+        "as" => "testimonialForm.edit",
+        "filter" => "permission:testimonial.forms",
+    ]);
 });
 
 $routes->get("changelog", "HomeController::changelog", [
@@ -359,6 +363,10 @@ $routes->group("api/0", static function ($routes) {
 
      $routes->delete("testimonial/(:num)", 'apiTestimonialController::delete/$1', [
         "filter" => "permission:testimonial.delete",
+    ]);
+
+    $routes->delete("testimonial/form/(:num)", 'apiTestimonialFormController::delete/$1', [
+        "filter" => "permission:testimonial.forms",
     ]);
 
     $routes->delete("website/(:num)", 'apiWebsitesController::delete/$1', [

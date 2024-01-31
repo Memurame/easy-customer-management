@@ -8,7 +8,7 @@
                     Testimonial
                 </div>
                 <h2 class="page-title">
-                    <?=$testimonial->firstname?> <?=$testimonial->lastname?>
+                    <?=$testimonial->firstname?> <?=$testimonial->lastname?> &nbsp;<span class="badge badge-outline text-blue" style="font-size: 10px">bearbeitungs Modus</span>
                 </h2>
             </div>
         </div>

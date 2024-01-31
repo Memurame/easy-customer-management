@@ -4,9 +4,9 @@ var csrfName = document.getElementById('csrf_security').getAttribute('name')
 var csrfHash = document.getElementById('csrf_security').getAttribute('value')
 
 if($('#jsoneditor').length){
+    let valueJSON = document.getElementById("json");
     const options = {
         onChangeText: function (json) {
-            let valueJSON = document.getElementById("json");
             valueJSON.value = json;
         },
         modes: ['text', 'code', 'tree', 'view'],
@@ -63,7 +63,14 @@ if($('#jsoneditor').length){
             }
         }
     }
-    editor.set(initialJson)
+    if(valueJSON.value){
+        editor.set(valueJSON.value)
+        console.log('Exist value');
+    } else {
+        editor.set(initialJson)
+        valueJSON.value = JSON.stringify(initialJson);
+        console.log('No value');
+    }
     editor.expandAll()
 }
 
@@ -677,6 +684,39 @@ $(".delete-testimonial" ).click(function() {
         if (result.isConfirmed) {
             $.ajax({
                 url: rootUrl + '/api/0/testimonial/' + $(this).data('id'),
+                type: 'DELETE',
+                dataType: 'json',
+                statusCode: {
+                    200: function() {
+                        row.remove();
+                    },
+                    404: function() {
+                        Swal.fire({
+                            icon: 'error',
+                            text: response.responseJSON.messages.error,
+                        })
+                    }
+                },
+            });
+        }
+    })
+});
+
+$(".delete-testimonialform" ).click(function() {
+    var row = $(this).closest('tr');
+    Swal.fire({
+        title: 'Löschen',
+        text: "Möchtest du doeses Formular wirklich löschen? Alle Testimonial welche mit diesem Formular erstellt wurden, können danach nicht mehr geöffnet werden.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        cancelButtonText: 'Abbrechen',
+        confirmButtonText: 'Löschen'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: rootUrl + '/api/0/testimonial/form/' + $(this).data('id'),
                 type: 'DELETE',
                 dataType: 'json',
                 statusCode: {

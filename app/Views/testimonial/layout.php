@@ -60,26 +60,6 @@
         </header>
         <div class="page-wrapper">
             <?= $this->renderSection("main") ?>
-
-            <footer class="footer footer-transparent d-print-none">
-                <div class="container-xl">
-                    <div class="row text-center align-items-center flex-row-reverse">
-                        <div class="col-12 col-lg-auto mt-3 mt-lg-0">
-                            <ul class="list-inline list-inline-dots mb-0">
-                                <li class="list-inline-item">
-                                    Entwickelt von <a href="https://github.com/Memurame/easy-customer-management" target="_blank">Thomas
-                                        Hirter</a> | Design von <a href="https://tabler.io/" target="_blank">Tabler</a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="https://github.com/Memurame/easy-customer-management/releases" class="link-secondary" rel="noopener">
-                                        Versionen
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </footer>
         </div>
     </div>
 

@@ -130,7 +130,7 @@ class TestimonialController extends BaseController
                 return redirect()->back()->with('msg_success', lang('Das Formular wurde erfolgreich übermittelt. Vielen Dank.'));
             }
 
-            return redirect()->back()->with('msg_info', lang('Es wurden keine Änderungen erkannt.'));
+            return redirect()->route('testimonial.index')->with('msg_info', lang('Es wurden keine Änderungen erkannt.'));
         }
 
         return view('testimonial/edit', [

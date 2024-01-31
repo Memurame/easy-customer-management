@@ -51,7 +51,7 @@
                                         <?php if(isset($field['required']) && $field['required']): ?><span
                                             class="text-danger">*</span><?php endif; ?></label>
                                     <input
-                                        class="form-control form-control-lg form-control-alt<?php if(session('errors.' .$fieldName)) : ?> is-invalid<?php endif ?> <?= (isset($field['inputClass'])) ? $field['inputClass'] : null ?>"
+                                        class="form-control<?php if(session('errors.' .$fieldName)) : ?> is-invalid<?php endif ?> <?= (isset($field['inputClass'])) ? $field['inputClass'] : null ?>"
                                         name="<?= $fieldName ?>" id="<?= $fieldName ?>" type="text"
                                         value="<?=old($fieldName) ?>">
                                     <div class="invalid-feedback"><?= session('errors.' .$fieldName) ?></div>
