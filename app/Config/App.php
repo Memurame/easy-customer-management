@@ -27,7 +27,7 @@ class App extends BaseConfig
      * explicitly and never rely on auto-guessing, especially in production
      * environments.
      */
-    public string $baseURL = 'http://localhost/bebv-tools/public';
+    public string $baseURL = 'http://localhost:8080';
 
 
 

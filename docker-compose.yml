@@ -1,0 +1,20 @@
+version: "3.9"
+services:
+  web:
+    image: shinsenter/codeigniter4:latest
+    volumes:
+      - .:/var/www/html
+    ports:
+      - 8080:80
+    depends_on:
+      - mysql-db
+
+  mysql-db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: ecm-root-password
+      MYSQL_DATABASE: ecm-db
+      MYSQL_USER: ecm-username
+      MYSQL_PASSWORD: ecm-password
+    ports:
+      - "3306:3306"
