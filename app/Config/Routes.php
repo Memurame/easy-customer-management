@@ -25,6 +25,9 @@ $routes->group("testimonial", static function ($routes) {
     $routes->match(["get", "post"], "register", "TestimonialController::form", [
         "as" => "testimonial.register"
     ]);
+    $routes->get("v/(:any)", "TestimonialController::view/$1", [
+        "as" => "testimonial.view"
+    ]);
     $routes->match(["get", "post"], "edit/(:num)", "TestimonialController::edit/$1", [
         "as" => "testimonial.edit",
         "filter" => "permission:testimonial.edit",

@@ -77,11 +77,15 @@ abstract class BaseController extends Controller
                     if(in_array($field['type'], ['select','checkbox'])){
                         $options[$fieldName] = $field['option'];
                     }
+                    if($field['type'] == 'upload'){
+                        $files[] = $fieldName;
+                    }
                 }
             }
             cache()->save('testimonial_'.$form->id.'_required', $required);
             cache()->save('testimonial_'.$form->id.'_options', $options);
             cache()->save('testimonial_'.$form->id.'_fieldNames', $fields);
+            cache()->save('testimonial_'.$form->id.'_files', $files);
         }
     }
 }

@@ -45,7 +45,19 @@ class TestimonialController extends BaseController
 
             $data = [];
             foreach (cache('testimonial_' . $form->id . '_fieldNames') as $fieldName) {
-                $data[$fieldName] = $this->request->getPost($fieldName) ?? null;
+                if(in_array($fieldName, cache('testimonial_' . $form->id . '_files'))){
+                    $image = $this->request->getFile($fieldName);
+
+                    if ($image->isValid() AND !$image->hasMoved()) {
+                        $newName = $image->getRandomName();
+                        $image->move(ROOTPATH.'public/uploads/testimonial/', $newName);
+                        $data[$fieldName] = 'uploads/testimonial/' . $newName;
+                    }
+                }
+                else {
+                    $data[$fieldName] = $this->request->getPost($fieldName) ?? null;
+                }
+                
             }
 
             $testimonial->data = json_encode($data);
@@ -62,7 +74,7 @@ class TestimonialController extends BaseController
 
 
 
-        return view('testimonial/form', [
+        return view('testimonial/register/index', [
             'formFields' => cache('testimonial_'.$form->id.'_fields'),
             'form' => $form
         ]);
@@ -137,6 +149,16 @@ class TestimonialController extends BaseController
             'testimonial'  => $testimonial,
             'formFields' => cache('testimonial_'.$form->id.'_fields')
         ]);
+    }
+
+    public function view($token){
+        $testimonialModel = new TestimonialModel();
+        $testimonial = $testimonialModel->where('token_view', $token)->first();
+        if(!$testimonial OR !$testimonial->active){
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+
+        return view('testimonial/public/index');
     }
 }
 

@@ -55,7 +55,7 @@
                 <div class="row mb-3">
                     <?php foreach($section['fields'] as $fieldName => $field): ?>
                     <?php if($field['type'] == "text"): ?>
-                    <div class="<?= (isset($field['outerClass'])) ? $field['outerClass'] : null ?>">
+                    <div class="pb-3 <?= (isset($field['outerClass'])) ? $field['outerClass'] : null ?>">
                         <label class="form-label" for="<?= $fieldName ?>"><?=$field['title'] ?>
                             <?php if(isset($field['required']) && $field['required']): ?><span
                                 class="text-danger">*</span><?php endif; ?></label>
@@ -69,9 +69,24 @@
                         <?php endif; ?>
                     </div>
                     <?php endif; ?>
-
+                    <?php if($field['type'] == "upload"): ?>
+                        <div class="pb-3 <?= (isset($field['outerClass'])) ? $field['outerClass'] : null ?>">
+                            <label class="form-label" for="<?= $fieldName ?>"><?=$field['title'] ?>
+                                <?php if(isset($field['required']) && $field['required']): ?><span
+                                    class="text-danger">*</span><?php endif; ?></label>
+                            <input
+                                class="form-control<?php if(session('errors.' .$fieldName)) : ?> is-invalid<?php endif ?> <?= (isset($field['inputClass'])) ? $field['inputClass'] : null ?>"
+                                name="<?= $fieldName ?>" id="<?= $fieldName ?>" type="file"
+                                value="">
+                            <div class="invalid-feedback"><?= session('errors.' .$fieldName) ?></div>
+                            <?php if(isset($field['desc'])): ?>
+                            <div class="form-text text-primary"><?=$field['desc'] ?></div>
+                            <?php endif; ?>
+                            <img src="<?= base_url() . $testimonial->dataArray->{$fieldName} ?>" height="50" alt="ECM" class=" mt-3">
+                        </div>
+                        <?php endif; ?>
                     <?php if($field['type'] == "select"): ?>
-                    <div class="<?= (isset($field['outerClass'])) ? $field['outerClass'] : null ?>">
+                    <div class="pb-3 <?= (isset($field['outerClass'])) ? $field['outerClass'] : null ?>">
                         <label class="form-label" for="<?= $fieldName ?>"><?=$field['title'] ?>
                             <?php if(isset($field['required']) && $field['required']): ?><span
                                 class="text-danger">*</span><?php endif; ?></label>
@@ -92,7 +107,7 @@
                     <?php endif; ?>
 
                     <?php if($field['type'] == "textarea"): ?>
-                    <div class="<?= (isset($field['outerClass'])) ? $field['outerClass'] : null ?>">
+                    <div class="pb-3 <?= (isset($field['outerClass'])) ? $field['outerClass'] : null ?>">
                         <label class="form-label" for="<?= $fieldName ?>"><?=$field['title'] ?>
                             <?php if(isset($field['required']) && $field['required']): ?><span
                                 class="text-danger">*</span><?php endif; ?></label>
