@@ -58,17 +58,25 @@
                             <tr>
                                 <td class="align-middle"><?=$testimonial->id?></td>
                                 <td class="align-middle">
-                                    <a href="<?=base_url(route_to('testimonial.show', $testimonial->id))?>"><?=$testimonial->firstname?> <?=$testimonial->lastname?></a>
+                                    <a href="<?=base_url(route_to('testimonial.view', $testimonial->token_view))?>" target="_blank">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-external-link" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6" />
+  <path d="M11 13l9 -9" />
+  <path d="M15 4h5v5" />
+</svg>
+                                    <?=$testimonial->firstname?> <?=$testimonial->lastname?>
+                                </a>
                                 </td>
                                 <td class="align-middle"><?=$testimonial->getFormTitle()?></td>
                                 <td class="text-end">
-                                    <?php if(auth()->user()->can('customer.edit') or auth()->user()->can('customer.delete')): ?>
+                                    <?php if(auth()->user()->can('testimonial.edit') or auth()->user()->can('testimonial.delete')): ?>
                                     <div class="dropdown">
                                         <button class="btn dropdown-toggle align-text-top" data-bs-toggle="dropdown">
                                             Aktion
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-end">
-                                            <a href="<?=base_url(route_to('testimonial.show', $testimonial->id))?>" class="dropdown-item text-primary">
+                                            <a href="<?=base_url(route_to('testimonial.view', $testimonial->token_view))?>" target="_blank" class="dropdown-item text-primary">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
                                                     stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>

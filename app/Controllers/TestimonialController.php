@@ -62,6 +62,8 @@ class TestimonialController extends BaseController
 
             $testimonial->data = json_encode($data);
             $testimonial->form = $form->id;
+            $testimonial->token_view = bin2hex(time() . random_bytes(20));
+            $testimonial->token_edit = bin2hex(time() . random_bytes(20));
 
             $testimonialModel = new TestimonialModel();
             $testimonialModel->save($testimonial);
@@ -158,7 +160,18 @@ class TestimonialController extends BaseController
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
 
-        return view('testimonial/public/index');
+        $formModel = new TestimonialFormModel();
+        $form = $formModel->find($testimonial->form);
+        if(!$form){
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+
+        $testimonial->dataArray = json_decode($testimonial->data, true);
+
+        return view('testimonial/public/index',[
+            'testimonial' => $testimonial,
+            'formFields' => cache('testimonial_'.$form->id.'_fields')
+        ]);
     }
 }
 

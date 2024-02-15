@@ -20,6 +20,9 @@ class TestimonialFormModel extends Model
     protected $primaryKey = 'id';
     protected $useAutoIncrement = true;
 
+    protected $useTimestamps = true;
+    protected $dateFormat = 'int';
+
     protected $returnType = TestimonialForm::class;
     protected $useSoftDeletes = false;
 
