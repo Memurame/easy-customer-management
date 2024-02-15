@@ -3,6 +3,79 @@ var currentUrl =  document.querySelector('meta[name="currentUrl"]').getAttribute
 var csrfName = document.getElementById('csrf_security').getAttribute('name')
 var csrfHash = document.getElementById('csrf_security').getAttribute('value')
 
+if($('#jsoneditor').length){
+    let valueJSON = document.getElementById("json");
+    const options = {
+        onChangeText: function (json) {
+            valueJSON.value = json;
+        },
+        modes: ['text', 'code', 'tree', 'view'],
+        mode: 'tree',
+        ace: ace
+    }
+    const editor = new JSONEditor(document.getElementById("jsoneditor"), options)
+    
+    
+    const initialJson = {
+        "sections": {
+            "exampleSection1": {
+                "title": "Section1",
+                "fields": {
+                    "os": {
+                        "title": "Welches OS",
+                        "type": "select",
+                        "desc": "Hier eine Beschreibung",
+                        "option": {
+                            "0": "Windows",
+                            "1": "Linux",
+                            "2": "OSX"
+                        },
+                        "required": true,
+                        "outerClass": "col-md-6"
+                    },
+                    "zustand": {
+                        "title": "Wie geht es Dir heute?",
+                        "type": "text",
+                        "desc": "Kurzer Text über deinen Zustandg",
+                        "required": true,
+                        "outerClass": "col-md-6"
+                        }
+                }
+            },
+            "exampleSection2": {
+                "title": "Section2",
+                "fields": {
+                    "about": {
+                        "title": "Deine Geschichte",
+                        "type": "textarea",
+                        "outerClass": "col-md-12"
+                    },
+                    "transport": {
+                        "title": "Velotransport",
+                        "type": "checkbox",
+                        "option": {
+                            "0": "Ich kann mein Velo nicht selbst transportieren"
+                        },
+                        "required": false,
+                        "outerClass": "col-md-12"
+                    }
+                }
+            }
+        }
+    }
+    if(valueJSON.value){
+        editor.set(valueJSON.value)
+        console.log('Exist value');
+    } else {
+        editor.set(initialJson)
+        valueJSON.value = JSON.stringify(initialJson);
+        console.log('No value');
+    }
+    editor.expandAll()
+}
+
+
+
 $('#table-customer').DataTable({
     "pageLength": 100,
     "lengthMenu": [ [50, 100, 200, -1], [50, 100, 200, "All"] ]});
@@ -130,6 +203,13 @@ $("#receiver-select").change(function() {
     }
 
 });
+
+$(".copy-to-clipboard" ).click(function(e) {
+    e.preventDefault()
+
+    navigator.clipboard.writeText($(this).data('text'));
+});
+
 $(".action-copyinvoicepos" ).click(function(e) {
     e.preventDefault()
     $.ajax({
@@ -584,6 +664,72 @@ $(".delete-invoicepos" ).click(function() {
                         })
                     }
                 }
+            });
+        }
+    })
+});
+
+$(".delete-testimonial" ).click(function() {
+    var row = $(this).closest('tr');
+    Swal.fire({
+        title: 'Löschen',
+        text: "Möchtest du dieser Testimonial Eintrag wirklich löschen?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        cancelButtonText: 'Abbrechen',
+        confirmButtonText: 'Löschen'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: rootUrl + '/api/0/testimonial/' + $(this).data('id'),
+                type: 'DELETE',
+                dataType: 'json',
+                statusCode: {
+                    200: function() {
+                        row.remove();
+                    },
+                    404: function() {
+                        Swal.fire({
+                            icon: 'error',
+                            text: response.responseJSON.messages.error,
+                        })
+                    }
+                },
+            });
+        }
+    })
+});
+
+$(".delete-testimonialform" ).click(function() {
+    var row = $(this).closest('tr');
+    Swal.fire({
+        title: 'Löschen',
+        text: "Möchtest du doeses Formular wirklich löschen? Alle Testimonial welche mit diesem Formular erstellt wurden, können danach nicht mehr geöffnet werden.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        cancelButtonText: 'Abbrechen',
+        confirmButtonText: 'Löschen'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: rootUrl + '/api/0/testimonial/form/' + $(this).data('id'),
+                type: 'DELETE',
+                dataType: 'json',
+                statusCode: {
+                    200: function() {
+                        row.remove();
+                    },
+                    404: function() {
+                        Swal.fire({
+                            icon: 'error',
+                            text: response.responseJSON.messages.error,
+                        })
+                    }
+                },
             });
         }
     })

@@ -66,6 +66,9 @@ writable/invoice/*
 writable/export/*
 !writable/export/index.html
 
+writable/testimonial/*
+!writable/testimonial/index.html
+
  writable/mail/*
 !writable/mail/index.html
 writable/mail/queue/*

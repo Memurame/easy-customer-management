@@ -78,6 +78,10 @@ class AuthGroups extends ShieldAuthGroups
         "message.index" => "Nachrichten Übersicht",
         "message.add" => "Nachrichten senden",
         "mail.index" => "Mails anzeigen",
+        "testimonial.index" => "Testimonial anzeigen",
+        "testimonial.edit" => "Testimonial bearbeiten",
+        "testimonial.add" => "Testimonial hinzufügen",
+        "testimonial.forms" => "Testimonial Formulare verwalten",
     ];
 
     /**

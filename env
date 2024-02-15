@@ -31,10 +31,10 @@ app.appTimezone = 'Europe/Zurich'
 # DATABASE
 #--------------------------------------------------------------------
 
-database.default.hostname = localhost
-database.default.database = DBNAME
-database.default.username = USER
-database.default.password = PASSWORD
+database.default.hostname = mysql-db
+database.default.database = ecm-db
+database.default.username = ecm-username
+database.default.password = ecm-password
 # database.default.DBDriver = MySQLi
 # database.default.DBPrefix =
 # database.default.port = 3306

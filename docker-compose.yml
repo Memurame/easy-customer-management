@@ -1,0 +1,32 @@
+version: "3.9"
+services:
+  web:
+    container_name: webserver
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/var/www/html
+    ports:
+      - 8080:80
+    depends_on:
+      - mysql-db
+   
+  mysql-db:
+    image: mysql:8.2
+    environment:
+      MYSQL_ROOT_PASSWORD: ecm-root-password
+      MYSQL_DATABASE: ecm-db
+      MYSQL_USER: ecm-username
+      MYSQL_PASSWORD: ecm-password
+    ports:
+      - "3306:3306"
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links:
+      - mysql-db
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: mysql-db
+      MYSQL_ROOT_PASSWORD: ecm-root-password

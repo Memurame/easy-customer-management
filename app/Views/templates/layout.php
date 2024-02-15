@@ -28,6 +28,7 @@
     <link href="<?= base_url() ?>dist/css/tabler-vendors.min.css?1692870487" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
     <link rel="stylesheet" href="@sweetalert2/theme-material-ui/material-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/10.0.0/jsoneditor.min.css" integrity="sha512-8G+Vb2+10BSrSo+wupdzJIylDLpGtEYniQhp0rsbTigPG7Onn2S08Ai/KEGlxN2Ncx9fGqVHtRehMuOjPb9f8g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="<?= base_url() ?>assets/css/ecm.css">
     <style>
     @import url('https://rsms.me/inter/inter.css');
@@ -262,12 +263,13 @@
                                         Tools
                                     </span>
                                 </a>
-                                <?php if (
-                                    auth()
-                                        ->user()
-                                        ->can("tool.estos")
-                                ): ?>
+
                                 <div class="dropdown-menu">
+                                    <?php if (
+                                        auth()
+                                            ->user()
+                                            ->can("tool.estos")
+                                    ): ?>
                                     <a class="dropdown-item <?= current_page(
                                         route_to("estos.index"),
                                     )
@@ -277,8 +279,26 @@
                                         ) ?>" rel="noopener">
                                         Estos Telefonliste <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
                                     </a>
+                                    <?php endif; ?>
+                                    <?php if (
+                                        auth()
+                                            ->user()
+                                            ->can("testimonial.index")
+                                    ): ?>
+
+                                    <a class="dropdown-item <?= current_page(
+                                        route_to("testimonial.index"),
+                                    )
+                                        ? "active"
+                                        : "" ?>" href="<?= base_url(
+                                            route_to("testimonial.index"),
+                                        ) ?>" rel="noopener">
+                                        Testimonial <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+                                    </a>
+                                    <?php endif; ?>
                                 </div>
-                                <?php endif; ?>
+
+
                             </li>
                             <?php endif; ?>
                             <?php if (
@@ -498,6 +518,7 @@
     <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
     <script src="https://cdn.tiny.cloud/1/ogrp83qx6bkmtc1n5bjxqkgzaibula4gyfa44goo79nt7yk3/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tinymce/tinymce-jquery@2/dist/tinymce-jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/10.0.0/jsoneditor.min.js" integrity="sha512-vi9Akg8ycb3xXYCKlTgF2aRh9qU4m8za8Y9v+cm4lcg4Cm8koF5NDQwZ0QxF4+AFo3wTvTJFo56dKTeMGhMvzw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="<?= base_url() ?>assets/js/tabler_custom.js"></script>
     <script src="<?= base_url() ?>assets/js/ecm.js"></script>
 
