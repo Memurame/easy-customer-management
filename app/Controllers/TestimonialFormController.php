@@ -23,7 +23,7 @@ class TestimonialFormController extends BaseController
     public function add()
     {
 
-
+        $users = model('UserModel')->findAll();
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
@@ -38,7 +38,8 @@ class TestimonialFormController extends BaseController
             }
 
             $form = new TestimonialForm($this->request->getPost([
-                'title', 'description'
+                'title', 'description', 'message_success', 'mail_confirmation', 'mail_confirmation',
+                'mail_approved', 'mail_rejected', 'mail_new'
             ]));
 
 
@@ -46,6 +47,7 @@ class TestimonialFormController extends BaseController
             $form->data = preg_replace('/\s*\R\s*/', ' ', trim($this->request->getPost('json')));
             $form->token = bin2hex(random_bytes(20));
             $form->active = true;
+            $form->notify = json_encode($this->request->getPost('notify'));
 
             $formModel = new TestimonialFormModel();
             $formModel->save($form);
@@ -53,7 +55,9 @@ class TestimonialFormController extends BaseController
             return redirect()->route('testimonialForm.index')->with('msg_success', lang('Das Formular wurde erfolgreich übermittelt. Vielen Dank.'));
         }
 
-        return view('testimonial_form/add');
+        return view('testimonial_form/add', [
+            'users' => $users
+        ]);
     }
 
     public function edit($id)
@@ -66,15 +70,14 @@ class TestimonialFormController extends BaseController
             return redirect()->route('testimonialForm.index')->with('msg_error', 'Das Formular existiert nicht.');
         }
 
-
+        $users = model('UserModel')->findAll();
 
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
-
 
             $rules = [
                 'title' => 'required',
                 'description' => 'required',
-                'json' => 'required'
+                //'json' => 'required'
             ];
 
             if (!$this->validate($rules)) {
@@ -84,15 +87,25 @@ class TestimonialFormController extends BaseController
 
             $form->title = $this->request->getPost('title');
             $form->description = $this->request->getPost('description');
-            $form->data = preg_replace('/\s*\R\s*/', ' ', trim($this->request->getPost('json')));
+            $form->message_success = $this->request->getPost('message_success');
+            $form->mail_confirmation = $this->request->getPost('mail_confirmation');
+            $form->mail_approved = $this->request->getPost('mail_approved');
+            $form->mail_rejected = $this->request->getPost('mail_rejected');
+            $form->mail_new = $this->request->getPost('mail_new');
+            $form->notify = json_encode($this->request->getPost('notify'));
+            //$form->data = preg_replace('/\s*\R\s*/', ' ', trim($this->request->getPost('json')));
 
-            $formModel->save($form);
+            if($form->hasChanged()){
+                $formModel->save($form);
+            }
+            
 
             return redirect()->route('testimonialForm.index')->with('msg_success', lang('Das Formular wurde erfolgreich übermittelt. Vielen Dank.'));
         }
 
         return view('testimonial_form/edit', [
-            'form' => $form
+            'form' => $form,
+            'users' => $users
         ]);
     }
 }

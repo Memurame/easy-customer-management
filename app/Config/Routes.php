@@ -28,13 +28,13 @@ $routes->group("testimonial", static function ($routes) {
     $routes->get("v/(:any)", "TestimonialController::view/$1", [
         "as" => "testimonial.view"
     ]);
+    $routes->get("p/(:any)", "TestimonialController::preview/$1", [
+        "as" => "testimonial.preview",
+        "filter" => "permission:testimonial.preview",
+    ]);
     $routes->match(["get", "post"], "edit/(:num)", "TestimonialController::edit/$1", [
         "as" => "testimonial.edit",
-        "filter" => "permission:testimonial.edit",
-    ]);
-    $routes->match(["get", "post"], "show/(:num)", "TestimonialController::view/$1", [
-        "as" => "testimonial.show",
-        "filter" => "permission:testimonial.show",
+        "filter" => "permission:testimonial.edit"
     ]);
     
     $routes->get("form/", "TestimonialFormController::index", [
