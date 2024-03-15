@@ -42,6 +42,7 @@
                             </div>
                             <div class="col-md-6">
                                 <?= form_open_multipart('tools/estos/kalahari') ?>
+                                <?= csrf_field() ?>
                                 <label for="kalahari_import">Kalahari Einträge</label>
                                 <div class="input-group">
                                     <input type="file" class="form-control" id="kalahari_import" name="kalahari_import" aria-label="Upload">
@@ -53,6 +54,7 @@
                             </div>
                             <div class="col-md-6">
                                 <?= form_open_multipart('tools/estos/abacus') ?>
+                                <?= csrf_field() ?>
                                 <label for="abacus_import">Abacus Adressen</label>
                                 <div class="input-group">
                                     <input type="file" class="form-control" id="abacus_import" name="abacus_import" aria-describedby="inputGroupFileAddon04" aria-label="Upload">

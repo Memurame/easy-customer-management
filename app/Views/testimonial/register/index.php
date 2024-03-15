@@ -90,7 +90,7 @@
                                                     }
                                                     ?>
                                     </select>
-                                    <div class="invalid-feedback"><?= session('errors.' .$fieldName) ?></div>
+                                    <div class="invalid-feedback"><?= session('errors.' . $fieldName) ?></div>
                                     <?php if(isset($field['desc'])): ?>
                                     <div class="form-text text-primary"><?=$field['desc'] ?></div>
                                     <?php endif; ?>
@@ -120,13 +120,12 @@
                                             class="text-danger">*</span><?php endif; ?></label>
                                     <?php foreach($field['option'] as $key => $value): ?>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" value="<?= $key ?>"
+                                        <input class="form-check-input <?php if(session('errors.' .$fieldName)) : ?> is-invalid<?php endif ?>" type="checkbox" value="<?= $key ?>"
                                             id="<?= $fieldName ?>[<?= $key ?>]" name="<?= $fieldName ?>[]">
                                         <label class="form-check-label"
                                             for="<?= $fieldName ?>[<?= $key ?>]"><?= $value ?></label>
                                     </div>
                                     <?php endforeach; ?>
-                                    <div class="invalid-feedback"><?= session('errors.' .$fieldName) ?></div>
                                     <?php if(isset($field['desc'])): ?>
                                     <div class="form-text text-primary"><?=$field['desc'] ?></div>
                                     <?php endif; ?>

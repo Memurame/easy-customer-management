@@ -44,6 +44,7 @@ if($('#jsoneditor').length){
             },
             "exampleSection2": {
                 "title": "Section2",
+                "editable":false,
                 "fields": {
                     "about": {
                         "title": "Deine Geschichte",
@@ -53,6 +54,7 @@ if($('#jsoneditor').length){
                     "transport": {
                         "title": "Velotransport",
                         "type": "checkbox",
+                        "log": true,
                         "option": {
                             "0": "Ich kann mein Velo nicht selbst transportieren"
                         },
@@ -110,15 +112,8 @@ $('.tinymce').tinymce({
         height: 300,
         menubar: false,
         statusbar: false,
-        plugins: [
-            'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
-            'anchor', 'searchreplace', 'visualblocks', 'fullscreen',
-            'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
-        ],
-        toolbar: 'undo redo | blocks | bold italic backcolor | ' +
-            'alignleft aligncenter alignright alignjustify | ' +
-            'bullist numlist outdent indent | removeformat | help',
-        content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif; font-size: 14px; -webkit-font-smoothing: antialiased; }'
+        plugins: 'preview importcss searchreplace autolink directionality code visualblocks visualchars fullscreen image link media codesample table charmap nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons',
+        toolbar: "undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | forecolor backcolor removeformat | align numlist bullist | link image | table media | lineheight outdent indent| charmap emoticons | code fullscreen preview | save print | codesample"
     }
 );
 
@@ -216,6 +211,9 @@ $(".action-copyinvoicepos" ).click(function(e) {
         url: rootUrl + '/api/0/invoice/position/'  + $(this).data('id') + '/copy',
         type: 'POST',
         dataType: 'json',
+        data: JSON.stringify({
+            [csrfName]: csrfHash
+        }),
         statusCode: {
             204: function() {
                 Swal.fire({
@@ -238,6 +236,9 @@ $(".action-mailreset" ).click(function(e) {
         url: rootUrl + '/api/0/mail/' + $(this).data('id') + '/reset',
         type: 'PATCH',
         dataType: 'json',
+        data: JSON.stringify({
+            [csrfName]: csrfHash
+        }),
         statusCode: {
             204: function() {
                 window.location.href = currentUrl
@@ -268,6 +269,9 @@ $(".delete-mailsent" ).click(function(e) {
                 url: rootUrl + '/api/0/mail/' + $(this).data('id'),
                 type: 'DELETE',
                 dataType: 'json',
+                data: JSON.stringify({
+                    [csrfName]: csrfHash
+                }),
                 statusCode: {
                     200: function() {
                         window.location.href = currentUrl
@@ -301,6 +305,9 @@ $(".delete-mailtemplate" ).click(function(e) {
                 url: rootUrl + '/api/0/mail/' + $(this).data('id'),
                 type: 'DELETE',
                 dataType: 'json',
+                data: JSON.stringify({
+                    [csrfName]: csrfHash
+                }),
                 statusCode: {
                     200: function() {
                         window.location.href = rootUrl + '/mail'
@@ -332,6 +339,9 @@ $(".delete-chat" ).click(function() {
                 url: rootUrl + '/api/0/chat/' + $(this).data('id'),
                 type: 'DELETE',
                 dataType: 'json',
+                data: JSON.stringify({
+                    [csrfName]: csrfHash
+                }),
                 statusCode: {
                     200: function() {
                         window.location.href = rootUrl + '/message'
@@ -364,6 +374,9 @@ $(".delete-website" ).click(function() {
                 url: rootUrl + '/api/0/website/' + $(this).data('id'),
                 type: 'DELETE',
                 dataType: 'json',
+                data: JSON.stringify({
+                    [csrfName]: csrfHash
+                }),
                 statusCode: {
                     200: function() {
                         row.remove();
@@ -397,6 +410,9 @@ $(".delete-customer" ).click(function() {
                 url: rootUrl + '/api/0/customer/' + $(this).data('id'),
                 type: 'DELETE',
                 dataType: 'json',
+                data: JSON.stringify({
+                    [csrfName]: csrfHash
+                }),
                 statusCode: {
                     200: function() {
                         row.remove();
@@ -431,6 +447,9 @@ $(".delete-project" ).click(function() {
                 url: rootUrl + '/api/0/project/' + $(this).data('id'),
                 type: 'DELETE',
                 dataType: 'json',
+                data: JSON.stringify({
+                    [csrfName]: csrfHash
+                }),
                 statusCode: {
                     200: function() {
                         row.remove();
@@ -465,6 +484,9 @@ $(".delete-customer-contact" ).click(function() {
                 url: rootUrl + '/api/0/contact/' + $(this).data('id'),
                 type: 'DELETE',
                 dataType: 'json',
+                data: JSON.stringify({
+                    [csrfName]: csrfHash
+                }),
                 statusCode: {
                     200: function() {
                         row.remove();
@@ -498,6 +520,9 @@ $(".delete-invoice" ).click(function() {
             $.ajax({
                 url: rootUrl + '/api/0/invoice/' + $(this).data('id'),
                 type: 'DELETE',
+                data: JSON.stringify({
+                    [csrfName]: csrfHash
+                }),
                 dataType: 'json',
                 statusCode: {
                     200: function() {
@@ -533,6 +558,9 @@ $(".delete-comment" ).click(function() {
                 url: rootUrl + '/api/0/comment/' + $(this).data('id'),
                 type: 'DELETE',
                 dataType: 'json',
+                data: JSON.stringify({
+                    [csrfName]: csrfHash
+                }),
                 statusCode: {
                     200: function() {
                         row.remove();
@@ -567,6 +595,9 @@ $(".delete-user" ).click(function() {
                 url: rootUrl + '/api/0/user/' + $(this).data('id') + '',
                 type: 'DELETE',
                 dataType: 'json',
+                data: JSON.stringify({
+                    [csrfName]: csrfHash
+                }),
                 statusCode: {
                     200: function() {
                         location.reload()
@@ -613,6 +644,9 @@ $(".delete-tag" ).click(function() {
                 url: rootUrl + '/api/0/tag/' + $(this).data('id'),
                 type: 'DELETE',
                 dataType: 'json',
+                data: JSON.stringify({
+                    [csrfName]: csrfHash
+                }),
                 statusCode: {
                     200: function() {
                         row.remove();
@@ -647,6 +681,9 @@ $(".delete-invoicepos" ).click(function() {
                 url: rootUrl + '/api/0/invoice/position/'  + $(this).data('id'),
                 type: 'DELETE',
                 dataType: 'json',
+                data: JSON.stringify({
+                    [csrfName]: csrfHash
+                }),
                 statusCode: {
                     200: function() {
                         row.remove();
@@ -686,8 +723,11 @@ $(".delete-testimonial" ).click(function() {
                 url: rootUrl + '/api/0/testimonial/' + $(this).data('id'),
                 type: 'DELETE',
                 dataType: 'json',
+                data: JSON.stringify({
+                    [csrfName]: csrfHash
+                }),
                 statusCode: {
-                    200: function() {
+                    200: function(response) {
                         row.remove();
                     },
                     404: function() {
@@ -696,7 +736,7 @@ $(".delete-testimonial" ).click(function() {
                             text: response.responseJSON.messages.error,
                         })
                     }
-                },
+                }
             });
         }
     })
@@ -706,7 +746,7 @@ $(".delete-testimonialform" ).click(function() {
     var row = $(this).closest('tr');
     Swal.fire({
         title: 'Löschen',
-        text: "Möchtest du doeses Formular wirklich löschen? Alle Testimonial welche mit diesem Formular erstellt wurden, können danach nicht mehr geöffnet werden.",
+        text: "Möchtest du dieses Formular wirklich löschen? Alle Testimonial welche mit diesem Formular erstellt wurden, können danach nicht mehr geöffnet werden.",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#d33',
@@ -719,6 +759,9 @@ $(".delete-testimonialform" ).click(function() {
                 url: rootUrl + '/api/0/testimonial/form/' + $(this).data('id'),
                 type: 'DELETE',
                 dataType: 'json',
+                data: JSON.stringify({
+                    [csrfName]: csrfHash
+                }),
                 statusCode: {
                     200: function() {
                         row.remove();
@@ -753,6 +796,9 @@ $(".admin-password-reset" ).click(function() {
                 url: rootUrl + '/api/0/user/' + $(this).data('id') + '/password',
                 type: 'PATCH',
                 dataType: 'json',
+                data: JSON.stringify({
+                    [csrfName]: csrfHash
+                }),
                 statusCode: {
                     200: function(response) {
                         console.log(response)

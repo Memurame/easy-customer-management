@@ -15,6 +15,12 @@ class TestimonialFormModel extends Model
         "description",
         "active",
         "data",
+        'message_success',
+        'mail_confirmation',
+        'mail_approved',
+        'mail_rejected',
+        'mail_new',
+        'notify'
     ];
 
     protected $primaryKey = 'id';
@@ -31,4 +37,5 @@ class TestimonialFormModel extends Model
         parent::__construct();
         $this->db = \Config\Database::connect();
     }
+
 }

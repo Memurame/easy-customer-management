@@ -152,6 +152,7 @@
 
                             <div class="card-footer">
                                 <form method="post">
+                                <?= csrf_field() ?>
                                     <div class="input-group mb-2">
                                         <textarea name="message-text" class="form-control" data-bs-toggle="autosize" placeholder="Nachricht eingeben..."></textarea>
                                         <input type="hidden" name="receiver-hidden" value="<?=$receiver?>">

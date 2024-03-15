@@ -1,6 +1,7 @@
 <?= $this->extend('templates/layout') ?>
 <?= $this->section('main') ?>
 <form method="post">
+<?= csrf_field() ?>
     <div class="page-header d-print-none">
         <div class="container-xl">
             <div class="row g-2 align-items-center">
@@ -41,6 +42,74 @@
                             </div>
                             <div id="jsoneditor" style="width: 100%; height: 800px;"></div>
                             <input type="hidden" name="json" id="json">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <div class="col-12">
+                            <label class="form-label">Nachricht bei erfolgreichem Formular</label>
+                            <textarea rows="10" name="message_success" id="message_success" class="tinymce form-control <?php if (
+                                session("errors.message_success")
+                            ): ?>is-invalid<?php endif; ?>"><?=old('message_success') ?></textarea>
+                            <div class="invalid-feedback"><?= session(
+                                "errors.message_success", 
+                            ) ?></div>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <div class="col-12">
+                            <label class="form-label">Text für Freigabe Anforderung</label>
+                            <textarea rows="10" name="mail_new" id="mail_new" class="tinymce form-control <?php if (
+                                session("errors.mail_new")
+                            ): ?>is-invalid<?php endif; ?>"><?=old('mail_new') ?></textarea>
+                            <div class="invalid-feedback"><?= session(
+                                "errors.mail_new", 
+                            ) ?></div>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <div class="col-12">
+                            <label class="form-label">Text für Bestätgungsmail</label>
+                            <textarea rows="10" name="mail_confirmation" id="mail_confirmation" class="tinymce form-control <?php if (
+                                session("errors.mail_confirmation")
+                            ): ?>is-invalid<?php endif; ?>"><?=old('mail_confirmation') ?></textarea>
+                            <div class="invalid-feedback"><?= session(
+                                "errors.mail_confirmation", 
+                            ) ?></div>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <div class="col-12">
+                            <label class="form-label">Text für Freigabemail</label>
+                            <textarea rows="10" name="mail_approved" id="mail_approved" class="tinymce form-control <?php if (
+                                session("errors.mail_approved")
+                            ): ?>is-invalid<?php endif; ?>"><?=old('mail_approved') ?></textarea>
+                            <div class="invalid-feedback"><?= session(
+                                "errors.mail_approved", 
+                            ) ?></div>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <div class="col-12">
+                            <label class="form-label">Text wenn abgelehnt</label>
+                            <textarea rows="10" name="mail_rejected" id="mail_rejected" class="tinymce form-control <?php if (
+                                session("errors.mail_rejected")
+                            ): ?>is-invalid<?php endif; ?>"><?=old('mail_rejected') ?></textarea>
+                            <div class="invalid-feedback"><?= session(
+                                "errors.mail_rejected", 
+                            ) ?></div>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <div class="col-12">
+                            <label class="form-label">Neue Einträge an folgende Benutzer melden</label>
+                            <select class="form-select tomselect-multiple-check" name="notify[]" name="notify" multiple="multiple">
+                                <?php foreach($users as $user): ?>
+                                    <option value="<?=$user->id?>"><?=$user->email?></option>
+                                <?php endforeach; ?>
+                            </select>
+                            <div class="invalid-feedback"><?= session(
+                                "errors.mail_rejected", 
+                            ) ?></div>
                         </div>
                     </div>
                 </div>

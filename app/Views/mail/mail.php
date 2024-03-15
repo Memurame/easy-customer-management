@@ -18,6 +18,7 @@
 <!-- Page body -->
 <div class="page-body">
     <form method="POST" action="<?= base_url(route_to("mail.index")) ?>">
+    <?= csrf_field() ?>
         <div class="container-xl">
             <div class="card">
                 <div class="card-body">

@@ -26,11 +26,6 @@
                             </svg>
                             Formulare
                         </a>
-                        <a href="<?=base_url(route_to('testimonial.add'))?>" class="btn btn-primary d-none d-sm-inline-block">
-                            <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 5l0 14"></path><path d="M5 12l14 0"></path></svg>
-                            Neu
-                        </a>
                     </div>
                 </div>
             <?php endif; ?>
@@ -49,6 +44,7 @@
                             <th style="width: 30px">#</th>
                             <th>Name</th>
                             <th style="width:150px">Form</th>
+                            <th>Status</th>
                             <th style="width: 100px"></th>
                         </tr>
                         </thead>
@@ -60,15 +56,24 @@
                                 <td class="align-middle">
                                     <a href="<?=base_url(route_to('testimonial.view', $testimonial->token_view))?>" target="_blank">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-external-link" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-  <path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6" />
-  <path d="M11 13l9 -9" />
-  <path d="M15 4h5v5" />
-</svg>
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                        <path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6" />
+                                        <path d="M11 13l9 -9" />
+                                        <path d="M15 4h5v5" />
+                                    </svg>
                                     <?=$testimonial->firstname?> <?=$testimonial->lastname?>
                                 </a>
                                 </td>
                                 <td class="align-middle"><?=$testimonial->getFormTitle()?></td>
+                                <td class="align-middle">
+                                    <?php if($testimonial->active == 2):?>
+                                    <span class="badge text-bg-success">Online</span>
+                                    <?php elseif($testimonial->active == 1):?>
+                                    <span class="badge text-bg-warning">Freizuschalten</span>
+                                    <?php else:?>
+                                    <span class="badge text-bg-danger">Offline</span>
+                                    <?php endif;?>
+                                </td>
                                 <td class="text-end">
                                     <?php if(auth()->user()->can('testimonial.edit') or auth()->user()->can('testimonial.delete')): ?>
                                     <div class="dropdown">
@@ -76,14 +81,14 @@
                                             Aktion
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-end">
-                                            <a href="<?=base_url(route_to('testimonial.view', $testimonial->token_view))?>" target="_blank" class="dropdown-item text-primary">
+                                            <a href="<?=base_url(route_to('testimonial.preview', $testimonial->token_view))?>" target="_blank" class="dropdown-item text-primary">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
                                                     stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                                     <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path>
                                                     <path d="M21 21l-6 -6"></path>
                                                 </svg>
-                                                Anzeigen
+                                                Vorschau
                                             </a>
                                             <?php if(auth()->user()->can('testimonial.edit')): ?>
                                                 <a href="<?=base_url(route_to('testimonial.edit', $testimonial->id))?>" class="dropdown-item text-primary">

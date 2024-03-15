@@ -36,6 +36,7 @@ class GroupPermissions extends Seeder
             ['group_id' => '3', 'permission' => 'home.*'],
             ['group_id' => '3', 'permission' => 'profile.*'],
             ['group_id' => '3', 'permission' => 'message.*'],
+            ['group_id' => '3', 'permission' => 'testimonial.*'],
         ];
 
         // Using Query Builder

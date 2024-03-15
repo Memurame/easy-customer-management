@@ -63,16 +63,20 @@ abstract class BaseController extends Controller
 
         foreach($forms as $form){
             $formData = json_decode($form->data, true);
-            cache()->save('testimonial_'.$form->id.'_fields', $formData);
+            cache()->save('testimonial_'.$form->id.'_raw', $formData);
 
             $required = [];
             $options = [];
             $fields = [];
+            $log = [];
             foreach($formData['sections'] as $section){
                 foreach($section['fields'] as $fieldName => $field){
-                    $fields[] = $fieldName;
+                    $fields[$fieldName] = $field;
                     if(isset($field['required']) && $field['required']){
                         $required[] = $fieldName;
+                    }
+                    if(isset($field['log']) && $field['log']){
+                        $log[] = $fieldName;
                     }
                     if(in_array($field['type'], ['select','checkbox'])){
                         $options[$fieldName] = $field['option'];
@@ -83,9 +87,11 @@ abstract class BaseController extends Controller
                 }
             }
             cache()->save('testimonial_'.$form->id.'_required', $required);
+            cache()->save('testimonial_'.$form->id.'_log', $log);
             cache()->save('testimonial_'.$form->id.'_options', $options);
             cache()->save('testimonial_'.$form->id.'_fieldNames', $fields);
             cache()->save('testimonial_'.$form->id.'_files', $files);
+            cache()->save('testimonial_'.$form->id.'_fields', $fields);
         }
     }
 }

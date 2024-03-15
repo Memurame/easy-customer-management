@@ -18,7 +18,8 @@ class TestimonialModel extends Model
         "notes",
         "active",
         "token_view",
-        "token_edit"
+        "token_edit",
+        'log'
     ];
 
     protected $primaryKey = 'id';
