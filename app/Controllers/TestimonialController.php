@@ -40,7 +40,7 @@ class TestimonialController extends BaseController
             ];
 
             if($captcha){
-                $rules = array_merge($rules. ['cf-turnstile-response' => 'required|verifycaptcha',]);
+                $rules = array_merge($rules, ['cf-turnstile-response' => 'required|verifycaptcha']);
             }
 
             foreach (cache('testimonial_' . $form->id . '_required') as $required) {
