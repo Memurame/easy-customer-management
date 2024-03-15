@@ -47,7 +47,7 @@ class TestimonialFormController extends BaseController
             $form->data = preg_replace('/\s*\R\s*/', ' ', trim($this->request->getPost('json')));
             $form->token = bin2hex(random_bytes(20));
             $form->active = true;
-            $form->notify = json_encode($this->request->getPost('notify'));
+            $form->notify = ($this->request->getPost('notify')) ? json_encode($this->request->getPost('notify')) : '[]';
 
             $formModel = new TestimonialFormModel();
             $formModel->save($form);
@@ -92,7 +92,7 @@ class TestimonialFormController extends BaseController
             $form->mail_approved = $this->request->getPost('mail_approved');
             $form->mail_rejected = $this->request->getPost('mail_rejected');
             $form->mail_new = $this->request->getPost('mail_new');
-            $form->notify = json_encode($this->request->getPost('notify'));
+            $form->notify = ($this->request->getPost('notify')) ? json_encode($this->request->getPost('notify')) : '[]';;
             //$form->data = preg_replace('/\s*\R\s*/', ' ', trim($this->request->getPost('json')));
 
             if($form->hasChanged()){
