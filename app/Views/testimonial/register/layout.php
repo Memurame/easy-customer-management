@@ -71,6 +71,7 @@
     <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
     <script src="https://cdn.tiny.cloud/1/ogrp83qx6bkmtc1n5bjxqkgzaibula4gyfa44goo79nt7yk3/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tinymce/tinymce-jquery@2/dist/tinymce-jquery.min.js"></script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <script src="<?= base_url() ?>assets/js/tabler_custom.js"></script>
     <script src="<?= base_url() ?>assets/js/ecm.js"></script>
 

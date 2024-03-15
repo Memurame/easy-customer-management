@@ -18,7 +18,12 @@
                             <?php endif ?>
                         </div>
                         <!-- END Header -->
-
+                        <?php if(session('errors.cf-turnstile-response')): ?>
+                            <div class="alert alert-danger">
+                                Sie haben die Captcha prüfung nicht bestanden.<br>
+                                Bitte versuchen Sie eserneut.
+                            </div>
+                        <?php endif; ?>
                         <form method="POST" enctype="multipart/form-data">
                             <?= csrf_field() ?>
                             <div class="row py-3">
@@ -134,6 +139,16 @@
                                 <?php endforeach; ?>
                             </div>
                             <?php endforeach; ?>
+                            <div class="row py-3">
+                               
+                            </div>
+                            <?php if($captcha): ?>
+                            <div class="row py-3 justify-content-center">
+                                <div style="max-width: 300px">
+                                    <div class="cf-turnstile" data-sitekey="<?= service('settings')->get('Site.cfSiteKey') ?>" data-callback="javascriptCallback"></div>
+                                </div>
+                            </div>
+                            <?php endif; ?>
                             <div class="row justify-content-center">
                                 <div class="col-lg-6 col-xxl-5">
                                     <button type="submit" class="btn w-100 btn-alt-success">
