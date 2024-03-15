@@ -134,6 +134,10 @@ class SettingsController extends BaseController
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
             service('settings')->set('Auth.allowRegistration', boolval($this->request->getPost('allowRegistration')));
+            service('settings')->set('Site.cfSiteKey', $this->request->getPost('turnstile_public'));
+            if($this->request->getPost('turnstile_secret')){
+                service('settings')->set('Site.cfSecretKey', $this->request->getPost('turnstile_secret'));
+            }
 
             return redirect()->route('setting.4')->with('msg_success', 'Einstellungen wurden gespeichert');
         }

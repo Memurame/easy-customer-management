@@ -39,8 +39,8 @@
                         <form method="post">
                             <?= csrf_field() ?>
                             <div class="card-body">
-                                <h2 class="mb-4">Allgemein</h2>
-                                <h3 class="card-title">Allgemein Angaben zur Seite</h3>
+                                <h2 class="mb-4">Sicherheit</h2>
+                                <h3 class="card-title">Login und Registrierung</h3>
                                 <div class="row mb-3">
                                     <div class="col-lg-8 col-xl-6">
                                         <label for="allowRegistration" class="form-label">Erlaube Registrierung</label>
@@ -52,6 +52,26 @@
                                                 <?=(!service('settings')->get('Auth.allowRegistration')) ?'selected':'' ?>>Nein
                                             </option>
                                         </select>
+                                    </div>
+
+                                </div>
+
+                                <h3 class="card-title">Captcha</h3>
+                                <div class="row mb-3">
+                                    <div class="col-lg-8 col-xl-6">
+                                        <label for="turnstile_public" class="form-label">Site Key</label>
+                                        <input type="text" class="form-control <?php if(session('errors.turnstile_public')) : ?>is-invalid<?php endif ?>" id="turnstile_public" name="turnstile_public"
+                                            value="<?=service('settings')->get('Site.cfSiteKey'); ?>">
+                                        <div class="invalid-feedback"><?= session('errors.turnstile_public') ?></div>
+                                    </div>
+
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-lg-8 col-xl-6">
+                                        <label for="turnstile_secret" class="form-label">Secret Key</label>
+                                        <input type="password" class="form-control <?php if(session('errors.turnstile_secret')) : ?>is-invalid<?php endif ?>" id="turnstile_secret" name="turnstile_secret"
+                                            placeholder="***">
+                                        <div class="invalid-feedback"><?= session('errors.turnstile_secret') ?></div>
                                     </div>
 
                                 </div>

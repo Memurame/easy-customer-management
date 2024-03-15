@@ -13,6 +13,10 @@ class Site extends BaseConfig
 
     public string $logo = 'assets/images/logo.png';
 
+    public string $cfSiteKey;
+
+    public string $cfSecretKey;
+
 
 
 

@@ -23,6 +23,12 @@ class TestimonialController extends BaseController
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
 
+        
+        $captcha = false;
+        if(!empty(service('settings')->get('Site.cfSiteKey')) && !empty(service('settings')->get('Site.cfSecretKey'))){
+            $captcha = true;
+        }
+
 
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -32,6 +38,11 @@ class TestimonialController extends BaseController
                 'lastname' => 'required',
                 'email' => 'required'
             ];
+
+            if($captcha){
+                $rules = array_merge($rules. ['cf-turnstile-response' => 'required|verifycaptcha',]);
+            }
+
             foreach (cache('testimonial_' . $form->id . '_required') as $required) {
                 if(in_array($required, cache('testimonial_' . $form->id . '_files'))){
                     $rules = array_merge($rules, [$required => 'uploaded['.$required.']']);
@@ -44,6 +55,7 @@ class TestimonialController extends BaseController
             if (!$this->validate($rules)) {
                 return redirect()->back()->withInput()->with('errors', $this->validator->getErrors())->with('msg_error', 'Es wurden nicht alle erforderlichen Felder ausgefüllt!');
             }
+
 
             $testimonial = new Testimonial($this->request->getPost([
                 'firstname', 'lastname', 'email'
@@ -135,6 +147,7 @@ class TestimonialController extends BaseController
         return view('testimonial/register/index', [
             'formFields' => cache('testimonial_'.$form->id.'_raw'),
             'form' => $form,
+            'captcha' =>  $captcha
         ]);
     }
 
