@@ -10,7 +10,7 @@
                 </h2>
             </div>
             <!-- Page title actions -->
-            <?php if(auth()->user()->can('customer.add')): ?>
+            <?php if(auth()->user()->can('testimonial.forms')): ?>
                 <div class="col-auto ms-auto d-print-none">
                     <div class="btn-list">
                         <a href="<?=base_url(route_to('testimonialForm.index'))?>" class="btn btn-primary d-none d-sm-inline-block">

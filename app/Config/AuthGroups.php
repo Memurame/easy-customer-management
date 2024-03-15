@@ -81,6 +81,7 @@ class AuthGroups extends ShieldAuthGroups
         "testimonial.index" => "Testimonial anzeigen",
         "testimonial.edit" => "Testimonial bearbeiten",
         "testimonial.preview" => "Testimonial Vorschau",
+        "testimonial.delete" => "Testimonial Löschen",
         "testimonial.forms" => "Testimonial Formulare verwalten",
     ];
 
