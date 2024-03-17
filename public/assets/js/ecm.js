@@ -87,18 +87,24 @@ $('#table-project').DataTable({
 $('#table-comments').DataTable({
     order: [[0, 'desc']]
 });
+
 $('#table-invoice').DataTable({
     "pageLength": 100,
     "lengthMenu": [ [50, 100, 200, -1], [50, 100, 200, "All"] ],
     "columns": [
         { "width": "30px" },
         { "width": "60px" },
+        { "width": "350px" },
         null,
-        null,
-        null,
+        { "width": "100px" },
         null,
         null
-      ]});
+      ],
+    "columnDefs": [{ 
+        target: 0, 
+        render: DataTable.render.datetime( "DD.MM.Y" ) 
+    }]
+});
 $('#table-contacts').DataTable({
     "pageLength": 100,
     "lengthMenu": [ [50, 100, 200, -1], [50, 100, 200, "All"] ]

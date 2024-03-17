@@ -235,11 +235,7 @@
                                 </div>
                             </li>
                             <?php endif; ?>
-                            <?php if (
-                                auth()
-                                    ->user()
-                                    ->can("tool.menu")
-                            ): ?>
+                            <?php if (auth()->user()->can("tool.menu")): ?>
                             <li class="nav-item dropdown <?= current_page(
                                 "/tools",
                             )
@@ -516,6 +512,7 @@
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="<?= base_url() ?>dist/libs/litepicker/dist/litepicker.js?1692870487" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
     <script src="https://cdn.tiny.cloud/1/ogrp83qx6bkmtc1n5bjxqkgzaibula4gyfa44goo79nt7yk3/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tinymce/tinymce-jquery@2/dist/tinymce-jquery.min.js"></script>
