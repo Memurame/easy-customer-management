@@ -69,7 +69,7 @@
                                 <td class="align-middle">
                                     <?php foreach($website->getTags() as $tag): ?>
                                     <span
-                                        class="badge <?=($tag['class']) ? $tag['class'] : 'text-bg-secondary'?>"><?=$tag['name']?></span>
+                                        class="badge <?=($tag['class']) ? $tag['class'] : 'text-bg-secondary'?>" style="margin: 2px;"><?=$tag['name']?></span>
                                     <?php endforeach; ?>
                                 </td>
                                 <td class="text-end">
