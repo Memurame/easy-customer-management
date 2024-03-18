@@ -29,7 +29,6 @@ class CustomersController extends BaseController
                 "postcode" => "required",
                 "city" => "required",
                 "status" => "required",
-                "mail" => 'valid_email',
                 "contact_firstname" => "required",
                 "contact_lastname" => "required",
                 "contact_mail" => "valid_email",

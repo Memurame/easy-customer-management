@@ -85,7 +85,7 @@
                         ?>
 
                             <tr>
-                                <td class="align-middle"><?=$date->format('d.m.Y')?></td>
+                                <td class="align-middle"><?=$date->format('Y-m-d')?></td>
                                 <td class="align-middle">RE-<?=str_pad($invoice->id,5,0,STR_PAD_LEFT)?></td>
                                 <td class="align-middle">
                                     <?php if(auth()->user()->can('invoice.show')): ?>
@@ -109,33 +109,33 @@
                                 </td>
                                 <td class="align-middle">
                                     <?php if($invoice->renew_interval == 1):?>
-                                    <span class="badge text-bg-<?=($invoice->renew) ? 'success' : 'danger'?>">Monatlich
+                                    <span class="badge text-bg-<?=($invoice->renew) ? 'success' : 'danger'?>" style="margin: 2px 0">Monatlich
                                         (Rechnungsdatum)</span>
                                     <?php elseif($invoice->renew_interval == 2):?>
-                                    <span class="badge text-bg-<?=($invoice->renew) ? 'success' : 'danger'?>">Monatlich
+                                    <span class="badge text-bg-<?=($invoice->renew) ? 'success' : 'danger'?>" style="margin: 2px 0">Monatlich
                                         (1. im Monat)</span>
                                     <?php elseif($invoice->renew_interval == 3):?>
-                                    <span class="badge  text-bg-<?=($invoice->renew) ? 'success' : 'danger'?>">Jährlich
+                                    <span class="badge  text-bg-<?=($invoice->renew) ? 'success' : 'danger'?>" style="margin: 2px 0">Jährlich
                                         (Rechnungsdatum)</span>
                                     <?php elseif($invoice->renew_interval == 4):?>
-                                    <span class="badge text-bg-<?=($invoice->renew) ? 'success' : 'danger'?>">Jährlich
+                                    <span class="badge text-bg-<?=($invoice->renew) ? 'success' : 'danger'?>" style="margin: 2px 0">Jährlich
                                         (1. Januar)</span>
                                     <?php elseif($invoice->renew_interval == 0):?>
-                                    <span class="badge text-bg-<?=($invoice->renew) ? 'success' : 'danger'?>">Einmalig</span>
+                                    <span class="badge text-bg-<?=($invoice->renew) ? 'success' : 'danger'?>" style="margin: 2px 0">Einmalig</span>
                                     <?php endif;?>
 
                                     <?php if($invoice->paid == 1):?>
-                                    <span class="badge text-bg-success">Bezahlt</span>
+                                    <span class="badge text-bg-success" style="margin: 2px 0">Bezahlt</span>
                                     <?php elseif($invoice->paid == 2):?>
-                                    <span class="badge text-bg-warning">Rechnung generieren</span>
+                                    <span class="badge text-bg-warning" style="margin: 2px 0">Rechnung generieren</span>
                                     <?php elseif($invoice->paid == 3):?>
-                                    <span class="badge text-bg-danger">Überfällig</span>
+                                    <span class="badge text-bg-danger" style="margin: 2px 0">Überfällig</span>
                                     <?php elseif($invoice->paid == 4):?>
-                                    <span class="badge text-bg-info">Geplant</span>
+                                    <span class="badge text-bg-info" style="margin: 2px 0">Geplant</span>
                                     <?php elseif($invoice->paid == 0):?>
-                                    <span class="badge text-bg-warning">Offen</span>
+                                    <span class="badge text-bg-warning" style="margin: 2px 0">Offen</span>
                                     <?php elseif($invoice->paid == 5):?>
-                                    <span class="badge text-bg-dark">Entwurf</span>
+                                    <span class="badge text-bg-dark" style="margin: 2px 0">Entwurf</span>
                                     <?php endif;?>
                                 </td>
                                 <td class="text-end">
