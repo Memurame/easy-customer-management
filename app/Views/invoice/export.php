@@ -61,7 +61,7 @@ $date = ($invoice->invoice) ? new DateTime($invoice->invoice) : null;
                 <div class="print-body">
                     <div class="row mt-6">
                         <div class="col-7 print-receiver">
-                            <address>
+                            <address contenteditable="true">
                                 <strong><?=$invoice->address['name']?></strong><br>
                                 <?=$invoice->address['street']?><br>
                                 <?=$invoice->address['postcode']?> <?=$invoice->address['city']?><br>
@@ -117,7 +117,7 @@ $date = ($invoice->invoice) ? new DateTime($invoice->invoice) : null;
                         </div>
                     </div>
                     <div class="row title">
-                        <span>Rechnung</span>
+                        <span contenteditable="true">Rechnung</span>
                     </div>
                     <div class="row subtitle">
                         <span contenteditable="true"><?=$invoice->description?></span>
@@ -130,11 +130,11 @@ $date = ($invoice->invoice) ? new DateTime($invoice->invoice) : null;
                     <table class="table table-transparent table-responsive print-table">
                         <thead>
                             <tr>
-                                <th class="text-start" style="width: 1%">#</th>
-                                <th>Beschreibung</th>
-                                <th class="text-end" style="width: 1%">Einzelbetrag</th>
-                                <th class="text-end" style="width: 1%">Anzahl</th>
-                                <th class="text-end" style="width: 1%">Gesamtpreis</th>
+                                <th class="text-start" style="width: 1%">Pos.</th>
+                                <th>Bezeichnung</th>
+                                <th class="text-end" style="width: 1%">Preis</th>
+                                <th class="text-end" style="width: 1%">Menge</th>
+                                <th class="text-end" style="width: 1%">Total</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -146,13 +146,13 @@ $date = ($invoice->invoice) ? new DateTime($invoice->invoice) : null;
                                     <div class="text-secondary"><?=$position->description?></div>
                                 </td>
                                 <td class="text-end">
-                                    CHF <?=$position->getPositionUnitprice(false)?>
+                                    CHF&nbsp;<?=$position->getPositionUnitprice(false)?>
                                 </td>
                                 <td class="text-end">
-                                    <?=$position->multiplication?> <?=$position->unit?>
+                                    <?=$position->multiplication?>&nbsp;<?=$position->unit?>
                                 </td>
                                 <td class="text-end">
-                                    CHF <?=$position->getPositionTotal(false)?>
+                                    CHF&nbsp;<?=$position->getPositionTotal(false)?>
                                 </td>
                             </tr>
                             <?php endforeach; ?>
@@ -163,14 +163,14 @@ $date = ($invoice->invoice) ? new DateTime($invoice->invoice) : null;
                                 <td colspan="3" class="text-end">
                                     Total (netto)
                                 </td>
-                                <td colspan="3" class="text-end">CHF <?php echo $invoice->getTotal(false, false) ?></td>
+                                <td colspan="3" class="text-end">CHF&nbsp;<?php echo $invoice->getTotal(false, false) ?></td>
                             </tr>
                             <?php foreach($invoice->getMwst() as $mwst): ?>
                             <tr>
                                 <td colspan="3" class="text-end">
                                     Mehrwertsteuer (<?=$mwst['mwst']?>%)
                                 </td>
-                                <td colspan="3" class="text-end">CHF <?=$mwst['value']?></td>
+                                <td colspan="3" class="text-end">CHF&nbsp;<?=$mwst['value']?></td>
                             </tr>
                             <?php endforeach; ?>
                             <tr>
@@ -178,7 +178,7 @@ $date = ($invoice->invoice) ? new DateTime($invoice->invoice) : null;
                                     <strong>Rechnungsbetrag</strong>
                                 </td>
                                 <td colspan="3" class="text-end">
-                                    <strong>CHF <?php echo $invoice->getTotal(true, true) ?></strong>
+                                    <strong>CHF&nbsp;<?php echo $invoice->getTotal(true, true) ?></strong>
                                 </td>
                             </tr>
                         </tfoot>
