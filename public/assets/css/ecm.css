@@ -57,23 +57,24 @@ table.company-info tbody tr td:nth-child(1){
     font-size: 14px;
 }
 
-.print-body table{
-   
-}
-
 .print-invoice{
     margin-top:100px;
  }
+
+ .print-body table{
+   
+ }
 .print-body table tr td{
    border: 0;
+   font-size: 12px;
 }
-.print-body table tfoot td{
-    padding-top: 6px;
-    padding-bottom: 6px;
- }
 .print-body table tfoot{
     border-top: 1px solid black;
     border-bottom: 1px double black;
+ }
+.print-body table tfoot td{
+    padding-top: 6px;
+    padding-bottom: 6px;
  }
 
 
