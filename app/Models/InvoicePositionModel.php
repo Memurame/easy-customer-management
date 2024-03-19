@@ -22,7 +22,8 @@ class InvoicePositionModel extends Model
         'unit',
         'notes',
         'position',
-        'type'
+        'type',
+        'ord'
     ];
 
     protected $primaryKey = 'id';

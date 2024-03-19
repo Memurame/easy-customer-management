@@ -109,7 +109,11 @@ class apiInvoicePosController extends BaseController
 
     public function moveUp($invoicePosId){
         $invoicePos = model('InvoicePositionModel')->find($invoicePosId);
-        $invoicePosList = model('InvoicePositionModel')->where('invoice_id', $invoicePos->invoice_id)->findAll();
+        $invoicePosList = model('InvoicePositionModel')
+        ->where('invoice_id', $invoicePos->invoice_id)
+        ->where('ord <', $invoicePos->ord)
+        ->orderBy('ord', 'desc')
+        ->findAll();
 
         foreach($invoicePosList as $pos){
             if($pos->ord < $invoicePos->ord){
@@ -120,6 +124,31 @@ class apiInvoicePosController extends BaseController
 
                 $invoicePos->ord = $prevPos;
                 model('InvoicePositionModel')->save($invoicePos);
+                exit;
+            }
+        }
+        
+
+    }
+
+    public function moveDown($invoicePosId){
+        $invoicePos = model('InvoicePositionModel')->find($invoicePosId);
+        $invoicePosList = model('InvoicePositionModel')
+        ->where('invoice_id', $invoicePos->invoice_id)
+        ->where('ord >', $invoicePos->ord)
+        ->orderBy('ord')
+        ->findAll();
+
+        foreach($invoicePosList as $pos){
+            if($pos->ord > $invoicePos->ord){
+                $prevPos = $pos->ord;
+
+                $pos->ord = $invoicePos->ord;
+                model('InvoicePositionModel')->save($pos);
+
+                $invoicePos->ord = $prevPos;
+                model('InvoicePositionModel')->save($invoicePos);
+                exit;
             }
         }
         
