@@ -61,6 +61,11 @@
                     <div class="mb-3 row">
                         <div class="col-12">
                             <label class="form-label">Text für Freigabe Anforderung</label>
+                            <div class="alert alert-info">
+                                <strong>Folgende Platzhalter sind möglich:</strong><br>
+                                <b>[_URL_PREVIEW_]</b> URL zur Vorschau des Testimonial.<br>
+                                <b>[_URL_EDIT_]</b> URL um den Eintrag zu bearbeiten.<br>
+                            </div>
                             <textarea rows="10" name="mail_new" id="mail_new" class="tinymce form-control <?php if (
                                 session("errors.mail_new")
                             ): ?>is-invalid<?php endif; ?>"><?= $form->mail_new ?></textarea>
@@ -83,6 +88,11 @@
                     <div class="mb-3 row">
                         <div class="col-12">
                             <label class="form-label">Text für Freigabemail</label>
+                            <div class="alert alert-info">
+                                <strong>Folgende Platzhalter sind möglich:</strong><br>
+                                <b>[_URL_]</b> URL zum öffentlichen Testimonial.<br>
+                                <b>[_TOKEN_]</b> Token des Testimonial Eintrages.<br>
+                            </div>
                             <textarea rows="10" name="mail_approved" id="mail_approved" class="tinymce form-control <?php if (
                                 session("errors.mail_approved")
                             ): ?>is-invalid<?php endif; ?>"><?= $form->mail_approved ?></textarea>
