@@ -107,4 +107,22 @@ class apiInvoicePosController extends BaseController
         
     }
 
+    public function moveUp($invoicePosId){
+        $invoicePos = model('InvoicePositionModel')->find($invoicePosId);
+        $invoicePosList = model('InvoicePositionModel')->where('invoice_id', $invoicePos->invoice_id)->findAll();
+
+        foreach($invoicePosList as $pos){
+            if($pos->ord < $invoicePos->ord){
+                $prevPos = $pos->ord;
+
+                $pos->ord = $invoicePos->ord;
+                model('InvoicePositionModel')->save($pos);
+
+                $invoicePos->ord = $prevPos;
+                model('InvoicePositionModel')->save($invoicePos);
+            }
+        }
+        
+
+    }
 }

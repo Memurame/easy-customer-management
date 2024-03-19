@@ -220,9 +220,13 @@ class TestimonialController extends BaseController
 
 
             if($this->request->getPost('active') == 2 && $this->request->getPost('notify')){
-                $text_find = array('[_URL_]');
+                $text_find = array(
+                    '[_URL_]',
+                    '[_TOKEN_]'
+                );
                 $text_replace = array(
-                    base_url(route_to('testimonial.view', $testimonial->token_view))
+                    base_url(route_to('testimonial.view', $testimonial->token_view)),
+                    $testimonial->token_view
                 );
 
                 if(!empty($form->mail_approved)){

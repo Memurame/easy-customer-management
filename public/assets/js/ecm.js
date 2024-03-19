@@ -205,6 +205,37 @@ $("#receiver-select").change(function() {
 
 });
 
+$('.action-invoicemoveup').click(function(element){
+    console.log("UP");
+    var currentRow = $(this).parents().parents("tr:first");
+    var prevRow = currentRow.prev();
+    if(prevRow.index()>=0){
+        currentRow.insertBefore(prevRow);
+        $.ajax({
+            url: rootUrl + 'api/0/invoice/position/'  + $(this).data('id') + '/up',
+            type: 'PATCH',
+            dataType: 'json',
+            data: JSON.stringify({
+                [csrfName]: csrfHash
+            })
+        });
+    }
+});
+$('.action-invoicemovedown').click(function(element){
+    console.log("DOWN");
+    var currentRow = $(this).parents().parents("tr:first");
+    var nextRow = currentRow.next();
+    currentRow.insertAfter(nextRow);
+    $.ajax({
+        url: rootUrl + 'api/0/invoice/position/'  + $(this).data('id') + '/down',
+        type: 'PATCH',
+        dataType: 'json',
+        data: JSON.stringify({
+            [csrfName]: csrfHash
+        })
+    });
+});
+
 $(".action-addinvoicetitle" ).click(function(e) {
     e.preventDefault()
     const {value: text} = Swal.fire({

@@ -413,6 +413,16 @@ $routes->group("api/0", static function ($routes) {
         'apiInvoicePosController::saveAsTemplate/$1',
         ["filter" => "permission:invoice.add"],
     );
+    $routes->patch(
+        "invoice/position/(:num)/up",
+        'apiInvoicePosController::moveUp/$1',
+        ["filter" => "permission:invoice.edit"],
+    );
+    $routes->patch(
+        "invoice/position/(:num)/down",
+        'apiInvoicePosController::moveDown/$1',
+        ["filter" => "permission:invoice.edit"],
+    );
     $routes->post(
         "invoice/(:num)/title",
         'apiInvoicePosController::addTitle/$1',
@@ -505,6 +515,14 @@ $routes->group("api/v1", static function ($routes) {
     $routes->post(
         "invoice/position/(:num)/copy",
         'apiInvoicePosController::saveAsTemplate/$1'
+    );
+    $routes->patch(
+        "invoice/position/(:num)/up",
+        'apiInvoicePosController::moveUp/$1'
+    );
+    $routes->patch(
+        "invoice/position/(:num)/down",
+        'apiInvoicePosController::moveDown/$1'
     );
 
     $routes->delete("comment/(:num)", 'apiCommentController::delete/$1');
