@@ -21,7 +21,8 @@ class InvoicePositionModel extends Model
         'mwst',
         'unit',
         'notes',
-        'position'
+        'position',
+        'type'
     ];
 
     protected $primaryKey = 'id';
@@ -44,6 +45,7 @@ class InvoicePositionModel extends Model
             ->select('mwst')
             ->where('invoice_id',$invoiceId)
             ->where('deleted_at =', null)
+            ->where('type', 1)
             ->distinct()
             ->orderBy('mwst')
             ->get()->getResultArray();

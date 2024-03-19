@@ -89,7 +89,7 @@ class Invoice extends Entity
     public function getPositions(){
 
         $invoicePositionModel = model(InvoicePositionModel::class);
-        $result = $invoicePositionModel->where('invoice_id', $this->id)->findAll();
+        $result = $invoicePositionModel->where('invoice_id', $this->id)->orderBy('ord')->findAll();
 
         return $result ?: [];
         

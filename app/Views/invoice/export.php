@@ -140,6 +140,7 @@ $date = ($invoice->invoice) ? new DateTime($invoice->invoice) : null;
                         <tbody>
                             <?php foreach($invoice->getPositions() as $position): ?>
                             <tr>
+                                <?php if($position->type == 1): ?>
                                 <td class="text-start"><?=$position->position?></td>
                                 <td>
                                     <p class="strong mb-1"><?=$position->title?></p>
@@ -154,6 +155,11 @@ $date = ($invoice->invoice) ? new DateTime($invoice->invoice) : null;
                                 <td class="text-end">
                                     CHF&nbsp;<?=$position->getPositionTotal(false)?>
                                 </td>
+                                <?php elseif($position->type == 2): ?>
+                                <td colspan="5" class="pb-1">
+                                    <p class="strong mb-0"><?=$position->title?></p>
+                                </td>
+                                <?php endif; ?>
                             </tr>
                             <?php endforeach; ?>
                         </tbody>

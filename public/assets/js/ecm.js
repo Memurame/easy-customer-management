@@ -205,6 +205,42 @@ $("#receiver-select").change(function() {
 
 });
 
+$(".action-addinvoicetitle" ).click(function(e) {
+    e.preventDefault()
+    const {value: text} = Swal.fire({
+        title: 'Position Titel',
+        input: "text",
+        inputLabel: "Neuer Titel eingeben",
+        showCancelButton: true,
+        preConfirm: (call) => {
+            $.ajax({
+                type: "POST",
+                url: rootUrl + 'api/0/invoice/' + $(this).data('id') + '/title',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify({
+                    'title': $("#swal2-input").val(),
+                    [csrfName]: csrfHash
+                }),
+                cache: false,
+                statusCode: {
+                    200: function (respond) {
+                        window.location.href = rootUrl + '/message?chat=' + respond.chat_id
+                    },
+                    400: function (error) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Fehler',
+                            text: 'Du musst einen Titel eingeben!'
+                        })
+                    }
+                }
+            });
+        },
+        allowOutsideClick: () => !Swal.isLoading()
+    })
+});
+
 $(".copy-to-clipboard" ).click(function(e) {
     e.preventDefault()
 

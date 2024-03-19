@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use CodeIgniter\API\ResponseTrait;
 use App\Entities\Invoice;
+use App\Entities\InvoicePosition;
 
 class apiInvoicePosController extends BaseController
 {
@@ -66,6 +67,40 @@ class apiInvoicePosController extends BaseController
         $position->position = $resultMaxPos->maxPosition + 1;
         $position->user_id = user_id();
         $position->invoice_id = $templateId;
+        model('InvoicePositionModel')->save($position);
+        
+        return $this->respondNoContent();
+        
+    }
+
+    public function addTitle($invoideId){
+        $json_data = $this->request->getJSON('array');
+
+        $rules = [
+            'title' => 'required'
+        ];
+
+        if (! $this->validate($rules))
+        {
+            return $this->failValidationErrors($this->validator->getErrors());
+        }
+
+        $invoice = model('InvoiceModel')
+            ->where('id', $invoideId)
+            ->first();
+
+        $resultMaxOrd = model('InvoicePositionModel')
+        ->where('invoice_id', $invoideId)
+        ->select('max(ord) as maxOrd')
+        ->first();
+
+
+        $position = new InvoicePosition();;
+        $position->ord = $resultMaxOrd->maxOrd + 1;
+        $position->user_id = user_id();
+        $position->invoice_id = $invoideId;
+        $position->type = 2;
+        $position->title = $json_data['title'];
         model('InvoicePositionModel')->save($position);
         
         return $this->respondNoContent();

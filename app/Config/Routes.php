@@ -413,6 +413,11 @@ $routes->group("api/0", static function ($routes) {
         'apiInvoicePosController::saveAsTemplate/$1',
         ["filter" => "permission:invoice.add"],
     );
+    $routes->post(
+        "invoice/(:num)/title",
+        'apiInvoicePosController::addTitle/$1',
+        ["filter" => "permission:invoice.edit"],
+    );
 
     $routes->delete("comment/(:num)", 'apiCommentController::delete/$1', [
         "filter" => "permission:comment.delete",
