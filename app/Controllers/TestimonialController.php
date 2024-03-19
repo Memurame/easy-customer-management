@@ -217,6 +217,8 @@ class TestimonialController extends BaseController
             $testimonial->email = $this->request->getPost('email');
             $testimonial->data = json_encode($data);
             $testimonial->active = $this->request->getPost('active');
+            unset($testimonial->dataArray);
+            unset($testimonial->logArray);
 
 
             if($this->request->getPost('active') == 2 && $this->request->getPost('notify')){
