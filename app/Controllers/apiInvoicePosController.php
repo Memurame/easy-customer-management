@@ -72,4 +72,56 @@ class apiInvoicePosController extends BaseController
         
     }
 
+    public function addTitle($invoideId){
+        $json_data = $this->request->getJSON('array');
+
+        $rules = [
+            'title' => 'required'
+        ];
+
+        if (! $this->validate($rules))
+        {
+            return $this->failValidationErrors($this->validator->getErrors());
+        }
+
+        $invoice = model('InvoiceModel')
+            ->where('id', $invoideId)
+            ->first();
+
+        $resultMaxOrd = model('InvoicePositionModel')
+        ->where('invoice_id', $invoideId)
+        ->select('max(ord) as maxOrd')
+        ->first();
+
+
+        $position = new InvoicePosition();;
+        $position->ord = $resultMaxOrd->maxOrd + 1;
+        $position->user_id = user_id();
+        $position->invoice_id = $invoideId;
+        $position->type = 2;
+        $position->title = $json_data['title'];
+        model('InvoicePositionModel')->save($position);
+        
+        return $this->respondNoContent();
+        
+    }
+
+    public function moveUp($invoicePosId){
+        $invoicePos = model('InvoicePositionModel')->find($invoicePosId);
+        $invoicePosList = model('InvoicePositionModel')->where('invoice_id', $invoicePos->invoice_id)->findAll();
+
+        foreach($invoicePosList as $pos){
+            if($pos->ord < $invoicePos->ord){
+                $prevPos = $pos->ord;
+
+                $pos->ord = $invoicePos->ord;
+                model('InvoicePositionModel')->save($pos);
+
+                $invoicePos->ord = $prevPos;
+                model('InvoicePositionModel')->save($invoicePos);
+            }
+        }
+        
+
+    }
 }
