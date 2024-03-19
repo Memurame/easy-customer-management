@@ -32,6 +32,11 @@ class InvoicesPositionController extends BaseController
             ->first();
         $max['position'] = $resultMaxPos->maxPosition + 1;
 
+        $resultMaxOrd = model('InvoicePositionModel')
+        ->where('invoice_id', $invoice->Id)
+        ->select('max(ord) as maxOrd')
+        ->first();
+        $max['ord'] = $resultMaxOrd->maxOrd + 1;
 
 
         if($this->request->getGet('template')){
@@ -67,6 +72,7 @@ class InvoicesPositionController extends BaseController
             $invoicePosition->price_inkl = ($this->request->getPost('price_inkl')) ? true : false;
             $invoicePosition->user_id = user_id();
             $invoicePosition->invoice_id = $invoice->id;
+            $invoicePosition->ord = $max['ord'];
 
             $invoicePositionModel = new InvoicePositionModel();
             $invoicePositionModel->save($invoicePosition);

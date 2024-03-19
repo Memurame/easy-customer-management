@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use CodeIgniter\API\ResponseTrait;
 use App\Entities\Invoice;
+use App\Entities\InvoicePosition;
 
 class apiInvoicePosController extends BaseController
 {

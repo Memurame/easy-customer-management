@@ -236,7 +236,6 @@ $('.action-invoicemovedown').click(function(element){
     });
 });
 
-
 $(".action-addinvoicetitle" ).click(function(e) {
     e.preventDefault()
     const {value: text} = Swal.fire({

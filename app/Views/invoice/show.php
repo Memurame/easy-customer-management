@@ -226,7 +226,15 @@ $date = ($invoice->invoice) ? new DateTime($invoice->invoice) : null;
                         <h3 class="card-title">Positionen</h3>
                         <div class="card-actions">
                             <?php if(auth()->user()->can('invoice.edit')): ?>
-
+                            <button class="btn btn-primary action-addinvoicetitle" data-id="<?=$invoice->id?>">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M12 5l0 14"></path>
+                                    <path d="M5 12l14 0"></path>
+                                </svg>
+                                Titel
+                            </button>
                             <a href="<?=base_url(route_to('invoicepos.add', $invoice->id))?>" class="btn btn-primary">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -246,7 +254,7 @@ $date = ($invoice->invoice) ? new DateTime($invoice->invoice) : null;
                         <table class="table" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>#</th>
+                                    <th>Pos.</th>
                                     <th>Titel</th>
                                     <th>Einzelpreis</th>
                                     <th>Menge</th>
@@ -258,25 +266,32 @@ $date = ($invoice->invoice) ? new DateTime($invoice->invoice) : null;
                             <tbody>
                                 <?php foreach($invoice->getPositions() as $position): ?>
                                 <tr>
-                                    <td class="align-middle">
-                                        <?=$position->position?>
-                                    </td>
-                                    <td class="align-middle">
-                                        <strong><?=$position->title?></strong><br><?=$position->description?>
-                                    </td>
-                                    <td class="align-middle">
-                                        CHF <?=$position->price?>
-                                        <span style="font-size:11px"><?= ($position->price_inkl) ? '(inkl. MwSt)' : '(exkl. MwSt)' ?></span>
-                                    </td>
-                                    <td class="align-middle">
-                                        <?=$position->multiplication?> <?=$position->unit?>
-                                    </td>
-                                    <td class="align-middle">
-                                        <?=($position->mwst >= 0) ? $position->mwst .'%' : 'inkl.' ?>
-                                    </td>
-                                    <td class="align-middle">
-                                        CHF <?=$position->getPositionTotal()?>
-                                    </td>
+                                    <?php if($position->type == 1): ?>
+                                        <td class="align-middle">
+                                            <?=$position->position?>
+                                        </td>
+                                        <td class="align-middle">
+                                            <strong><?=$position->title?></strong><br><?=$position->description?>
+                                        </td>
+                                        <td class="align-middle">
+                                            CHF <?=$position->price?>
+                                            <span style="font-size:11px"><?= ($position->price_inkl) ? '(inkl. MwSt)' : '(exkl. MwSt)' ?></span>
+                                        </td>
+                                        <td class="align-middle">
+                                            <?=$position->multiplication?> <?=$position->unit?>
+                                        </td>
+                                        <td class="align-middle">
+                                            <?=($position->mwst >= 0) ? $position->mwst .'%' : 'inkl.' ?>
+                                        </td>
+                                        <td class="align-middle">
+                                            CHF <?=$position->getPositionTotal()?>
+                                        </td>
+                                        <?php elseif($position->type == 2): ?>
+                                            <td class="align-middle" colspan="6">
+                                                <strong><?=$position->title?></strong>
+                                            </td>
+
+                                        <?php endif; ?>
                                     <td class="text-end">
                                         <?php if(auth()->user()->can('invoice.edit')): ?>
                                             <button class="btn btn-secondary action-invoicemoveup" data-id="<?=$position->id?>">UP</button>
