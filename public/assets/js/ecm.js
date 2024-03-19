@@ -205,6 +205,74 @@ $("#receiver-select").change(function() {
 
 });
 
+$('.action-invoicemoveup').click(function(element){
+    console.log("UP");
+    var currentRow = $(this).parents().parents("tr:first");
+    var prevRow = currentRow.prev();
+    if(prevRow.index()>=0){
+        currentRow.insertBefore(prevRow);
+        $.ajax({
+            url: rootUrl + 'api/0/invoice/position/'  + $(this).data('id') + '/up',
+            type: 'PATCH',
+            dataType: 'json',
+            data: JSON.stringify({
+                [csrfName]: csrfHash
+            })
+        });
+    }
+});
+$('.action-invoicemovedown').click(function(element){
+    console.log("DOWN");
+    var currentRow = $(this).parents().parents("tr:first");
+    var nextRow = currentRow.next();
+    currentRow.insertAfter(nextRow);
+    $.ajax({
+        url: rootUrl + 'api/0/invoice/position/'  + $(this).data('id') + '/down',
+        type: 'PATCH',
+        dataType: 'json',
+        data: JSON.stringify({
+            [csrfName]: csrfHash
+        })
+    });
+});
+
+
+$(".action-addinvoicetitle" ).click(function(e) {
+    e.preventDefault()
+    const {value: text} = Swal.fire({
+        title: 'Position Titel',
+        input: "text",
+        inputLabel: "Neuer Titel eingeben",
+        showCancelButton: true,
+        preConfirm: (call) => {
+            $.ajax({
+                type: "POST",
+                url: rootUrl + 'api/0/invoice/' + $(this).data('id') + '/title',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify({
+                    'title': $("#swal2-input").val(),
+                    [csrfName]: csrfHash
+                }),
+                cache: false,
+                statusCode: {
+                    200: function (respond) {
+                        window.location.href = rootUrl + '/message?chat=' + respond.chat_id
+                    },
+                    400: function (error) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Fehler',
+                            text: 'Du musst einen Titel eingeben!'
+                        })
+                    }
+                }
+            });
+        },
+        allowOutsideClick: () => !Swal.isLoading()
+    })
+});
+
 $(".copy-to-clipboard" ).click(function(e) {
     e.preventDefault()
 

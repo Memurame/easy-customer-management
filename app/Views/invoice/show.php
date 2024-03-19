@@ -279,6 +279,8 @@ $date = ($invoice->invoice) ? new DateTime($invoice->invoice) : null;
                                     </td>
                                     <td class="text-end">
                                         <?php if(auth()->user()->can('invoice.edit')): ?>
+                                            <button class="btn btn-secondary action-invoicemoveup" data-id="<?=$position->id?>">UP</button>
+                                            <button class="btn btn-secondary action-invoicemovedown" data-id="<?=$position->id?>">DOWN</button>
                                         <div class="dropdown">
                                             <button class="btn dropdown-toggle align-text-top" data-bs-toggle="dropdown">
                                                 Aktion
