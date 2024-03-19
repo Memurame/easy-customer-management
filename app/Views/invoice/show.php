@@ -250,102 +250,119 @@ $date = ($invoice->invoice) ? new DateTime($invoice->invoice) : null;
                     </div>
                     <div class="card-body">
 
-
-                        <table class="table" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>Pos.</th>
-                                    <th>Titel</th>
-                                    <th>Einzelpreis</th>
-                                    <th>Menge</th>
-                                    <th>MwSt</th>
-                                    <th>Positionspreis (inkl. MwSt)</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach($invoice->getPositions() as $position): ?>
-                                <tr>
-                                    <?php if($position->type == 1): ?>
-                                        <td class="align-middle">
-                                            <?=$position->position?>
-                                        </td>
-                                        <td class="align-middle">
-                                            <strong><?=$position->title?></strong><br><?=$position->description?>
-                                        </td>
-                                        <td class="align-middle">
-                                            CHF <?=$position->price?>
-                                            <span style="font-size:11px"><?= ($position->price_inkl) ? '(inkl. MwSt)' : '(exkl. MwSt)' ?></span>
-                                        </td>
-                                        <td class="align-middle">
-                                            <?=$position->multiplication?> <?=$position->unit?>
-                                        </td>
-                                        <td class="align-middle">
-                                            <?=($position->mwst >= 0) ? $position->mwst .'%' : 'inkl.' ?>
-                                        </td>
-                                        <td class="align-middle">
-                                            CHF <?=$position->getPositionTotal()?>
-                                        </td>
-                                        <?php elseif($position->type == 2): ?>
-                                            <td class="align-middle" colspan="6">
-                                                <strong><?=$position->title?></strong>
+                        <div class="table-responsive-md">
+                            <table class="table table-vcenter card-table" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Pos.</th>
+                                        <th>Titel</th>
+                                        <th>Einzelpreis</th>
+                                        <th>Menge</th>
+                                        <th>MwSt</th>
+                                        <th>Positionspreis (inkl. MwSt)</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach($invoice->getPositions() as $position): ?>
+                                    <tr>
+                                        <?php if($position->type == 1): ?>
+                                            <td class="align-middle">
+                                                <?=$position->position?>
                                             </td>
+                                            <td class="align-middle">
+                                                <strong><?=$position->title?></strong><br><?=$position->description?>
+                                            </td>
+                                            <td class="align-middle">
+                                                CHF <?=$position->price?>
+                                                <span style="font-size:11px"><?= ($position->price_inkl) ? '(inkl. MwSt)' : '(exkl. MwSt)' ?></span>
+                                            </td>
+                                            <td class="align-middle">
+                                                <?=$position->multiplication?> <?=$position->unit?>
+                                            </td>
+                                            <td class="align-middle">
+                                                <?=($position->mwst >= 0) ? $position->mwst .'%' : 'inkl.' ?>
+                                            </td>
+                                            <td class="align-middle">
+                                                CHF <?=$position->getPositionTotal()?>
+                                            </td>
+                                            <?php elseif($position->type == 2): ?>
+                                                <td class="align-middle" colspan="6">
+                                                    <strong><?=$position->title?></strong>
+                                                </td>
 
-                                        <?php endif; ?>
-                                    <td class="text-end">
-                                        <?php if(auth()->user()->can('invoice.edit')): ?>
-                                            <button class="btn btn-secondary action-invoicemoveup" data-id="<?=$position->id?>">UP</button>
-                                            <button class="btn btn-secondary action-invoicemovedown" data-id="<?=$position->id?>">DOWN</button>
-                                        <div class="dropdown">
-                                            <button class="btn dropdown-toggle align-text-top" data-bs-toggle="dropdown">
-                                                Aktion
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <?php if($invoice->id != setting('App.invoiceTemplateId')): ?>
-                                                <button class="dropdown-item text-primary action-copyinvoicepos" data-id="<?=$position->id?>">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                        stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                        <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path>
-                                                        <path d="M21 21l-6 -6"></path>
-                                                    </svg>
-                                                    Pos. als Vorlage speichern
-                                                </button>
-                                                <?php endif; ?>
+                                            <?php endif; ?>
+                                        <td class="text-end">
+                                            <?php if(auth()->user()->can('invoice.edit')): ?>
 
-                                                <a href="<?=base_url(route_to('invoicepos.edit', $position->id))?>" class="dropdown-item">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                        stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                        <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path>
-                                                        <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path>
-                                                        <path d="M16 5l3 3"></path>
-                                                    </svg>
-                                                    Bearbeiten
-                                                </a>
+                                                <div class="btn-list justify-content-end">
+                                                    <div class="d-flex flex-column">
+                                                        <button class="btn mb-1 p-0 mt-1 btn-outline-secondary btn-sm action-invoicemoveup" data-id="<?=$position->id?>" style="width: 20px; height: 16px">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-caret-up m-0">
+                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                                <path d="M11.293 7.293a1 1 0 0 1 1.32 -.083l.094 .083l6 6l.083 .094l.054 .077l.054 .096l.017 .036l.027 .067l.032 .108l.01 .053l.01 .06l.004 .057l.002 .059l-.002 .059l-.005 .058l-.009 .06l-.01 .052l-.032 .108l-.027 .067l-.07 .132l-.065 .09l-.073 .081l-.094 .083l-.077 .054l-.096 .054l-.036 .017l-.067 .027l-.108 .032l-.053 .01l-.06 .01l-.057 .004l-.059 .002h-12c-.852 0 -1.297 -.986 -.783 -1.623l.076 -.084l6 -6z" />
+                                                            </svg>
+                                                        </button>
+                                                        <button class="btn p-0 btn-outline-secondary btn-sm action-invoicemovedown" data-id="<?=$position->id?>" style="width: 20px; height: 16px">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-caret-down m-0">
+                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                                <path d="M18 9c.852 0 1.297 .986 .783 1.623l-.076 .084l-6 6a1 1 0 0 1 -1.32 .083l-.094 -.083l-6 -6l-.083 -.094l-.054 -.077l-.054 -.096l-.017 -.036l-.027 -.067l-.032 -.108l-.01 -.053l-.01 -.06l-.004 -.057v-.118l.005 -.058l.009 -.06l.01 -.052l.032 -.108l.027 -.067l.07 -.132l.065 -.09l.073 -.081l.094 -.083l.077 -.054l.096 -.054l.036 -.017l.067 -.027l.108 -.032l.053 -.01l.06 -.01l.057 -.004l12.059 -.002z" />
+                                                            </svg>
+                                                        </button>
+                                                    </div>
+                                                    
+                                                    <div class="dropdown">
+                                                        <button class="btn dropdown-toggle align-text-top" data-bs-toggle="dropdown">
+                                                            Aktion
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-end">
+                                                            <?php if($invoice->id != setting('App.invoiceTemplateId')): ?>
+                                                            <button class="dropdown-item text-primary action-copyinvoicepos" data-id="<?=$position->id?>">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                                    <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path>
+                                                                    <path d="M21 21l-6 -6"></path>
+                                                                </svg>
+                                                                Pos. als Vorlage speichern
+                                                            </button>
+                                                            <?php endif; ?>
 
-                                                <button class="text-danger dropdown-item delete-invoicepos" data-id="<?=$position->id?>">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                        stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                        <path d="M4 7l16 0"></path>
-                                                        <path d="M10 11l0 6"></path>
-                                                        <path d="M14 11l0 6"></path>
-                                                        <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
-                                                        <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
-                                                    </svg>
-                                                    Löschen
-                                                </button>
+                                                            <a href="<?=base_url(route_to('invoicepos.edit', $position->id))?>" class="dropdown-item">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                                    <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path>
+                                                                    <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path>
+                                                                    <path d="M16 5l3 3"></path>
+                                                                </svg>
+                                                                Bearbeiten
+                                                            </a>
 
-                                            </div>
-                                        </div>
+                                                            <button class="text-danger dropdown-item delete-invoicepos" data-id="<?=$position->id?>">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                                    <path d="M4 7l16 0"></path>
+                                                                    <path d="M10 11l0 6"></path>
+                                                                    <path d="M14 11l0 6"></path>
+                                                                    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
+                                                                    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
+                                                                </svg>
+                                                                Löschen
+                                                            </button>
 
-                                        <?php endif; ?>
-                                    </td>
-                                </tr>
-                                <?php endforeach;?>
-                            </tbody>
-                        </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            <?php endif; ?>
+                                        </td>
+                                    </tr>
+                                    <?php endforeach;?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
