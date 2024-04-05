@@ -163,4 +163,28 @@ class Invoice extends Entity
 
         return $this->address;
     }
+
+    /* ########################################################
+     * Ab hier sind Funktionen für die API
+     #########################################################*/
+     public function prepareForReturn(){
+        $r = model('InvoiceModel')
+            ->find($this->id);
+
+        $return = [];
+        $return['id'] = $r->id;
+        $return['date_invoice'] = $r->invoice;
+        $return['paid'] = $r->paid;
+        $return['renew'] = $r->renew;
+        $return['intervall'] = $r->renew_intervall;
+        $return['renewed'] = $r->renewed;
+        $return['description'] = $r->description;
+        $return['note']['top'] = $r->notes_top;
+        $return['note']['bottom'] = $r->notes_bottom;
+        $return['contact']['name'] = $r->contact_name;
+        $return['contact']['phone'] = $r->contact_phone;
+        $return['contact']['mail'] = $r->contact_mail;
+
+        return $return ?? null;
+    }
 }

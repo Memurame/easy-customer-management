@@ -111,10 +111,10 @@ class apiInvoicePosController extends BaseController
         $invoicePos = model('InvoicePositionModel')->find($invoicePosId);
         $invoicePosList = model('InvoicePositionModel')
         ->where('invoice_id', $invoicePos->invoice_id)
-        ->where('ord <', $invoicePos->ord)
+        ->where('ord <=', $invoicePos->ord)
         ->orderBy('ord', 'desc')
         ->findAll();
-
+        
         foreach($invoicePosList as $pos){
             if($pos->ord < $invoicePos->ord){
                 $prevPos = $pos->ord;
@@ -135,7 +135,7 @@ class apiInvoicePosController extends BaseController
         $invoicePos = model('InvoicePositionModel')->find($invoicePosId);
         $invoicePosList = model('InvoicePositionModel')
         ->where('invoice_id', $invoicePos->invoice_id)
-        ->where('ord >', $invoicePos->ord)
+        ->where('ord >=', $invoicePos->ord)
         ->orderBy('ord')
         ->findAll();
 

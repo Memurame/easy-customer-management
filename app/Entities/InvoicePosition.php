@@ -69,4 +69,27 @@ class InvoicePosition extends Entity
 
         return round($total,2);
     }
+
+    /* ########################################################
+     * Ab hier sind Funktionen für die API
+     #########################################################*/
+     public function prepareForReturn(){
+        $r = model('InvoicePositionModel')
+            ->find($this->id);
+
+        $return = [];
+        $return['id'] = $r->id;
+        $return['position'] = $r->position;
+        $return['title'] = $r->title;
+        $return['description'] = $r->description;
+        $return['price'] = $r->price;
+        $return['price_inkl'] = $r->price_inkl;
+        $return['amount'] = $r->amount;
+        $return['mwst'] = $r->mwst;
+        $return['notes'] = $r->notes;
+        $return['type'] = $r->type;
+        $return['order'] = $r->ord;
+
+        return $return ?? null;
+    }
 }

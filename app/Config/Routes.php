@@ -508,10 +508,10 @@ $routes->group("api/v1", static function ($routes) {
     );
 
     $routes->delete("invoice/(:num)", 'apiInvoiceController::delete/$1');
-    $routes->delete(
-        "invoice/position/(:num)",
-        'apiInvoicePosController::delete/$1',
-    );
+    $routes->get("invoice/(:num)", 'apiInvoiceController::show/$1');
+
+
+    $routes->delete("invoice/position/(:num)",'apiInvoicePosController::delete/$1');
     $routes->post(
         "invoice/position/(:num)/copy",
         'apiInvoicePosController::saveAsTemplate/$1'
