@@ -57,15 +57,15 @@ class CronController extends BaseController
         }
 
         /*
-         * Geplannet rechneungen bearbeten und entsprechend status setzen
+         * Geplannet rechneungen bearbeiten und entsprechend status setzen
          */
         $invoices = $invoiceModel
             ->where('paid', 4)
             ->findAll();
         foreach($invoices as $key => $invoice){
             $invoiceDate = strtotime($invoice->invoice);
-            if(time() >= strtotime('-14 days', $invoiceDate)){
-                $invoice->paid = 2;
+            if(time() >= strtotime('-30 days', $invoiceDate)){
+                $invoice->paid = 5;
                 if($invoice->hasChanged()){
                     $invoiceModel->save($invoice);
                 }
@@ -83,7 +83,7 @@ class CronController extends BaseController
 
         foreach($invoices as $key => $invoice){
             $invoiceDate = strtotime($invoice->invoice);
-            if(time() >= strtotime('+14 days', $invoiceDate)){
+            if(time() >= strtotime('+1 days', $invoiceDate)){
 
                 $invoice->renewed = 1;
                 if($invoice->hasChanged()){
@@ -91,17 +91,31 @@ class CronController extends BaseController
                 }
 
                 $invoice->id = null;
-                $invoice->paid = 2;
+                $invoice->paid = 5;
                 $invoice->renewed = 0;
                 $invoice->invoice = date('Y.m.d', strtotime($invoice->invoice. '+1 months'));
-                $invoiceModel->insert($invoice);
+                $invoiceModel->save($invoice);
+
+
+                $newInvoiceID = $invoiceModel->getInsertID();
+                $invoicePos = model('InvoicePositionModel')
+                    ->where('invoice_id', $lastInvoiceID)
+                    ->findAll();
+                foreach($invoicePos as $pos){
+                    $pos->id = null;
+                    $pos->invoice_id = $newInvoiceID;
+                    if(!$pos->type){
+                        $pos->type = 1;
+                    }
+                    model('InvoicePositionModel')->save($pos);
+                }
 
 
             }
         }
 
          /*
-         * Rechnungen welche automatisch auf den 1. im Monat fällig sind generieren und auf pendent setzen
+         * Rechnungen welche automatisch auf den 1. im Monat fällig sind generieren und auf entwurf setzen
          */
         $invoices = $invoiceModel
             ->where('renew', 1)
@@ -111,7 +125,7 @@ class CronController extends BaseController
 
         foreach($invoices as $key => $invoice){
             $invoiceDate = strtotime($invoice->invoice);
-            if(date('d', time()) >= 14 && date('m', $invoiceDate) == date('m', time())){
+            if(date('d', time()) > 1 && date('m', $invoiceDate) == date('m', time())){
 
                 $invoice->renewed = 1;
                 if($invoice->hasChanged()){
@@ -119,13 +133,31 @@ class CronController extends BaseController
                 }
 
                 $invoice->id = null;
-                $invoice->paid = 2;
+                $invoice->paid = 5;
                 $invoice->renewed = 0;
                 $invoice->invoice = date('Y.m', strtotime($invoice->invoice. '+1 months')) . '.1';
-                $invoiceModel->insert($invoice);
+                $invoiceModel->save($invoice);
+
+
+                $newInvoiceID = $invoiceModel->getInsertID();
+                $invoicePos = model('InvoicePositionModel')
+                    ->where('invoice_id', $lastInvoiceID)
+                    ->findAll();
+                foreach($invoicePos as $pos){
+                    $pos->id = null;
+                    $pos->invoice_id = $newInvoiceID;
+                    if(!$pos->type){
+                        $pos->type = 1;
+                    }
+                    model('InvoicePositionModel')->save($pos);
+                }
+
+                
+                
 
             }
         }
+        
 
         /*
          * Rechnungen welche automatisch Jährlich erneuert werden generieren und auf pendent setzen
@@ -138,7 +170,8 @@ class CronController extends BaseController
 
         foreach($invoices as $key => $invoice){
             $invoiceDate = strtotime($invoice->invoice);
-            if(time() >= strtotime('+335 days', $invoiceDate)){
+            if(time() >= strtotime('+300 days', $invoiceDate)){
+                $lastInvoiceID = $invoice->id;
 
                 $invoice->renewed = 1;
                 if($invoice->hasChanged()){
@@ -146,14 +179,28 @@ class CronController extends BaseController
                 }
 
                 $invoice->id = null;
-                $invoice->paid = 2;
+                $invoice->paid = 4;
                 $invoice->renewed = null;
                 $invoice->invoice = date('Y.m.d', strtotime($invoice->invoice. '+1 year'));
-                $invoiceModel->insert($invoice);
+                $invoiceModel->save($invoice);
 
+
+                $newInvoiceID = $invoiceModel->getInsertID();
+                $invoicePos = model('InvoicePositionModel')
+                    ->where('invoice_id', $lastInvoiceID)
+                    ->findAll();
+                foreach($invoicePos as $pos){
+                    $pos->id = null;
+                    $pos->invoice_id = $newInvoiceID;
+                    if(!$pos->type){
+                        $pos->type = 1;
+                    }
+                    model('InvoicePositionModel')->save($pos);
+                }
 
             }
         }
+        die();
 
          /*
          * Rechnungen welche automatisch auf den 1. im Jahr fällig sind generieren und auf pendent setzen
@@ -166,7 +213,7 @@ class CronController extends BaseController
 
         foreach($invoices as $key => $invoice){
             $invoiceDate = strtotime($invoice->invoice);
-            if(date('d', time()) >= 1 && date('m', time()) == 12 && date('Y', $invoiceDate) == date('Y', time())){
+            if(date('d', time()) >= 1 && date('m', time()) == 10 && date('Y', $invoiceDate) == date('Y', time())){
 
                 $invoice->renewed = 1;
                 if($invoice->hasChanged()){
@@ -174,10 +221,24 @@ class CronController extends BaseController
                 }
 
                 $invoice->id = null;
-                $invoice->paid = 2;
+                $invoice->paid = 4;
                 $invoice->renewed = 0;
                 $invoice->invoice = date('Y.m', strtotime($invoice->invoice. '+1 year')) . '.1';
-                $invoiceModel->insert($invoice);
+                $invoiceModel->save($invoice);
+
+
+                $newInvoiceID = $invoiceModel->getInsertID();
+                $invoicePos = model('InvoicePositionModel')
+                    ->where('invoice_id', $lastInvoiceID)
+                    ->findAll();
+                foreach($invoicePos as $pos){
+                    $pos->id = null;
+                    $pos->invoice_id = $newInvoiceID;
+                    if(!$pos->type){
+                        $pos->type = 1;
+                    }
+                    model('InvoicePositionModel')->save($pos);
+                }
 
             }
         }
