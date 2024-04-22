@@ -52,19 +52,6 @@
                                     <b>Letzter Import: <?=service('settings')->get('App.lastKalahariImport') ?></b></small>
                                 </form>
                             </div>
-                            <div class="col-md-6">
-                                <?= form_open_multipart('tools/estos/abacus') ?>
-                                <?= csrf_field() ?>
-                                <label for="abacus_import">Abacus Adressen</label>
-                                <div class="input-group">
-                                    <input type="file" class="form-control" id="abacus_import" name="abacus_import" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-                                    <button class="btn btn-outline-secondary" type="submit">Hochladen</button>
-                                </div>
-                                <small class="text-muted">Upload aller Adressen aus dem Abacus als .json Datei.<br>
-                                    <b>Letzter Import: <?=service('settings')->get('App.lastAbacusImport') ?></b></small>
-                                </form>
-
-                            </div>
 
                         </div>
                     </div>

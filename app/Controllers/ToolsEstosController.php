@@ -6,40 +6,22 @@ use CodeIgniter\Files\File;
 
 class ToolsEstosController extends BaseController
 {
-    public string $fileCSV = FCPATH . '../writable/export/estos.csv';
-    public string $fileJSON = FCPATH . '../writable/export/estos.json';
-    public string $fileKalahari = FCPATH . '../writable/export/kalahari.json';
+    
+    public function index()
+    {
+        return view('tools/estos-phonelist', [
+            'adressen' => $adressen ?? [],
+            'preview'  => $this->request->getGet('preview')
+        ]);
 
-    public function importAbacus(){
+    }
 
-        $validationRule = [
-            'abacus_import' => [
-                'label' => 'Abacus Adressen',
-                'rules' => [
-                    'uploaded[abacus_import]'
-                ],
-            ],
-        ];
-        if (! $this->validate($validationRule)) {
-            $data = ['errors' => $this->validator->getErrors()];
+    public function export(){
 
-            return redirect()->route('estos.index')->with('msg_error', 'Fehler beim hochaden der Datei, prüfe deine Eingabe. Nur JSON Datei möglich.');
-        }
-
-        $uploadFile = $this->request->getFile('abacus_import');
-
-        if (! $uploadFile->hasMoved()) {
-            $filepath = WRITEPATH . 'uploads/' . $uploadFile->store();
-        }
-
-
-
-
-        $inputFileName = $filepath;
-        $json = json_decode(file_get_contents($inputFileName), true);
-        
-        $fp = fopen($this->fileCSV, 'w');
-
+        $adressen = model('abaAddressModel')
+            ->where('abacus IS NOT NULL', null)
+            ->where('inactive', NULL)
+            ->findAll();
 
         $currentDate['year'] = date('Y');
         $currentDate['month'] = date('m');
@@ -61,23 +43,24 @@ class ToolsEstosController extends BaseController
             'KalahariId',
             'Telefon2'
         ];
-        fputcsv($fp, $title, ";");
-
-        $adressen = $json[array_key_first($json)];
         $returnArray = [];
 
-        $kalahari = json_decode(file_get_contents($this->fileKalahari), true);
+        $kalahari = json_decode(file_get_contents(FCPATH . '../writable/export/kalahari.json'), true);
+
+        $fileOut = fopen("php://output", 'w') or die("Unable open php://output");
+        fputcsv($fileOut, $title, ';');
+
+        // Header forces the CSV file to download
+        header("Content-Type:application/csv");
+        header("Content-Disposition:attachment;filename=example-csv.csv");
 
         // Alle Adressen durchschleifen
         for($i = 0; $i < count($adressen); $i++){
 
-            // Die Adressen welche als Inaktv markiert sind heruasfiltern
-            // Wenn der Wert 1 ist dann  ist die Adresse inaktiv markiert
-            if($adressen[$i]['Inaktiv'] == 1) continue;
-
             // Das Datum welches im Excel in einem Datumformat war, wieder in ein normales Format umwandeln
             // Falls das Datum leer ist, NULL zurückgeben
-            $adressDate = (!empty($adressen[$i]['Zahldatum'])) ? date("d.m.Y", convertExcelDateToUnix($adressen[$i]['Zahldatum'])) : null;
+            //$adressDate = (!empty($adressen[$i]['Zahldatum'])) ? date("d.m.Y", convertExcelDateToUnix($adressen[$i]['Zahldatum'])) : null;
+            $adressDate = (!empty($address[$i]['paid_date'])) ? date('d.m.Y',strtotime($address[$i]['paid_date'])) : NULL;
             $adressDateArray = explode(".", $adressDate);
             // Prüfen on ein Zahldatum gesetzt ist.
             // von Juli-Dezember die Mitgliederart anhand des Zahldatums anpassen
@@ -86,42 +69,44 @@ class ToolsEstosController extends BaseController
             if(isset($adressDate) AND
                 $currentDate['year'] == $adressDateArray[2] AND
                 $currentDate['month'] >= 7 AND
-                $adressen[$i]['Bez in %'] >= 70 AND
-                $adressen[$i]['Mitgliederart'] == "NM"){
-                $adressen[$i]['Mitgliederart'] = "AM";
+                $adressen[$i]['paid_percent'] >= 70 AND
+                $adressen[$i]['member_typ'] == "NM"){
+                $adressen[$i]['member_typ'] = "AM";
             }
 
             // Bei Mitgliederart AM und MK den Status "Rechnung bezahlt" setzen.
-            if($adressen[$i]['Mitgliederart'] == "AM" OR $adressen[$i]['Mitgliederart'] == "MK"){
+            if($adressen[$i]['member_typ'] == "AM" OR $adressen[$i]['member_typ'] == "MK"){
                 $adressen[$i]['Status'] = "Rechnung bezahlt";
             }
             // CAJB Mitglieder erhalten den Status "CAJB"
-            else if($adressen[$i]['Mitgliederart'] == "CAJB"){
+            else if($adressen[$i]['member_typ'] == "CAJB"){
                 $adressen[$i]['Status'] = "CAJB";
             }
             // Adressen mit einem NM erhalten den Status "UNBEZAHLT"
-            else if($adressen[$i]['Mitgliederart'] == "NM"){
+            else if($adressen[$i]['member_typ'] == "NM"){
                 $adressen[$i]['Status'] = "UNBEZAHLT";
             }
             // Alle Anderen erhalten den Status "Keine Rechnung"
             else {
                 $adressen[$i]['Status'] = "keine Rechnung";
-            }$upas = Array("/" => "", "." => "", "-" => "", "'" => "");
+            }
+
+            $upas = Array("/" => "", "." => "", "-" => "", "'" => "");
 
             // Bei den Telefonnummern die (Sonder)Zeichen: / . - ' entfernen
-            $adressen[$i]['Telefon 1'] = removeSpecialchar($adressen[$i]['Telefon 1']);
-            $adressen[$i]['Telefon 2'] = removeSpecialchar($adressen[$i]['Telefon 2']);
-            $adressen[$i]['Mobiltelefon'] = removeSpecialchar($adressen[$i]['Mobiltelefon']);
+            $adressen[$i]['phone1'] = removeSpecialchar($adressen[$i]['phone1']);
+            $adressen[$i]['phone2'] = removeSpecialchar($adressen[$i]['phone2']);
+            $adressen[$i]['mobile'] = removeSpecialchar($adressen[$i]['mobile']);
 
             // Die Telefonnummer und handynummer so formatieren damit diese mit der Kalahariliste abgeglichen werden können
             // Diese sollten im Format sein wie im folgenden Beispiel: 319382280
-            $telefon = removeSpecialchar($adressen[$i]['Telefon 1'], true);
+            $telefon = removeSpecialchar($adressen[$i]['phone1'], true);
             $telefon = (string)((int)($telefon));
 
-            $telefon2 = removeSpecialchar($adressen[$i]['Telefon 2'], true);
+            $telefon2 = removeSpecialchar($adressen[$i]['phone2'], true);
             $telefon2 = (string)((int)($telefon2));
 
-            $mobile = removeSpecialchar($adressen[$i]['Mobiltelefon'], true);
+            $mobile = removeSpecialchar($adressen[$i]['mobile'], true);
             $mobile = (string)((int)($mobile));
 
             // In der kalahari Liste nach vorhandener Telefonnummer suchen
@@ -138,54 +123,26 @@ class ToolsEstosController extends BaseController
 
 
             // Export der Mitgliederdaten aufbereiten
-            $returnArray[$i][$title[0]] = $adressen[$i]['AdressNr'];
-            $returnArray[$i][$title[1]] = $adressen[$i]['Vorname'];
-            $returnArray[$i][$title[2]] = $adressen[$i]['Name'];
-            $returnArray[$i][$title[3]] = $adressen[$i]['Strasse'];
-            $returnArray[$i][$title[4]] = $adressen[$i]['Plz'];
-            $returnArray[$i][$title[5]] = $adressen[$i]['Ort'];
-            $returnArray[$i][$title[6]] = $adressen[$i]['Telefon 1'];
-            $returnArray[$i][$title[7]] = $adressen[$i]['Mobiltelefon'];
-            $returnArray[$i][$title[8]] = $adressen[$i]['E-Mail'];
-            $returnArray[$i][$title[9]] = $adressen[$i]['Mitgliederart'];
-            $returnArray[$i][$title[10]] = $adressen[$i]['Bez in %'];
+            $returnArray[$i][$title[0]] = $adressen[$i]['abacus'];
+            $returnArray[$i][$title[1]] = $adressen[$i]['firstname'];
+            $returnArray[$i][$title[2]] = $adressen[$i]['lastname'];
+            $returnArray[$i][$title[3]] = $adressen[$i]['street'];
+            $returnArray[$i][$title[4]] = $adressen[$i]['postcode'];
+            $returnArray[$i][$title[5]] = $adressen[$i]['city'];
+            $returnArray[$i][$title[6]] = $adressen[$i]['phone1'];
+            $returnArray[$i][$title[7]] = $adressen[$i]['mobile'];
+            $returnArray[$i][$title[8]] = $adressen[$i]['email'];
+            $returnArray[$i][$title[9]] = $adressen[$i]['member_typ'];
+            $returnArray[$i][$title[10]] = $adressen[$i]['paid_percent'];
             $returnArray[$i][$title[11]] = $adressDate;
             $returnArray[$i][$title[12]] = $adressen[$i]['Status'];
             $returnArray[$i][$title[13]] = $adressen[$i]['KalahariId'];
-            $returnArray[$i][$title[14]] = $adressen[$i]['Telefon 2'];
+            $returnArray[$i][$title[14]] = $adressen[$i]['phone2'];
+            fputcsv($fileOut, $returnArray[$i], ';');
 
-            fputcsv($fp, $returnArray[$i], ";");
         }
 
-        fclose($fp);
-
-        service('settings')->set('App.lastAbacusImport', date('d.m.Y - H:i:s'));
-        file_put_contents($this->fileJSON, json_encode($returnArray));
-
-        unlink($filepath);
-
-        return redirect()->route('estos.index')->with('msg_success', 'Adressen wurden importiert');
-    }
-
-    public function index()
-    {
-        if(file_exists($this->fileJSON)){
-            $adressen = json_decode(file_get_contents($this->fileJSON), true);
-        }
-        return view('tools/estos-phonelist', [
-            'adressen' => $adressen ?? [],
-            'preview'  => $this->request->getGet('preview')
-        ]);
-
-    }
-
-    public function export(){
-
-        if(file_exists($this->fileCSV)){
-            return $this->response->download($this->fileCSV, null)->setFileName(date('Y-m-d').'_telefonliste.csv');
-        }
-
-        return false;
+        fclose($fileOut) or die("Unable to close php://output");
     }
 
     public function importKalahari(){

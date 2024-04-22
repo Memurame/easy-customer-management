@@ -17,6 +17,17 @@ $routes->get("dashboard", "HomeController::index", [
     "filter" => "permission:home.index",
 ]);
 
+$routes->group("abacus", static function ($routes) {
+    $routes->get("", "AbaAddressController::index", [
+        "as" => "abacus.index",
+        "filter" => "permission:abacus.index",
+    ]);
+    $routes->post("", "AbaAddressController::index", [
+        "filter" => "permission:abacus.index",
+    ]);
+});
+
+
 $routes->group("testimonial", static function ($routes) {
     $routes->get("", "TestimonialController::index", [
         "as" => "testimonial.index",

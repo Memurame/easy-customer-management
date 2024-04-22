@@ -273,24 +273,18 @@
                                         : "" ?>" href="<?= base_url(
                                             route_to("estos.index"),
                                         ) ?>" rel="noopener">
-                                        Estos Telefonliste <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+                                        Estos Telefonliste
                                     </a>
                                     <?php endif; ?>
-                                    <?php if (
-                                        auth()
-                                            ->user()
-                                            ->can("testimonial.index")
-                                    ): ?>
-
-                                    <a class="dropdown-item <?= current_page(
-                                        route_to("testimonial.index"),
-                                    )
-                                        ? "active"
-                                        : "" ?>" href="<?= base_url(
-                                            route_to("testimonial.index"),
-                                        ) ?>" rel="noopener">
-                                        Testimonial <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
-                                    </a>
+                                    <?php if (auth()->user()->can("testimonial.index")): ?>
+                                        <a class="dropdown-item <?= current_page(route_to("testimonial.index")) ? "active" : "" ?>" href="<?= base_url(route_to("testimonial.index")) ?>" rel="noopener">
+                                            Testimonial <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+                                        </a>
+                                    <?php endif; ?>
+                                    <?php if (auth()->user()->can("abacus.index")): ?>
+                                        <a class="dropdown-item <?= current_page(route_to("abacus.index")) ? "active" : "" ?>" href="<?= base_url(route_to("abacus.index")) ?>" rel="noopener">
+                                            Abacus <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+                                        </a>
                                     <?php endif; ?>
                                 </div>
 

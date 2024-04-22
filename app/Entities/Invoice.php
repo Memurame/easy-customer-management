@@ -2,7 +2,7 @@
 
 namespace App\Entities;
 
-use CodeIgniter\Entity;
+use CodeIgniter\Entity\Entity;
 use App\Models\WebsiteModel;
 use App\Models\ProjectModel;
 use App\Models\CustomerModel;
