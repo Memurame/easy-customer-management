@@ -3,7 +3,7 @@
 namespace App\Entities;
 
 use App\Models\WebsiteModel;
-use CodeIgniter\Entity;
+use CodeIgniter\Entity\Entity;
 use App\Models\WebsiteTagModel;
 use App\Models\CustomerModel;
 use App\Models\ProjectModel;
