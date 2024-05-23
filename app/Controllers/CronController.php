@@ -339,7 +339,7 @@ class CronController extends BaseController
             
 
             $adressen = model('abaAddressModel')
-                ->where('abacus IS NOT NULL', null)
+                ->where('abacus IS NOT', null)
                 ->where('inactive', NULL)
                 ->findAll();
 
