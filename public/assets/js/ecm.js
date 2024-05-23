@@ -430,6 +430,41 @@ $(".delete-chat" ).click(function() {
         }
     })
 });
+$(".delete-newsletter" ).click(function() {
+    var row = $(this).closest('tr');
+    Swal.fire({
+        title: 'Löschen',
+        text: "Möchtest du diesen Empfänger wirklich löschen?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        cancelButtonText: 'Abbrechen',
+        confirmButtonText: 'Löschen'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: rootUrl + '/api/0/newsletter/' + $(this).data('id'),
+                type: 'DELETE',
+                dataType: 'json',
+                data: JSON.stringify({
+                    [csrfName]: csrfHash
+                }),
+                statusCode: {
+                    200: function() {
+                        row.remove();
+                    },
+                    404: function() {
+                        Swal.fire({
+                            icon: 'error',
+                            text: response.responseJSON.messages.error,
+                        })
+                    }
+                },
+            });
+        }
+    })
+});
 $(".delete-website" ).click(function() {
     var row = $(this).closest('tr');
     Swal.fire({

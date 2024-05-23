@@ -27,6 +27,17 @@ $routes->group("abacus", static function ($routes) {
     ]);
 });
 
+$routes->group("newsletter", static function ($routes) {
+    $routes->get("", "AbaNewsletterController::index", [
+        "as" => "newsletter.index",
+        "filter" => "permission:newsletter.index",
+    ]);
+    $routes->match(["get", "post"],"edit/(:num)",'AbaNewsletterController::edit/$1',[
+            "as" => "newsletter.edit",
+            "filter" => "permission:newsletter.edit",
+        ],
+    );
+});
 
 $routes->group("testimonial", static function ($routes) {
     $routes->get("", "TestimonialController::index", [
@@ -367,13 +378,19 @@ $routes->group("tools", static function ($routes) {
     ]);
 });
 
-$routes->cli("cron", "CronController::index");
-$routes->get("cron", "CronController::index");
+$routes->cli("cron", "CronController::index/default");
+$routes->cli("cron/daily", "CronController::index/daily");
+
+$routes->get("cron", "CronController::index/default");
+$routes->get("cron/daily", "CronController::index/daily");
 
 $routes->group("api/0", static function ($routes) {
     /*
      * Routes with NEW API
      */
+    $routes->delete("newsletter/(:num)", 'apiAbaNewsletterController::delete/$1', [
+        "filter" => "permission:newsletter.delete",
+    ]);
 
      $routes->delete("testimonial/(:num)", 'apiTestimonialController::delete/$1', [
         "filter" => "permission:testimonial.delete",
