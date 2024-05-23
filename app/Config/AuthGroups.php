@@ -86,7 +86,6 @@ class AuthGroups extends ShieldAuthGroups
         "invoice.export" => "Export invoice",
         "invoice.template" => "Rechnungsposition Vorlagen verwalten",
         "tool.menu" => "Zeigt das Tools Menu an",
-        "tool.estos" => "Estos Telefonliste",
         "profile.index" => "Kann sein Profil bearbeiten",
         "profile.password" => "Kann sein Passswortändern",
         "message.index" => "Nachrichten Übersicht",
@@ -101,6 +100,7 @@ class AuthGroups extends ShieldAuthGroups
         "newsletter.index" => "Newsletter Zugriff",
         "newsletter.edit" => "Newsletter bearbeiten",
         "newsletter.delete" => "Newsletter löschen",
+        "estos.index" => "Estos Telefonliste",
     ];
 
     /**
@@ -120,7 +120,7 @@ class AuthGroups extends ShieldAuthGroups
         
         foreach ($groups as $group) {
             $arr = [];
-            if($group->name == 'superadmin'){
+            if(in_array($group->name, ['superadmin', 'admin'])){
                 // The Superadmin group gets all existing permissions.
                 foreach ($this->permissions as $permission => $permissionDesc) {
                     $explode = explode('.', $permission)[0];

@@ -28,9 +28,9 @@
                                 <div class="col-12">
                                     <label class="form-label">Benutzergruppe <span class="text-danger">*</span></label>
                                     <select name="group" id="group" class="form-select tomselect-default">
-                                        <?php if(auth()->user()->can('user.manage-admins')):?>
-                                        <option value="superadmin">Superadmin</option>
-                                        <option value="admin">Admin</option>
+                                        <?php if(auth()->user()->inGroup('superadmin')):?>
+                                            <option value="superadmin">Superadmin</option>
+                                            <option value="admin">Admin</option>
                                         <?php endif; ?>
                                         <option value="user" selected>Mitarbeiter</option>
                                     </select>
@@ -39,21 +39,17 @@
                             </div>
                             <div class="row mb-3">
                                 <div class="col-12">
-                                    <?php if(auth()->user()->can('user.manage-admins')):?>
+                                <?php if(auth()->user()->inGroup('superadmin')):?>
                                     <div class="alert alert-info">
-                                        Die Gruppe Superadmin und Admin benötigen keine zusätzliche Berechtigung.
+                                        Die Gruppe Superadmin und Admin benötigen keine zusätzliche Berechtigungen.
                                     </div>
                                     <?php endif; ?>
                                     <label class="form-label">Zusätzliche Berechtigung</label>
                                     <select name="right" id="right" class="form-select tomselect-multiple-check" multiple>
                                         <?php foreach(service('settings')->get('AuthGroups.groups') as $key => $group): ?>
-                                        <?php if(!in_array($key, ['superadmin','admin','user'])): ?>
-
-                                        <option value="<?=$key ?>"><?=$group['title']?></option>
-
-
-                                        <?php endif; ?>
-
+                                            <?php if(!in_array($key, ['superadmin','admin','user'])): ?>
+                                                <option value="<?=$key ?>"><?=$group['title']?></option>
+                                            <?php endif; ?>
                                         <?php endforeach; ?>
                                     </select>
 

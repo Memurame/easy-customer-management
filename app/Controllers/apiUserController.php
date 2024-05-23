@@ -24,8 +24,8 @@ class apiUserController extends BaseController
 
         $userGroups = $user->getGroups();
 
-        if((in_array('superadmin', $userGroups) OR in_array('admin', $userGroups)) AND !auth()->user()->can('user.manage-admins')){
-            return $this->failForbidden('You do not have the necessary rights to delete an administrator');
+        if((in_array('superadmin', $userGroups) OR in_array('admin', $userGroups)) AND !auth()->user()->inGroup('superadmin')){
+            return $this->failForbidden('You do not have the necessary rights');
         }
 
         if($user->id == user_id()){
@@ -49,8 +49,8 @@ class apiUserController extends BaseController
 
         $userGroups = $user->getGroups();
 
-        if((in_array('superadmin', $userGroups) OR in_array('admin', $userGroups)) AND !auth()->user()->can('user.manage-admins')){
-            return $this->failForbidden('You do not have permission to edit an administrator');
+        if((in_array('superadmin', $userGroups) OR in_array('admin', $userGroups)) AND !auth()->user()->inGroup('superadmin')){
+            return $this->failForbidden('You do not have the necessary rights');
         }
 
         $newPassword = createRandomPassword(12);
