@@ -338,8 +338,8 @@ class CronController extends BaseController
             }
             
 
-            $adressen = model('abaAddressModel')
-                ->where('abacus IS NOT', null)
+            $adressen = model('AbaAddressModel')
+                ->where('abacus IS NOT NULL', null)
                 ->where('inactive', NULL)
                 ->findAll();
 
@@ -404,8 +404,8 @@ class CronController extends BaseController
 
     public function telefonlist(){
 
-        $adressen = model('abaAddressModel')
-            ->where('abacus IS NOT', null)
+        $adressen = model('AbaAddressModel')
+            ->where('abacus IS NOT NULL', null)
             ->where('inactive', NULL)
             ->asArray()
             ->findAll();
@@ -469,7 +469,7 @@ class CronController extends BaseController
                 $adressen[$i]['Status'] = "keine Rechnung";
             }
 
-            $kalahari = model('abaAddressKalahariModel')
+            $kalahari = model('AbaAddressKalahariModel')
                 ->select('kalahari')
                 ->where('abacus', $adressen[$i]['abacus'])
                 ->asArray()
