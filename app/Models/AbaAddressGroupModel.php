@@ -23,7 +23,7 @@ class AbaAddressGroupModel extends Model
         $builder->select('address_id');
         $builder->whereIn('group_id', $ids);
         $builder->groupBy('address_id');
-        $query   = $builder->get();
+        $query = $builder->get();
         $result = $query->getResult();
 
         $a = [];

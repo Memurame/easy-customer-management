@@ -1,5 +1,5 @@
 # Disable directory browsing
-Options All -Indexes
+Options -Indexes
 
 # ----------------------------------------------------------------------
 # Rewrite engine
@@ -31,7 +31,7 @@ Options All -Indexes
 	# request to the front controller, index.php
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_FILENAME} !-d
-	RewriteRule ^([\s\S]*)$ index.php?/$1 [L,NC,QSA]
+	RewriteRule ^([\s\S]*)$ index.php/$1 [L,NC,QSA]
 
 	# Ensure Authorization header is passed along
 	RewriteCond %{HTTP:Authorization} .
@@ -45,5 +45,5 @@ Options All -Indexes
 </IfModule>
 
 # Disable server signature start
-	ServerSignature Off
+ServerSignature Off
 # Disable server signature end

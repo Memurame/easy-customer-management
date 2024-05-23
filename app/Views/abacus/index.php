@@ -6,7 +6,7 @@
             <div class="col">
                 <!-- Page pre-title -->
                 <h2 class="page-title">
-                    Abacus
+                    Abacus Adressen
                 </h2>
             </div>
             <!-- Page title actions -->
@@ -79,6 +79,8 @@
                             <th style="width: 30px">#</th>
                             <th>Name</th>
                             <th>Typ</th>
+                            <th>Zahldatum</th>
+                            <th>Telefon</th>
                             <th style="width:150px">Mail</th>
                         </tr>
                         </thead>
@@ -86,14 +88,30 @@
                         <?php foreach($addresses as  $key => $address):?>
 
                             <tr>
-                                <td class="align-middle"><?=$address['abacus']?></td>
+                                <td class="align-middle"><?=$address->abacus?></td>
                                 <td class="align-middle">
-                                    <?=$address['firstname']?> <?=$address['lastname']?>
+                                    <?=$address->firstname?> <?=$address->lastname?>
                                 </td>
                                 <td class="align-middle">
-                                    <?=$address['member_typ']?>
+                                    <?=$address->member_typ?>
                                 </td>
-                                <td class="align-middle"><?=$address['email']?></td>
+                                <td class="align-middle">
+                                    
+                                </td>
+                                <td class="align-middle">
+                                    <?=$address->phone1?>
+                                    <?php if($address->phone2 != NULL){
+                                        echo"<br>" . $address->phone2;
+                                    }
+                                    
+                                    if($address->mobile != NULL){
+                                        echo"<br>" . $address->mobile;
+                                    }?>
+                                </td>
+                                <td class="align-middle">
+                                    <?=$address->email?>
+                                </td>
+                                
                             </tr>
                         <?php endforeach; ?>
 

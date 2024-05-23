@@ -283,7 +283,12 @@
                                     <?php endif; ?>
                                     <?php if (auth()->user()->can("abacus.index")): ?>
                                         <a class="dropdown-item <?= current_page(route_to("abacus.index")) ? "active" : "" ?>" href="<?= base_url(route_to("abacus.index")) ?>" rel="noopener">
-                                            Abacus <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+                                            Abacus Adressen <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+                                        </a>
+                                    <?php endif; ?>
+                                    <?php if (auth()->user()->can("abacus.index")): ?>
+                                        <a class="dropdown-item <?= current_page(route_to("newsletter.index")) ? "active" : "" ?>" href="<?= base_url(route_to("newsletter.index")) ?>" rel="noopener">
+                                            Newsletter <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
                                         </a>
                                     <?php endif; ?>
                                 </div>

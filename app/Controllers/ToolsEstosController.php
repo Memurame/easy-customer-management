@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\AbaKalahariModel;
 use CodeIgniter\Files\File;
 
 class ToolsEstosController extends BaseController
@@ -16,7 +17,7 @@ class ToolsEstosController extends BaseController
 
     }
 
-    public function export(){
+    public function export_OLD(){
 
         $adressen = model('abaAddressModel')
             ->where('abacus IS NOT NULL', null)
@@ -91,8 +92,6 @@ class ToolsEstosController extends BaseController
                 $adressen[$i]['Status'] = "keine Rechnung";
             }
 
-            $upas = Array("/" => "", "." => "", "-" => "", "'" => "");
-
             // Bei den Telefonnummern die (Sonder)Zeichen: / . - ' entfernen
             $adressen[$i]['phone1'] = removeSpecialchar($adressen[$i]['phone1']);
             $adressen[$i]['phone2'] = removeSpecialchar($adressen[$i]['phone2']);
@@ -145,7 +144,21 @@ class ToolsEstosController extends BaseController
         fclose($fileOut) or die("Unable to close php://output");
     }
 
+    public function export(){
+
+        $outputfile = FCPATH . '../writable/export/telefonliste.csv';
+
+        // Header forces the CSV file to download
+        header("Content-Type:application/csv");
+        header("Content-Disposition:attachment;filename=telefonliste_".date('Y-m-d').".csv");
+        readfile( $outputfile );
+        
+    }
+
     public function importKalahari(){
+
+        
+
         $validationRule = [
             'kalahari_import' => [
                 'label' => 'Abacus Adressen',
@@ -161,33 +174,11 @@ class ToolsEstosController extends BaseController
         }
 
         $uploadFile = $this->request->getFile('kalahari_import');
+        $uploadFile->move(WRITEPATH . 'uploads/temp', 'kalahari.json', true);
 
-        if (! $uploadFile->hasMoved()) {
-            $filepath = WRITEPATH . 'uploads/' . $uploadFile->store();
+        service('settings')->set('App.lastKalahariImportReceiver', auth()->user()->email);
+        
 
-        }
-        $json = json_decode(file_get_contents($filepath), true);
-        $kalahari = $json[array_key_first($json)];
-
-
-        $array = [];
-        foreach($kalahari as $key => $val){
-            if(!empty($val['tel_1'])){
-
-                $telefon = removeSpecialchar($val['tel_1']);
-                $telefon = (string)((int)($telefon));
-
-                $array[$val['id_nr']] = $val['tel_1'];
-                //$insert = Model(AbacusKalahariModel::class)->save($data);
-            }
-
-        }
-        file_put_contents($this->fileKalahari, json_encode($array));
-
-        service('settings')->set('App.lastKalahariImport', date('d.m.Y - H:i:s'));
-
-        unlink($filepath);
-
-        return redirect()->route('estos.index')->with('msg_success', 'Kalahari Einträge wurden importiert');
+        return redirect()->route('estos.index')->with('message', 'Die Datei wurde hochgeladen und wird in den nächsten Minuten im Hintergrund verarbeitet. Du erhälst eine E-Mail sobald der Import abgeschlossen ist.');
     }
 }

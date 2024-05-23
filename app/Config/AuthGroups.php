@@ -97,7 +97,10 @@ class AuthGroups extends ShieldAuthGroups
         "testimonial.preview" => "Testimonial Vorschau",
         "testimonial.delete" => "Testimonial Löschen",
         "testimonial.forms" => "Testimonial Formulare verwalten",
-        "abacus.index" => "Abacus Zugriff"
+        "abacus.index" => "Abacus Zugriff",
+        "newsletter.index" => "Newsletter Zugriff",
+        "newsletter.edit" => "Newsletter bearbeiten",
+        "newsletter.delete" => "Newsletter löschen",
     ];
 
     /**
