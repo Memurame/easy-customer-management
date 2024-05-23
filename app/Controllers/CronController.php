@@ -405,7 +405,7 @@ class CronController extends BaseController
     public function telefonlist(){
 
         $adressen = model('abaAddressModel')
-            ->where('abacus IS NOT NULL', null)
+            ->where('abacus IS NOT', null)
             ->where('inactive', NULL)
             ->asArray()
             ->findAll();
