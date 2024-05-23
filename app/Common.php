@@ -13,3 +13,6 @@
  *
  * @see: https://codeigniter4.github.io/CodeIgniter4/
  */
+
+$env = (getenv('BEBV') == 'true') ? true : false;
+define('BEBV', $env);

@@ -84,11 +84,9 @@
                                     <?php endforeach; ?>
                                 </td>
                                 <td class="text-end">
-                                    <?php if((in_array('superadmin', $user->getGroups()) OR
-                                            in_array('admin', $user->getGroups())) AND
-                                            auth()->user()->can('user.manage-admins') OR
-                                            (!in_array('superadmin', $user->getGroups()) AND
-                                                !in_array('admin', $user->getGroups()))): ?>
+                                    <?php if(((in_array('superadmin', $user->getGroups()) OR in_array('admin', $user->getGroups())) AND 
+                                            auth()->user()->inGroup('superadmin')) OR
+                                            in_array('user', $user->getGroups())): ?>
                                     <?php if(auth()->user()->can('user.edit') OR auth()->user()->can('user.delete')): ?>
                                     <div class="dropdown">
                                         <button class="btn dropdown-toggle align-text-top" data-bs-toggle="dropdown">

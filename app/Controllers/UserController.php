@@ -55,7 +55,8 @@ class UserController extends BaseController
         }
         $userGroups = $user->getGroups();
 
-        if((in_array('superadmin', $userGroups) OR in_array('admin', $userGroups)) AND !auth()->user()->can('user.manage-admins')){
+
+        if((in_array('superadmin', $userGroups) OR in_array('admin', $userGroups)) AND !auth()->user()->inGroup('superadmin')){
             session()->setFlashdata('msg_error', 'Du besitzt keine Berechtigung einen Administrator zu bearbeiten.');
             return redirect()->route('user.index');
         }
@@ -81,7 +82,7 @@ class UserController extends BaseController
 
             $emailRules            = config('Auth')->emailValidationRules;
             $emailRules['rules'][] = sprintf(
-                'is_unique[%s.secret,id, %s]',
+                'is_unique[%s.secret,user_id, %s]',
                 $this->tables['identities'],
                 $user->id
                 
@@ -148,7 +149,7 @@ class UserController extends BaseController
             $selectedRights = $this->request->getPost('right');
             foreach(service('settings')->get('AuthGroups.groups') as $key => $group){
                 if(!in_array($key, ['superadmin','admin','user'])){
-                    if($key == $selectedRights){
+                    if($selectedRights  AND in_array($key, $selectedRights)){
                         $user->addGroup($key);
                     } else {
                         $user->removeGroup($key);
@@ -159,12 +160,18 @@ class UserController extends BaseController
             // Hier kann immer nur eine Gruppe aktiv sein.
             $selectedGroup = $this->request->getPost('group');
             foreach(service('settings')->get('AuthGroups.groups') as $key => $group){
+                print_r($group);
                 if(in_array($key, ['superadmin','admin','user'])){
-                    if($key == $selectedGroup){
-                        $user->addGroup($key);
-                    } else {
-                        $user->removeGroup($key);
+                    if(($selectedGroup == 'admin' && auth()->user()->inGroup('superadmin', 'admin')) OR 
+                    ($selectedGroup == 'superadmin' && auth()->user()->inGroup('superadmin')) OR 
+                    !in_array($selectedGroup, ['superadmin', 'admin'])){
+                        if($key == $selectedGroup){
+                            $user->addGroup($key);
+                        } else {
+                            $user->removeGroup($key);
+                        }
                     }
+                    
                 }
             }
 
@@ -253,14 +260,8 @@ class UserController extends BaseController
             $selectedRights = $this->request->getPost('right');
             foreach(service('settings')->get('AuthGroups.groups') as $key => $group){
                 if(!in_array($key, ['superadmin','admin','user'])){
-                    if($key == $selectedRights){
-                        if(($group['isAdmin'] && auth()->user()->can('user.manage-admins')) OR !$group['isAdmin']){
-                            $user->addGroup($key);
-                        }
-                        else{
-                            $user->addGroup('user');
-                        }
-
+                    if($selectedRights  AND in_array($key, $selectedRights)){
+                        $user->addGroup($key);
                     }
                 }
             }
@@ -268,11 +269,17 @@ class UserController extends BaseController
            // Hier kann immer nur eine Gruppe aktiv sein.
             $selectedGroup = $this->request->getPost('group');
             foreach(service('settings')->get('AuthGroups.groups') as $key => $group){
-               if(in_array($key, ['superadmin','admin','user'])){
-                   if($key == $selectedGroup){
-                       $user->addGroup($key);
-                   }
-               }
+                if(in_array($key, ['superadmin','admin','user'])){
+                    if(($selectedGroup == 'admin' && auth()->user()->inGroup('superadmin', 'admin')) OR 
+                    ($selectedGroup == 'superadmin' && auth()->user()->inGroup('superadmin')) OR 
+                    !in_array($selectedGroup, ['superadmin', 'admin'])){
+                        if($key == $selectedGroup){
+                            $user->addGroup($key);
+                        }
+                    }
+                }
+
+                    
             }
 
 

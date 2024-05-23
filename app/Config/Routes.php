@@ -362,19 +362,19 @@ $routes->group("admin", static function ($routes) {
 $routes->group("tools", static function ($routes) {
     $routes->get("estos", "ToolsEstosController::index", [
         "as" => "estos.index",
-        "filter" => "permission:tool.estos",
+        "filter" => "permission:estos.index",
     ]);
     $routes->post("estos/abacus", "ToolsEstosController::importAbacus", [
         "as" => "estos.abacus",
-        "filter" => "permission:tool.estos",
+        "filter" => "permission:estos.index",
     ]);
     $routes->post("estos/kalahari", "ToolsEstosController::importKalahari", [
         "as" => "estos.kalahari",
-        "filter" => "permission:tool.estos",
+        "filter" => "permission:estos.index",
     ]);
     $routes->get("estos/export", "ToolsEstosController::export", [
         "as" => "estos.export",
-        "filter" => "permission:tool.estos",
+        "filter" => "permission:estos.index",
     ]);
 });
 
