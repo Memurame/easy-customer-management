@@ -102,7 +102,7 @@ class CreateAbacusTables extends Migration
             'kalahari'      => ['type' => 'int', 'constraint' => 11],
         ]);
 
-        $this->forge->addKey('abacus', true);
+        $this->forge->addKey('id', true);
         $this->forge->createTable('aba_address_kalahari', true);
     }
 
