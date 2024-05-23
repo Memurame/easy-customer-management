@@ -15,7 +15,7 @@ class CronController extends BaseController
         
         if($filter == 'daily'){
             
-            //$this->kalahari();
+            $this->kalahari();
             $this->telefonlist();
         }
         

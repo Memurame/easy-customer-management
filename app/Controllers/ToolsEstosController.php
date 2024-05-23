@@ -178,6 +178,7 @@ class ToolsEstosController extends BaseController
 
         service('settings')->set('App.lastKalahariImportReceiver', auth()->user()->email);
         
+        unlink(WRITEPATH . 'export/telefonliste.csv');
 
         return redirect()->route('estos.index')->with('message', 'Die Datei wurde hochgeladen und wird in den nächsten Minuten im Hintergrund verarbeitet. Du erhälst eine E-Mail sobald der Import abgeschlossen ist.');
     }
