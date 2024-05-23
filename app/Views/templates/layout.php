@@ -286,7 +286,7 @@
                                             Abacus Adressen <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
                                         </a>
                                     <?php endif; ?>
-                                    <?php if (auth()->user()->can("abacus.index")): ?>
+                                    <?php if (auth()->user()->can("newsletter.index")): ?>
                                         <a class="dropdown-item <?= current_page(route_to("newsletter.index")) ? "active" : "" ?>" href="<?= base_url(route_to("newsletter.index")) ?>" rel="noopener">
                                             Newsletter <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
                                         </a>
