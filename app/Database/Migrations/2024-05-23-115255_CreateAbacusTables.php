@@ -28,7 +28,7 @@ class CreateAbacusTables extends Migration
             'bebv_regio'            => ['type' => 'varchar', 'constraint' => 150, 'null' => true],
             'bebv_subregio'         => ['type' => 'varchar', 'constraint' => 150, 'null' => true],
             'inactive'              => ['type' => 'int', 'constraint' => 11, 'null' => true],
-            'newsletter_active'     => ['type' => 'int', 'constraint' => 3, 'null' => true],
+            'newsletter_active'     => ['type' => 'bool', 'null' => true],
             'newsletter_unsubscribeid'  => ['type' => 'varchar', 'constraint' => 100, 'null' => true],
             'lastsync'              => ['type' => 'datetime', 'null' => true],
             'website_username'      => ['type' => 'varchar', 'constraint' => 200, 'null' => true],
@@ -43,17 +43,8 @@ class CreateAbacusTables extends Migration
         $this->forge->addField([
             'id'                    => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
             'group_id'              => ['type' => 'int', 'constraint' => 11],
-            'address_id'            => ['type' => 'int', 'constraint' => 11]
-        ]);
-
-        $this->forge->addKey('id', true);
-        $this->forge->createTable('aba_groups', true);
-
-        //############################################
-
-        $this->forge->addField([
-            'id'                    => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
-            'group_name'            => ['type' => 'varchar', 'constraint' => 150]
+            'address_id'            => ['type' => 'int', 'constraint' => 11],
+            'lastsync'              => ['type' => 'datetime', 'null' => true],
         ]);
 
         $this->forge->addKey('id', true);
@@ -62,8 +53,20 @@ class CreateAbacusTables extends Migration
         //############################################
 
         $this->forge->addField([
-            'id'                    => ['type' => 'varchar', 'constraint' => 10, 'unsigned' => true],
-            'name'                  => ['type' => 'varchar', 'constraint' => 100]
+            'id'                    => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
+            'group_name'            => ['type' => 'varchar', 'constraint' => 150],
+            'lastsync'              => ['type' => 'datetime', 'null' => true],
+        ]);
+
+        $this->forge->addKey('id', true);
+        $this->forge->createTable('aba_groups', true);
+
+        //############################################
+
+        $this->forge->addField([
+            'id'                    => ['type' => 'varchar', 'constraint' => 10],
+            'name'                  => ['type' => 'varchar', 'constraint' => 100],
+            'lastsync'              => ['type' => 'datetime', 'null' => true],
         ]);
 
         $this->forge->addKey('id', true);
@@ -72,9 +75,10 @@ class CreateAbacusTables extends Migration
         //############################################
 
         $this->forge->addField([
-            'id'                    => ['type' => 'varchar', 'constraint' => 10, 'unsigned' => true],
+            'id'                    => ['type' => 'varchar', 'constraint' => 10,],
             'salutation'            => ['type' => 'varchar', 'constraint' => 20],
-            'text'                  => ['type' => 'varchar', 'constraint' => 100]
+            'text'                  => ['type' => 'varchar', 'constraint' => 100],
+            'lastsync'              => ['type' => 'datetime', 'null' => true],
         ]);
 
         $this->forge->addKey('id', true);
