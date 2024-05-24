@@ -30,8 +30,7 @@ class CustomersController extends BaseController
                 "city" => "required",
                 "status" => "required",
                 "contact_firstname" => "required",
-                "contact_lastname" => "required",
-                "contact_mail" => "valid_email",
+                "contact_lastname" => "required"
             ];
 
             if (!$this->validate($rules)) {
@@ -131,8 +130,7 @@ class CustomersController extends BaseController
                 "main_contact" => "required",
                 "street" => "required",
                 "postcode" => "required",
-                "city" => "required",
-                "mail" => 'valid_email',
+                "city" => "required"
             ];
 
             if (!$this->validate($rules)) {

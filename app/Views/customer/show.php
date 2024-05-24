@@ -260,10 +260,10 @@
                                                 <?php endif;?>
                                             </td>
                                             <td>
-                                                <a href="mailto:<?=$contact->mail?>"><?=$contact->mail?></a>
+                                                <a href="tel:<?=$contact->phone?>"><?=$contact->phone?></a>
                                             </td>
                                             <td>
-                                                <a href="tel:<?=$contact->phone?>"><?=$contact->phone?></a>
+                                                <a href="mailto:<?=$contact->mail?>"><?=$contact->mail?></a>
                                             </td>
                                             <td>
                                                 <?=$contact->street?><br>
