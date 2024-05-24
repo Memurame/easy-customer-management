@@ -382,7 +382,7 @@ class CronController extends BaseController
             unlink($filepath);
             unlink($pending);
 
-            /*
+            
             if(service('settings')->get('App.lastKalahariImportReceiver')){
                 $email = emailer()->setFrom(setting('Email.fromEmail'), setting('Email.fromName') ?? '');
                 $email->setTo(service('settings')->get('App.lastKalahariImportReceiver'));
@@ -392,7 +392,6 @@ class CronController extends BaseController
                     throw new \RuntimeException("Cannot send email \n" . $email->printDebugger(['headers']));
                 }
             }
-            */
             
             
             
@@ -505,6 +504,8 @@ class CronController extends BaseController
             
 
         }
+
+        service('settings')->set('App.lastTelefonlistDate', date('d.m.Y - H:i:s'));
 
         fclose($fileOut);
     }
