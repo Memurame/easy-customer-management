@@ -45,7 +45,7 @@
                                     </div>
                                     <?php endif; ?>
                                     <label class="form-label">Zusätzliche Berechtigung</label>
-                                    <select name="right" id="right" class="form-select tomselect-multiple-check" multiple>
+                                    <select name="right[]" id="right[]" class="form-select tomselect-multiple-check" multiple>
                                         <?php foreach(service('settings')->get('AuthGroups.groups') as $key => $group): ?>
                                             <?php if(!in_array($key, ['superadmin','admin','user'])): ?>
                                                 <option value="<?=$key ?>"><?=$group['title']?></option>
