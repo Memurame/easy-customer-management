@@ -221,35 +221,6 @@ class CustomersController extends BaseController
         ]);
     }
 
-    public function apiDelete($id)
-    {
-        $data = [];
-        $data["success"] = 0;
-        $data["token"] = csrf_hash();
 
-        $customerModel = new CustomerModel();
-        $customer = $customerModel->find($id);
 
-        if (empty($customer)) {
-            $data["error"] = "Kunde wurde nicht gefunden.";
-        } else {
-            $customerContactsModel = model(CustomerContactModel::class);
-            $deleteContact = $customerContactsModel
-                ->where("customer_id", $customer->id)
-                ->delete();
-
-            if ($deleteContact) {
-                $deleted = $customerModel->delete($customer->id);
-                if ($deleted) {
-                    $data["success"] = 1;
-                } else {
-                    $data["error"] = "Fehler beim Löschen des Kunden";
-                }
-            } else {
-                $data["error"] = "Fehler beim Löschen der Kunden Kontakte";
-            }
-        }
-
-        return $this->response->setJSON($data);
-    }
 }
