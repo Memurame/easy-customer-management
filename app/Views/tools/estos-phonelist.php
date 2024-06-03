@@ -41,7 +41,7 @@
                         <div class="row mb-3">
                             <div class="alert alert-info d-flex align-items-center" role="alert">
                                 <div>
-                                    Die Excel Dateien von Kalahari muss vorgängig in ein JSON Format umgewandelt werden.
+                                    Die Excel Datei von Kalahari muss vorgängig in ein JSON Format umgewandelt werden.
                                     Die Excel Datei kann bei der unten verlinkten Seite hochgeladen und anschliessend wieder heruntergeladen werden.<br>
                                     Dies muss jedoch nur einmal im Jahr gemacht werden.<br>
                                     <a href="https://kinoar.github.io/xlsx-to-json/" class="alert-link">Jetzt umwandeln</a>
@@ -87,6 +87,9 @@
                                     Telefonliste herunterladen
                                 </a>
                             <?php endif;?>
+                            <small class="text-muted mt-2">
+                                <b>Letzte erstellung der Telefonliste: <?=service('settings')->get('App.lastTelefonlistDate') ?></b></small>
+                            </form>
                             
 
                         </div>
