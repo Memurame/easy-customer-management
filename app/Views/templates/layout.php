@@ -27,7 +27,6 @@
     <link href="<?= base_url() ?>dist/css/tabler-payments.min.css?1692870487" rel="stylesheet" />
     <link href="<?= base_url() ?>dist/css/tabler-vendors.min.css?1692870487" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
-    <link rel="stylesheet" href="@sweetalert2/theme-material-ui/material-ui.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/10.0.0/jsoneditor.min.css" integrity="sha512-8G+Vb2+10BSrSo+wupdzJIylDLpGtEYniQhp0rsbTigPG7Onn2S08Ai/KEGlxN2Ncx9fGqVHtRehMuOjPb9f8g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="<?= base_url() ?>assets/css/ecm.css">
     <style>
@@ -499,7 +498,7 @@
     <script src="<?= base_url() ?>dist/js/tabler.min.js?1692870487" defer></script>
     <script src="<?= base_url() ?>dist/libs/fslightbox/index.js?1692870487" defer></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="<?= base_url() ?>dist/libs/litepicker/dist/litepicker.js?1692870487" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
