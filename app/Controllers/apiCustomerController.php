@@ -132,4 +132,24 @@ class apiCustomerController extends BaseController
 
         return $this->respond($websites, 200);
     }
+
+    public function syncAbacus($customerId = NULL){
+        $customer = model('CustomerModel')
+            ->find($customerId);
+
+        if(!$customer){
+            return $this->failNotFound("No customer found");
+        }
+        
+
+        if($customer->addressnumber == NULL){
+            return $this->failNotFound("No addressnumber set");
+        }
+
+        $customer->syncWithAbacus();
+
+        model('CustomerModel')->save($customer);
+
+        return $this->respond(200);
+    }
 }

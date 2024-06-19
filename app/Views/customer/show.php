@@ -65,6 +65,9 @@
                                     </div>
                                     <div class="col-sm-9 text-secondary">
                                         <?php echo $customer->addressnumber?: '---' ?>
+                                        <?php if($customer->addressnumber_sync):?>
+                                            <small>(zuletzt synchronisiert am <?=date('d.m.Y - H:i', $customer->addressnumber_sync)?>)</small>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             <?php endif;?>
@@ -260,10 +263,10 @@
                                                 <?php endif;?>
                                             </td>
                                             <td>
-                                                <a href="mailto:<?=$contact->mail?>"><?=$contact->mail?></a>
+                                                <a href="tel:<?=$contact->phone?>"><?=$contact->phone?></a>
                                             </td>
                                             <td>
-                                                <a href="tel:<?=$contact->phone?>"><?=$contact->phone?></a>
+                                                <a href="mailto:<?=$contact->mail?>"><?=$contact->mail?></a>
                                             </td>
                                             <td>
                                                 <?=$contact->street?><br>

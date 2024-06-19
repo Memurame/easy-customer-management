@@ -82,6 +82,7 @@
                             <th>Zahldatum</th>
                             <th>Telefon</th>
                             <th style="width:150px">Mail</th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -99,17 +100,24 @@
                                     
                                 </td>
                                 <td class="align-middle">
-                                    <?=$address->phone1?>
-                                    <?php if($address->phone2 != NULL){
-                                        echo"<br>" . $address->phone2;
+                                    <?php if($address->phone1 != NULL){
+                                        echo $address->phone1 . "<br>";
+                                    }
+                                    if($address->phone2 != NULL){
+                                        echo $address->phone2 . "<br>";
                                     }
                                     
                                     if($address->mobile != NULL){
-                                        echo"<br>" . $address->mobile;
+                                        echo $address->mobile;
                                     }?>
                                 </td>
                                 <td class="align-middle">
                                     <?=$address->email?>
+                                </td>
+                                <td>
+                                    <a href="<?=base_url(route_to('customer.abacus', $address->abacus))?>" class="btn btn-link">
+                                        Kunde erstellen
+                                    </a>
                                 </td>
                                 
                             </tr>

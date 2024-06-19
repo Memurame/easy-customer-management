@@ -8,9 +8,11 @@ use CodeIgniter\Router\RouteCollection;
  * --------------------------------------------------------------------
  */
 
+
+
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->addRedirect("/", "dashboard");
+$routes->get("test/(:any)", "apiCustomerController::syncAbacus/$1");
 
 $routes->get("dashboard", "HomeController::index", [
     "as" => "home",
@@ -206,15 +208,14 @@ $routes->group("crm", static function ($routes) {
         "as" => "customer.index",
         "filter" => "permission:customer.index",
     ]);
-    $routes->match(
-        ["get", "post"],
-        "customers/add",
-        "CustomersController::add",
-        [
-            "as" => "customer.add",
-            "filter" => "permission:customer.add",
-        ],
-    );
+    $routes->match(["get", "post"],"customers/add","CustomersController::add",[
+        "as" => "customer.add",
+        "filter" => "permission:customer.add",
+    ]);
+    $routes->match(["get", "post"],"customers/add/(:num)","CustomersController::addAbacus/$1",[
+        "as" => "customer.abacus",
+        "filter" => "permission:customer.add",
+    ]);
     $routes->get("customers/(:num)", 'CustomersController::show/$1', [
         "as" => "customer.show",
         "filter" => "permission:customer.show",

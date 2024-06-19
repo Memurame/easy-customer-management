@@ -61,6 +61,10 @@
                                     <?php else:?>
                                         <span class="badge text-bg-danger text-white">Inaktiv</span>
                                     <?php endif;?>
+
+                                    <?php if(!$customer->addressnumber_sync == NULL):?>
+                                        <span class="badge text-bg-warning">Synchronisiert</span>
+                                    <?php endif;?>
                                 </td>
                                 <td class="text-end">
                                     <?php if(auth()->user()->can('customer.edit') or auth()->user()->can('customer.delete')): ?>

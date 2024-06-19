@@ -127,7 +127,7 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-md-6">
-                                        <label for="contact_mail" class="form-label">E-Mail <span class="text-danger">*</span></label>
+                                        <label for="contact_mail" class="form-label">E-Mail</label>
                                         <input type="email" class="form-control <?php if(session('errors.contact_mail')) : ?>is-invalid<?php endif ?>" id="contact_mail" name="contact_mail"
                                             value="<?=old('contact_mail') ?>">
                                         <div class="invalid-feedback"><?= session('errors.contact_mail') ?></div>

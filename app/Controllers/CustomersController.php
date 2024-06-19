@@ -20,6 +20,40 @@ class CustomersController extends BaseController
         ]);
     }
 
+    public function addAbacus($addressnumber){
+
+        $customerModel = model('CustomerModel');
+
+        $address = model('AbaAddressModel')->where('abacus', $addressnumber)->first();
+
+        if(!$address){
+            return redirect()->route("customer.index")->with("msg_error", "Kein Abacus Eintrag zu dieser Nummer gefunden. Erstellen eines Kunden kann nicht ausgeführt werden.");
+        }
+
+        $customer = $customerModel->where('addressnumber', $address->abacus)->first();
+        if($customer){
+            return redirect()->route("customer.index")->with("msg_error", "Es existiert bereits ein Kunde mit dieser Adressnumer.");
+        }
+
+        $customer = new Customer();
+        $customer->status = 1;
+        $customer->syncWithAbacus($addressnumber);
+        $customerModel->save($customer);
+
+        if($address->firstname){
+            $contact = new CustomerContact();
+            $contact->customer_id = $customerModel->getInsertID();
+            $contact->lastname = $address->lastname;
+            $contact->firstname = $address->firstname;
+            $contact->typ = 'AP';
+            model('CustomerContactModel')->save($contact);
+        }
+        
+    
+
+        return redirect()->route("customer.show", [$customerModel->getInsertID()]);
+    }
+
     public function add()
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -30,8 +64,7 @@ class CustomersController extends BaseController
                 "city" => "required",
                 "status" => "required",
                 "contact_firstname" => "required",
-                "contact_lastname" => "required",
-                "contact_mail" => "valid_email",
+                "contact_lastname" => "required"
             ];
 
             if (!$this->validate($rules)) {
@@ -131,8 +164,7 @@ class CustomersController extends BaseController
                 "main_contact" => "required",
                 "street" => "required",
                 "postcode" => "required",
-                "city" => "required",
-                "mail" => 'valid_email',
+                "city" => "required"
             ];
 
             if (!$this->validate($rules)) {
@@ -223,35 +255,6 @@ class CustomersController extends BaseController
         ]);
     }
 
-    public function apiDelete($id)
-    {
-        $data = [];
-        $data["success"] = 0;
-        $data["token"] = csrf_hash();
 
-        $customerModel = new CustomerModel();
-        $customer = $customerModel->find($id);
 
-        if (empty($customer)) {
-            $data["error"] = "Kunde wurde nicht gefunden.";
-        } else {
-            $customerContactsModel = model(CustomerContactModel::class);
-            $deleteContact = $customerContactsModel
-                ->where("customer_id", $customer->id)
-                ->delete();
-
-            if ($deleteContact) {
-                $deleted = $customerModel->delete($customer->id);
-                if ($deleted) {
-                    $data["success"] = 1;
-                } else {
-                    $data["error"] = "Fehler beim Löschen des Kunden";
-                }
-            } else {
-                $data["error"] = "Fehler beim Löschen der Kunden Kontakte";
-            }
-        }
-
-        return $this->response->setJSON($data);
-    }
 }
