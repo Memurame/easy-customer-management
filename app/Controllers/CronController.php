@@ -17,7 +17,6 @@ class CronController extends BaseController
             
             $this->kalahari();
             $this->telefonlist();
-            $this->resizeTestimonialImages();
             $this->abacusSync();
 
         }
@@ -526,15 +525,6 @@ class CronController extends BaseController
             $customer->syncWithAbacus();
 
             model('CustomerModel')->save($customer);
-    }
-    public function resizeTestimonialImages(){
-        $testimonialModel = new TestimonialModel();
-        $testimonials = $testimonialModel->findAll();
-
-        foreach($testimonials as $testimonial){
-            $testimonial->dataArray = json_decode($testimonial->data, true);
-            $image = explode('/', $testimonial->dataArray[''])
-            if(file_exists())
         }
     }
 }
