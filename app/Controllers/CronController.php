@@ -17,6 +17,7 @@ class CronController extends BaseController
             
             $this->kalahari();
             $this->telefonlist();
+            $this->resizeTestimonialImages();
         }
         
     }
@@ -508,5 +509,16 @@ class CronController extends BaseController
         service('settings')->set('App.lastTelefonlistDate', date('d.m.Y - H:i:s'));
 
         fclose($fileOut);
+    }
+
+    public function resizeTestimonialImages(){
+        $testimonialModel = new TestimonialModel();
+        $testimonials = $testimonialModel->findAll();
+
+        foreach($testimonials as $testimonial){
+            $testimonial->dataArray = json_decode($testimonial->data, true);
+            $image = explode('/', $testimonial->dataArray[''])
+            if(file_exists())
+        }
     }
 }
