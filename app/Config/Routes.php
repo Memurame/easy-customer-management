@@ -12,7 +12,7 @@ use CodeIgniter\Router\RouteCollection;
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get("test/(:any)", "apiCustomerController::syncAbacus/$1");
+$routes->addRedirect("/", "dashboard");
 
 $routes->get("dashboard", "HomeController::index", [
     "as" => "home",
