@@ -21,7 +21,8 @@ class CustomerModel extends Model
         'status',
         'notes',
         'main_contact',
-        'billing_contact'
+        'billing_contact',
+        'addressnumber_sync'
     ];
 
     protected $primaryKey = 'id';

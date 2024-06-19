@@ -16,7 +16,8 @@ class CronController extends BaseController
         if($filter == 'daily'){
             
             $this->kalahari();
-            $this->telefonlist();
+            //$this->telefonlist();
+            $this->abacusSync();
         }
         
     }
@@ -507,5 +508,21 @@ class CronController extends BaseController
         }
 
         fclose($fileOut);
+    }
+
+    public function abacusSync(){
+        $customers = model('CustomerModel')->where('addressnumber IS NOT', NULL)->findAll();
+
+        foreach($customers as $customer){
+            
+
+            if($customer->addressnumber == NULL){
+                continue;
+            }
+
+            $customer->syncWithAbacus();
+
+            model('CustomerModel')->save($customer);
+        }
     }
 }

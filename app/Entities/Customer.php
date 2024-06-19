@@ -86,4 +86,28 @@ class Customer extends Entity
         return $return ?? null;
     }
 
+
+    public function syncwithAbacus(){
+        $address = model('AbaAddressModel')
+                ->where('abacus', $this->addressnumber)
+                ->first();
+
+        $name = $address->lastname;
+        if($address->firstname) $name .= ' ' . $address->firstname;
+
+        $phone = $address->phone1;
+        if(!$phone) $phone = $address->phone2;
+        if(!$phone) $phone = $address->mobile;
+
+
+        $this->customername = $name;
+        $this->mail = $address->email;
+        $this->street = $address->street;
+        $this->postcode = $address->postcode;
+        $this->city = $address->city;
+        $this->phone = $phone ?? NULL;
+        $this->addressnumber_sync = time();
+
+    }
+
 }

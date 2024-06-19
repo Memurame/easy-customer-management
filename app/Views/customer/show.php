@@ -65,6 +65,9 @@
                                     </div>
                                     <div class="col-sm-9 text-secondary">
                                         <?php echo $customer->addressnumber?: '---' ?>
+                                        <?php if($customer->addressnumber_sync):?>
+                                            <small>(zuletzt synchronisiert am <?=date('d.m.Y - H:i', $customer->addressnumber_sync)?>)</small>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             <?php endif;?>
