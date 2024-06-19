@@ -466,7 +466,7 @@ $(document).on('click', '.delete-website', function() {
         }
     })
 });
-$(document).on('click', '.delete-custome', function() {
+$(document).on('click', '.delete-customer', function() {
 
 
     var row = $(this).closest('tr');
