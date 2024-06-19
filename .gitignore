@@ -68,6 +68,8 @@ writable/export/*
 
 writable/testimonial/*
 !writable/testimonial/index.html
+writable/testimonial/thumb/*
+!writable/testimonial/thumb/index.html
 
  writable/mail/*
 !writable/mail/index.html

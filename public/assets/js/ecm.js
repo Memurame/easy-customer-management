@@ -204,8 +204,7 @@ $("#receiver-select").change(function() {
     }
 
 });
-
-$('.action-invoicemoveup').click(function(element){
+$(document).on('click', '.action-invoicemoveup', function() {
     console.log("UP");
     var currentRow = $(this).parents().parents("tr:first");
     var prevRow = currentRow.prev();
@@ -221,7 +220,7 @@ $('.action-invoicemoveup').click(function(element){
         });
     }
 });
-$('.action-invoicemovedown').click(function(element){
+$(document).on('click', '.action-invoicemovedown', function() {
     console.log("DOWN");
     var currentRow = $(this).parents().parents("tr:first");
     var nextRow = currentRow.next();
@@ -235,8 +234,7 @@ $('.action-invoicemovedown').click(function(element){
         })
     });
 });
-
-$(".action-addinvoicetitle" ).click(function(e) {
+$(document).on('click', '.action-addinvoicetitle', function() {
     e.preventDefault()
     const {value: text} = Swal.fire({
         title: 'Position Titel',
@@ -271,14 +269,13 @@ $(".action-addinvoicetitle" ).click(function(e) {
         allowOutsideClick: () => !Swal.isLoading()
     })
 });
-
-$(".copy-to-clipboard" ).click(function(e) {
+$(document).on('click', '.copy-to-clipboard', function() {
     e.preventDefault()
 
     navigator.clipboard.writeText($(this).data('text'));
 });
+$(document).on('click', '.action-copyinvoicepos', function() {
 
-$(".action-copyinvoicepos" ).click(function(e) {
     e.preventDefault()
     $.ajax({
         url: rootUrl + '/api/0/invoice/position/'  + $(this).data('id') + '/copy',
@@ -303,7 +300,8 @@ $(".action-copyinvoicepos" ).click(function(e) {
         },
     });
 });
-$(".action-mailreset" ).click(function(e) {
+$(document).on('click', '.action-mailreset', function() {
+
     e.preventDefault()
     $.ajax({
         url: rootUrl + '/api/0/mail/' + $(this).data('id') + '/reset',
@@ -325,7 +323,8 @@ $(".action-mailreset" ).click(function(e) {
         },
     });
 });
-$(".delete-mailsent" ).click(function(e) {
+$(document).on('click', '.delete-mailsent', function() {
+
     e.preventDefault()
     Swal.fire({
         title: 'Löschen',
@@ -360,8 +359,8 @@ $(".delete-mailsent" ).click(function(e) {
         }
     })
 });
+$(document).on('click', '.delete-mailtemplate', function() {
 
-$(".delete-mailtemplate" ).click(function(e) {
     e.preventDefault()
     Swal.fire({
         title: 'Löschen',
@@ -396,7 +395,8 @@ $(".delete-mailtemplate" ).click(function(e) {
         }
     })
 });
-$(".delete-chat" ).click(function() {
+$(document).on('click', '.delete-chat', function() {
+
     Swal.fire({
         title: 'Löschen',
         text: "Möchtest du diesen Chat und alle Nachrichten löschen? Der Chat wird für beide Chat Teilnehmer unwiederruflich gelöscht!",
@@ -430,42 +430,8 @@ $(".delete-chat" ).click(function() {
         }
     })
 });
-$(".delete-newsletter" ).click(function() {
-    var row = $(this).closest('tr');
-    Swal.fire({
-        title: 'Löschen',
-        text: "Möchtest du diesen Empfänger wirklich löschen?",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#3085d6',
-        cancelButtonText: 'Abbrechen',
-        confirmButtonText: 'Löschen'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            $.ajax({
-                url: rootUrl + '/api/0/newsletter/' + $(this).data('id'),
-                type: 'DELETE',
-                dataType: 'json',
-                data: JSON.stringify({
-                    [csrfName]: csrfHash
-                }),
-                statusCode: {
-                    200: function() {
-                        row.remove();
-                    },
-                    404: function() {
-                        Swal.fire({
-                            icon: 'error',
-                            text: response.responseJSON.messages.error,
-                        })
-                    }
-                },
-            });
-        }
-    })
-});
-$(".delete-website" ).click(function() {
+$(document).on('click', '.delete-website', function() {
+
     var row = $(this).closest('tr');
     Swal.fire({
         title: 'Löschen',
@@ -500,7 +466,8 @@ $(".delete-website" ).click(function() {
         }
     })
 });
-$(".delete-customer" ).click(function() {
+$(document).on('click', '.delete-custome', function() {
+
 
     var row = $(this).closest('tr');
     Swal.fire({
@@ -536,8 +503,8 @@ $(".delete-customer" ).click(function() {
         }
     })
 });
+$(document).on('click', '.delete-project', function() {
 
-$(".delete-project" ).click(function() {
 
     var row = $(this).closest('tr');
     Swal.fire({
@@ -574,8 +541,7 @@ $(".delete-project" ).click(function() {
     })
 });
 
-
-$(".delete-customer-contact" ).click(function() {
+$(document).on('click', '.delete-customer-contact', function() {
 
     Swal.fire({
         title: 'Löschen',
@@ -610,8 +576,7 @@ $(".delete-customer-contact" ).click(function() {
         }
     })
 });
-
-$(".delete-invoice" ).click(function() {
+$(document).on('click', '.delete-invoice', function() {
 
     var row = $(this).closest('tr');
     Swal.fire({
@@ -647,8 +612,7 @@ $(".delete-invoice" ).click(function() {
         }
     })
 });
-
-$(".delete-comment" ).click(function() {
+$(document).on('click', '.delete-comment', function() {
 
     var row = $(this).closest('tr');
     Swal.fire({
@@ -684,8 +648,7 @@ $(".delete-comment" ).click(function() {
         }
     })
 });
-
-$(".delete-user" ).click(function() {
+$(document).on('click', '.delete-user', function() {
 
     var row = $(this).closest('tr');
     Swal.fire({
@@ -733,8 +696,7 @@ $(".delete-user" ).click(function() {
         }
     })
 });
-
-$(".delete-tag" ).click(function() {
+$(document).on('click', '.delete-tag', function() {
 
     var row = $(this).closest('tr');
     Swal.fire({
@@ -770,8 +732,8 @@ $(".delete-tag" ).click(function() {
         }
     })
 });
+$(document).on('click', '.delete-invoicepos', function() {
 
-$(".delete-invoicepos" ).click(function() {
 
     var row = $(this).closest('tr');
     Swal.fire({
@@ -813,8 +775,7 @@ $(".delete-invoicepos" ).click(function() {
         }
     })
 });
-
-$(".delete-testimonial" ).click(function() {
+$(document).on('click', '.delete-testimonial', function() {
     var row = $(this).closest('tr');
     Swal.fire({
         title: 'Löschen',
@@ -849,8 +810,7 @@ $(".delete-testimonial" ).click(function() {
         }
     })
 });
-
-$(".delete-testimonialform" ).click(function() {
+$(document).on('click', '.delete-testimonialform', function() {
     var row = $(this).closest('tr');
     Swal.fire({
         title: 'Löschen',
@@ -885,8 +845,7 @@ $(".delete-testimonialform" ).click(function() {
         }
     })
 });
-
-$(".admin-password-reset" ).click(function() {
+$(document).on('click', '.admin-password-reset', function() {
 
     var row = $(this).closest('tr');
     Swal.fire({
@@ -945,4 +904,40 @@ $(".admin-password-reset" ).click(function() {
 
 $("#filter-invoice").change(function(e){
     location.href = currentUrl + '?filter=' + $(this).val();
+});
+
+$(document).on('click', '.delete-newsletter', function() {
+    var row = $(this).closest('tr');
+    Swal.fire({
+        title: 'Löschen',
+        text: "Möchtest du diesen Empfänger wirklich löschen?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        cancelButtonText: 'Abbrechen',
+        confirmButtonText: 'Löschen'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: rootUrl + '/api/0/newsletter/' + $(this).data('id'),
+                type: 'DELETE',
+                dataType: 'json',
+                data: JSON.stringify({
+                    [csrfName]: csrfHash
+                }),
+                statusCode: {
+                    200: function() {
+                        row.remove();
+                    },
+                    404: function() {
+                        Swal.fire({
+                            icon: 'error',
+                            text: response.responseJSON.messages.error,
+                        })
+                    }
+                },
+            });
+        }
+    })
 });

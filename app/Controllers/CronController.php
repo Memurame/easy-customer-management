@@ -16,8 +16,10 @@ class CronController extends BaseController
         if($filter == 'daily'){
             
             $this->kalahari();
-            //$this->telefonlist();
+            $this->telefonlist();
+            $this->resizeTestimonialImages();
             $this->abacusSync();
+
         }
         
     }
@@ -383,7 +385,7 @@ class CronController extends BaseController
             unlink($filepath);
             unlink($pending);
 
-            /*
+            
             if(service('settings')->get('App.lastKalahariImportReceiver')){
                 $email = emailer()->setFrom(setting('Email.fromEmail'), setting('Email.fromName') ?? '');
                 $email->setTo(service('settings')->get('App.lastKalahariImportReceiver'));
@@ -393,7 +395,6 @@ class CronController extends BaseController
                     throw new \RuntimeException("Cannot send email \n" . $email->printDebugger(['headers']));
                 }
             }
-            */
             
             
             
@@ -507,6 +508,8 @@ class CronController extends BaseController
 
         }
 
+        service('settings')->set('App.lastTelefonlistDate', date('d.m.Y - H:i:s'));
+
         fclose($fileOut);
     }
 
@@ -523,6 +526,15 @@ class CronController extends BaseController
             $customer->syncWithAbacus();
 
             model('CustomerModel')->save($customer);
+    }
+    public function resizeTestimonialImages(){
+        $testimonialModel = new TestimonialModel();
+        $testimonials = $testimonialModel->findAll();
+
+        foreach($testimonials as $testimonial){
+            $testimonial->dataArray = json_decode($testimonial->data, true);
+            $image = explode('/', $testimonial->dataArray[''])
+            if(file_exists())
         }
     }
 }
