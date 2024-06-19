@@ -87,7 +87,11 @@ class Customer extends Entity
     }
 
 
-    public function syncwithAbacus(){
+    public function syncwithAbacus($addressnumber = null){
+
+        if($addressnumber != null){
+            $this->addressnumber = $addressnumber;
+        }
         $address = model('AbaAddressModel')
                 ->where('abacus', $this->addressnumber)
                 ->first();

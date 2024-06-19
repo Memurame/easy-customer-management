@@ -20,6 +20,40 @@ class CustomersController extends BaseController
         ]);
     }
 
+    public function addAbacus($addressnumber){
+
+        $customerModel = model('CustomerModel');
+
+        $address = model('AbaAddressModel')->where('abacus', $addressnumber)->first();
+
+        if(!$address){
+            return redirect()->route("customer.index")->with("msg_error", "Kein Abacus Eintrag zu dieser Nummer gefunden. Erstellen eines Kunden kann nicht ausgeführt werden.");
+        }
+
+        $customer = $customerModel->where('addressnumber', $address->abacus)->first();
+        if($customer){
+            return redirect()->route("customer.index")->with("msg_error", "Es existiert bereits ein Kunde mit dieser Adressnumer.");
+        }
+
+        $customer = new Customer();
+        $customer->status = 1;
+        $customer->syncWithAbacus($addressnumber);
+        $customerModel->save($customer);
+
+        if($address->firstname){
+            $contact = new CustomerContact();
+            $contact->customer_id = $customerModel->getInsertID();
+            $contact->lastname = $address->lastname;
+            $contact->firstname = $address->firstname;
+            $contact->typ = 'AP';
+            model('CustomerContactModel')->save($contact);
+        }
+        
+    
+
+        return redirect()->route("customer.show", [$customerModel->getInsertID()]);
+    }
+
     public function add()
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
