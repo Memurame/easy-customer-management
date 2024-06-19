@@ -189,3 +189,58 @@ if (! function_exists('new_messages')) {
         return model('MessageModel')->getNewMessagesOfCurrentUser();
     }
 }
+if (! function_exists('crop_and_resize_image_gd')) {
+    function crop_and_resize_image_gd($orig_path, $new_path, $new_width, $new_height)
+    {
+        $image_data  = getimagesize($orig_path);
+        $orig_width  = $image_data[0];
+        $orig_height = $image_data[1];
+        $media_type  = $image_data['mime'];
+        $orig_ratio  = $orig_width / $orig_height;
+        $new_ratio   = $new_width / $new_height;
+
+
+        // Calculate new size
+        if ($new_ratio < $orig_ratio) {
+            $select_width  = $orig_height * $new_ratio;
+            $select_height = $orig_height;
+            $x_offset      = ($orig_width - $select_width) / 2;
+            $y_offset      = 0;
+        } else {
+            $select_width  = $orig_width;
+            $select_height = $orig_width * $new_ratio;
+            $x_offset      = 0;
+            $y_offset      = ($orig_height - $select_height) / 2;
+        }
+
+        switch($media_type) {
+            case 'image/gif' :
+                $orig = imagecreatefromgif($orig_path);
+                break;
+            case 'image/jpeg' :
+                $orig = imagecreatefromjpeg($orig_path);
+                break;
+            case 'image/png' :
+                $orig = imagecreatefrompng($orig_path);
+                break;
+        }
+
+        $new = imagecreatetruecolor($new_width, $new_height);
+        imagecopyresampled($new, $orig, 0, 0, $x_offset, $y_offset, $new_width, 
+                        $new_height, $select_width, $select_height);
+
+        // Save the image in the correct format
+        switch($media_type) {
+            case 'image/gif' :
+            $result = imagegif($new, $new_path);
+            break;
+            case 'image/jpeg':
+            $result = imagejpeg($new, $new_path);
+            break;
+            case 'image/png' :
+            $result = imagepng($new, $new_path);
+            break;
+        }
+        return $result;        
+    }
+}

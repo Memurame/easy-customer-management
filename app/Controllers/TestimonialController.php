@@ -71,6 +71,8 @@ class TestimonialController extends BaseController
                         $newName = $image->getRandomName();
                         $image->move(ROOTPATH.'public/uploads/testimonial/', $newName);
                         $data[$fieldName] = 'uploads/testimonial/' . $newName;
+
+                        crop_and_resize_image_gd(ROOTPATH.'public/uploads/testimonial/' . $newName, ROOTPATH.'public/uploads/testimonial/thumb/' . $newName, 220,220);
                     }
                 }
                 else {
