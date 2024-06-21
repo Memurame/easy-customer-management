@@ -30,8 +30,8 @@ class CustomersController extends BaseController
             return redirect()->route("customer.index")->with("msg_error", "Kein Abacus Eintrag zu dieser Nummer gefunden. Erstellen eines Kunden kann nicht ausgeführt werden.");
         }
 
-        $customer = $customerModel->where('addressnumber', $address->abacus)->first();
-        if($customer){
+        $checkCustomer = $customerModel->where('addressnumber', $address->abacus)->first();
+        if($checkCustomer){
             return redirect()->route("customer.index")->with("msg_error", "Es existiert bereits ein Kunde mit dieser Adressnumer.");
         }
 

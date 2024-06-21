@@ -95,6 +95,8 @@ class Customer extends Entity
         $address = model('AbaAddressModel')
                 ->where('abacus', $this->addressnumber)
                 ->first();
+        if(!$address) return;
+
 
         $name = $address->lastname;
         if($address->firstname) $name .= ' ' . $address->firstname;
