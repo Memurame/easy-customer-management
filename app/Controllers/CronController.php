@@ -523,8 +523,10 @@ class CronController extends BaseController
             }
 
             $customer->syncWithAbacus();
-
-            model('CustomerModel')->save($customer);
+            if($customer->hasChanged()){
+                model('CustomerModel')->save($customer);
+            }
+            
         }
     }
 }
