@@ -234,7 +234,7 @@ $(document).on('click', '.action-invoicemovedown', function() {
         })
     });
 });
-$(document).on('click', '.action-addinvoicetitle', function() {
+$(document).on('click', '.action-addinvoicetitle', function(e) {
     e.preventDefault()
     const {value: text} = Swal.fire({
         title: 'Position Titel',
@@ -253,8 +253,9 @@ $(document).on('click', '.action-addinvoicetitle', function() {
                 }),
                 cache: false,
                 statusCode: {
-                    200: function (respond) {
-                        window.location.href = rootUrl + '/message?chat=' + respond.chat_id
+                    204: function (respond) {
+                        location.reload(true);
+
                     },
                     400: function (error) {
                         Swal.fire({
