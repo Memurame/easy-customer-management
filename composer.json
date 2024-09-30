@@ -9,7 +9,7 @@
         "codeigniter4/framework": "^4.3.2",
         "codeigniter4/settings": "^2.1",
         "erusev/parsedown": "^1.7",
-        "phpoffice/phpspreadsheet": "^2.0",
+        "phpoffice/phpspreadsheet": "^3.3",
         "ext-curl": "*",
         "sprain/swiss-qr-bill": "^4.10",
         "fpdf/fpdf": "^1.86",
