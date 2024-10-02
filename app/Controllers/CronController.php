@@ -441,12 +441,15 @@ class CronController extends BaseController
         // Alle Adressen durchschleifen
         for($i = 0; $i < count($adressen); $i++){
 
+            
             // Prüfen on ein Zahldatum gesetzt ist.
             // von Juli-Dezember die Mitgliederart anhand des Zahldatums anpassen
             // NM welche im laufenden Jahr ab Juli bezahlt haben und über 70 % bezahlt haben, die Mitgliederart auf AM Wechseln
 
-            if(isset($adressDate) AND
-                $currentDate['year'] == $adressDateArray[2] AND
+            $adressDateArray = ($adressen[$i]['paid_date']) ? explode('-', $adressen[$i]['paid_date']) : null;
+
+            if(isset($adressDateArray) AND
+                $currentDate['year'] == $adressDateArray[0] AND
                 $currentDate['month'] >= 7 AND
                 $adressen[$i]['paid_percent'] >= 70 AND
                 $adressen[$i]['member_typ'] == "NM"){
@@ -469,7 +472,7 @@ class CronController extends BaseController
             else {
                 $adressen[$i]['Status'] = "keine Rechnung";
             }
-
+        
             $kalahari = model('AbaAddressKalahariModel')
                 ->select('kalahari')
                 ->where('abacus', $adressen[$i]['abacus'])
