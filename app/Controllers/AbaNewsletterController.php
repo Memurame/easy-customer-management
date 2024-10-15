@@ -13,14 +13,11 @@ class AbaNewsletterController extends BaseController
         $addressModel = model('AbaAddressModel');
 
         $addresses = $addressModel
+            ->select('email, MAX(id) as id, MAX(abacus) as abacus, MAX(firstname) as firstname, MAX(lastname) as lastname')  // Aggregiere andere Spalten
             ->where('newsletter_active', 1)
             ->where('email IS NOT', NULL)
-            ->groupBy('email')
+            ->groupBy('email')  // Gruppiere nach email
             ->findAll();
-
-        
-
-       
 
 
         return view('newsletter/index', [
