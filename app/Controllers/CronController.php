@@ -448,6 +448,26 @@ class CronController extends BaseController
 
             $adressDateArray = ($adressen[$i]['paid_date']) ? explode('-', $adressen[$i]['paid_date']) : null;
 
+            if (isset($adressDateArray)) {
+                $paidYear = (int)$adressDateArray[0];
+                $paidMonth = (int)$adressDateArray[1];
+
+                // Bis Juni: Prüfen, ob Zahlung im Vorjahr erfolgte und mindestens 70% bezahlt wurde
+                if ($currentDate['month'] <= 6 &&
+                    $paidYear == ($currentDate['year'] - 1) &&
+                    $adressen[$i]['paid_percent'] >= 70 &&
+                    $adressen[$i]['member_typ'] == "NM") {
+                    $adressen[$i]['member_typ'] = "AM";
+                }
+                // Ab Juli: Zahlung muss im aktuellen Jahr erfolgt sein und mindestens 70% betragen
+                elseif ($currentDate['month'] >= 7 &&
+                    $paidYear == $currentDate['year'] &&
+                    $adressen[$i]['paid_percent'] >= 70 &&
+                    $adressen[$i]['member_typ'] == "NM") {
+                    $adressen[$i]['member_typ'] = "AM";
+                }
+            }
+            /*
             if(isset($adressDateArray) AND
                 $currentDate['year'] == $adressDateArray[0] AND
                 $currentDate['month'] >= 7 AND
@@ -455,6 +475,7 @@ class CronController extends BaseController
                 $adressen[$i]['member_typ'] == "NM"){
                 $adressen[$i]['member_typ'] = "AM";
             }
+            */
 
             // Bei Mitgliederart AM und MK den Status "Rechnung bezahlt" setzen.
             if($adressen[$i]['member_typ'] == "AM" OR $adressen[$i]['member_typ'] == "MK"){
